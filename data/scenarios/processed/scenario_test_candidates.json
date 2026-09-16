@@ -1,0 +1,152 @@
+[
+  {
+    "scenario_id": "SC-001",
+    "act_name": "Consumer Protection Act, 2019",
+    "section_number": "2",
+    "section_title": "Definitions.",
+    "legal_text": "Definitions.—In this Act, unless the context otherwise requires,— (1) “advertisement” means any audio or visual publicity, representation, endorsement or pronouncement made by means of light, sound, smoke, gas, print, electronic media, internet or website and includes any notice, circular, label, wrapper, invoice or such other documents; (2) “appropriate laboratory” means a laboratory or an organisation— (i) recognised by the Central Government; or (ii) recognised by a State Government, subject to such guidelines as may be issued by the Central Government in this behalf; or (iii) established by or under any law for the time being in force, which is maintained, financed or aided by the Central Government or a State Government for carrying out analysis or test of any goods with a view to determining whether such goods suffer from any defect; (3) “branch office” means— (i) any office or place of work described as a branch by the establishment; or (ii) any establishment carrying on either the same or substantially the same activity carried on by the head office of the establishment; *. Vide Notifn. No. S.O. 3912(E), dated 30th October, 2019, this Act is made applicable to the Union territory of Jammu and Kashmir and the Union territory of Ladakh",
+    "scenario": "A customer wants to know whether they qualify as a consumer under the Consumer Protection Act.",
+    "user_query": "I bought a product for personal use. Am I considered a consumer under the law?",
+    "language": "English"
+  },
+  {
+    "scenario_id": "SC-002",
+    "act_name": "Consumer Protection Act, 2019",
+    "section_number": "2",
+    "section_title": "Definitions.",
+    "legal_text": "Definitions.—In this Act, unless the context otherwise requires,— (1) “advertisement” means any audio or visual publicity, representation, endorsement or pronouncement made by means of light, sound, smoke, gas, print, electronic media, internet or website and includes any notice, circular, label, wrapper, invoice or such other documents; (2) “appropriate laboratory” means a laboratory or an organisation— (i) recognised by the Central Government; or (ii) recognised by a State Government, subject to such guidelines as may be issued by the Central Government in this behalf; or (iii) established by or under any law for the time being in force, which is maintained, financed or aided by the Central Government or a State Government for carrying out analysis or test of any goods with a view to determining whether such goods suffer from any defect; (3) “branch office” means— (i) any office or place of work described as a branch by the establishment; or (ii) any establishment carrying on either the same or substantially the same activity carried on by the head office of the establishment; *. Vide Notifn. No. S.O. 3912(E), dated 30th October, 2019, this Act is made applicable to the Union territory of Jammu and Kashmir and the Union territory of Ladakh",
+    "scenario": "A customer wants to know whether they qualify as a consumer under the Consumer Protection Act.",
+    "user_query": "मैंने अपने निजी उपयोग के लिए एक सामान खरीदा है। क्या कानून के अनुसार मैं उपभोक्ता माना जाता हूँ?",
+    "language": "Hindi"
+  },
+  {
+    "scenario_id": "SC-003",
+    "act_name": "Consumer Protection Act, 2019",
+    "section_number": "2",
+    "section_title": "Definitions.",
+    "legal_text": "Definitions.—In this Act, unless the context otherwise requires,— (1) “advertisement” means any audio or visual publicity, representation, endorsement or pronouncement made by means of light, sound, smoke, gas, print, electronic media, internet or website and includes any notice, circular, label, wrapper, invoice or such other documents; (2) “appropriate laboratory” means a laboratory or an organisation— (i) recognised by the Central Government; or (ii) recognised by a State Government, subject to such guidelines as may be issued by the Central Government in this behalf; or (iii) established by or under any law for the time being in force, which is maintained, financed or aided by the Central Government or a State Government for carrying out analysis or test of any goods with a view to determining whether such goods suffer from any defect; (3) “branch office” means— (i) any office or place of work described as a branch by the establishment; or (ii) any establishment carrying on either the same or substantially the same activity carried on by the head office of the establishment; *. Vide Notifn. No. S.O. 3912(E), dated 30th October, 2019, this Act is made applicable to the Union territory of Jammu and Kashmir and the Union territory of Ladakh",
+    "scenario": "A customer wants to know whether they qualify as a consumer under the Consumer Protection Act.",
+    "user_query": "ನನ್ನ ವೈಯಕ್ತಿಕ ಬಳಕೆಗಾಗಿ ನಾನು ಒಂದು ವಸ್ತುವನ್ನು ಖರೀದಿಸಿದ್ದೇನೆ. ಕಾನೂನಿನ ಪ್ರಕಾರ ನಾನು ಗ್ರಾಹಕನೆಂದು ಪರಿಗಣಿಸಲ್ಪಡುತ್ತೇನೆಯೇ?",
+    "language": "Kannada"
+  },
+  {
+    "scenario_id": "SC-004",
+    "act_name": "Consumer Protection Act, 2019",
+    "section_number": "10",
+    "section_title": "Establishment of Central Consumer Protection Authority .",
+    "legal_text": "Establishment of Central Consumer Protection Authority .—(1) The Central Government shall, by notification, establish with effect from such date as it may specify in that notification, a Central Consumer Protection Authority to be known as the Central Authority to regulate matters relating to violation of rights of consumers, unfair trade practices and false or misleading advertisements which are prejudicial to the interests of public and consumers and to promote, protect and enforce the rights of consumers as a class. (2) The Central Authority shall consist of a Chief Commissioner and such number of other Commissioners as may be prescribed, to be appointed by the Central Government to exercise the powers and discharge the functions under this Act. (3) The headquarters of the Central Authority shall be at such place in the National Capital Region of Delhi, and it shall have regional and other offices in any other place in India as the Central Government may decide.",
+    "scenario": "A consumer wants to know about the authority responsible for protecting consumer interests.",
+    "user_query": "Which authority is responsible for protecting consumers from unfair practices?",
+    "language": "English"
+  },
+  {
+    "scenario_id": "SC-005",
+    "act_name": "Consumer Protection Act, 2019",
+    "section_number": "10",
+    "section_title": "Establishment of Central Consumer Protection Authority .",
+    "legal_text": "Establishment of Central Consumer Protection Authority .—(1) The Central Government shall, by notification, establish with effect from such date as it may specify in that notification, a Central Consumer Protection Authority to be known as the Central Authority to regulate matters relating to violation of rights of consumers, unfair trade practices and false or misleading advertisements which are prejudicial to the interests of public and consumers and to promote, protect and enforce the rights of consumers as a class. (2) The Central Authority shall consist of a Chief Commissioner and such number of other Commissioners as may be prescribed, to be appointed by the Central Government to exercise the powers and discharge the functions under this Act. (3) The headquarters of the Central Authority shall be at such place in the National Capital Region of Delhi, and it shall have regional and other offices in any other place in India as the Central Government may decide.",
+    "scenario": "A consumer wants to know about the authority responsible for protecting consumer interests.",
+    "user_query": "उपभोक्ताओं को अनुचित व्यापार प्रथाओं से बचाने के लिए कौन सा प्राधिकरण जिम्मेदार है?",
+    "language": "Hindi"
+  },
+  {
+    "scenario_id": "SC-006",
+    "act_name": "Consumer Protection Act, 2019",
+    "section_number": "10",
+    "section_title": "Establishment of Central Consumer Protection Authority .",
+    "legal_text": "Establishment of Central Consumer Protection Authority .—(1) The Central Government shall, by notification, establish with effect from such date as it may specify in that notification, a Central Consumer Protection Authority to be known as the Central Authority to regulate matters relating to violation of rights of consumers, unfair trade practices and false or misleading advertisements which are prejudicial to the interests of public and consumers and to promote, protect and enforce the rights of consumers as a class. (2) The Central Authority shall consist of a Chief Commissioner and such number of other Commissioners as may be prescribed, to be appointed by the Central Government to exercise the powers and discharge the functions under this Act. (3) The headquarters of the Central Authority shall be at such place in the National Capital Region of Delhi, and it shall have regional and other offices in any other place in India as the Central Government may decide.",
+    "scenario": "A consumer wants to know about the authority responsible for protecting consumer interests.",
+    "user_query": "ಅನ್ಯಾಯವಾದ ವ್ಯಾಪಾರ ಪದ್ಧತಿಗಳಿಂದ ಗ್ರಾಹಕರನ್ನು ರಕ್ಷಿಸಲು ಯಾವ ಪ್ರಾಧಿಕಾರ ಜವಾಬ್ದಾರಿಯಾಗಿದೆ?",
+    "language": "Kannada"
+  },
+  {
+    "scenario_id": "SC-007",
+    "act_name": "Consumer Protection Act, 2019",
+    "section_number": "17",
+    "section_title": "Complaints to authorities.",
+    "legal_text": "Complaints to authorities.—A complaint relating to violation of consumer rights or unfair trade practices or false or misleading advertisements which are prejudicial to the interests of consumers as a class, may be forwarded either in writing or in electronic mode, to any one of the authorities, namely, the District Collector or the Commissioner of regional office or the Central Authority.",
+    "scenario": "A consumer wants to know where a complaint about a consumer-related issue can be made.",
+    "user_query": "Where can I make a complaint about a problem with a product or service?",
+    "language": "English"
+  },
+  {
+    "scenario_id": "SC-008",
+    "act_name": "Consumer Protection Act, 2019",
+    "section_number": "17",
+    "section_title": "Complaints to authorities.",
+    "legal_text": "Complaints to authorities.—A complaint relating to violation of consumer rights or unfair trade practices or false or misleading advertisements which are prejudicial to the interests of consumers as a class, may be forwarded either in writing or in electronic mode, to any one of the authorities, namely, the District Collector or the Commissioner of regional office or the Central Authority.",
+    "scenario": "A consumer wants to know where a complaint about a consumer-related issue can be made.",
+    "user_query": "किसी उत्पाद या सेवा से जुड़ी समस्या की शिकायत मैं कहाँ कर सकता हूँ?",
+    "language": "Hindi"
+  },
+  {
+    "scenario_id": "SC-009",
+    "act_name": "Consumer Protection Act, 2019",
+    "section_number": "17",
+    "section_title": "Complaints to authorities.",
+    "legal_text": "Complaints to authorities.—A complaint relating to violation of consumer rights or unfair trade practices or false or misleading advertisements which are prejudicial to the interests of consumers as a class, may be forwarded either in writing or in electronic mode, to any one of the authorities, namely, the District Collector or the Commissioner of regional office or the Central Authority.",
+    "scenario": "A consumer wants to know where a complaint about a consumer-related issue can be made.",
+    "user_query": "ಉತ್ಪನ್ನ ಅಥವಾ ಸೇವೆಗೆ ಸಂಬಂಧಿಸಿದ ಸಮಸ್ಯೆಯ ಬಗ್ಗೆ ನಾನು ಎಲ್ಲಿ ದೂರು ನೀಡಬಹುದು?",
+    "language": "Kannada"
+  },
+  {
+    "scenario_id": "SC-010",
+    "act_name": "Consumer Protection Act, 2019",
+    "section_number": "20",
+    "section_title": "Power of Central Authority to recall goods, etc .",
+    "legal_text": "Power of Central Authority to recall goods, etc .—Where the Central Authority is satisfied on the basis of investigation that there is sufficient evidence to show violation of consumer rights or unfair trade practice by a person, it may pass such order as may be necessary, including— (a) recalling of goods or withdrawal of services which are dangerous, hazardous or unsafe; (b) reimbursement of the prices of goods or services so recalled to purchasers of such goods or services; and (c) discontinuation of practices which are unfair and prejudicial to consumers’ interest: Provided that the Central Authority shall give the person an opportunity of being heard before passing an order under this section. 18",
+    "scenario": "A consumer is concerned about unsafe goods being sold in the market.",
+    "user_query": "What can the consumer authority do if unsafe goods are being sold?",
+    "language": "English"
+  },
+  {
+    "scenario_id": "SC-011",
+    "act_name": "Consumer Protection Act, 2019",
+    "section_number": "20",
+    "section_title": "Power of Central Authority to recall goods, etc .",
+    "legal_text": "Power of Central Authority to recall goods, etc .—Where the Central Authority is satisfied on the basis of investigation that there is sufficient evidence to show violation of consumer rights or unfair trade practice by a person, it may pass such order as may be necessary, including— (a) recalling of goods or withdrawal of services which are dangerous, hazardous or unsafe; (b) reimbursement of the prices of goods or services so recalled to purchasers of such goods or services; and (c) discontinuation of practices which are unfair and prejudicial to consumers’ interest: Provided that the Central Authority shall give the person an opportunity of being heard before passing an order under this section. 18",
+    "scenario": "A consumer is concerned about unsafe goods being sold in the market.",
+    "user_query": "अगर बाजार में असुरक्षित सामान बेचा जा रहा है तो उपभोक्ता प्राधिकरण क्या कर सकता है?",
+    "language": "Hindi"
+  },
+  {
+    "scenario_id": "SC-012",
+    "act_name": "Consumer Protection Act, 2019",
+    "section_number": "20",
+    "section_title": "Power of Central Authority to recall goods, etc .",
+    "legal_text": "Power of Central Authority to recall goods, etc .—Where the Central Authority is satisfied on the basis of investigation that there is sufficient evidence to show violation of consumer rights or unfair trade practice by a person, it may pass such order as may be necessary, including— (a) recalling of goods or withdrawal of services which are dangerous, hazardous or unsafe; (b) reimbursement of the prices of goods or services so recalled to purchasers of such goods or services; and (c) discontinuation of practices which are unfair and prejudicial to consumers’ interest: Provided that the Central Authority shall give the person an opportunity of being heard before passing an order under this section. 18",
+    "scenario": "A consumer is concerned about unsafe goods being sold in the market.",
+    "user_query": "ಮಾರುಕಟ್ಟೆಯಲ್ಲಿ ಅಸುರಕ್ಷಿತ ವಸ್ತುಗಳನ್ನು ಮಾರಾಟ ಮಾಡುತ್ತಿದ್ದರೆ ಗ್ರಾಹಕ ಪ್ರಾಧಿಕಾರ ಏನು ಮಾಡಬಹುದು?",
+    "language": "Kannada"
+  },
+  {
+    "scenario_id": "SC-013",
+    "act_name": "Consumer Protection Act, 2019",
+    "section_number": "21",
+    "section_title": "Power of Central Authority to issue directions and penalties against false or misleading advertisements.",
+    "legal_text": "Power of Central Authority to issue directions and penalties against false or misleading advertisements.—(1) Where the Central Authority is satisfied after investigation that any advertisement is false or misleading and is prejudicial to the interest of any consumer or is in contravention of consumer rights, it may, by order, issue directions to the concerned trader or manufacturer or endorser or advertiser or publisher, as the case may be, to discontinue such advertisement or to modify the same in such ma nner and within such time as may be specified in that order. (2) Notwithstanding the order passed under sub -section (1), if the Central Authority is of the opinion that it is necessary to impose a penalty in respect of such false or misleading advertisement, by a manufacturer or an endorser, it may, by order, impose on manufacturer or endorser a penalty which may extend to ten lakh rupees: Provided that the Central Authority may, for every subsequent contravention by a manufacturer or endorser, impose a penalty, which may extend to fifty lakh rupees. (3) Notwithstanding any order under sub -sections (1) and ( 2), where the Central Authority deems it necessary, it may, by order, prohibit the endorser of a false or misleading advertisement from making endorsement of any product or service for a period which may extend to one year: Provided that the Central Authority may, for every subsequent contravention, prohibit such endorser from making endorsement in respect of any product or service for a period which may extend to three years. (4) Where the Central Authority is satisfied after investigation that any person is found to publish, or is a party to the publication of, a misleading advertisement, it may impose on such person a penalty which may extend to ten lakh rupees. (5) No endorser shall be liable to a penalty under sub -sections (2) and ( 3) if he has exercised due diligence to verify the veracity of the claims made in the advertisement regarding the product or service being endorsed by him. (6) No person shall be liable to such penalty if he proves that he had published or arranged for the publication of such advertisement in the ordinary course of his business: Provided that no such defence shall be available to such person if he had previous knowledge of the order passed by the Central Authority for withdrawal or modification of such advertisement. (7) While determining the penalty under this section, regard shall be had to the following, namely:— (a) the population and the area impacted or affected by such offence; (b) the frequency and duration of such offence; (c) the vulnerability of the class of persons likely to be adversely affected by such offence; and (d) the gross revenue from the sales effected by virtue of such offence. (8) The Central Authority shall give the person an opportunity of being heard before an orde r under this section is passed.",
+    "scenario": "A consumer sees an advertisement making a false or misleading claim about a product.",
+    "user_query": "What can be done about a false or misleading advertisement for a product?",
+    "language": "English"
+  },
+  {
+    "scenario_id": "SC-014",
+    "act_name": "Consumer Protection Act, 2019",
+    "section_number": "21",
+    "section_title": "Power of Central Authority to issue directions and penalties against false or misleading advertisements.",
+    "legal_text": "Power of Central Authority to issue directions and penalties against false or misleading advertisements.—(1) Where the Central Authority is satisfied after investigation that any advertisement is false or misleading and is prejudicial to the interest of any consumer or is in contravention of consumer rights, it may, by order, issue directions to the concerned trader or manufacturer or endorser or advertiser or publisher, as the case may be, to discontinue such advertisement or to modify the same in such ma nner and within such time as may be specified in that order. (2) Notwithstanding the order passed under sub -section (1), if the Central Authority is of the opinion that it is necessary to impose a penalty in respect of such false or misleading advertisement, by a manufacturer or an endorser, it may, by order, impose on manufacturer or endorser a penalty which may extend to ten lakh rupees: Provided that the Central Authority may, for every subsequent contravention by a manufacturer or endorser, impose a penalty, which may extend to fifty lakh rupees. (3) Notwithstanding any order under sub -sections (1) and ( 2), where the Central Authority deems it necessary, it may, by order, prohibit the endorser of a false or misleading advertisement from making endorsement of any product or service for a period which may extend to one year: Provided that the Central Authority may, for every subsequent contravention, prohibit such endorser from making endorsement in respect of any product or service for a period which may extend to three years. (4) Where the Central Authority is satisfied after investigation that any person is found to publish, or is a party to the publication of, a misleading advertisement, it may impose on such person a penalty which may extend to ten lakh rupees. (5) No endorser shall be liable to a penalty under sub -sections (2) and ( 3) if he has exercised due diligence to verify the veracity of the claims made in the advertisement regarding the product or service being endorsed by him. (6) No person shall be liable to such penalty if he proves that he had published or arranged for the publication of such advertisement in the ordinary course of his business: Provided that no such defence shall be available to such person if he had previous knowledge of the order passed by the Central Authority for withdrawal or modification of such advertisement. (7) While determining the penalty under this section, regard shall be had to the following, namely:— (a) the population and the area impacted or affected by such offence; (b) the frequency and duration of such offence; (c) the vulnerability of the class of persons likely to be adversely affected by such offence; and (d) the gross revenue from the sales effected by virtue of such offence. (8) The Central Authority shall give the person an opportunity of being heard before an orde r under this section is passed.",
+    "scenario": "A consumer sees an advertisement making a false or misleading claim about a product.",
+    "user_query": "किसी उत्पाद के झूठे या भ्रामक विज्ञापन के खिलाफ क्या किया जा सकता है?",
+    "language": "Hindi"
+  },
+  {
+    "scenario_id": "SC-015",
+    "act_name": "Consumer Protection Act, 2019",
+    "section_number": "21",
+    "section_title": "Power of Central Authority to issue directions and penalties against false or misleading advertisements.",
+    "legal_text": "Power of Central Authority to issue directions and penalties against false or misleading advertisements.—(1) Where the Central Authority is satisfied after investigation that any advertisement is false or misleading and is prejudicial to the interest of any consumer or is in contravention of consumer rights, it may, by order, issue directions to the concerned trader or manufacturer or endorser or advertiser or publisher, as the case may be, to discontinue such advertisement or to modify the same in such ma nner and within such time as may be specified in that order. (2) Notwithstanding the order passed under sub -section (1), if the Central Authority is of the opinion that it is necessary to impose a penalty in respect of such false or misleading advertisement, by a manufacturer or an endorser, it may, by order, impose on manufacturer or endorser a penalty which may extend to ten lakh rupees: Provided that the Central Authority may, for every subsequent contravention by a manufacturer or endorser, impose a penalty, which may extend to fifty lakh rupees. (3) Notwithstanding any order under sub -sections (1) and ( 2), where the Central Authority deems it necessary, it may, by order, prohibit the endorser of a false or misleading advertisement from making endorsement of any product or service for a period which may extend to one year: Provided that the Central Authority may, for every subsequent contravention, prohibit such endorser from making endorsement in respect of any product or service for a period which may extend to three years. (4) Where the Central Authority is satisfied after investigation that any person is found to publish, or is a party to the publication of, a misleading advertisement, it may impose on such person a penalty which may extend to ten lakh rupees. (5) No endorser shall be liable to a penalty under sub -sections (2) and ( 3) if he has exercised due diligence to verify the veracity of the claims made in the advertisement regarding the product or service being endorsed by him. (6) No person shall be liable to such penalty if he proves that he had published or arranged for the publication of such advertisement in the ordinary course of his business: Provided that no such defence shall be available to such person if he had previous knowledge of the order passed by the Central Authority for withdrawal or modification of such advertisement. (7) While determining the penalty under this section, regard shall be had to the following, namely:— (a) the population and the area impacted or affected by such offence; (b) the frequency and duration of such offence; (c) the vulnerability of the class of persons likely to be adversely affected by such offence; and (d) the gross revenue from the sales effected by virtue of such offence. (8) The Central Authority shall give the person an opportunity of being heard before an orde r under this section is passed.",
+    "scenario": "A consumer sees an advertisement making a false or misleading claim about a product.",
+    "user_query": "ಉತ್ಪನ್ನದ ಬಗ್ಗೆ ಸುಳ್ಳು ಅಥವಾ ದಾರಿ ತಪ್ಪಿಸುವ ಜಾಹೀರಾತಿನ ವಿರುದ್ಧ ಏನು ಮಾಡಬಹುದು?",
+    "language": "Kannada"
+  }
+]

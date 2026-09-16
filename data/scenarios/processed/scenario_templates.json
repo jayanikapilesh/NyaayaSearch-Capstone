@@ -1,0 +1,31 @@
+{
+  "source_sections": 602,
+  "templates_per_section": 5,
+  "languages": [
+    "English",
+    "Hindi",
+    "Kannada"
+  ],
+  "templates": [
+    {
+      "template_type": "problem",
+      "template": "I am facing a problem related to {concept}. What does the law say?"
+    },
+    {
+      "template_type": "rights",
+      "template": "What are my rights regarding {concept}?"
+    },
+    {
+      "template_type": "action",
+      "template": "What should I do if I am affected by an issue involving {concept}?"
+    },
+    {
+      "template_type": "complaint",
+      "template": "Where can I complain about an issue involving {concept}?"
+    },
+    {
+      "template_type": "procedure",
+      "template": "What is the legal procedure for {concept}?"
+    }
+  ]
+}
