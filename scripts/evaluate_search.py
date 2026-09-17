@@ -1,4 +1,4 @@
-import re
+﻿import re
 import json
 import numpy as np
 import openpyxl
@@ -22,7 +22,30 @@ SYNONYMS = {
     "tenant": ["tenant", "renter", "renting"],
     "deposit": ["deposit", "security deposit", "rental deposit"],
     "return": ["return", "refund", "repay", "give back"],
-    "rent": ["rent", "rental", "lease", "tenancy"]
+    "rent": ["rent", "rental", "lease", "tenancy"],
+    "threat": ["threat", "coercion", "intimidation", "forced", "duress"],
+    "forced": ["forced", "coercion", "duress", "threat"],
+    "agreement": ["agreement", "contract", "obligation"],
+    "not fulfilling": ["not fulfilling", "breach", "default", "non-performance"],
+    "minor": ["minor", "child", "underage", "competent to contract"],
+    "hacked": ["hacked", "unauthorized access", "computer offence"],
+    "stole data": ["stole data", "data theft", "data breach"],
+    "blackmail": ["blackmail", "privacy violation", "obscene", "extortion"],
+    "fake account": ["fake account", "impersonation", "identity theft", "cheating by personation"],
+    "impersonat": ["impersonat", "identity theft", "cheating by personation"],
+    "licence": ["licence", "license", "driving licence", "revocation"],
+    "suspended": ["suspended", "revoked", "revocation", "disqualification"],
+    "won't complete": ["won't complete", "specific performance", "breach of contract"],
+    "sale": ["sale", "contract of sale", "transfer"],
+    "stop someone": ["stop someone", "injunction", "restrain"],
+    "harmful": ["harmful", "injunction", "wrongful act"],
+    "defend myself": ["defend myself", "private defence", "self-defence"],
+    "attacked": ["attacked", "assault", "hurt", "criminal force"],
+    "fir": ["fir", "first information report", "cognizable offence", "information to police"],
+    "arrest": ["arrest", "arrested", "custody", "detention"],
+    "warrant": ["warrant", "arrest without warrant", "cognizable"],
+    "own it": ["own it", "ostensible owner", "title", "ownership"],
+    "seller doesn't own": ["seller doesn't own", "ostensible owner", "fraudulent transfer"]
 }
 
 
