@@ -3,7 +3,9 @@ import pytesseract
 from PIL import Image
 import os
 
-pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+pytesseract.pytesseract.tesseract_cmd = os.environ.get(
+    "TESSERACT_PATH", r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+)
 
 input_path = "data/raw/Constitution of India.pdf"
 output_path = "data/processed/constitution_of_india_ocr.txt"

@@ -1,0 +1,13 @@
+openpyxl
+requests
+duckdb
+pypdf
+pymupdf
+pytesseract
+Pillow
+rank-bm25
+sentence-transformers
+transformers
+torch
+sentencepiece
+numpy
