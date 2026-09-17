@@ -1,0 +1,45 @@
+[
+  {"query": "Seller sold me a defective product, who is responsible?", "act_name": "Consumer Protection Act, 2019", "expected_sections": ["83", "84", "86"]},
+  {"query": "Where do I file a consumer complaint for a small purchase?", "act_name": "Consumer Protection Act, 2019", "expected_sections": ["34", "35"]},
+  {"query": "Company is running a false or misleading advertisement", "act_name": "Consumer Protection Act, 2019", "expected_sections": ["21", "89"]},
+
+  {"query": "I bought a house but the seller doesn't actually own it, is the sale valid?", "act_name": "Transfer of Property Act, 1882", "expected_sections": ["41"]},
+  {"query": "How can I redeem my mortgage and get my property back?", "act_name": "Transfer of Property Act, 1882", "expected_sections": ["60"]},
+  {"query": "What are the buyer's and seller's responsibilities when selling a house?", "act_name": "Transfer of Property Act, 1882", "expected_sections": ["55"]},
+
+  {"query": "My landlord isn't returning my security deposit", "act_name": "Karnataka Rent Act, 1999", "expected_sections": ["17", "19"]},
+  {"query": "My landlord wants to evict me, what are my protections?", "act_name": "Karnataka Rent Act, 1999", "expected_sections": ["27"]},
+  {"query": "How much can my landlord increase my rent by?", "act_name": "Karnataka Rent Act, 1999", "expected_sections": ["7", "9"]},
+
+  {"query": "I signed a contract under threat, is it valid?", "act_name": "Indian Contract Act, 1872", "expected_sections": ["15", "19"]},
+  {"query": "The other party isn't fulfilling their side of the agreement", "act_name": "Indian Contract Act, 1872", "expected_sections": ["37", "73"]},
+  {"query": "Can a minor enter into a valid contract?", "act_name": "Indian Contract Act, 1872", "expected_sections": ["11"]},
+
+  {"query": "Someone hacked my computer and stole data", "act_name": "Information Technology Act, 2000", "expected_sections": ["43", "66"]},
+  {"query": "I'm being blackmailed with private photos online", "act_name": "Information Technology Act, 2000", "expected_sections": ["66E"]},
+  {"query": "Someone created a fake account impersonating me online", "act_name": "Information Technology Act, 2000", "expected_sections": ["66C", "66D"]},
+
+  {"query": "I was in an accident, how do I claim compensation?", "act_name": "Motor Vehicles Act, 1988", "expected_sections": ["164", "166"]},
+  {"query": "Can I drive without insurance, what happens if caught?", "act_name": "Motor Vehicles Act, 1988", "expected_sections": ["146", "196"]},
+  {"query": "My driving licence was suspended, can I appeal?", "act_name": "Motor Vehicles Act, 1988", "expected_sections": ["17"]},
+
+  {"query": "My husband is abusive, how do I get protection?", "act_name": "Protection of Women from Domestic Violence Act, 2005", "expected_sections": ["12", "18"]},
+  {"query": "Can I stay in my shared house during a domestic violence case?", "act_name": "Protection of Women from Domestic Violence Act, 2005", "expected_sections": ["17", "19"]},
+  {"query": "How do I get monetary support after facing domestic violence?", "act_name": "Protection of Women from Domestic Violence Act, 2005", "expected_sections": ["20"]},
+
+  {"query": "How do I file an RTI request?", "act_name": "Right to Information Act, 2005", "expected_sections": ["6"]},
+  {"query": "My RTI request was rejected, can I appeal?", "act_name": "Right to Information Act, 2005", "expected_sections": ["19"]},
+  {"query": "What information can be denied to me under RTI?", "act_name": "Right to Information Act, 2005", "expected_sections": ["8"]},
+
+  {"query": "The other party won't complete the property sale we agreed to, what can I do?", "act_name": "Specific Relief Act, 1963", "expected_sections": ["10"]},
+  {"query": "How do I stop someone from doing something harmful through a court order?", "act_name": "Specific Relief Act, 1963", "expected_sections": ["36", "38"]},
+  {"query": "I was wrongfully dispossessed of my property, what's my remedy?", "act_name": "Specific Relief Act, 1963", "expected_sections": ["5", "6"]},
+
+  {"query": "Someone attacked me, can I defend myself legally?", "act_name": "Bharatiya Nyaya Sanhita, 2023", "expected_sections": ["34", "35"]},
+  {"query": "I'm facing dowry harassment demands", "act_name": "Bharatiya Nyaya Sanhita, 2023", "expected_sections": ["80"]},
+  {"query": "Someone assaulted a woman inappropriately in public", "act_name": "Bharatiya Nyaya Sanhita, 2023", "expected_sections": ["74"]},
+
+  {"query": "Police arrested me, what are my rights?", "act_name": "Bharatiya Nagarik Suraksha Sanhita, 2023", "expected_sections": ["47", "58"]},
+  {"query": "Can police arrest someone without a warrant?", "act_name": "Bharatiya Nagarik Suraksha Sanhita, 2023", "expected_sections": ["35"]},
+  {"query": "How do I file an FIR for a cognizable offence?", "act_name": "Bharatiya Nagarik Suraksha Sanhita, 2023", "expected_sections": ["173"]}
+]
