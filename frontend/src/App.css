@@ -142,3 +142,33 @@ body {
   max-height: 150px;
   overflow-y: auto;
 }
+.related-cases {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #eee;
+}
+
+.related-cases-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1a3c34;
+  margin-bottom: 6px;
+}
+
+.case-item {
+  display: flex;
+  flex-direction: column;
+  padding: 6px 0;
+  font-size: 0.85rem;
+}
+
+.case-title {
+  color: #333;
+  font-weight: 500;
+}
+
+.case-meta {
+  color: #888;
+  font-size: 0.78rem;
+  margin-top: 2px;
+}

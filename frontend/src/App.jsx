@@ -87,6 +87,18 @@ function App() {
               </div>
               <div className="section-title">{r.section_title}</div>
               <div className="legal-text">{r.legal_text}</div>
+
+              {r.related_cases && r.related_cases.length > 0 && (
+                <div className="related-cases">
+                  <div className="related-cases-title">Related Supreme Court Cases</div>
+                  {r.related_cases.map((c, j) => (
+                    <div className="case-item" key={j}>
+                      <span className="case-title">{c.title}</span>
+                      <span className="case-meta">{c.court} · {c.decision_date}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           ))}
         </div>
