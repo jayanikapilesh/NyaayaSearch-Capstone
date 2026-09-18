@@ -7,19 +7,19 @@ OUTPUT_FILE = "../data/case_law/processed/case_citations.csv"
 
 WORD = r"(?:[A-Z][a-z]+|of|the|and)"
 
-# "Act, YEAR - s.NUMBER"
 PATTERN_ACT_SECTION = re.compile(
     rf"((?:{WORD}\s+){{1,6}}Act,?\s*\d{{4}})\s*-?\s*[:\-]?\s*s\.?\s*(\d+[A-Za-z]?(?:\(\w+\))?)",
 )
 
-# "u/s NUMBER of Act Name"
 PATTERN_US_OF = re.compile(
     rf"u[/l1]s\.?\s*(\d+[A-Za-z]?(?:\(\w+\))?)\s*of\s*(?:the\s*)?((?:{WORD}\s+){{1,6}}Act)",
 )
 
-# "Penal Code, YEAR - s.NUMBER" or "Code of Criminal Procedure, YEAR: ss. NUMBER"
+# Note: Code pattern excludes the word "Code" itself from the WORD list match
+# so "Code of Criminal Procedure" doesn't double up with the literal "Code" suffix
+CODE_WORD = r"(?:[A-Z][a-z]+|of|the|and)(?<!Code)"
 PATTERN_CODE_SECTION = re.compile(
-    rf"((?:{WORD}\s+){{1,6}}Code,?\s*\d{{4}})\s*[:\-]?\s*ss?\.?\s*(\d+[A-Za-z]?(?:/\d+[A-Za-z]?)*(?:\(\w+\))?)",
+    rf"((?:{WORD}\s+){{0,5}}(?:Penal Code|Code of Criminal Procedure|Insolvency and Bankruptcy Code)),?\s*\d{{4}}\s*[:\-]?\s*ss?\.?\s*(\d+[A-Za-z]?(?:/\d+[A-Za-z]?)*(?:\(\w+\))?)",
 )
 
 BLOCKLIST = {"the act", "act", "this act", "said act", "the code", "code"}
@@ -31,25 +31,43 @@ def clean_act_name(name):
     return name.strip()
 
 
+def is_low_confidence_section(section):
+    # A section number with 5+ digits and no separator is likely an OCR-garbled
+    # concatenation of two numbers (e.g. "302134" probably meant "302/34")
+    digits_only = re.sub(r"[^\d]", "", section)
+    return len(digits_only) >= 5
+
+
 def extract_citations(text):
     citations = []
 
     for act_name, section in PATTERN_ACT_SECTION.findall(text):
         cleaned = clean_act_name(act_name)
         if cleaned.lower() not in BLOCKLIST:
-            citations.append({"act_name": cleaned, "section_number": section})
+            citations.append({
+                "act_name": cleaned,
+                "section_number": section,
+                "low_confidence": is_low_confidence_section(section),
+            })
 
     for section, act_name in PATTERN_US_OF.findall(text):
         cleaned = clean_act_name(act_name)
         if cleaned.lower() not in BLOCKLIST:
-            citations.append({"act_name": cleaned, "section_number": section})
+            citations.append({
+                "act_name": cleaned,
+                "section_number": section,
+                "low_confidence": is_low_confidence_section(section),
+            })
 
     for code_name, section in PATTERN_CODE_SECTION.findall(text):
         cleaned = clean_act_name(code_name)
         if cleaned.lower() not in BLOCKLIST:
-            # A combined section like "302/149" - split into separate entries
             for sec in section.split("/"):
-                citations.append({"act_name": cleaned, "section_number": sec})
+                citations.append({
+                    "act_name": cleaned,
+                    "section_number": sec,
+                    "low_confidence": is_low_confidence_section(sec),
+                })
 
     return citations
 
@@ -87,6 +105,7 @@ def main():
                     "act_name": c["act_name"],
                     "act_name_normalized": normalize_act_name(c["act_name"]),
                     "section_number": c["section_number"],
+                    "low_confidence": c["low_confidence"],
                 })
 
         if (i + 1) % 5000 == 0:
@@ -96,6 +115,9 @@ def main():
     print(f"Total citation links extracted: {len(rows)}")
 
     result_df = pd.DataFrame(rows)
+    low_conf_count = result_df["low_confidence"].sum()
+    print(f"Low-confidence (likely OCR-garbled) citations flagged: {low_conf_count}")
+
     result_df.to_csv(OUTPUT_FILE, index=False)
     print(f"Saved to {OUTPUT_FILE}")
 
