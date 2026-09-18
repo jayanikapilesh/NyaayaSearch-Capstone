@@ -7,15 +7,22 @@ OUTPUT_FILE = "../data/case_law/processed/case_citations.csv"
 
 WORD = r"(?:[A-Z][a-z]+|of|the|and)"
 
+# "Act, YEAR - s.NUMBER"
 PATTERN_ACT_SECTION = re.compile(
     rf"((?:{WORD}\s+){{1,6}}Act,?\s*\d{{4}})\s*-?\s*[:\-]?\s*s\.?\s*(\d+[A-Za-z]?(?:\(\w+\))?)",
 )
 
+# "u/s NUMBER of Act Name"
 PATTERN_US_OF = re.compile(
     rf"u[/l1]s\.?\s*(\d+[A-Za-z]?(?:\(\w+\))?)\s*of\s*(?:the\s*)?((?:{WORD}\s+){{1,6}}Act)",
 )
 
-BLOCKLIST = {"the act", "act", "this act", "said act"}
+# "Penal Code, YEAR - s.NUMBER" or "Code of Criminal Procedure, YEAR: ss. NUMBER"
+PATTERN_CODE_SECTION = re.compile(
+    rf"((?:{WORD}\s+){{1,6}}Code,?\s*\d{{4}})\s*[:\-]?\s*ss?\.?\s*(\d+[A-Za-z]?(?:/\d+[A-Za-z]?)*(?:\(\w+\))?)",
+)
+
+BLOCKLIST = {"the act", "act", "this act", "said act", "the code", "code"}
 
 
 def clean_act_name(name):
@@ -29,22 +36,25 @@ def extract_citations(text):
 
     for act_name, section in PATTERN_ACT_SECTION.findall(text):
         cleaned = clean_act_name(act_name)
-        if cleaned.lower() in BLOCKLIST:
-            continue
-        citations.append({"act_name": cleaned, "section_number": section})
+        if cleaned.lower() not in BLOCKLIST:
+            citations.append({"act_name": cleaned, "section_number": section})
 
     for section, act_name in PATTERN_US_OF.findall(text):
         cleaned = clean_act_name(act_name)
-        if cleaned.lower() in BLOCKLIST:
-            continue
-        citations.append({"act_name": cleaned, "section_number": section})
+        if cleaned.lower() not in BLOCKLIST:
+            citations.append({"act_name": cleaned, "section_number": section})
+
+    for code_name, section in PATTERN_CODE_SECTION.findall(text):
+        cleaned = clean_act_name(code_name)
+        if cleaned.lower() not in BLOCKLIST:
+            # A combined section like "302/149" - split into separate entries
+            for sec in section.split("/"):
+                citations.append({"act_name": cleaned, "section_number": sec})
 
     return citations
 
 
 def normalize_act_name(name):
-    # Strip trailing year so "Arbitration and Conciliation Act, 1996" and
-    # "Arbitration and Conciliation Act" merge into one canonical form.
     return re.sub(r",?\s*\d{4}$", "", name).strip()
 
 
@@ -79,7 +89,7 @@ def main():
                     "section_number": c["section_number"],
                 })
 
-        if (i + 1) % 10000 == 0:
+        if (i + 1) % 5000 == 0:
             print(f"Processed {i + 1}/{len(df)} cases, {matched_cases} matched so far...")
 
     print(f"\nDone. Matched {matched_cases} out of {len(df)} cases ({matched_cases/len(df)*100:.1f}%)")
