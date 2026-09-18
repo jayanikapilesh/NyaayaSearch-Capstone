@@ -177,6 +177,18 @@ function App() {
             <div className="document-filename">{uploadedDoc.filename}</div>
             <div className="document-summary">{uploadedDoc.summary}</div>
 
+            {uploadedDoc.dates && uploadedDoc.dates.length > 0 && (
+              <div className="dates-section">
+                <div className="dates-title">📅 Important Dates & Deadlines</div>
+                {uploadedDoc.dates.map((d, i) => (
+                  <div className="date-item" key={i}>
+                    <span className="date-value">{d.value}</span>
+                    <span className="date-description">{d.description}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+
             <form className="doc-question-form" onSubmit={handleAskDocument}>
               <input
                 type="text"

@@ -275,3 +275,41 @@ body {
   border-top: 1px solid #ddd;
   margin: 28px 0;
 }
+.dates-section {
+  background: #fff8ec;
+  border: 1px solid #f0dfa8;
+  border-radius: 8px;
+  padding: 14px;
+  margin-bottom: 16px;
+}
+
+.dates-title {
+  font-weight: 600;
+  color: #8a6d1a;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+}
+
+.date-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px solid #f0e6c8;
+}
+
+.date-item:last-child {
+  border-bottom: none;
+}
+
+.date-value {
+  font-weight: 600;
+  color: #1a3c34;
+  font-size: 0.9rem;
+}
+
+.date-description {
+  color: #666;
+  font-size: 0.85rem;
+  text-align: right;
+}
