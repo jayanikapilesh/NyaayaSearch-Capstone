@@ -1,6 +1,7 @@
 ﻿import fitz  # PyMuPDF
 from groq import Groq
 import os
+import json
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -17,6 +18,17 @@ STRICT RULES:
 - Respond in the SAME language as the user's question.
 """
 
+DATE_EXTRACTION_PROMPT = """You extract important dates and deadlines from legal documents.
+
+STRICT RULES:
+- Only extract dates and deadlines that are EXPLICITLY stated in the document text. Never infer, calculate, or assume a date that is not written.
+- For each date found, note what it refers to (e.g. "rent due date", "lease end date", "notice period deadline").
+- If the document mentions a duration (e.g. "within 30 days") but not an exact date, include it as a duration, not a date.
+- If no dates or deadlines are found, return an empty list.
+- Return ONLY valid JSON, no other text, no markdown formatting, no code fences. Format:
+{"dates": [{"description": "what this date/deadline is for", "value": "the date or duration as written in the document"}]}
+"""
+
 
 def extract_text_from_pdf(file_bytes):
     doc = fitz.open(stream=file_bytes, filetype="pdf")
@@ -31,7 +43,6 @@ def answer_question_about_document(document_text, question):
     if not document_text:
         return "Could not extract any text from this document. It may be a scanned image without selectable text."
 
-    # Truncate very long documents to stay within reasonable token limits
     max_chars = 12000
     truncated = document_text[:max_chars]
     was_truncated = len(document_text) > max_chars
@@ -61,3 +72,36 @@ def summarize_document(document_text):
         document_text,
         "Give a clear, plain-language summary of what this document is and its key points."
     )
+
+
+def extract_dates_and_deadlines(document_text):
+    if not document_text:
+        return []
+
+    max_chars = 12000
+    truncated = document_text[:max_chars]
+
+    response = client.chat.completions.create(
+        model="openai/gpt-oss-20b",
+        messages=[
+            {"role": "system", "content": DATE_EXTRACTION_PROMPT},
+            {"role": "user", "content": f"Document text:\n{truncated}"},
+        ],
+        temperature=0,
+        max_tokens=800,
+    )
+
+    raw = response.choices[0].message.content.strip()
+
+    # Strip markdown code fences if the model added them despite instructions
+    if raw.startswith("```"):
+        raw = raw.split("```")[1]
+        if raw.startswith("json"):
+            raw = raw[4:]
+        raw = raw.strip()
+
+    try:
+        parsed = json.loads(raw)
+        return parsed.get("dates", [])
+    except json.JSONDecodeError:
+        return []

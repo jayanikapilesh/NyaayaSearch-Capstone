@@ -4,7 +4,7 @@ from pydantic import BaseModel
 from search_core import SearchEngine
 from rag_core import generate_explanation, translate_to_english
 from citations_core import find_related_cases
-from pdf_core import extract_text_from_pdf, answer_question_about_document, summarize_document
+from pdf_core import extract_text_from_pdf, answer_question_about_document, summarize_document, extract_dates_and_deadlines
 
 app = FastAPI(title="NyaayaSearch API")
 
@@ -17,7 +17,6 @@ app.add_middleware(
 
 engine = None
 
-# Simple in-memory store for uploaded document text, keyed by a session id the frontend generates
 document_store = {}
 
 
@@ -81,12 +80,14 @@ async def upload_pdf(file: UploadFile = File(...)):
     document_store[document_id] = text
 
     summary = summarize_document(text)
+    dates = extract_dates_and_deadlines(text)
 
     return {
         "document_id": document_id,
         "filename": file.filename,
         "character_count": len(text),
         "summary": summary,
+        "dates": dates,
     }
 
 
