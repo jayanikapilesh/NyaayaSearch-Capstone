@@ -2,7 +2,7 @@
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from search_core import SearchEngine
-from rag_core import generate_explanation
+from rag_core import generate_explanation, translate_to_english
 
 app = FastAPI(title="NyaayaSearch API")
 
@@ -40,10 +40,12 @@ def search(request: SearchRequest):
 
 @app.post("/explain")
 def explain(request: SearchRequest):
-    results = engine.search(request.query, top_k=request.top_k)
+    search_query = translate_to_english(request.query)
+    results = engine.search(search_query, top_k=request.top_k)
     explanation = generate_explanation(request.query, results)
     return {
         "query": request.query,
+        "translated_query": search_query,
         "results": results,
         "explanation": explanation,
     }
