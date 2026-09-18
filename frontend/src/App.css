@@ -172,3 +172,54 @@ body {
   font-size: 0.78rem;
   margin-top: 2px;
 }
+.mic-button {
+  padding: 14px 18px;
+  font-size: 1.1rem;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.mic-button.listening {
+  background: #ffe0e0;
+  border-color: #d33;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.listening-indicator {
+  text-align: center;
+  color: #d33;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.explanation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.explanation-header h2 {
+  margin-bottom: 0;
+}
+
+.listen-button {
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  background: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.listen-button:hover {
+  background: #e0e0e0;
+}

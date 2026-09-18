@@ -1,4 +1,4 @@
-﻿import { useState } from "react";
+﻿import { useState, useRef } from "react";
 import "./App.css";
 
 const API_URL = "http://127.0.0.1:8000";
@@ -9,6 +9,9 @@ function App() {
   const [error, setError] = useState(null);
   const [results, setResults] = useState([]);
   const [explanation, setExplanation] = useState("");
+  const [isListening, setIsListening] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  const recognitionRef = useRef(null);
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -41,6 +44,58 @@ function App() {
     }
   };
 
+  const startListening = () => {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      setError("Voice input is not supported in this browser. Try Chrome.");
+      return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = "en-IN";
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    recognition.onstart = () => setIsListening(true);
+    recognition.onend = () => setIsListening(false);
+    recognition.onerror = () => {
+      setIsListening(false);
+      setError("Could not hear you. Please try again.");
+    };
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      setQuery(transcript);
+    };
+
+    recognitionRef.current = recognition;
+    recognition.start();
+  };
+
+  const speakExplanation = () => {
+    if (!explanation) return;
+
+    if (isSpeaking) {
+      window.speechSynthesis.cancel();
+      setIsSpeaking(false);
+      return;
+    }
+
+    // Strip markdown formatting for cleaner speech
+    const cleanText = explanation
+      .replace(/\*\*/g, "")
+      .replace(/\|/g, " ")
+      .replace(/#+/g, "")
+      .replace(/-{2,}/g, "");
+
+    const utterance = new SpeechSynthesisUtterance(cleanText);
+    utterance.lang = "en-IN";
+    utterance.onend = () => setIsSpeaking(false);
+    utterance.onerror = () => setIsSpeaking(false);
+
+    setIsSpeaking(true);
+    window.speechSynthesis.speak(utterance);
+  };
+
   return (
     <div className="app">
       <header className="header">
@@ -56,10 +111,20 @@ function App() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
+        <button
+          type="button"
+          className={`mic-button ${isListening ? "listening" : ""}`}
+          onClick={startListening}
+          title="Search by voice"
+        >
+          🎤
+        </button>
         <button type="submit" className="search-button" disabled={loading}>
           {loading ? "Searching..." : "Search"}
         </button>
       </form>
+
+      {isListening && <div className="listening-indicator">Listening...</div>}
 
       {error && <div className="error">{error}</div>}
 
@@ -71,7 +136,12 @@ function App() {
 
       {explanation && (
         <div className="explanation-card">
-          <h2>Explanation</h2>
+          <div className="explanation-header">
+            <h2>Explanation</h2>
+            <button className="listen-button" onClick={speakExplanation}>
+              {isSpeaking ? "⏹ Stop" : "🔊 Listen"}
+            </button>
+          </div>
           <div className="explanation-text">{explanation}</div>
         </div>
       )}
