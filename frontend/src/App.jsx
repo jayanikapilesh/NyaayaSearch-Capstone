@@ -13,6 +13,12 @@ function App() {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const recognitionRef = useRef(null);
 
+  const [uploadedDoc, setUploadedDoc] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [docQuestion, setDocQuestion] = useState("");
+  const [docAnswer, setDocAnswer] = useState("");
+  const [docAsking, setDocAsking] = useState(false);
+
   const handleSearch = async (e) => {
     e.preventDefault();
     if (!query.trim()) return;
@@ -80,7 +86,6 @@ function App() {
       return;
     }
 
-    // Strip markdown formatting for cleaner speech
     const cleanText = explanation
       .replace(/\*\*/g, "")
       .replace(/\|/g, " ")
@@ -96,12 +101,101 @@ function App() {
     window.speechSynthesis.speak(utterance);
   };
 
+  const handleFileUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setUploading(true);
+    setError(null);
+    setUploadedDoc(null);
+    setDocAnswer("");
+
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const response = await fetch(`${API_URL}/upload-pdf`, {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error(`Server returned ${response.status}`);
+      }
+
+      const data = await response.json();
+      setUploadedDoc(data);
+    } catch (err) {
+      setError("Could not upload the document. Make sure the backend server is running.");
+      console.error(err);
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleAskDocument = async (e) => {
+    e.preventDefault();
+    if (!docQuestion.trim() || !uploadedDoc) return;
+
+    setDocAsking(true);
+    setDocAnswer("");
+
+    try {
+      const response = await fetch(`${API_URL}/ask-document`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          document_id: uploadedDoc.document_id,
+          question: docQuestion,
+        }),
+      });
+
+      const data = await response.json();
+      setDocAnswer(data.answer || data.error || "No answer returned.");
+    } catch (err) {
+      setDocAnswer("Something went wrong asking about the document.");
+      console.error(err);
+    } finally {
+      setDocAsking(false);
+    }
+  };
+
   return (
     <div className="app">
       <header className="header">
         <h1>NyaayaSearch</h1>
         <p className="tagline">Understand Indian law in plain language</p>
       </header>
+
+      <div className="upload-section">
+        <h2>Ask about your own document</h2>
+        <input type="file" accept="application/pdf" onChange={handleFileUpload} />
+        {uploading && <div className="loading">Reading and summarizing your document...</div>}
+
+        {uploadedDoc && (
+          <div className="document-card">
+            <div className="document-filename">{uploadedDoc.filename}</div>
+            <div className="document-summary">{uploadedDoc.summary}</div>
+
+            <form className="doc-question-form" onSubmit={handleAskDocument}>
+              <input
+                type="text"
+                className="search-input"
+                placeholder="Ask a question about this document..."
+                value={docQuestion}
+                onChange={(e) => setDocQuestion(e.target.value)}
+              />
+              <button type="submit" className="search-button" disabled={docAsking}>
+                {docAsking ? "Asking..." : "Ask"}
+              </button>
+            </form>
+
+            {docAnswer && <div className="document-answer">{docAnswer}</div>}
+          </div>
+        )}
+      </div>
+
+      <hr className="section-divider" />
 
       <form className="search-form" onSubmit={handleSearch}>
         <input

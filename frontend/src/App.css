@@ -223,3 +223,55 @@ body {
 .listen-button:hover {
   background: #e0e0e0;
 }
+.upload-section {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.upload-section h2 {
+  font-size: 1.1rem;
+  color: #1a3c34;
+  margin-bottom: 12px;
+}
+
+.document-card {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #eee;
+}
+
+.document-filename {
+  font-weight: 600;
+  color: #1a3c34;
+  margin-bottom: 8px;
+}
+
+.document-summary {
+  white-space: pre-wrap;
+  line-height: 1.5;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.doc-question-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.document-answer {
+  background: #f7f7f5;
+  border-radius: 8px;
+  padding: 14px;
+  line-height: 1.5;
+  color: #222;
+}
+
+.section-divider {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 28px 0;
+}
