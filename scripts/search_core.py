@@ -1,4 +1,4 @@
-﻿import re
+import re
 import os
 import numpy as np
 import openpyxl
@@ -12,7 +12,7 @@ STOP_WORDS = {
     "what", "which", "who", "how", "can", "could", "would",
     "should", "do", "does", "did", "if", "to", "of", "for",
     "and", "or", "in", "on", "with", "from", "about", "law",
-    "legal", "rights", "section"
+    "legal", "rights", "section", "not"
 }
 
 SYNONYMS = {
@@ -59,6 +59,14 @@ def expand_query(query):
         if key in query_lower:
             expanded += " " + " ".join(values)
     return expanded
+
+
+def find_matched_terms(query_tokens, section_text, max_terms=5):
+    """Find which query keywords actually appear in this section's text -
+    used to show the user WHY a result matched, not just a score."""
+    text_tokens = set(tokenize(section_text))
+    matched = [t for t in dict.fromkeys(query_tokens) if t in text_tokens]
+    return matched[:max_terms]
 
 
 class SearchEngine:
@@ -167,6 +175,12 @@ class SearchEngine:
         results = []
         for index in top_indices:
             record = self.records[index]
+            section_text = (
+                str(record.get("section_title") or "") + " " +
+                str(record.get("legal_text") or "")
+            )
+            matched_terms = find_matched_terms(query_tokens, section_text)
+
             results.append({
                 "act_name": record.get("act_name"),
                 "section_number": record.get("section_number"),
@@ -175,5 +189,6 @@ class SearchEngine:
                 "hybrid_score": float(final_scores[index]),
                 "semantic_score": float(semantic_scores[index]),
                 "bm25_score": float(bm25_scores[index]),
+                "matched_terms": matched_terms,
             })
         return results

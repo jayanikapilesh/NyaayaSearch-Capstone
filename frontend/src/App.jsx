@@ -319,6 +319,16 @@ function App() {
                 <div className={`confidence-badge ${confidence.className}`}>
                   {confidence.label}
                 </div>
+
+                {r.matched_terms && r.matched_terms.length > 0 && (
+                  <div className="matched-terms">
+                    <span className="matched-terms-label">Why this matched: </span>
+                    {r.matched_terms.map((term, k) => (
+                      <span className="matched-term-tag" key={k}>{term}</span>
+                    ))}
+                  </div>
+                )}
+
                 <div className="section-title">{r.section_title}</div>
                 <div className="legal-text">{r.legal_text}</div>
 

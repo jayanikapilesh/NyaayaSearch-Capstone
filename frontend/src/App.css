@@ -340,3 +340,45 @@ body {
   line-height: 1.5;
   color: #222;
 }
+.confidence-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+}
+
+.confidence-strong {
+  background: #dff5e3;
+  color: #1a7a35;
+}
+
+.confidence-good {
+  background: #fff3d6;
+  color: #8a6d1a;
+}
+
+.confidence-weak {
+  background: #f0f0f0;
+  color: #777;
+}
+.matched-terms {
+  margin-bottom: 10px;
+  font-size: 0.82rem;
+}
+
+.matched-terms-label {
+  color: #777;
+}
+
+.matched-term-tag {
+  display: inline-block;
+  background: #eef6f3;
+  color: #1a3c34;
+  padding: 2px 8px;
+  border-radius: 10px;
+  margin-right: 4px;
+  font-size: 0.78rem;
+  font-weight: 500;
+}
