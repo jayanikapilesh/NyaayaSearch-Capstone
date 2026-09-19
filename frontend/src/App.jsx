@@ -10,10 +10,18 @@ function getConfidenceLabel(score, topScore) {
   return { label: "Possible match", className: "confidence-weak" };
 }
 
-// Absolute score thresholds (not relative) to detect when even the TOP
-// result is weak overall - signals we should warn the user, not just rank.
 function isOverallLowConfidence(topScore) {
   return topScore < 0.75;
+}
+
+async function extractErrorMessage(response, fallback) {
+  try {
+    const data = await response.json();
+    if (data.detail) return data.detail;
+  } catch (e) {
+    // response wasn't JSON, fall through to fallback
+  }
+  return fallback;
 }
 
 function App() {
@@ -38,7 +46,10 @@ function App() {
 
   const handleSearch = async (e) => {
     e.preventDefault();
-    if (!query.trim()) return;
+    if (!query.trim()) {
+      setError("Please enter a question or describe your situation to search.");
+      return;
+    }
 
     setLoading(true);
     setError(null);
@@ -53,14 +64,19 @@ function App() {
       });
 
       if (!response.ok) {
-        throw new Error(`Server returned ${response.status}`);
+        const message = await extractErrorMessage(
+          response,
+          "Something went wrong. Make sure the backend server is running."
+        );
+        setError(message);
+        return;
       }
 
       const data = await response.json();
       setResults(data.results || []);
       setExplanation(data.explanation || "");
     } catch (err) {
-      setError("Something went wrong. Make sure the backend server is running.");
+      setError("Could not reach the server. Make sure the backend is running.");
       console.error(err);
     } finally {
       setLoading(false);
@@ -137,13 +153,18 @@ function App() {
       });
 
       if (!response.ok) {
-        throw new Error(`Server returned ${response.status}`);
+        const message = await extractErrorMessage(
+          response,
+          "Could not upload the document. Make sure the backend server is running."
+        );
+        setError(message);
+        return;
       }
 
       const data = await response.json();
       setUploadedDoc(data);
     } catch (err) {
-      setError("Could not upload the document. Make sure the backend server is running.");
+      setError("Could not reach the server. Make sure the backend is running.");
       console.error(err);
     } finally {
       setUploading(false);
@@ -167,10 +188,16 @@ function App() {
         }),
       });
 
+      if (!response.ok) {
+        const message = await extractErrorMessage(response, "Something went wrong asking about the document.");
+        setDocAnswer(message);
+        return;
+      }
+
       const data = await response.json();
-      setDocAnswer(data.answer || data.error || "No answer returned.");
+      setDocAnswer(data.answer || "No answer returned.");
     } catch (err) {
-      setDocAnswer("Something went wrong asking about the document.");
+      setDocAnswer("Could not reach the server. Please try again.");
       console.error(err);
     } finally {
       setDocAsking(false);
@@ -191,10 +218,16 @@ function App() {
         body: JSON.stringify({ term: dictTerm }),
       });
 
+      if (!response.ok) {
+        const message = await extractErrorMessage(response, "Something went wrong looking up this term.");
+        setDictDefinition(message);
+        return;
+      }
+
       const data = await response.json();
       setDictDefinition(data.definition || "No definition found.");
     } catch (err) {
-      setDictDefinition("Something went wrong looking up this term.");
+      setDictDefinition("Could not reach the server. Please try again.");
       console.error(err);
     } finally {
       setDictLoading(false);
@@ -250,18 +283,20 @@ function App() {
               </div>
             )}
 
-            <form className="doc-question-form" onSubmit={handleAskDocument}>
-              <input
-                type="text"
-                className="search-input"
-                placeholder="Ask a question about this document..."
-                value={docQuestion}
-                onChange={(e) => setDocQuestion(e.target.value)}
-              />
-              <button type="submit" className="search-button" disabled={docAsking}>
-                {docAsking ? "Asking..." : "Ask"}
-              </button>
-            </form>
+            {uploadedDoc.document_id && (
+              <form className="doc-question-form" onSubmit={handleAskDocument}>
+                <input
+                  type="text"
+                  className="search-input"
+                  placeholder="Ask a question about this document..."
+                  value={docQuestion}
+                  onChange={(e) => setDocQuestion(e.target.value)}
+                />
+                <button type="submit" className="search-button" disabled={docAsking}>
+                  {docAsking ? "Asking..." : "Ask"}
+                </button>
+              </form>
+            )}
 
             {docAnswer && <div className="document-answer">{docAnswer}</div>}
           </div>
