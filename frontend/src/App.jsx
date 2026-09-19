@@ -19,6 +19,10 @@ function App() {
   const [docAnswer, setDocAnswer] = useState("");
   const [docAsking, setDocAsking] = useState(false);
 
+  const [dictTerm, setDictTerm] = useState("");
+  const [dictDefinition, setDictDefinition] = useState("");
+  const [dictLoading, setDictLoading] = useState(false);
+
   const handleSearch = async (e) => {
     e.preventDefault();
     if (!query.trim()) return;
@@ -160,12 +164,53 @@ function App() {
     }
   };
 
+  const handleDefine = async (e) => {
+    e.preventDefault();
+    if (!dictTerm.trim()) return;
+
+    setDictLoading(true);
+    setDictDefinition("");
+
+    try {
+      const response = await fetch(`${API_URL}/define`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ term: dictTerm }),
+      });
+
+      const data = await response.json();
+      setDictDefinition(data.definition || "No definition found.");
+    } catch (err) {
+      setDictDefinition("Something went wrong looking up this term.");
+      console.error(err);
+    } finally {
+      setDictLoading(false);
+    }
+  };
+
   return (
     <div className="app">
       <header className="header">
         <h1>NyaayaSearch</h1>
         <p className="tagline">Understand Indian law in plain language</p>
       </header>
+
+      <div className="dictionary-section">
+        <h2>Legal Dictionary</h2>
+        <form className="dict-form" onSubmit={handleDefine}>
+          <input
+            type="text"
+            className="search-input"
+            placeholder="Look up a legal term, e.g. 'cognizable offence'"
+            value={dictTerm}
+            onChange={(e) => setDictTerm(e.target.value)}
+          />
+          <button type="submit" className="search-button" disabled={dictLoading}>
+            {dictLoading ? "Looking up..." : "Define"}
+          </button>
+        </form>
+        {dictDefinition && <div className="dict-definition">{dictDefinition}</div>}
+      </div>
 
       <div className="upload-section">
         <h2>Ask about your own document</h2>
