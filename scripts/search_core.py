@@ -1,4 +1,4 @@
-﻿import re
+import re
 import os
 import numpy as np
 import openpyxl
@@ -112,7 +112,7 @@ class SearchEngine:
 
         print("Creating semantic embeddings...")
         self.model = SentenceTransformer(
-            "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+            os.path.join(os.path.dirname(__file__), "..", "finetuned_legal_model")
         )
         self.embeddings = self.model.encode(
             texts, normalize_embeddings=True, show_progress_bar=True

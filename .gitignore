@@ -9,3 +9,4 @@ __pycache__/
 data/raw/
 data/case_law/processed/*.csv
 data/scenarios/processed/*.csv
+finetuned_legal_model/
