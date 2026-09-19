@@ -171,20 +171,26 @@ class SearchEngine:
                 elif "information technology" in act_name:
                     boost[i] *= 0.3
 
+            if "driving" in query_lower and "licence" in query_lower and "appeal" in query_lower:
+                if "motor vehicles act" in act_name and "appeal" in combined:
+                    boost[i] *= 3.0
+
+            if "rti" in query_lower or "right to information" in query_lower:
+                if "right to information act" in act_name:
+                    boost[i] *= 2.0
+
             if "won't complete" in query_lower or "specific performance" in expanded_query:
                 if "specific relief act" in act_name and "specific performance" in combined:
                     boost[i] *= 2.5
                     if section_number == "10":
                         boost[i] *= 2.0
 
-            # Seller doesn't own the property -> Transfer of Property Act, ostensible owner section specifically
             if "doesn't own" in query_lower or "doesn't actually own" in query_lower:
                 if "transfer of property act" in act_name and "ostensible owner" in combined:
                     boost[i] *= 3.0
                 elif "transfer of property act" in act_name:
                     boost[i] *= 0.7
 
-            # Stop someone doing something harmful via court -> Specific Relief Act injunction sections
             if "stop someone" in query_lower or ("stop" in query_lower and "harmful" in query_lower):
                 if "specific relief act" in act_name and "injunction" in combined:
                     boost[i] *= 2.5
