@@ -3,6 +3,13 @@ import "./App.css";
 
 const API_URL = "http://127.0.0.1:8000";
 
+function getConfidenceLabel(score, topScore) {
+  const ratio = topScore > 0 ? score / topScore : 0;
+  if (ratio >= 0.95) return { label: "Strong match", className: "confidence-strong" };
+  if (ratio >= 0.8) return { label: "Good match", className: "confidence-good" };
+  return { label: "Possible match", className: "confidence-weak" };
+}
+
 function App() {
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
@@ -300,28 +307,35 @@ function App() {
       {results.length > 0 && (
         <div className="results-section">
           <h2>Sources</h2>
-          {results.map((r, i) => (
-            <div className="result-card" key={i}>
-              <div className="result-header">
-                <span className="act-name">{r.act_name}</span>
-                <span className="section-number">Section {r.section_number}</span>
-              </div>
-              <div className="section-title">{r.section_title}</div>
-              <div className="legal-text">{r.legal_text}</div>
-
-              {r.related_cases && r.related_cases.length > 0 && (
-                <div className="related-cases">
-                  <div className="related-cases-title">Related Supreme Court Cases</div>
-                  {r.related_cases.map((c, j) => (
-                    <div className="case-item" key={j}>
-                      <span className="case-title">{c.title}</span>
-                      <span className="case-meta">{c.court} · {c.decision_date}</span>
-                    </div>
-                  ))}
+          {results.map((r, i) => {
+            const topScore = results[0]?.hybrid_score || 1;
+            const confidence = getConfidenceLabel(r.hybrid_score, topScore);
+            return (
+              <div className="result-card" key={i}>
+                <div className="result-header">
+                  <span className="act-name">{r.act_name}</span>
+                  <span className="section-number">Section {r.section_number}</span>
                 </div>
-              )}
-            </div>
-          ))}
+                <div className={`confidence-badge ${confidence.className}`}>
+                  {confidence.label}
+                </div>
+                <div className="section-title">{r.section_title}</div>
+                <div className="legal-text">{r.legal_text}</div>
+
+                {r.related_cases && r.related_cases.length > 0 && (
+                  <div className="related-cases">
+                    <div className="related-cases-title">Related Supreme Court Cases</div>
+                    {r.related_cases.map((c, j) => (
+                      <div className="case-item" key={j}>
+                        <span className="case-title">{c.title}</span>
+                        <span className="case-meta">{c.court} · {c.decision_date}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       )}
     </div>
