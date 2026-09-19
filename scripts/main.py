@@ -5,6 +5,7 @@ from search_core import SearchEngine
 from rag_core import generate_explanation, translate_to_english
 from citations_core import find_related_cases
 from pdf_core import extract_text_from_pdf, answer_question_about_document, summarize_document, extract_dates_and_deadlines
+from dictionary_core import define_term
 
 app = FastAPI(title="NyaayaSearch API")
 
@@ -34,6 +35,10 @@ class SearchRequest(BaseModel):
 class DocumentQuestionRequest(BaseModel):
     document_id: str
     question: str
+
+
+class DefineRequest(BaseModel):
+    term: str
 
 
 def attach_related_cases(results):
@@ -99,3 +104,9 @@ def ask_document(request: DocumentQuestionRequest):
 
     answer = answer_question_about_document(text, request.question)
     return {"answer": answer}
+
+
+@app.post("/define")
+def define(request: DefineRequest):
+    definition = define_term(request.term)
+    return {"term": request.term, "definition": definition}
