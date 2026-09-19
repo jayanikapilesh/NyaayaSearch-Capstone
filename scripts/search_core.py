@@ -1,4 +1,4 @@
-import re
+﻿import re
 import os
 import numpy as np
 import openpyxl
@@ -43,7 +43,10 @@ SYNONYMS = {
     "arrest": ["arrest", "arrested", "custody", "detention"],
     "warrant": ["warrant", "arrest without warrant", "cognizable"],
     "own it": ["own it", "ostensible owner", "title", "ownership"],
-    "seller doesn't own": ["seller doesn't own", "ostensible owner", "fraudulent transfer"]
+    "doesn't own": ["doesn't own", "ostensible owner", "fraudulent transfer"],
+    "seller doesn't own": ["seller doesn't own", "ostensible owner", "fraudulent transfer"],
+    "stop": ["stop", "injunction", "restrain", "prevent"],
+    "court order": ["court order", "injunction", "perpetual injunction"]
 }
 
 
@@ -137,6 +140,7 @@ class SearchEngine:
             title = str(record.get("section_title") or "").lower()
             legal_text = str(record.get("legal_text") or "").lower()
             act_name = str(record.get("act_name") or "").lower()
+            section_number = str(record.get("section_number") or "")
             combined = title + " " + legal_text + " " + act_name
 
             if "landlord" in query_lower and "landlord" in combined:
@@ -150,14 +154,10 @@ class SearchEngine:
                 if any(word in combined for word in ["return", "refund", "repay"]):
                     boost[i] *= 1.2
 
-            # --- Targeted fixes for diagnosed zero-score / low-rank queries ---
-
-            # "minor valid contract" -> Indian Contract Act, competency-to-contract sections
             if "minor" in query_lower and "contract" in query_lower:
                 if "contract act" in act_name and ("minor" in combined or "competent" in combined or "age of majority" in combined):
                     boost[i] *= 2.0
 
-            # "hacked computer stole data" -> IT Act unauthorized access / data theft sections
             if ("hacked" in query_lower or "stole data" in query_lower or "hacking" in query_lower):
                 if "information technology" in act_name and (
                     "unauthorised access" in combined or "unauthorized access" in combined
@@ -165,18 +165,28 @@ class SearchEngine:
                 ):
                     boost[i] *= 2.0
 
-            # "driving licence suspended appeal" -> Motor Vehicles Act specifically,
-            # and stop unrelated Acts (like IT Act) from outranking it on "licence"
             if "driving" in query_lower and "licence" in query_lower:
                 if "motor vehicles act" in act_name:
                     boost[i] *= 2.0
                 elif "information technology" in act_name:
                     boost[i] *= 0.3
 
-            # "property sale won't complete" -> Specific Relief Act (specific performance),
-            # not Transfer of Property Act (which covers the sale itself, not the remedy)
             if "won't complete" in query_lower or "specific performance" in expanded_query:
                 if "specific relief act" in act_name and "specific performance" in combined:
+                    boost[i] *= 2.5
+                    if section_number == "10":
+                        boost[i] *= 2.0
+
+            # Seller doesn't own the property -> Transfer of Property Act, ostensible owner section specifically
+            if "doesn't own" in query_lower or "doesn't actually own" in query_lower:
+                if "transfer of property act" in act_name and "ostensible owner" in combined:
+                    boost[i] *= 3.0
+                elif "transfer of property act" in act_name:
+                    boost[i] *= 0.7
+
+            # Stop someone doing something harmful via court -> Specific Relief Act injunction sections
+            if "stop someone" in query_lower or ("stop" in query_lower and "harmful" in query_lower):
+                if "specific relief act" in act_name and "injunction" in combined:
                     boost[i] *= 2.5
 
         final_scores = (0.15 * bm25_scores) + (0.85 * semantic_scores)
