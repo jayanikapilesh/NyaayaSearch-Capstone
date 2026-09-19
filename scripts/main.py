@@ -2,7 +2,7 @@
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from search_core import SearchEngine
-from rag_core import generate_explanation, translate_to_english
+from rag_core import generate_explanation, translate_to_english, translate_explanation, detect_language
 from citations_core import find_related_cases
 from pdf_core import extract_text_from_pdf, answer_question_about_document, summarize_document, extract_dates_and_deadlines
 from dictionary_core import define_term
@@ -40,6 +40,11 @@ class DocumentQuestionRequest(BaseModel):
 
 class DefineRequest(BaseModel):
     term: str
+
+
+class TranslateExplanationRequest(BaseModel):
+    text: str
+    target_language: str  # "en", "hi", or "kn"
 
 
 def attach_related_cases(results):
@@ -96,12 +101,15 @@ def explain(request: SearchRequest):
     except Exception:
         raise HTTPException(status_code=500, detail="Search failed unexpectedly. Please try again.")
 
+    detected_language = detect_language(request.query)
+
     if not results:
         return {
             "query": request.query,
             "translated_query": search_query,
             "results": [],
-            "explanation": "No relevant legal sections were found for this query. Try rephrasing with more specific details."
+            "explanation": "No relevant legal sections were found for this query. Try rephrasing with more specific details.",
+            "language": detected_language,
         }
 
     try:
@@ -116,7 +124,25 @@ def explain(request: SearchRequest):
         "translated_query": search_query,
         "results": results,
         "explanation": explanation,
+        "language": detected_language,
     }
+
+
+@app.post("/translate-explanation")
+def translate_explanation_endpoint(request: TranslateExplanationRequest):
+    if not request.text or not request.text.strip():
+        raise HTTPException(status_code=400, detail="No text provided to translate.")
+    if request.target_language not in ("en", "hi", "kn"):
+        raise HTTPException(status_code=400, detail="Unsupported target language.")
+
+    try:
+        translated = translate_explanation(request.text, request.target_language)
+    except groq.RateLimitError:
+        raise HTTPException(status_code=503, detail="Translation service is temporarily unavailable due to a usage limit. Please try again later.")
+    except Exception:
+        raise HTTPException(status_code=500, detail="Something went wrong translating this. Please try again.")
+
+    return {"translation": translated, "language": request.target_language}
 
 
 @app.post("/upload-pdf")

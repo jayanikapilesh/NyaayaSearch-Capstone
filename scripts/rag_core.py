@@ -1,4 +1,5 @@
-import os
+﻿import os
+import re
 from dotenv import load_dotenv
 from groq import Groq
 
@@ -18,6 +19,22 @@ STRICT RULES:
 - IMPORTANT: Respond in the SAME language as the user's question. If the question is written in Hindi, respond entirely in Hindi. If the question is written in Kannada, respond entirely in Kannada. If the question is written in English, respond entirely in English. Match the user's language exactly, even though the legal section text provided to you will be in English.
 """
 
+LANGUAGE_NAMES = {
+    "en": "English",
+    "hi": "Hindi",
+    "kn": "Kannada",
+}
+
+
+def detect_language(text):
+    """Detect which of English/Hindi/Kannada a piece of text is written in,
+    using Unicode script ranges - cheap and reliable, no API call needed."""
+    if re.search(r"[\u0C80-\u0CFF]", text):
+        return "kn"
+    if re.search(r"[\u0900-\u097F]", text):
+        return "hi"
+    return "en"
+
 
 def translate_to_english(query):
     response = client.chat.completions.create(
@@ -35,6 +52,34 @@ def translate_to_english(query):
         ],
         temperature=0,
         max_tokens=200,
+    )
+    return response.choices[0].message.content.strip()
+
+
+def translate_explanation(explanation_text, target_language_code):
+    """Translate an already-generated explanation into a target language,
+    preserving formatting and legal terms. Used for the language toggle -
+    does NOT re-run search or re-generate the legal content."""
+    target_language = LANGUAGE_NAMES.get(target_language_code)
+    if not target_language:
+        return explanation_text
+
+    response = client.chat.completions.create(
+        model="openai/gpt-oss-20b",
+        messages=[
+            {
+                "role": "system",
+                "content": (
+                    f"You translate legal explanations into {target_language}. "
+                    "Preserve all formatting (markdown tables, bullet points, headers) exactly as given. "
+                    "Preserve all Act names, Section numbers, and legal terms accurately. "
+                    "Return ONLY the translated text, nothing else - no preamble, no notes."
+                ),
+            },
+            {"role": "user", "content": explanation_text},
+        ],
+        temperature=0,
+        max_tokens=3000,
     )
     return response.choices[0].message.content.strip()
 
