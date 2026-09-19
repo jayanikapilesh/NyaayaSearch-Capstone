@@ -19,8 +19,6 @@ PATTERN_CODE_SECTION = re.compile(
     rf"((?:{WORD}\s+){{0,5}}(?:Penal Code|Code of Criminal Procedure|Insolvency and Bankruptcy Code)),?\s*\d{{4}}\s*[:\-]?\s*ss?\.?\s*(\d+[A-Za-z]?(?:/\d+[A-Za-z]?)*(?:\(\w+\))?)",
 )
 
-# Common Indian legal acronyms mapped to their full Act names.
-# Matches patterns like "IPC s.302", "u/s 138 of the NI Act", "UAPA s.22A"
 ACRONYMS = {
     "IPC": "Indian Penal Code",
     "CrPC": "Code of Criminal Procedure",
@@ -36,13 +34,23 @@ ACRONYMS = {
 
 _acronym_alternation = "|".join(re.escape(a) for a in sorted(ACRONYMS, key=len, reverse=True))
 
-# "IPC s.302", "IPC - ss.302/149", "u/s 138 of the NI Act", "UAPA s.22A"
 PATTERN_ACRONYM_SECTION = re.compile(
     rf"\b({_acronym_alternation})\b\s*[-:]?\s*ss?\.?\s*(\d+[A-Za-z]?(?:/\d+[A-Za-z]?)*(?:\(\w+\))?)",
 )
 
 PATTERN_US_OF_ACRONYM = re.compile(
     rf"u[/l1]s\.?\s*(\d+[A-Za-z]?(?:\(\w+\))?)\s*of\s*(?:the\s*)?({_acronym_alternation})\b",
+)
+
+# NEW: Constitution Article references, e.g. "Art. 14 of the Constitution", "Article 21"
+PATTERN_ARTICLE = re.compile(
+    r"\bArt(?:icle)?\.?\s*(\d+[A-Za-z]?(?:\(\w+\))?)\s*(?:of the Constitution)?",
+)
+
+# NEW: bare "s.X" / "ss.X" when an Act/Code name appeared earlier in the SAME text,
+# used as a fallback pass with the most-recently-seen Act name in that document
+PATTERN_BARE_SECTION = re.compile(
+    r"\bs{1,2}\.?\s*(\d+[A-Za-z]?(?:\(\w+\))?)\b",
 )
 
 BLOCKLIST = {"the act", "act", "this act", "said act", "the code", "code"}
@@ -61,6 +69,7 @@ def is_low_confidence_section(section):
 
 def extract_citations(text):
     citations = []
+    found_any_named_act = False
 
     for act_name, section in PATTERN_ACT_SECTION.findall(text):
         cleaned = clean_act_name(act_name)
@@ -71,6 +80,7 @@ def extract_citations(text):
                 "low_confidence": is_low_confidence_section(section),
                 "source_pattern": "act_year_section",
             })
+            found_any_named_act = True
 
     for section, act_name in PATTERN_US_OF.findall(text):
         cleaned = clean_act_name(act_name)
@@ -81,6 +91,7 @@ def extract_citations(text):
                 "low_confidence": is_low_confidence_section(section),
                 "source_pattern": "us_of_act",
             })
+            found_any_named_act = True
 
     for code_name, section in PATTERN_CODE_SECTION.findall(text):
         cleaned = clean_act_name(code_name)
@@ -92,6 +103,7 @@ def extract_citations(text):
                     "low_confidence": is_low_confidence_section(sec),
                     "source_pattern": "code_year_section",
                 })
+            found_any_named_act = True
 
     for acronym, section in PATTERN_ACRONYM_SECTION.findall(text):
         full_name = ACRONYMS.get(acronym, acronym)
@@ -102,6 +114,7 @@ def extract_citations(text):
                 "low_confidence": is_low_confidence_section(sec),
                 "source_pattern": "acronym",
             })
+        found_any_named_act = True
 
     for section, acronym in PATTERN_US_OF_ACRONYM.findall(text):
         full_name = ACRONYMS.get(acronym, acronym)
@@ -110,6 +123,16 @@ def extract_citations(text):
             "section_number": section,
             "low_confidence": is_low_confidence_section(section),
             "source_pattern": "us_of_acronym",
+        })
+        found_any_named_act = True
+
+    # Constitution Article references - always flagged with a fixed "act name"
+    for section in PATTERN_ARTICLE.findall(text):
+        citations.append({
+            "act_name": "Constitution of India",
+            "section_number": f"Art. {section}",
+            "low_confidence": is_low_confidence_section(section),
+            "source_pattern": "article",
         })
 
     return citations
