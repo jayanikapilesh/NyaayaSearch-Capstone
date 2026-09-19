@@ -10,6 +10,12 @@ function getConfidenceLabel(score, topScore) {
   return { label: "Possible match", className: "confidence-weak" };
 }
 
+// Absolute score thresholds (not relative) to detect when even the TOP
+// result is weak overall - signals we should warn the user, not just rank.
+function isOverallLowConfidence(topScore) {
+  return topScore < 0.75;
+}
+
 function App() {
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
@@ -195,6 +201,9 @@ function App() {
     }
   };
 
+  const topScore = results.length > 0 ? results[0].hybrid_score : 0;
+  const showLowConfidenceWarning = results.length > 0 && isOverallLowConfidence(topScore);
+
   return (
     <div className="app">
       <header className="header">
@@ -292,6 +301,14 @@ function App() {
         </div>
       )}
 
+      {showLowConfidenceWarning && (
+        <div className="low-confidence-warning">
+          ⚠️ We're not fully confident in these results. Try rephrasing your question
+          with more specific details (e.g. mention the situation, the people involved,
+          or what you're trying to do) for a better match. Showing our best guess below.
+        </div>
+      )}
+
       {explanation && (
         <div className="explanation-card">
           <div className="explanation-header">
@@ -308,7 +325,6 @@ function App() {
         <div className="results-section">
           <h2>Sources</h2>
           {results.map((r, i) => {
-            const topScore = results[0]?.hybrid_score || 1;
             const confidence = getConfidenceLabel(r.hybrid_score, topScore);
             return (
               <div className="result-card" key={i}>
