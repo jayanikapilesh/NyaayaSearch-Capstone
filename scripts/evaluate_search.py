@@ -1,214 +1,57 @@
-﻿import re
-import json
-import numpy as np
-import openpyxl
-from rank_bm25 import BM25Okapi
-from sentence_transformers import SentenceTransformer
+﻿import json
+import os
+from search_core import SearchEngine
 
-DATASET = "Legal_Knowledge_Base_combined.xlsx"
-EVAL_FILE = "data/eval/eval_queries.json"
-TOP_K = 5
-
-STOP_WORDS = {
-    "the", "a", "an", "is", "are", "am", "my", "me", "i",
-    "what", "which", "who", "how", "can", "could", "would",
-    "should", "do", "does", "did", "if", "to", "of", "for",
-    "and", "or", "in", "on", "with", "from", "about", "law",
-    "legal", "rights", "section"
-}
-
-SYNONYMS = {
-    "landlord": ["landlord", "owner", "house owner"],
-    "tenant": ["tenant", "renter", "renting"],
-    "deposit": ["deposit", "security deposit", "rental deposit"],
-    "return": ["return", "refund", "repay", "give back"],
-    "rent": ["rent", "rental", "lease", "tenancy"],
-    "threat": ["threat", "coercion", "intimidation", "forced", "duress"],
-    "forced": ["forced", "coercion", "duress", "threat"],
-    "agreement": ["agreement", "contract", "obligation"],
-    "not fulfilling": ["not fulfilling", "breach", "default", "non-performance"],
-    "minor": ["minor", "child", "underage", "competent to contract"],
-    "hacked": ["hacked", "unauthorized access", "computer offence"],
-    "stole data": ["stole data", "data theft", "data breach"],
-    "blackmail": ["blackmail", "privacy violation", "obscene", "extortion"],
-    "fake account": ["fake account", "impersonation", "identity theft", "cheating by personation"],
-    "impersonat": ["impersonat", "identity theft", "cheating by personation"],
-    "licence": ["licence", "license", "driving licence", "revocation"],
-    "suspended": ["suspended", "revoked", "revocation", "disqualification"],
-    "won't complete": ["won't complete", "specific performance", "breach of contract"],
-    "sale": ["sale", "contract of sale", "transfer"],
-    "stop someone": ["stop someone", "injunction", "restrain"],
-    "harmful": ["harmful", "injunction", "wrongful act"],
-    "defend myself": ["defend myself", "private defence", "self-defence"],
-    "attacked": ["attacked", "assault", "hurt", "criminal force"],
-    "fir": ["fir", "first information report", "cognizable offence", "information to police"],
-    "arrest": ["arrest", "arrested", "custody", "detention"],
-    "warrant": ["warrant", "arrest without warrant", "cognizable"],
-    "own it": ["own it", "ostensible owner", "title", "ownership"],
-    "seller doesn't own": ["seller doesn't own", "ostensible owner", "fraudulent transfer"]
-}
+EVAL_FILE = os.path.join(os.path.dirname(__file__), "..", "data", "eval", "eval_queries.json")
 
 
-def tokenize(text):
-    words = re.findall(r"[a-zA-Z]+", text.lower())
-    return [word for word in words if word not in STOP_WORDS]
+def evaluate():
+    engine = SearchEngine()
+
+    with open(EVAL_FILE, "r", encoding="utf-8") as f:
+        eval_queries = json.load(f)
+
+    precisions = []
+    recalls = []
+    reciprocal_ranks = []
+
+    print(f"{'QUERY':<70} {'P@5':<6} {'R@5':<6} {'RR':<6}")
+    print("-" * 97)
+
+    for item in eval_queries:
+        query = item["query"]
+        expected_act = item["act_name"].lower()
+        expected_sections = {str(s) for s in item["expected_sections"]}
+
+        results = engine.search(query, top_k=5)
+
+        hits = 0
+        first_hit_rank = None
+        for rank, r in enumerate(results, start=1):
+            act_matches = str(r["act_name"]).lower() == expected_act
+            section_matches = str(r["section_number"]) in expected_sections
+            if act_matches and section_matches:
+                hits += 1
+                if first_hit_rank is None:
+                    first_hit_rank = rank
+
+        precision = hits / 5
+        recall = min(hits, len(expected_sections)) / len(expected_sections) if expected_sections else 0
+        rr = 1 / first_hit_rank if first_hit_rank else 0
+
+        precisions.append(precision)
+        recalls.append(recall)
+        reciprocal_ranks.append(rr)
+
+        display_query = query if len(query) <= 68 else query[:65] + "..."
+        print(f"{display_query:<70} {precision:<6.2f} {recall:<6.2f} {rr:<6.2f}")
+
+    print("-" * 97)
+    print(f"\nTotal queries evaluated: {len(eval_queries)}")
+    print(f"Mean Precision@5: {sum(precisions)/len(precisions):.3f}")
+    print(f"Mean Recall@5: {sum(recalls)/len(recalls):.3f}")
+    print(f"Mean Reciprocal Rank (MRR): {sum(reciprocal_ranks)/len(reciprocal_ranks):.3f}")
 
 
-def expand_query(query):
-    query_lower = query.lower()
-    expanded = query_lower
-    for key, values in SYNONYMS.items():
-        if key in query_lower:
-            expanded += " " + " ".join(values)
-    return expanded
-
-
-print("Loading legal dataset...")
-wb = openpyxl.load_workbook(DATASET, read_only=True)
-ws = wb.active
-headers = list(next(ws.values))
-records = []
-
-for row in ws.iter_rows(values_only=True):
-    record = dict(zip(headers, row))
-    title = str(record.get("section_title") or "").strip().lower()
-    if title in {"repeal.", "[repealed.]", "[repealed .].", "[omitted.]."}:
-        continue
-    records.append(record)
-
-print("Legal records loaded:", len(records))
-
-documents = []
-for record in records:
-    text = (
-        str(record.get("act_name") or "") + " " +
-        str(record.get("section_number") or "") + " " +
-        str(record.get("section_title") or "") + " " +
-        str(record.get("legal_text") or "")
-    )
-    documents.append(tokenize(text))
-
-print("Creating BM25 index...")
-bm25 = BM25Okapi(documents)
-
-print("Creating semantic embeddings...")
-model = SentenceTransformer("sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2")
-
-texts = []
-for record in records:
-    text = (
-        str(record.get("act_name") or "") + ". " +
-        str(record.get("section_title") or "") + ". " +
-        str(record.get("legal_text") or "")
-    )
-    texts.append(text)
-
-embeddings = model.encode(texts, normalize_embeddings=True, show_progress_bar=True)
-
-print("Search system ready.\n")
-
-
-def search(query, k=TOP_K):
-    expanded_query = expand_query(query)
-    query_tokens = tokenize(expanded_query)
-
-    bm25_scores = np.array(bm25.get_scores(query_tokens), dtype=float)
-    if bm25_scores.max() > 0:
-        bm25_scores = bm25_scores / bm25_scores.max()
-
-    query_embedding = model.encode([expanded_query], normalize_embeddings=True)[0]
-    semantic_scores = np.dot(embeddings, query_embedding)
-    semantic_scores = np.clip(semantic_scores, 0, 1)
-
-    boost = np.ones(len(records))
-    query_lower = query.lower()
-
-    for i, record in enumerate(records):
-        title = str(record.get("section_title") or "").lower()
-        legal_text = str(record.get("legal_text") or "").lower()
-        act_name = str(record.get("act_name") or "").lower()
-        combined = title + " " + legal_text + " " + act_name
-
-        if "landlord" in query_lower and "landlord" in combined:
-            boost[i] *= 1.25
-        if "tenant" in query_lower and "tenant" in combined:
-            boost[i] *= 1.25
-        if "security deposit" in query_lower:
-            if "security" in combined and "deposit" in combined:
-                boost[i] *= 1.5
-        if "return" in query_lower or "refund" in query_lower:
-            if any(word in combined for word in ["return", "refund", "repay"]):
-                boost[i] *= 1.2
-
-    final_scores = (0.15 * bm25_scores + 0.85 * semantic_scores)
-
-    if "landlord" in query_lower or "tenant" in query_lower:
-        for i, record in enumerate(records):
-            text = (
-                str(record.get("section_title") or "") + " " +
-                str(record.get("legal_text") or "")
-            ).lower()
-
-            if any(word in text for word in [
-                "tenant", "landlord", "lessee", "lessor", "rent", "lease", "tenancy"
-            ]):
-                final_scores[i] *= 1.5
-
-            if "security deposit" in query_lower:
-                if "deposit" not in text:
-                    final_scores[i] *= 0.3
-
-    final_scores = final_scores * boost
-
-    top_indices = np.argsort(final_scores)[::-1][:k]
-    results = []
-    for index in top_indices:
-        record = records[index]
-        results.append({
-            "act_name": record.get("act_name"),
-            "section_number": str(record.get("section_number")),
-        })
-    return results
-
-
-with open(EVAL_FILE, "r", encoding="utf-8") as f:
-    eval_queries = json.load(f)
-
-total_precision = 0.0
-total_recall = 0.0
-total_reciprocal_rank = 0.0
-
-print(f"{'QUERY':<70} {'P@5':<6} {'R@5':<6} {'RR':<6}")
-print("-" * 95)
-
-for item in eval_queries:
-    query = item["query"]
-    act_name = item["act_name"]
-    expected = set(item["expected_sections"])
-
-    results = search(query, k=TOP_K)
-
-    matched_ranks = []
-    hits_in_topk = 0
-    for rank, r in enumerate(results, start=1):
-        if r["act_name"] == act_name and r["section_number"] in expected:
-            hits_in_topk += 1
-            matched_ranks.append(rank)
-
-    precision = hits_in_topk / TOP_K
-    recall = hits_in_topk / len(expected) if expected else 0
-    reciprocal_rank = (1 / min(matched_ranks)) if matched_ranks else 0
-
-    total_precision += precision
-    total_recall += recall
-    total_reciprocal_rank += reciprocal_rank
-
-    short_query = (query[:67] + "...") if len(query) > 70 else query
-    print(f"{short_query:<70} {precision:<6.2f} {recall:<6.2f} {reciprocal_rank:<6.2f}")
-
-n = len(eval_queries)
-print("-" * 95)
-print(f"\nTotal queries evaluated: {n}")
-print(f"Mean Precision@{TOP_K}: {total_precision / n:.3f}")
-print(f"Mean Recall@{TOP_K}: {total_recall / n:.3f}")
-print(f"Mean Reciprocal Rank (MRR): {total_reciprocal_rank / n:.3f}")
+if __name__ == "__main__":
+    evaluate()
