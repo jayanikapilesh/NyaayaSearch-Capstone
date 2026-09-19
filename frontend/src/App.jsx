@@ -1,7 +1,17 @@
 ﻿import { useState, useRef } from "react";
 import "./App.css";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 const API_URL = "http://127.0.0.1:8000";
+
+const LANGUAGE_LABELS = {
+  en: "English",
+  hi: "\u0939\u093F\u0902\u0926\u0940",
+  kn: "\u0C95\u0CA8\u0CCD\u0CA8\u0CA1",
+};
+
+const ALL_LANGUAGES = ["en", "hi", "kn"];
 
 function getConfidenceLabel(score, topScore) {
   const ratio = topScore > 0 ? score / topScore : 0;
@@ -34,6 +44,10 @@ function App() {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const recognitionRef = useRef(null);
 
+  const [currentLanguage, setCurrentLanguage] = useState("en");
+  const [explanationCache, setExplanationCache] = useState({});
+  const [translating, setTranslating] = useState(false);
+
   const [uploadedDoc, setUploadedDoc] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [docQuestion, setDocQuestion] = useState("");
@@ -55,6 +69,7 @@ function App() {
     setError(null);
     setExplanation("");
     setResults([]);
+    setExplanationCache({});
 
     try {
       const response = await fetch(`${API_URL}/explain`, {
@@ -75,11 +90,50 @@ function App() {
       const data = await response.json();
       setResults(data.results || []);
       setExplanation(data.explanation || "");
+
+      const detectedLang = data.language || "en";
+      setCurrentLanguage(detectedLang);
+      setExplanationCache({ [detectedLang]: data.explanation || "" });
     } catch (err) {
       setError("Could not reach the server. Make sure the backend is running.");
       console.error(err);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleLanguageSwitch = async (targetLang) => {
+    if (targetLang === currentLanguage) return;
+
+    if (explanationCache[targetLang]) {
+      setExplanation(explanationCache[targetLang]);
+      setCurrentLanguage(targetLang);
+      return;
+    }
+
+    setTranslating(true);
+    try {
+      const response = await fetch(`${API_URL}/translate-explanation`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text: explanation, target_language: targetLang }),
+      });
+
+      if (!response.ok) {
+        const message = await extractErrorMessage(response, "Could not translate the explanation.");
+        setError(message);
+        return;
+      }
+
+      const data = await response.json();
+      setExplanation(data.translation);
+      setCurrentLanguage(targetLang);
+      setExplanationCache((prev) => ({ ...prev, [targetLang]: data.translation }));
+    } catch (err) {
+      setError("Could not reach the server to translate.");
+      console.error(err);
+    } finally {
+      setTranslating(false);
     }
   };
 
@@ -90,15 +144,26 @@ function App() {
       return;
     }
 
+    if (recognitionRef.current) {
+      recognitionRef.current.stop();
+      recognitionRef.current = null;
+      setIsListening(false);
+      return;
+    }
+
     const recognition = new SpeechRecognition();
     recognition.lang = "en-IN";
     recognition.interimResults = false;
     recognition.maxAlternatives = 1;
 
     recognition.onstart = () => setIsListening(true);
-    recognition.onend = () => setIsListening(false);
+    recognition.onend = () => {
+      setIsListening(false);
+      recognitionRef.current = null;
+    };
     recognition.onerror = () => {
       setIsListening(false);
+      recognitionRef.current = null;
       setError("Could not hear you. Please try again.");
     };
     recognition.onresult = (event) => {
@@ -126,7 +191,7 @@ function App() {
       .replace(/-{2,}/g, "");
 
     const utterance = new SpeechSynthesisUtterance(cleanText);
-    utterance.lang = "en-IN";
+    utterance.lang = currentLanguage === "hi" ? "hi-IN" : currentLanguage === "kn" ? "kn-IN" : "en-IN";
     utterance.onend = () => setIsSpeaking(false);
     utterance.onerror = () => setIsSpeaking(false);
 
@@ -237,6 +302,7 @@ function App() {
 
   const topScore = results.length > 0 ? results[0].hybrid_score : 0;
   const showLowConfidenceWarning = results.length > 0 && isOverallLowConfidence(topScore);
+  const otherLanguages = ALL_LANGUAGES.filter((lang) => lang !== currentLanguage);
 
   return (
     <div className="app">
@@ -274,7 +340,7 @@ function App() {
 
             {uploadedDoc.dates && uploadedDoc.dates.length > 0 && (
               <div className="dates-section">
-                <div className="dates-title">📅 Important Dates & Deadlines</div>
+                <div className="dates-title">Important Dates and Deadlines</div>
                 {uploadedDoc.dates.map((d, i) => (
                   <div className="date-item" key={i}>
                     <span className="date-value">{d.value}</span>
@@ -320,14 +386,14 @@ function App() {
           onClick={startListening}
           title="Search by voice"
         >
-          🎤
+          Mic
         </button>
         <button type="submit" className="search-button" disabled={loading}>
           {loading ? "Searching..." : "Search"}
         </button>
       </form>
 
-      {isListening && <div className="listening-indicator">Listening...</div>}
+      {isListening && <div className="listening-indicator">Listening... (click mic again to stop)</div>}
 
       {error && <div className="error">{error}</div>}
 
@@ -339,7 +405,7 @@ function App() {
 
       {showLowConfidenceWarning && (
         <div className="low-confidence-warning">
-          ⚠️ We're not fully confident in these results. Try rephrasing your question
+          We're not fully confident in these results. Try rephrasing your question
           with more specific details (e.g. mention the situation, the people involved,
           or what you're trying to do) for a better match. Showing our best guess below.
         </div>
@@ -349,11 +415,29 @@ function App() {
         <div className="explanation-card">
           <div className="explanation-header">
             <h2>Explanation</h2>
-            <button className="listen-button" onClick={speakExplanation}>
-              {isSpeaking ? "⏹ Stop" : "🔊 Listen"}
-            </button>
+            <div className="explanation-controls">
+              <div className="language-toggle">
+                {otherLanguages.map((lang) => (
+                  <button
+                    key={lang}
+                    className="language-toggle-button"
+                    onClick={() => handleLanguageSwitch(lang)}
+                    disabled={translating}
+                  >
+                    {LANGUAGE_LABELS[lang]}
+                  </button>
+                ))}
+              </div>
+              <button className="listen-button" onClick={speakExplanation}>
+                {isSpeaking ? "Stop" : "Listen"}
+              </button>
+            </div>
           </div>
-          <div className="explanation-text">{explanation}</div>
+          {translating ? (
+            <div className="loading">Translating...</div>
+          ) : (
+            <div className="explanation-text"><ReactMarkdown remarkPlugins={[remarkGfm]}>{explanation}</ReactMarkdown></div>
+          )}
         </div>
       )}
 

@@ -392,3 +392,124 @@ body {
   font-size: 0.9rem;
   line-height: 1.5;
 }
+.explanation-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.language-toggle {
+  display: flex;
+  gap: 6px;
+}
+
+.language-toggle-button {
+  padding: 5px 12px;
+  font-size: 0.85rem;
+  background: #eef6f3;
+  border: 1px solid #c9e0d8;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #1a3c34;
+  font-weight: 500;
+}
+
+.language-toggle-button:hover {
+  background: #dcefe7;
+}
+
+.language-toggle-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.explanation-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.language-toggle {
+  display: flex;
+  gap: 6px;
+}
+
+.language-toggle-button {
+  padding: 5px 12px;
+  font-size: 0.85rem;
+  background: #eef6f3;
+  border: 1px solid #c9e0d8;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #1a3c34;
+  font-weight: 500;
+}
+
+.language-toggle-button:hover {
+  background: #dcefe7;
+}
+
+.language-toggle-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.explanation-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.language-toggle {
+  display: flex;
+  gap: 6px;
+}
+
+.language-toggle-button {
+  padding: 5px 12px;
+  font-size: 0.85rem;
+  background: #eef6f3;
+  border: 1px solid #c9e0d8;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #1a3c34;
+  font-weight: 500;
+}
+
+.language-toggle-button:hover {
+  background: #dcefe7;
+}
+
+.language-toggle-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.explanation-text table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+}
+
+.explanation-text th,
+.explanation-text td {
+  border: 1px solid #ddd;
+  padding: 8px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.explanation-text th {
+  background: #f0f0ee;
+  font-weight: 600;
+}
+
+.explanation-text p {
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.explanation-text ul, .explanation-text ol {
+  margin: 8px 0 8px 20px;
+}
+
+.explanation-text li {
+  margin-bottom: 4px;
+}
