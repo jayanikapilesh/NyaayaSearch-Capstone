@@ -142,6 +142,7 @@ function App() {
     setError(null);
     setUploadedDoc(null);
     setDocAnswer("");
+    setDocQuestion("");
 
     try {
       const formData = new FormData();
