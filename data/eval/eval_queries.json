@@ -41,5 +41,14 @@
 
   {"query": "Police arrested me, what are my rights?", "act_name": "Bharatiya Nagarik Suraksha Sanhita, 2023", "expected_sections": ["47", "58"]},
   {"query": "Can police arrest someone without a warrant?", "act_name": "Bharatiya Nagarik Suraksha Sanhita, 2023", "expected_sections": ["35"]},
-  {"query": "How do I file an FIR for a cognizable offence?", "act_name": "Bharatiya Nagarik Suraksha Sanhita, 2023", "expected_sections": ["173"]}
+  {"query": "How do I file an FIR for a cognizable offence?", "act_name": "Bharatiya Nagarik Suraksha Sanhita, 2023", "expected_sections": ["173"]},
+  {"query": "I lost my consumer case at the District Commission, can I appeal?", "act_name": "Consumer Protection Act, 2019", "expected_sections": ["24"]},
+  {"query": "My digital signature certificate was revoked, will I be notified?", "act_name": "Information Technology Act, 2000", "expected_sections": ["39"]},
+  {"query": "Can an RTI officer be punished for releasing information in good faith?", "act_name": "Right to Information Act, 2005", "expected_sections": ["21"]},
+  {"query": "How is the amount of rent payable decided under the Rent Act?", "act_name": "Karnataka Rent Act, 1999", "expected_sections": ["6"]},
+  {"query": "I was dispossessed of my property without due process, how can I recover possession?", "act_name": "Specific Relief Act, 1963", "expected_sections": ["6"]},
+  {"query": "Do I have to give information about my vehicle if the police ask?", "act_name": "Motor Vehicles Act, 1988", "expected_sections": ["133"]},
+  {"query": "Someone is selling fake branded goods with a counterfeit mark, is that a crime?", "act_name": "Bharatiya Nyaya Sanhita, 2023", "expected_sections": ["349"]},
+  {"query": "Can police ask a repeat offender to give a bond for good behaviour?", "act_name": "Bharatiya Nagarik Suraksha Sanhita, 2023", "expected_sections": ["129"]},
+  {"query": "Can a domestic violence victim get monetary compensation for injuries?", "act_name": "Protection of Women from Domestic Violence Act, 2005", "expected_sections": ["22"]}
 ]
