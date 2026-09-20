@@ -1,4 +1,4 @@
-﻿from fastapi import FastAPI, UploadFile, File, Form, HTTPException
+from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from search_core import SearchEngine
@@ -6,6 +6,7 @@ from rag_core import generate_explanation, translate_to_english, translate_expla
 from citations_core import find_related_cases
 from pdf_core import extract_text_from_pdf, answer_question_about_document, summarize_document, extract_dates_and_deadlines
 from dictionary_core import define_term
+from drafter_core import draft_document, DOCUMENT_TYPES
 import groq
 
 app = FastAPI(title="NyaayaSearch API")
@@ -228,3 +229,27 @@ def define(request: DefineRequest):
         raise HTTPException(status_code=500, detail="Something went wrong looking up this term. Please try again.")
 
     return {"term": request.term, "definition": definition}
+
+class DraftRequest(BaseModel):
+    document_type: str
+    details: dict = {}
+
+
+@app.post("/draft-document")
+def draft_document_endpoint(request: DraftRequest):
+    if request.document_type not in DOCUMENT_TYPES:
+        raise HTTPException(status_code=400, detail=f"Unknown document type. Supported types: {list(DOCUMENT_TYPES.keys())}")
+
+    try:
+        document_text = draft_document(request.document_type, request.details)
+    except groq.RateLimitError:
+        raise HTTPException(status_code=503, detail="Document drafting service is temporarily unavailable due to a usage limit. Please try again later.")
+    except Exception:
+        raise HTTPException(status_code=500, detail="Something went wrong generating this document. Please try again.")
+
+    return {"document_type": request.document_type, "document_text": document_text}
+
+
+@app.get("/document-types")
+def get_document_types():
+    return {"document_types": DOCUMENT_TYPES}
