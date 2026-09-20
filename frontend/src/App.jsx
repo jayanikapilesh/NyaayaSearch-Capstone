@@ -1,4 +1,4 @@
-﻿import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import "./App.css";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -56,6 +56,25 @@ function loadHistory() {
 function saveHistory(history) {
   try {
     localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+  } catch (e) {
+    // localStorage unavailable - ignore
+  }
+}
+
+const SAVED_RESULTS_KEY = "nyaaya-saved-results";
+
+function loadSavedResults() {
+  try {
+    const raw = localStorage.getItem(SAVED_RESULTS_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch (e) {
+    return [];
+  }
+}
+
+function persistSavedResults(items) {
+  try {
+    localStorage.setItem(SAVED_RESULTS_KEY, JSON.stringify(items));
   } catch (e) {
     // localStorage unavailable - ignore
   }
@@ -135,6 +154,7 @@ function App() {
   });
 
   const [searchHistory, setSearchHistory] = useState(() => loadHistory());
+  const [savedResults, setSavedResults] = useState(() => loadSavedResults());
 
   useEffect(() => {
     try {
@@ -158,6 +178,40 @@ function App() {
   const clearHistory = () => {
     setSearchHistory([]);
     saveHistory([]);
+  };
+
+  const isCurrentResultSaved = savedResults.some((r) => r.query === query && r.explanation === explanation);
+
+  const handleSaveResult = () => {
+    if (!query || !explanation) return;
+    const newItem = {
+      id: Date.now(),
+      query,
+      explanation,
+      language: currentLanguage,
+      savedAt: new Date().toISOString(),
+    };
+    setSavedResults((prev) => {
+      const updated = [newItem, ...prev];
+      persistSavedResults(updated);
+      return updated;
+    });
+  };
+
+  const handleDeleteSaved = (id) => {
+    setSavedResults((prev) => {
+      const updated = prev.filter((r) => r.id !== id);
+      persistSavedResults(updated);
+      return updated;
+    });
+  };
+
+  const handleViewSaved = (item) => {
+    setQuery(item.query);
+    setExplanation(item.explanation);
+    setCurrentLanguage(item.language || "en");
+    setExplanationCache({ [item.language || "en"]: item.explanation });
+    setResults([]);
   };
 
   const runSearch = async (searchQuery) => {
@@ -682,6 +736,24 @@ function App() {
         </div>
       )}
 
+      {savedResults.length > 0 && (
+        <div className="saved-results-section">
+          <h2>Saved Results</h2>
+          {savedResults.map((item) => (
+            <div className="saved-result-card" key={item.id}>
+              <div className="saved-result-header">
+                <span className="saved-result-query" onClick={() => handleViewSaved(item)}>
+                  {item.query}
+                </span>
+                <button className="saved-result-delete" onClick={() => handleDeleteSaved(item.id)}>
+                  Delete
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
       {isListening && <div className="listening-indicator">Listening... (click mic again to stop)</div>}
 
       {error && <div className="error">{error}</div>}
@@ -719,6 +791,9 @@ function App() {
               </div>
               <button className="listen-button" onClick={speakExplanation}>
                 {isSpeaking ? "Stop" : "Listen"}
+              </button>
+              <button className="save-button" onClick={handleSaveResult} disabled={isCurrentResultSaved}>
+                {isCurrentResultSaved ? "Saved" : "Save"}
               </button>
             </div>
           </div>
@@ -763,7 +838,7 @@ function App() {
                     {r.related_cases.map((c, j) => (
                       <div className="case-item" key={j}>
                         <span className="case-title">{c.title}</span>
-                        <span className="case-meta">{c.court} · {c.decision_date}</span>
+                        <span className="case-meta">{c.court} � {c.decision_date}</span>
                       </div>
                     ))}
                   </div>
@@ -778,3 +853,12 @@ function App() {
 }
 
 export default App;
+
+
+
+
+
+
+
+
+
