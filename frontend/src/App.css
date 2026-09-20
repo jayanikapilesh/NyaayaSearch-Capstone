@@ -747,3 +747,52 @@ body {
   background: #2f2a1a;
   border-color: #4a3f28;
 }
+.search-history {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 16px;
+  font-size: 0.85rem;
+}
+
+.search-history-label {
+  color: #777;
+  font-weight: 500;
+  margin-right: 2px;
+}
+
+.history-chip {
+  padding: 4px 12px;
+  background: #eef6f3;
+  border: 1px solid #c9e0d8;
+  border-radius: 14px;
+  cursor: pointer;
+  color: #1a3c34;
+  font-size: 0.82rem;
+}
+
+.history-chip:hover {
+  background: #dcefe7;
+}
+
+.history-clear {
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  font-size: 0.8rem;
+  text-decoration: underline;
+  margin-left: 4px;
+}
+
+.dark-mode .history-chip {
+  background: #2a2a2a;
+  border-color: #444;
+  color: #7fd9b8;
+}
+
+.dark-mode .search-history-label,
+.dark-mode .history-clear {
+  color: #999;
+}

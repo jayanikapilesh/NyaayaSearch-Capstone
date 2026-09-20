@@ -7,6 +7,8 @@ import { saveAs } from "file-saver";
 import { DOCUMENT_SCHEMAS, GENERIC_DOCUMENT_TYPES } from "./documentSchemas";
 
 const API_URL = "http://127.0.0.1:8000";
+const HISTORY_KEY = "nyaaya-search-history";
+const MAX_HISTORY = 8;
 
 const LANGUAGE_LABELS = {
   en: "English",
@@ -40,6 +42,23 @@ async function extractErrorMessage(response, fallback) {
     // response wasn't JSON, fall through to fallback
   }
   return fallback;
+}
+
+function loadHistory() {
+  try {
+    const raw = localStorage.getItem(HISTORY_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch (e) {
+    return [];
+  }
+}
+
+function saveHistory(history) {
+  try {
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+  } catch (e) {
+    // localStorage unavailable - ignore
+  }
 }
 
 function buildDocxFromMarkdown(markdownText) {
@@ -115,6 +134,8 @@ function App() {
     }
   });
 
+  const [searchHistory, setSearchHistory] = useState(() => loadHistory());
+
   useEffect(() => {
     try {
       localStorage.setItem("nyaaya-dark-mode", darkMode ? "true" : "false");
@@ -125,9 +146,22 @@ function App() {
 
   const toggleDarkMode = () => setDarkMode((prev) => !prev);
 
-  const handleSearch = async (e) => {
-    e.preventDefault();
-    if (!query.trim()) {
+  const addToHistory = (searchedQuery) => {
+    setSearchHistory((prev) => {
+      const withoutDupe = prev.filter((q) => q !== searchedQuery);
+      const updated = [searchedQuery, ...withoutDupe].slice(0, MAX_HISTORY);
+      saveHistory(updated);
+      return updated;
+    });
+  };
+
+  const clearHistory = () => {
+    setSearchHistory([]);
+    saveHistory([]);
+  };
+
+  const runSearch = async (searchQuery) => {
+    if (!searchQuery.trim()) {
       setError("Please enter a question or describe your situation to search.");
       return;
     }
@@ -142,7 +176,7 @@ function App() {
       const response = await fetch(`${API_URL}/explain`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query, top_k: 5 }),
+        body: JSON.stringify({ query: searchQuery, top_k: 5 }),
       });
 
       if (!response.ok) {
@@ -161,12 +195,24 @@ function App() {
       const detectedLang = data.language || "en";
       setCurrentLanguage(detectedLang);
       setExplanationCache({ [detectedLang]: data.explanation || "" });
+
+      addToHistory(searchQuery);
     } catch (err) {
       setError("Could not reach the server. Make sure the backend is running.");
       console.error(err);
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    await runSearch(query);
+  };
+
+  const handleHistoryClick = (historyQuery) => {
+    setQuery(historyQuery);
+    runSearch(historyQuery);
   };
 
   const handleLanguageSwitch = async (targetLang) => {
@@ -623,6 +669,18 @@ function App() {
           {loading ? "Searching..." : "Search"}
         </button>
       </form>
+
+      {searchHistory.length > 0 && (
+        <div className="search-history">
+          <span className="search-history-label">Recent:</span>
+          {searchHistory.map((h, i) => (
+            <button key={i} className="history-chip" onClick={() => handleHistoryClick(h)}>
+              {h.length > 40 ? h.slice(0, 40) + "..." : h}
+            </button>
+          ))}
+          <button className="history-clear" onClick={clearHistory}>Clear</button>
+        </div>
+      )}
 
       {isListening && <div className="listening-indicator">Listening... (click mic again to stop)</div>}
 
