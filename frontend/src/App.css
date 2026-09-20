@@ -513,3 +513,237 @@ body {
 .explanation-text li {
   margin-bottom: 4px;
 }
+.drafter-section {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.drafter-section h2 {
+  font-size: 1.1rem;
+  color: #1a3c34;
+  margin-bottom: 12px;
+}
+
+.drafter-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.drafter-textarea {
+  padding: 12px 14px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  resize: vertical;
+}
+
+.draft-result {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #eee;
+}
+
+.draft-result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.draft-text {
+  background: #f7f7f5;
+  border-radius: 8px;
+  padding: 16px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+.drafter-intro {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.drafter-subtitle {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1a3c34;
+  margin: 12px 0 8px 0;
+}
+
+.form-section {
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.form-section:last-of-type {
+  border-bottom: none;
+}
+
+.form-section-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #1a3c34;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 10px;
+}
+
+.form-field {
+  margin-bottom: 10px;
+}
+
+.form-field-label {
+  display: block;
+  font-size: 0.85rem;
+  color: #444;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.theme-toggle {
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #1a3c34;
+  font-weight: 500;
+}
+
+.theme-toggle:hover {
+  background: #f0f0f0;
+}
+
+.dark-mode {
+  background: #1a1a1a;
+}
+
+.dark-mode body,
+.dark-mode {
+  background: #1a1a1a;
+  color: #e8e8e8;
+}
+
+.dark-mode .header h1 {
+  color: #7fd9b8;
+}
+
+.dark-mode .tagline {
+  color: #aaa;
+}
+
+.dark-mode .theme-toggle {
+  background: #2a2a2a;
+  border-color: #444;
+  color: #e8e8e8;
+}
+
+.dark-mode .theme-toggle:hover {
+  background: #333;
+}
+
+.dark-mode .dictionary-section,
+.dark-mode .drafter-section,
+.dark-mode .upload-section,
+.dark-mode .explanation-card,
+.dark-mode .result-card,
+.dark-mode .document-card {
+  background: #242424;
+  border-color: #3a3a3a;
+}
+
+.dark-mode .dictionary-section h2,
+.dark-mode .drafter-section h2,
+.dark-mode .upload-section h2,
+.dark-mode .explanation-header h2,
+.dark-mode .results-section h2,
+.dark-mode .act-name,
+.dark-mode .form-section-title,
+.dark-mode .related-cases-title,
+.dark-mode .draft-result-header h3 {
+  color: #7fd9b8;
+}
+
+.dark-mode .search-input,
+.dark-mode .drafter-textarea {
+  background: #2a2a2a;
+  border-color: #444;
+  color: #e8e8e8;
+}
+
+.dark-mode .search-button {
+  background: #7fd9b8;
+  color: #111;
+}
+
+.dark-mode .explanation-text,
+.dark-mode .legal-text,
+.dark-mode .draft-text,
+.dark-mode .document-summary,
+.dark-mode .dict-definition,
+.dark-mode .document-answer {
+  color: #d8d8d8;
+}
+
+.dark-mode .explanation-text table th,
+.dark-mode .explanation-text td {
+  border-color: #444;
+}
+
+.dark-mode .explanation-text th {
+  background: #2f2f2f;
+}
+
+.dark-mode .section-number,
+.dark-mode .case-meta,
+.dark-mode .form-field-label,
+.dark-mode .drafter-intro,
+.dark-mode .matched-terms-label {
+  color: #999;
+}
+
+.dark-mode .related-cases,
+.dark-mode .section-divider,
+.dark-mode .form-section {
+  border-color: #3a3a3a;
+}
+
+.dark-mode .matched-term-tag {
+  background: #2f3b36;
+  color: #7fd9b8;
+}
+
+.dark-mode .language-toggle-button,
+.dark-mode .listen-button {
+  background: #2a2a2a;
+  border-color: #444;
+  color: #e8e8e8;
+}
+
+.dark-mode .low-confidence-warning {
+  background: #3a341c;
+  border-color: #5a4f28;
+  color: #e0c980;
+}
+
+.dark-mode .error {
+  background: #3a1c1c;
+  color: #e08080;
+}
+
+.dark-mode .dates-section {
+  background: #2f2a1a;
+  border-color: #4a3f28;
+}

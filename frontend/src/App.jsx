@@ -1,7 +1,10 @@
-﻿import { useState, useRef } from "react";
+﻿import { useState, useRef, useEffect } from "react";
 import "./App.css";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { Document, Packer, Paragraph, TextRun, HeadingLevel } from "docx";
+import { saveAs } from "file-saver";
+import { DOCUMENT_SCHEMAS, GENERIC_DOCUMENT_TYPES } from "./documentSchemas";
 
 const API_URL = "http://127.0.0.1:8000";
 
@@ -12,6 +15,11 @@ const LANGUAGE_LABELS = {
 };
 
 const ALL_LANGUAGES = ["en", "hi", "kn"];
+
+const ALL_DOCUMENT_TYPE_LABELS = {
+  ...Object.fromEntries(Object.entries(DOCUMENT_SCHEMAS).map(([key, schema]) => [key, schema.label])),
+  ...GENERIC_DOCUMENT_TYPES,
+};
 
 function getConfidenceLabel(score, topScore) {
   const ratio = topScore > 0 ? score / topScore : 0;
@@ -32,6 +40,41 @@ async function extractErrorMessage(response, fallback) {
     // response wasn't JSON, fall through to fallback
   }
   return fallback;
+}
+
+function buildDocxFromMarkdown(markdownText) {
+  const lines = markdownText.split("\n");
+  const paragraphs = [];
+
+  const parseBoldRuns = (text) => {
+    const parts = text.split(/(\*\*[^*]+\*\*)/g).filter(Boolean);
+    return parts.map((part) => {
+      if (part.startsWith("**") && part.endsWith("**")) {
+        return new TextRun({ text: part.slice(2, -2), bold: true });
+      }
+      return new TextRun(part);
+    });
+  };
+
+  for (const rawLine of lines) {
+    const line = rawLine.replace(/\s+$/, "");
+
+    if (line.startsWith("# ")) {
+      paragraphs.push(new Paragraph({ text: line.slice(2), heading: HeadingLevel.TITLE, spacing: { after: 200 } }));
+    } else if (line.startsWith("## ")) {
+      paragraphs.push(new Paragraph({ text: line.slice(3), heading: HeadingLevel.HEADING_1, spacing: { before: 200, after: 100 } }));
+    } else if (line.startsWith("### ")) {
+      paragraphs.push(new Paragraph({ text: line.slice(4), heading: HeadingLevel.HEADING_2, spacing: { before: 150, after: 80 } }));
+    } else if (line.trim() === "") {
+      paragraphs.push(new Paragraph({ text: "" }));
+    } else {
+      paragraphs.push(new Paragraph({ children: parseBoldRuns(line), spacing: { after: 100 } }));
+    }
+  }
+
+  return new Document({
+    sections: [{ properties: {}, children: paragraphs }],
+  });
 }
 
 function App() {
@@ -57,6 +100,30 @@ function App() {
   const [dictTerm, setDictTerm] = useState("");
   const [dictDefinition, setDictDefinition] = useState("");
   const [dictLoading, setDictLoading] = useState(false);
+
+  const [draftType, setDraftType] = useState("rent_agreement");
+  const [formValues, setFormValues] = useState({});
+  const [genericDetails, setGenericDetails] = useState("");
+  const [draftText, setDraftText] = useState("");
+  const [drafting, setDrafting] = useState(false);
+
+  const [darkMode, setDarkMode] = useState(() => {
+    try {
+      return localStorage.getItem("nyaaya-dark-mode") === "true";
+    } catch (e) {
+      return false;
+    }
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("nyaaya-dark-mode", darkMode ? "true" : "false");
+    } catch (e) {
+      // localStorage unavailable - ignore
+    }
+  }, [darkMode]);
+
+  const toggleDarkMode = () => setDarkMode((prev) => !prev);
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -300,14 +367,86 @@ function App() {
     }
   };
 
+  const handleDraftTypeChange = (newType) => {
+    setDraftType(newType);
+    setFormValues({});
+    setGenericDetails("");
+    setDraftText("");
+  };
+
+  const handleFormFieldChange = (key, value) => {
+    setFormValues((prev) => ({ ...prev, [key]: value }));
+  };
+
+  const handleDraft = async (e) => {
+    e.preventDefault();
+
+    setDrafting(true);
+    setError(null);
+    setDraftText("");
+
+    let details = {};
+
+    const schema = DOCUMENT_SCHEMAS[draftType];
+    if (schema) {
+      Object.entries(formValues).forEach(([key, value]) => {
+        if (value && value.trim && value.trim() !== "") details[key] = value;
+        else if (value && typeof value !== "string") details[key] = value;
+      });
+    } else {
+      genericDetails.split("\n").forEach((line) => {
+        const idx = line.indexOf(":");
+        if (idx > -1) {
+          const key = line.slice(0, idx).trim().toLowerCase().replace(/\s+/g, "_");
+          const value = line.slice(idx + 1).trim();
+          if (key && value) details[key] = value;
+        }
+      });
+    }
+
+    try {
+      const response = await fetch(`${API_URL}/draft-document`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ document_type: draftType, details }),
+      });
+
+      if (!response.ok) {
+        const message = await extractErrorMessage(response, "Could not generate the document.");
+        setError(message);
+        return;
+      }
+
+      const data = await response.json();
+      setDraftText(data.document_text || "");
+    } catch (err) {
+      setError("Could not reach the server. Make sure the backend is running.");
+      console.error(err);
+    } finally {
+      setDrafting(false);
+    }
+  };
+
+  const handleDownloadDraft = async () => {
+    const doc = buildDocxFromMarkdown(draftText);
+    const blob = await Packer.toBlob(doc);
+    saveAs(blob, `${draftType}.docx`);
+  };
+
   const topScore = results.length > 0 ? results[0].hybrid_score : 0;
   const showLowConfidenceWarning = results.length > 0 && isOverallLowConfidence(topScore);
   const otherLanguages = ALL_LANGUAGES.filter((lang) => lang !== currentLanguage);
+  const activeSchema = DOCUMENT_SCHEMAS[draftType];
 
   return (
-    <div className="app">
+    <div className={`app ${darkMode ? "dark-mode" : ""}`}>
       <header className="header">
-        <h1>NyaayaSearch</h1>
+        <div className="header-top">
+          <h1>NyaayaSearch</h1>
+          <button className="theme-toggle" onClick={toggleDarkMode}>
+            {darkMode ? "Light Mode" : "Dark Mode"}
+          </button>
+        </div>
         <p className="tagline">Understand Indian law in plain language</p>
       </header>
 
@@ -326,6 +465,98 @@ function App() {
           </button>
         </form>
         {dictDefinition && <div className="dict-definition">{dictDefinition}</div>}
+      </div>
+
+      <div className="drafter-section">
+        <h2>Legal Document Generator</h2>
+        <p className="drafter-intro">What document do you want to create?</p>
+
+        <select
+          className="search-input"
+          value={draftType}
+          onChange={(e) => handleDraftTypeChange(e.target.value)}
+        >
+          {Object.entries(ALL_DOCUMENT_TYPE_LABELS).map(([value, label]) => (
+            <option key={value} value={value}>{label}</option>
+          ))}
+        </select>
+
+        <form className="drafter-form" onSubmit={handleDraft}>
+          {activeSchema ? (
+            <>
+              <p className="drafter-subtitle">Let's create your {activeSchema.label}</p>
+              {activeSchema.sections.map((section) => (
+                <div className="form-section" key={section.title}>
+                  <div className="form-section-title">{section.title}</div>
+                  {section.fields.map((field) => (
+                    <div className="form-field" key={field.key}>
+                      <label className="form-field-label">{field.label}</label>
+                      {field.type === "textarea" ? (
+                        <textarea
+                          className="drafter-textarea"
+                          placeholder={field.placeholder}
+                          rows={2}
+                          value={formValues[field.key] || ""}
+                          onChange={(e) => handleFormFieldChange(field.key, e.target.value)}
+                        />
+                      ) : field.type === "select" ? (
+                        <select
+                          className="search-input"
+                          value={formValues[field.key] || ""}
+                          onChange={(e) => handleFormFieldChange(field.key, e.target.value)}
+                        >
+                          <option value="">Select...</option>
+                          {field.options.map((opt) => (
+                            <option key={opt} value={opt}>{opt}</option>
+                          ))}
+                        </select>
+                      ) : (
+                        <input
+                          type={field.type === "date" ? "date" : field.type === "number" ? "number" : "text"}
+                          className="search-input"
+                          placeholder={field.placeholder}
+                          value={formValues[field.key] || ""}
+                          onChange={(e) => handleFormFieldChange(field.key, e.target.value)}
+                        />
+                      )}
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </>
+          ) : (
+            <>
+              <p className="drafter-subtitle">
+                This document type doesn't have a detailed form yet. Enter any details you'd like included, one per line (e.g. "name: John Doe") - anything you leave out will appear as a blank line to fill in later.
+              </p>
+              <textarea
+                className="drafter-textarea"
+                placeholder={"e.g.\nname: John Doe\ndate: 2026-01-01"}
+                value={genericDetails}
+                onChange={(e) => setGenericDetails(e.target.value)}
+                rows={5}
+              />
+            </>
+          )}
+
+          <button type="submit" className="search-button" disabled={drafting}>
+            {drafting ? "Generating..." : "Generate Document"}
+          </button>
+        </form>
+
+        {draftText && (
+          <div className="draft-result">
+            <div className="draft-result-header">
+              <h3>{ALL_DOCUMENT_TYPE_LABELS[draftType]}</h3>
+              <button className="search-button" onClick={handleDownloadDraft}>
+                Download as Word
+              </button>
+            </div>
+            <div className="draft-text">
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>{draftText}</ReactMarkdown>
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="upload-section">
