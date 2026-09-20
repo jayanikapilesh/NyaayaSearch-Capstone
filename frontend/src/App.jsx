@@ -9,6 +9,7 @@ import { DOCUMENT_SCHEMAS, GENERIC_DOCUMENT_TYPES } from "./documentSchemas";
 const API_URL = "http://127.0.0.1:8000";
 const HISTORY_KEY = "nyaaya-search-history";
 const MAX_HISTORY = 8;
+const SAVED_RESULTS_KEY = "nyaaya-saved-results";
 
 const LANGUAGE_LABELS = {
   en: "English",
@@ -39,7 +40,7 @@ async function extractErrorMessage(response, fallback) {
     const data = await response.json();
     if (data.detail) return data.detail;
   } catch (e) {
-    // response wasn't JSON, fall through to fallback
+    return fallback;
   }
   return fallback;
 }
@@ -57,11 +58,9 @@ function saveHistory(history) {
   try {
     localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
   } catch (e) {
-    // localStorage unavailable - ignore
+    return;
   }
 }
-
-const SAVED_RESULTS_KEY = "nyaaya-saved-results";
 
 function loadSavedResults() {
   try {
@@ -76,7 +75,7 @@ function persistSavedResults(items) {
   try {
     localStorage.setItem(SAVED_RESULTS_KEY, JSON.stringify(items));
   } catch (e) {
-    // localStorage unavailable - ignore
+    return;
   }
 }
 
@@ -117,6 +116,7 @@ function buildDocxFromMarkdown(markdownText) {
 
 function App() {
   const [query, setQuery] = useState("");
+  const [activeTab, setActiveTab] = useState("search");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [results, setResults] = useState([]);
@@ -145,7 +145,7 @@ function App() {
   const [draftText, setDraftText] = useState("");
   const [drafting, setDrafting] = useState(false);
 
-  const [darkMode, setDarkMode] = useState(() => {
+  const [darkMode, setDarkMode] = useState(function () {
     try {
       return localStorage.getItem("nyaaya-dark-mode") === "true";
     } catch (e) {
@@ -153,60 +153,62 @@ function App() {
     }
   });
 
-  const [searchHistory, setSearchHistory] = useState(() => loadHistory());
-  const [savedResults, setSavedResults] = useState(() => loadSavedResults());
+  const [searchHistory, setSearchHistory] = useState(function () { return loadHistory(); });
+  const [savedResults, setSavedResults] = useState(function () { return loadSavedResults(); });
 
-  useEffect(() => {
+  useEffect(function () {
     try {
       localStorage.setItem("nyaaya-dark-mode", darkMode ? "true" : "false");
+    document.body.style.background = darkMode ? "#1a1a1a" : "#f7f7f5";
     } catch (e) {
-      // localStorage unavailable - ignore
+      return;
     }
   }, [darkMode]);
 
-  const toggleDarkMode = () => setDarkMode((prev) => !prev);
+  const toggleDarkMode = function () { setDarkMode(function (prev) { return !prev; }); };
 
-  const addToHistory = (searchedQuery) => {
-    setSearchHistory((prev) => {
-      const withoutDupe = prev.filter((q) => q !== searchedQuery);
-      const updated = [searchedQuery, ...withoutDupe].slice(0, MAX_HISTORY);
+  const addToHistory = function (searchedQuery) {
+    setSearchHistory(function (prev) {
+      const withoutDupe = prev.filter(function (q) { return q !== searchedQuery; });
+      const updated = [searchedQuery].concat(withoutDupe).slice(0, MAX_HISTORY);
       saveHistory(updated);
       return updated;
     });
   };
 
-  const clearHistory = () => {
+  const clearHistory = function () {
     setSearchHistory([]);
     saveHistory([]);
   };
 
-  const isCurrentResultSaved = savedResults.some((r) => r.query === query && r.explanation === explanation);
+  const isCurrentResultSaved = savedResults.some(function (r) { return r.query === query && r.explanation === explanation; });
 
-  const handleSaveResult = () => {
+  const handleSaveResult = function () {
     if (!query || !explanation) return;
     const newItem = {
       id: Date.now(),
-      query,
-      explanation,
+      query: query,
+      explanation: explanation,
       language: currentLanguage,
       savedAt: new Date().toISOString(),
     };
-    setSavedResults((prev) => {
-      const updated = [newItem, ...prev];
+    setSavedResults(function (prev) {
+      const updated = [newItem].concat(prev);
       persistSavedResults(updated);
       return updated;
     });
   };
 
-  const handleDeleteSaved = (id) => {
-    setSavedResults((prev) => {
-      const updated = prev.filter((r) => r.id !== id);
+  const handleDeleteSaved = function (id) {
+    setSavedResults(function (prev) {
+      const updated = prev.filter(function (r) { return r.id !== id; });
       persistSavedResults(updated);
       return updated;
     });
   };
 
-  const handleViewSaved = (item) => {
+  const handleViewSaved = function (item) {
+    setActiveTab("search");
     setQuery(item.query);
     setExplanation(item.explanation);
     setCurrentLanguage(item.language || "en");
@@ -214,7 +216,7 @@ function App() {
     setResults([]);
   };
 
-  const runSearch = async (searchQuery) => {
+  const runSearch = async function (searchQuery) {
     if (!searchQuery.trim()) {
       setError("Please enter a question or describe your situation to search.");
       return;
@@ -227,17 +229,14 @@ function App() {
     setExplanationCache({});
 
     try {
-      const response = await fetch(`${API_URL}/explain`, {
+      const response = await fetch(API_URL + "/explain", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query: searchQuery, top_k: 5 }),
       });
 
       if (!response.ok) {
-        const message = await extractErrorMessage(
-          response,
-          "Something went wrong. Make sure the backend server is running."
-        );
+        const message = await extractErrorMessage(response, "Something went wrong. Make sure the backend server is running.");
         setError(message);
         return;
       }
@@ -259,17 +258,17 @@ function App() {
     }
   };
 
-  const handleSearch = async (e) => {
+  const handleSearch = async function (e) {
     e.preventDefault();
     await runSearch(query);
   };
 
-  const handleHistoryClick = (historyQuery) => {
+  const handleHistoryClick = function (historyQuery) {
     setQuery(historyQuery);
     runSearch(historyQuery);
   };
 
-  const handleLanguageSwitch = async (targetLang) => {
+  const handleLanguageSwitch = async function (targetLang) {
     if (targetLang === currentLanguage) return;
 
     if (explanationCache[targetLang]) {
@@ -280,7 +279,7 @@ function App() {
 
     setTranslating(true);
     try {
-      const response = await fetch(`${API_URL}/translate-explanation`, {
+      const response = await fetch(API_URL + "/translate-explanation", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: explanation, target_language: targetLang }),
@@ -295,7 +294,11 @@ function App() {
       const data = await response.json();
       setExplanation(data.translation);
       setCurrentLanguage(targetLang);
-      setExplanationCache((prev) => ({ ...prev, [targetLang]: data.translation }));
+      setExplanationCache(function (prev) {
+        const copy = Object.assign({}, prev);
+        copy[targetLang] = data.translation;
+        return copy;
+      });
     } catch (err) {
       setError("Could not reach the server to translate.");
       console.error(err);
@@ -304,7 +307,7 @@ function App() {
     }
   };
 
-  const startListening = () => {
+  const startListening = function () {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) {
       setError("Voice input is not supported in this browser. Try Chrome.");
@@ -323,17 +326,17 @@ function App() {
     recognition.interimResults = false;
     recognition.maxAlternatives = 1;
 
-    recognition.onstart = () => setIsListening(true);
-    recognition.onend = () => {
+    recognition.onstart = function () { setIsListening(true); };
+    recognition.onend = function () {
       setIsListening(false);
       recognitionRef.current = null;
     };
-    recognition.onerror = () => {
+    recognition.onerror = function () {
       setIsListening(false);
       recognitionRef.current = null;
       setError("Could not hear you. Please try again.");
     };
-    recognition.onresult = (event) => {
+    recognition.onresult = function (event) {
       const transcript = event.results[0][0].transcript;
       setQuery(transcript);
     };
@@ -342,7 +345,7 @@ function App() {
     recognition.start();
   };
 
-  const speakExplanation = () => {
+  const speakExplanation = function () {
     if (!explanation) return;
 
     if (isSpeaking) {
@@ -359,14 +362,14 @@ function App() {
 
     const utterance = new SpeechSynthesisUtterance(cleanText);
     utterance.lang = currentLanguage === "hi" ? "hi-IN" : currentLanguage === "kn" ? "kn-IN" : "en-IN";
-    utterance.onend = () => setIsSpeaking(false);
-    utterance.onerror = () => setIsSpeaking(false);
+    utterance.onend = function () { setIsSpeaking(false); };
+    utterance.onerror = function () { setIsSpeaking(false); };
 
     setIsSpeaking(true);
     window.speechSynthesis.speak(utterance);
   };
 
-  const handleFileUpload = async (e) => {
+  const handleFileUpload = async function (e) {
     const file = e.target.files[0];
     if (!file) return;
 
@@ -380,16 +383,13 @@ function App() {
       const formData = new FormData();
       formData.append("file", file);
 
-      const response = await fetch(`${API_URL}/upload-pdf`, {
+      const response = await fetch(API_URL + "/upload-pdf", {
         method: "POST",
         body: formData,
       });
 
       if (!response.ok) {
-        const message = await extractErrorMessage(
-          response,
-          "Could not upload the document. Make sure the backend server is running."
-        );
+        const message = await extractErrorMessage(response, "Could not upload the document. Make sure the backend server is running.");
         setError(message);
         return;
       }
@@ -404,7 +404,7 @@ function App() {
     }
   };
 
-  const handleAskDocument = async (e) => {
+  const handleAskDocument = async function (e) {
     e.preventDefault();
     if (!docQuestion.trim() || !uploadedDoc) return;
 
@@ -412,7 +412,7 @@ function App() {
     setDocAnswer("");
 
     try {
-      const response = await fetch(`${API_URL}/ask-document`, {
+      const response = await fetch(API_URL + "/ask-document", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -437,7 +437,7 @@ function App() {
     }
   };
 
-  const handleDefine = async (e) => {
+  const handleDefine = async function (e) {
     e.preventDefault();
     if (!dictTerm.trim()) return;
 
@@ -445,7 +445,7 @@ function App() {
     setDictDefinition("");
 
     try {
-      const response = await fetch(`${API_URL}/define`, {
+      const response = await fetch(API_URL + "/define", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ term: dictTerm }),
@@ -467,18 +467,22 @@ function App() {
     }
   };
 
-  const handleDraftTypeChange = (newType) => {
+  const handleDraftTypeChange = function (newType) {
     setDraftType(newType);
     setFormValues({});
     setGenericDetails("");
     setDraftText("");
   };
 
-  const handleFormFieldChange = (key, value) => {
-    setFormValues((prev) => ({ ...prev, [key]: value }));
+  const handleFormFieldChange = function (key, value) {
+    setFormValues(function (prev) {
+      const copy = Object.assign({}, prev);
+      copy[key] = value;
+      return copy;
+    });
   };
 
-  const handleDraft = async (e) => {
+  const handleDraft = async function (e) {
     e.preventDefault();
 
     setDrafting(true);
@@ -489,12 +493,13 @@ function App() {
 
     const schema = DOCUMENT_SCHEMAS[draftType];
     if (schema) {
-      Object.entries(formValues).forEach(([key, value]) => {
+      Object.keys(formValues).forEach(function (key) {
+        const value = formValues[key];
         if (value && value.trim && value.trim() !== "") details[key] = value;
         else if (value && typeof value !== "string") details[key] = value;
       });
     } else {
-      genericDetails.split("\n").forEach((line) => {
+      genericDetails.split("\n").forEach(function (line) {
         const idx = line.indexOf(":");
         if (idx > -1) {
           const key = line.slice(0, idx).trim().toLowerCase().replace(/\s+/g, "_");
@@ -505,10 +510,10 @@ function App() {
     }
 
     try {
-      const response = await fetch(`${API_URL}/draft-document`, {
+      const response = await fetch(API_URL + "/draft-document", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ document_type: draftType, details }),
+        body: JSON.stringify({ document_type: draftType, details: details }),
       });
 
       if (!response.ok) {
@@ -527,19 +532,19 @@ function App() {
     }
   };
 
-  const handleDownloadDraft = async () => {
+  const handleDownloadDraft = async function () {
     const doc = buildDocxFromMarkdown(draftText);
     const blob = await Packer.toBlob(doc);
-    saveAs(blob, `${draftType}.docx`);
+    saveAs(blob, draftType + ".docx");
   };
 
   const topScore = results.length > 0 ? results[0].hybrid_score : 0;
   const showLowConfidenceWarning = results.length > 0 && isOverallLowConfidence(topScore);
-  const otherLanguages = ALL_LANGUAGES.filter((lang) => lang !== currentLanguage);
+  const otherLanguages = ALL_LANGUAGES.filter(function (lang) { return lang !== currentLanguage; });
   const activeSchema = DOCUMENT_SCHEMAS[draftType];
 
   return (
-    <div className={`app ${darkMode ? "dark-mode" : ""}`}>
+    <div className={"app" + (darkMode ? " dark-mode" : "")}>
       <header className="header">
         <div className="header-top">
           <h1>NyaayaSearch</h1>
@@ -550,302 +555,321 @@ function App() {
         <p className="tagline">Understand Indian law in plain language</p>
       </header>
 
-      <div className="dictionary-section">
-        <h2>Legal Dictionary</h2>
-        <form className="dict-form" onSubmit={handleDefine}>
-          <input
-            type="text"
-            className="search-input"
-            placeholder="Look up a legal term, e.g. 'cognizable offence'"
-            value={dictTerm}
-            onChange={(e) => setDictTerm(e.target.value)}
-          />
-          <button type="submit" className="search-button" disabled={dictLoading}>
-            {dictLoading ? "Looking up..." : "Define"}
-          </button>
-        </form>
-        {dictDefinition && <div className="dict-definition">{dictDefinition}</div>}
-      </div>
-
-      <div className="drafter-section">
-        <h2>Legal Document Generator</h2>
-        <p className="drafter-intro">What document do you want to create?</p>
-
-        <select
-          className="search-input"
-          value={draftType}
-          onChange={(e) => handleDraftTypeChange(e.target.value)}
-        >
-          {Object.entries(ALL_DOCUMENT_TYPE_LABELS).map(([value, label]) => (
-            <option key={value} value={value}>{label}</option>
-          ))}
-        </select>
-
-        <form className="drafter-form" onSubmit={handleDraft}>
-          {activeSchema ? (
-            <>
-              <p className="drafter-subtitle">Let's create your {activeSchema.label}</p>
-              {activeSchema.sections.map((section) => (
-                <div className="form-section" key={section.title}>
-                  <div className="form-section-title">{section.title}</div>
-                  {section.fields.map((field) => (
-                    <div className="form-field" key={field.key}>
-                      <label className="form-field-label">{field.label}</label>
-                      {field.type === "textarea" ? (
-                        <textarea
-                          className="drafter-textarea"
-                          placeholder={field.placeholder}
-                          rows={2}
-                          value={formValues[field.key] || ""}
-                          onChange={(e) => handleFormFieldChange(field.key, e.target.value)}
-                        />
-                      ) : field.type === "select" ? (
-                        <select
-                          className="search-input"
-                          value={formValues[field.key] || ""}
-                          onChange={(e) => handleFormFieldChange(field.key, e.target.value)}
-                        >
-                          <option value="">Select...</option>
-                          {field.options.map((opt) => (
-                            <option key={opt} value={opt}>{opt}</option>
-                          ))}
-                        </select>
-                      ) : (
-                        <input
-                          type={field.type === "date" ? "date" : field.type === "number" ? "number" : "text"}
-                          className="search-input"
-                          placeholder={field.placeholder}
-                          value={formValues[field.key] || ""}
-                          onChange={(e) => handleFormFieldChange(field.key, e.target.value)}
-                        />
-                      )}
-                    </div>
-                  ))}
-                </div>
-              ))}
-            </>
-          ) : (
-            <>
-              <p className="drafter-subtitle">
-                This document type doesn't have a detailed form yet. Enter any details you'd like included, one per line (e.g. "name: John Doe") - anything you leave out will appear as a blank line to fill in later.
-              </p>
-              <textarea
-                className="drafter-textarea"
-                placeholder={"e.g.\nname: John Doe\ndate: 2026-01-01"}
-                value={genericDetails}
-                onChange={(e) => setGenericDetails(e.target.value)}
-                rows={5}
-              />
-            </>
-          )}
-
-          <button type="submit" className="search-button" disabled={drafting}>
-            {drafting ? "Generating..." : "Generate Document"}
-          </button>
-        </form>
-
-        {draftText && (
-          <div className="draft-result">
-            <div className="draft-result-header">
-              <h3>{ALL_DOCUMENT_TYPE_LABELS[draftType]}</h3>
-              <button className="search-button" onClick={handleDownloadDraft}>
-                Download as Word
-              </button>
-            </div>
-            <div className="draft-text">
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>{draftText}</ReactMarkdown>
-            </div>
-          </div>
-        )}
-      </div>
-
-      <div className="upload-section">
-        <h2>Ask about your own document</h2>
-        <input type="file" accept="application/pdf" onChange={handleFileUpload} />
-        {uploading && <div className="loading">Reading and summarizing your document...</div>}
-
-        {uploadedDoc && (
-          <div className="document-card">
-            <div className="document-filename">{uploadedDoc.filename}</div>
-            <div className="document-summary">{uploadedDoc.summary}</div>
-
-            {uploadedDoc.dates && uploadedDoc.dates.length > 0 && (
-              <div className="dates-section">
-                <div className="dates-title">Important Dates and Deadlines</div>
-                {uploadedDoc.dates.map((d, i) => (
-                  <div className="date-item" key={i}>
-                    <span className="date-value">{d.value}</span>
-                    <span className="date-description">{d.description}</span>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {uploadedDoc.document_id && (
-              <form className="doc-question-form" onSubmit={handleAskDocument}>
-                <input
-                  type="text"
-                  className="search-input"
-                  placeholder="Ask a question about this document..."
-                  value={docQuestion}
-                  onChange={(e) => setDocQuestion(e.target.value)}
-                />
-                <button type="submit" className="search-button" disabled={docAsking}>
-                  {docAsking ? "Asking..." : "Ask"}
-                </button>
-              </form>
-            )}
-
-            {docAnswer && <div className="document-answer">{docAnswer}</div>}
-          </div>
-        )}
-      </div>
-
-      <hr className="section-divider" />
-
-      <form className="search-form" onSubmit={handleSearch}>
-        <input
-          type="text"
-          className="search-input"
-          placeholder="Describe your legal situation, e.g. 'landlord not returning deposit'"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-        <button
-          type="button"
-          className={`mic-button ${isListening ? "listening" : ""}`}
-          onClick={startListening}
-          title="Search by voice"
-        >
-          Mic
-        </button>
-        <button type="submit" className="search-button" disabled={loading}>
-          {loading ? "Searching..." : "Search"}
-        </button>
-      </form>
-
-      {searchHistory.length > 0 && (
-        <div className="search-history">
-          <span className="search-history-label">Recent:</span>
-          {searchHistory.map((h, i) => (
-            <button key={i} className="history-chip" onClick={() => handleHistoryClick(h)}>
-              {h.length > 40 ? h.slice(0, 40) + "..." : h}
-            </button>
-          ))}
-          <button className="history-clear" onClick={clearHistory}>Clear</button>
-        </div>
-      )}
-
-      {savedResults.length > 0 && (
-        <div className="saved-results-section">
-          <h2>Saved Results</h2>
-          {savedResults.map((item) => (
-            <div className="saved-result-card" key={item.id}>
-              <div className="saved-result-header">
-                <span className="saved-result-query" onClick={() => handleViewSaved(item)}>
-                  {item.query}
-                </span>
-                <button className="saved-result-delete" onClick={() => handleDeleteSaved(item.id)}>
-                  Delete
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {isListening && <div className="listening-indicator">Listening... (click mic again to stop)</div>}
+      <nav className="tab-nav">
+        <button className={"tab-button" + (activeTab === "search" ? " active" : "")} onClick={function () { setActiveTab("search"); }}>Search</button>
+        <button className={"tab-button" + (activeTab === "drafter" ? " active" : "")} onClick={function () { setActiveTab("drafter"); }}>Document Generator</button>
+        <button className={"tab-button" + (activeTab === "dictionary" ? " active" : "")} onClick={function () { setActiveTab("dictionary"); }}>Dictionary</button>
+        <button className={"tab-button" + (activeTab === "documents" ? " active" : "")} onClick={function () { setActiveTab("documents"); }}>My Documents</button>
+      </nav>
 
       {error && <div className="error">{error}</div>}
 
-      {loading && (
-        <div className="loading">
-          Searching legal database and generating explanation...
+      {activeTab === "dictionary" && (
+        <div className="dictionary-section">
+          <h2>Legal Dictionary</h2>
+          <form className="dict-form" onSubmit={handleDefine}>
+            <input
+              type="text"
+              className="search-input"
+              placeholder="Look up a legal term, e.g. 'cognizable offence'"
+              value={dictTerm}
+              onChange={function (e) { setDictTerm(e.target.value); }}
+            />
+            <button type="submit" className="search-button" disabled={dictLoading}>
+              {dictLoading ? "Looking up..." : "Define"}
+            </button>
+          </form>
+          {dictDefinition && <div className="dict-definition">{dictDefinition}</div>}
         </div>
       )}
 
-      {showLowConfidenceWarning && (
-        <div className="low-confidence-warning">
-          We're not fully confident in these results. Try rephrasing your question
-          with more specific details (e.g. mention the situation, the people involved,
-          or what you're trying to do) for a better match. Showing our best guess below.
-        </div>
-      )}
+      {activeTab === "drafter" && (
+        <div className="drafter-section">
+          <h2>Legal Document Generator</h2>
+          <p className="drafter-intro">What document do you want to create?</p>
 
-      {explanation && (
-        <div className="explanation-card">
-          <div className="explanation-header">
-            <h2>Explanation</h2>
-            <div className="explanation-controls">
-              <div className="language-toggle">
-                {otherLanguages.map((lang) => (
-                  <button
-                    key={lang}
-                    className="language-toggle-button"
-                    onClick={() => handleLanguageSwitch(lang)}
-                    disabled={translating}
-                  >
-                    {LANGUAGE_LABELS[lang]}
-                  </button>
-                ))}
+          <select
+            className="search-input"
+            value={draftType}
+            onChange={function (e) { handleDraftTypeChange(e.target.value); }}
+          >
+            {Object.keys(ALL_DOCUMENT_TYPE_LABELS).map(function (value) {
+              return <option key={value} value={value}>{ALL_DOCUMENT_TYPE_LABELS[value]}</option>;
+            })}
+          </select>
+
+          <form className="drafter-form" onSubmit={handleDraft}>
+            {activeSchema ? (
+              <div>
+                <p className="drafter-subtitle">Let's create your {activeSchema.label}</p>
+                {activeSchema.sections.map(function (section) {
+                  return (
+                    <div className="form-section" key={section.title}>
+                      <div className="form-section-title">{section.title}</div>
+                      {section.fields.map(function (field) {
+                        return (
+                          <div className="form-field" key={field.key}>
+                            <label className="form-field-label">{field.label}</label>
+                            {field.type === "textarea" ? (
+                              <textarea
+                                className="drafter-textarea"
+                                placeholder={field.placeholder}
+                                rows={2}
+                                value={formValues[field.key] || ""}
+                                onChange={function (e) { handleFormFieldChange(field.key, e.target.value); }}
+                              />
+                            ) : field.type === "select" ? (
+                              <select
+                                className="search-input"
+                                value={formValues[field.key] || ""}
+                                onChange={function (e) { handleFormFieldChange(field.key, e.target.value); }}
+                              >
+                                <option value="">Select...</option>
+                                {field.options.map(function (opt) {
+                                  return <option key={opt} value={opt}>{opt}</option>;
+                                })}
+                              </select>
+                            ) : (
+                              <input
+                                type={field.type === "date" ? "date" : field.type === "number" ? "number" : "text"}
+                                className="search-input"
+                                placeholder={field.placeholder}
+                                value={formValues[field.key] || ""}
+                                onChange={function (e) { handleFormFieldChange(field.key, e.target.value); }}
+                              />
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  );
+                })}
               </div>
-              <button className="listen-button" onClick={speakExplanation}>
-                {isSpeaking ? "Stop" : "Listen"}
-              </button>
-              <button className="save-button" onClick={handleSaveResult} disabled={isCurrentResultSaved}>
-                {isCurrentResultSaved ? "Saved" : "Save"}
-              </button>
+            ) : (
+              <div>
+                <p className="drafter-subtitle">
+                  This document type doesn't have a detailed form yet. Enter any details you'd like included, one per line (e.g. "name: John Doe") - anything you leave out will appear as a blank line to fill in later.
+                </p>
+                <textarea
+                  className="drafter-textarea"
+                  placeholder={"e.g.\nname: John Doe\ndate: 2026-01-01"}
+                  value={genericDetails}
+                  onChange={function (e) { setGenericDetails(e.target.value); }}
+                  rows={5}
+                />
+              </div>
+            )}
+
+            <button type="submit" className="search-button" disabled={drafting}>
+              {drafting ? "Generating..." : "Generate Document"}
+            </button>
+          </form>
+
+          {draftText && (
+            <div className="draft-result">
+              <div className="draft-result-header">
+                <h3>{ALL_DOCUMENT_TYPE_LABELS[draftType]}</h3>
+                <button className="search-button" onClick={handleDownloadDraft}>Download as Word</button>
+              </div>
+              <div className="draft-text">
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>{draftText}</ReactMarkdown>
+              </div>
             </div>
-          </div>
-          {translating ? (
-            <div className="loading">Translating...</div>
-          ) : (
-            <div className="explanation-text"><ReactMarkdown remarkPlugins={[remarkGfm]}>{explanation}</ReactMarkdown></div>
           )}
         </div>
       )}
 
-      {results.length > 0 && (
-        <div className="results-section">
-          <h2>Sources</h2>
-          {results.map((r, i) => {
-            const confidence = getConfidenceLabel(r.hybrid_score, topScore);
-            return (
-              <div className="result-card" key={i}>
-                <div className="result-header">
-                  <span className="act-name">{r.act_name}</span>
-                  <span className="section-number">Section {r.section_number}</span>
-                </div>
-                <div className={`confidence-badge ${confidence.className}`}>
-                  {confidence.label}
-                </div>
+      {activeTab === "documents" && (
+        <div className="upload-section">
+          <h2>Ask about your own document</h2>
+          <input type="file" accept="application/pdf" onChange={handleFileUpload} />
+          {uploading && <div className="loading">Reading and summarizing your document...</div>}
 
-                {r.matched_terms && r.matched_terms.length > 0 && (
-                  <div className="matched-terms">
-                    <span className="matched-terms-label">Why this matched: </span>
-                    {r.matched_terms.map((term, k) => (
-                      <span className="matched-term-tag" key={k}>{term}</span>
-                    ))}
-                  </div>
-                )}
+          {uploadedDoc && (
+            <div className="document-card">
+              <div className="document-filename">{uploadedDoc.filename}</div>
+              <div className="document-summary">{uploadedDoc.summary}</div>
 
-                <div className="section-title">{r.section_title}</div>
-                <div className="legal-text">{r.legal_text}</div>
-
-                {r.related_cases && r.related_cases.length > 0 && (
-                  <div className="related-cases">
-                    <div className="related-cases-title">Related Supreme Court Cases</div>
-                    {r.related_cases.map((c, j) => (
-                      <div className="case-item" key={j}>
-                        <span className="case-title">{c.title}</span>
-                        <span className="case-meta">{c.court} · {c.decision_date}</span>
+              {uploadedDoc.dates && uploadedDoc.dates.length > 0 && (
+                <div className="dates-section">
+                  <div className="dates-title">Important Dates and Deadlines</div>
+                  {uploadedDoc.dates.map(function (d, i) {
+                    return (
+                      <div className="date-item" key={i}>
+                        <span className="date-value">{d.value}</span>
+                        <span className="date-description">{d.description}</span>
                       </div>
-                    ))}
+                    );
+                  })}
+                </div>
+              )}
+
+              {uploadedDoc.document_id && (
+                <form className="doc-question-form" onSubmit={handleAskDocument}>
+                  <input
+                    type="text"
+                    className="search-input"
+                    placeholder="Ask a question about this document..."
+                    value={docQuestion}
+                    onChange={function (e) { setDocQuestion(e.target.value); }}
+                  />
+                  <button type="submit" className="search-button" disabled={docAsking}>
+                    {docAsking ? "Asking..." : "Ask"}
+                  </button>
+                </form>
+              )}
+
+              {docAnswer && <div className="document-answer">{docAnswer}</div>}
+            </div>
+          )}
+        </div>
+      )}
+
+      {activeTab === "search" && (
+        <div>
+          <form className="search-form" onSubmit={handleSearch}>
+            <input
+              type="text"
+              className="search-input"
+              placeholder="Describe your legal situation, e.g. 'landlord not returning deposit'"
+              value={query}
+              onChange={function (e) { setQuery(e.target.value); }}
+            />
+            <button
+              type="button"
+              className={"mic-button" + (isListening ? " listening" : "")}
+              onClick={startListening}
+              title="Search by voice"
+            >
+              Mic
+            </button>
+            <button type="submit" className="search-button" disabled={loading}>
+              {loading ? "Searching..." : "Search"}
+            </button>
+          </form>
+
+          {searchHistory.length > 0 && (
+            <div className="search-history">
+              <span className="search-history-label">Recent:</span>
+              {searchHistory.map(function (h, i) {
+                return (
+                  <button key={i} className="history-chip" onClick={function () { handleHistoryClick(h); }}>
+                    {h.length > 40 ? h.slice(0, 40) + "..." : h}
+                  </button>
+                );
+              })}
+              <button className="history-clear" onClick={clearHistory}>Clear</button>
+            </div>
+          )}
+
+          {savedResults.length > 0 && (
+            <div className="saved-results-section">
+              <h2>Saved Results</h2>
+              {savedResults.map(function (item) {
+                return (
+                  <div className="saved-result-card" key={item.id}>
+                    <div className="saved-result-header">
+                      <span className="saved-result-query" onClick={function () { handleViewSaved(item); }}>
+                        {item.query}
+                      </span>
+                      <button className="saved-result-delete" onClick={function () { handleDeleteSaved(item.id); }}>Delete</button>
+                    </div>
                   </div>
-                )}
+                );
+              })}
+            </div>
+          )}
+
+          {isListening && <div className="listening-indicator">Listening... (click mic again to stop)</div>}
+
+          {loading && (
+            <div className="loading">Searching legal database and generating explanation...</div>
+          )}
+
+          {showLowConfidenceWarning && (
+            <div className="low-confidence-warning">
+              We're not fully confident in these results. Try rephrasing your question with more specific details for a better match. Showing our best guess below.
+            </div>
+          )}
+
+          {explanation && (
+            <div className="explanation-card">
+              <div className="explanation-header">
+                <h2>Explanation</h2>
+                <div className="explanation-controls">
+                  <div className="language-toggle">
+                    {otherLanguages.map(function (lang) {
+                      return (
+                        <button
+                          key={lang}
+                          className="language-toggle-button"
+                          onClick={function () { handleLanguageSwitch(lang); }}
+                          disabled={translating}
+                        >
+                          {LANGUAGE_LABELS[lang]}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  <button className="listen-button" onClick={speakExplanation}>
+                    {isSpeaking ? "Stop" : "Listen"}
+                  </button>
+                  <button className="save-button" onClick={handleSaveResult} disabled={isCurrentResultSaved}>
+                    {isCurrentResultSaved ? "Saved" : "Save"}
+                  </button>
+                </div>
               </div>
-            );
-          })}
+              {translating ? (
+                <div className="loading">Translating...</div>
+              ) : (
+                <div className="explanation-text"><ReactMarkdown remarkPlugins={[remarkGfm]}>{explanation}</ReactMarkdown></div>
+              )}
+            </div>
+          )}
+
+          {results.length > 0 && (
+            <div className="results-section">
+              <h2>Sources</h2>
+              {results.map(function (r, i) {
+                const confidence = getConfidenceLabel(r.hybrid_score, topScore);
+                return (
+                  <div className="result-card" key={i}>
+                    <div className="result-header">
+                      <span className="act-name">{r.act_name}</span>
+                      <span className="section-number">Section {r.section_number}</span>
+                    </div>
+                    <div className={"confidence-badge " + confidence.className}>{confidence.label}</div>
+
+                    {r.matched_terms && r.matched_terms.length > 0 && (
+                      <div className="matched-terms">
+                        <span className="matched-terms-label">Why this matched: </span>
+                        {r.matched_terms.map(function (term, k) {
+                          return <span className="matched-term-tag" key={k}>{term}</span>;
+                        })}
+                      </div>
+                    )}
+
+                    <div className="section-title">{r.section_title}</div>
+                    <div className="legal-text">{r.legal_text}</div>
+
+                    {r.related_cases && r.related_cases.length > 0 && (
+                      <div className="related-cases">
+                        <div className="related-cases-title">Related Supreme Court Cases</div>
+                        {r.related_cases.map(function (c, j) {
+                          return (
+                            <div className="case-item" key={j}>
+                              <span className="case-title">{c.title}</span>
+                              <span className="case-meta">{c.court} - {c.decision_date}</span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
       )}
     </div>
@@ -853,12 +877,4 @@ function App() {
 }
 
 export default App;
-
-
-
-
-
-
-
-
 
