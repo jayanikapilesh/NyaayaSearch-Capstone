@@ -53,7 +53,17 @@ SYNONYMS = {
     "appeal": ["appeal", "revision", "review", "challenge decision"],
     "review": ["review", "revision", "reconsider", "appeal"],
     "bail bond": ["bail bond", "bond", "surety", "forfeited"],
-    "report": ["report", "inform", "notify", "disclose", "give information"]
+    "report": ["report", "inform", "notify", "disclose", "give information"],
+    "sells debt": ["sells debt", "actionable claim", "transferee", "assignment of debt"],
+    "on my behalf": ["on my behalf", "agent", "represent me"],
+    "rulebook": ["rulebook", "rules", "regulations"],
+    "therapy": ["therapy", "counselling", "counseling"],
+    "on the hook": ["on the hook", "surety", "guarantee", "liable"],
+    "kicking out": ["kicking out", "eviction", "forfeiture", "forfeited"],
+    "plan a riot": ["plan a riot", "conspiracy", "conspire"],
+    "tricked a court": ["tricked a court", "fraudulently obtaining", "fraud on court"],
+    "pushed a cop": ["pushed a cop", "assault", "criminal force", "public servant"],
+    "protects buyers": ["protects buyers", "consumer", "consumer protection"]
 }
 
 
@@ -251,6 +261,7 @@ class SearchEngine:
                 "matched_terms": matched_terms,
             })
         return results
+
 
 
 
