@@ -48,6 +48,11 @@ multilingual_queries = [
 
 hits = 0
 failures = []
+hindi_n = sum(1 for l, q, a, s in multilingual_queries if l == "Hindi")
+kannada_n = sum(1 for l, q, a, s in multilingual_queries if l == "Kannada")
+hindi_hits = 0
+kannada_hits = 0
+
 print(f"Total multilingual queries: {len(multilingual_queries)}")
 print(f"{'Lang':<8} {'Translated':<55} {'Hit?'}")
 print("-" * 80)
@@ -58,28 +63,28 @@ for lang, query, expected_act, expected_section in multilingual_queries:
     except Exception as e:
         translated = f"[FAILED: {e}]"
         print(f"{lang:<8} {translated}")
-        failures.append((lang, query, "translation failed"))
+        failures.append((lang, query))
         continue
 
     results = engine.search(translated, top_k=5)
     hit = any(str(r["act_name"]) == expected_act and str(r["section_number"]) == expected_section for r in results)
     if hit:
         hits += 1
+        if lang == "Hindi":
+            hindi_hits += 1
+        else:
+            kannada_hits += 1
     else:
-        failures.append((lang, query, translated))
+        failures.append((lang, query))
     print(f"{lang:<8} {translated:<55} {'YES' if hit else 'NO'}")
 
 n = len(multilingual_queries)
-hindi_n = sum(1 for l, q, a, s in multilingual_queries if l == "Hindi")
-kannada_n = sum(1 for l, q, a, s in multilingual_queries if l == "Kannada")
-hindi_hits = sum(1 for l, q, a, s in multilingual_queries if l == "Hindi" and any(
-    str(r["act_name"]) == a and str(r["section_number"]) == s
-    for r in engine.search(translate_to_english(q), top_k=5)
-)) if False else None  # skip recompute, use failures list instead
-
 print("-" * 80)
-print(f"\nOverall multilingual: {hits}/{n} = {hits/n:.3f}")
-print(f"Hindi: {hindi_n} queries, Kannada: {kannada_n} queries")
+print(f"\nOverall multilingual: {hits}/{n} = {hits/n:.4f}")
+print(f"\nPER-LANGUAGE BREAKDOWN:")
+print(f"English (frozen 148-query set): Recall@5 = 0.7770")
+print(f"Hindi: {hindi_hits}/{hindi_n} = {hindi_hits/hindi_n:.4f}")
+print(f"Kannada: {kannada_hits}/{kannada_n} = {kannada_hits/kannada_n:.4f}")
 print(f"\nFailures ({len(failures)}):")
-for lang, q, t in failures:
-    print(f"  [{lang}] {t}")
+for lang, q in failures:
+    print(f"  [{lang}] {q[:50]}")
