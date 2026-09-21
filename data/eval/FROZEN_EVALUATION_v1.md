@@ -4,19 +4,18 @@ This file documents the final, frozen 148-query category-based evaluation.
 Do not modify the query set or retrieval system based on these results -
 this is the final reported number for the paper.
 
-## IMPORTANT: Relationship to the multilingual evaluation
+## Evaluation Set Design: Relationship to the multilingual evaluation
 
-This 148-query set is English-only. It is a SEPARATE, independently
-constructed evaluation from the 40-query multilingual set (21 Hindi,
-19 Kannada - see scripts/test_multilingual_expanded.py). The two sets
-were built at different times for different purposes and are NOT
-parallel translations of one another. Do not compare n=148 (English)
-directly against n=40 (Hindi+Kannada combined) as if they are drawn
-from the same underlying sample - they are two distinct, independently
-valid evaluations answering two different questions:
-(1) how does the system perform across different English query styles,
-and (2) how does the translation pipeline affect retrieval accuracy in
-Hindi and Kannada. Report them side by side, not as one combined set.
+The English and multilingual evaluations were designed as separate
+experiments with different objectives. The 148-query English evaluation
+measures retrieval robustness across diverse query formulations,
+including simple, vague, and synonym-rich queries. A separate 40-query
+multilingual evaluation (21 Hindi, 19 Kannada - see
+scripts/test_multilingual_expanded.py) assesses whether retrieval
+performance is maintained across Hindi and Kannada queries. Therefore,
+the evaluation-set sizes differ intentionally and should not be
+interpreted as missing or inconsistent data. Report the two sets side
+by side, not as one combined sample.
 
 ## Methodology
 - 149 queries constructed across 8 categories (Simple/Direct, Synonym-heavy,
@@ -70,4 +69,5 @@ number for the paper's retrieval evaluation section, alongside the earlier
 42-query tuned set (Recall@5=0.881) and 55-query held-out set
 (Recall@5=0.71-0.80), reported together with clear disclosure of which set
 is which.
+
 
