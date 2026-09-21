@@ -1,41 +1,68 @@
-﻿# Reranking Analysis - FROZEN
+﻿# Reranking Analysis - FROZEN (CORRECTED)
 
-This documents the final, complete reranking evaluation. No further
-classifier reranking experiments should be run after this point.
+## IMPORTANT CORRECTION
 
-## Two evaluation sets, two different findings - both real, both honest
+An earlier version of this analysis reported a +18.2 percentage point
+Top-1 improvement from classifier reranking on the 55-query held-out
+set. This result was found to be INVALID due to train/test leakage:
+the 55 held-out queries (and the 42 tuned eval queries) were
+inadvertently included in the classifier's own training data. The
+classifier had partially "seen" these queries during training, so
+testing reranking on them was not a genuine generalization test.
 
-### 55-query held-out set (original, from earlier session)
+## The fix
+
+1. Rebuilt classifier training data using ONLY the 826 purpose-built
+   query-section pairs (training_pairs.jsonl + training_pairs_batch2.jsonl),
+   explicitly excluding the 42 tuned and 55 held-out evaluation queries.
+2. Switched from a row-level train/test split to a GroupShuffleSplit by
+   query, ensuring zero query overlap between train and test even within
+   the remaining data (verified: 0 overlapping queries).
+3. Retrained: the clean classifier achieves F1=0.772 (Voting Ensemble),
+   HIGHER than the contaminated version's F1=0.719 - the leakage was not
+   inflating the classifier's own quality metric, only the reranking
+   Top-1 claim.
+4. This clean classifier is now the production model
+   (relevance_classifier.pkl).
+
+## Corrected, trustworthy results
+
+### 55-query held-out set (classifier now genuinely never trained on these)
 - Search-only Top-1 accuracy: 49.1% (27/55)
-- Classifier-reranked Top-1 accuracy: 67.3% (37/55)
-- Delta: +18.2 percentage points
-- Script: scripts/compare_search_vs_reranked.py
+- Classifier-reranked Top-1 accuracy: 49.1% (27/55)
+- Delta: 0.0 percentage points (CORRECTED from the invalid +18.2pp claim)
+- Script: scripts/test_clean_reranking_55.py
 
-### 148-query frozen category set (this session, V1 baseline system)
+### 148-query frozen category set (was already clean, unaffected)
 - Search-only Top-1 accuracy: 50.68% (75/148)
 - Classifier-reranked Top-1 accuracy: 50.68% (75/148)
 - Delta: 0.0 percentage points
-- Search-only Recall@5: 77.70%
-- Classifier-reranked Recall@5: 75.68%
-- Delta: -2.03 percentage points
-- Search-only MRR: 0.6088
-- Classifier-reranked MRR: 0.6081
-- Delta: -0.0007
-- Script: scripts/test_recall_mrr_reranked_v1.py (run against git tag
-  v1-original-baseline for a clean, uncontaminated comparison)
+- Search-only Recall@5: 77.70%, Reranked Recall@5: 75.68% (-2.03pp)
+- Search-only MRR: 0.6088, Reranked MRR: 0.6081 (-0.0007)
 
 ## Honest interpretation
 
-The reranking classifier shows dataset-dependent effectiveness: a
-substantial improvement on the original 55-query held-out set, but no
-measurable benefit - and a small negative effect on Recall@5 and MRR -
-on the broader, more diverse 148-query category-based set. This is not
-a contradiction; it reflects that the classifier's benefit is not
-uniform across all query types and retrieval conditions. Verified
-across two different metrics (Top-1 accuracy and Recall@5/MRR) on the
-same 148-query set to rule out a single-metric artifact.
+Both evaluation sets, tested cleanly and independently, now agree: the
+classifier reranker provides no measurable Top-1 accuracy improvement.
+This is a genuine, consistent finding across two separate test sets,
+not an artifact. The classifier itself (F1=0.772 on unseen data) shows
+real discriminative ability at the relevance-classification task in
+isolation, but this does not translate into improved end-to-end top-1
+retrieval ranking on either evaluation set tested.
 
-## Status: FROZEN
+## Lesson learned (worth stating explicitly in the paper)
 
-No further reranking experiments. This is the final reported finding
-on the classifier's real-world reranking value for the paper.
+This correction is itself a legitimate methodological finding worth
+reporting: an initial evaluation suggested a substantial reranking
+benefit, but a subsequent data-leakage audit revealed the training and
+evaluation sets were not properly isolated. After fixing the leakage
+(purpose-built training data only, grouped train/test split), the
+apparent benefit disappeared, and both independent evaluation sets
+consistently showed no Top-1 improvement. This underscores the
+importance of verifying query-level (not just row-level) independence
+between training and evaluation data in retrieval-adjacent ML tasks.
+
+## Status: FROZEN (corrected)
+
+This is the final, corrected, trustworthy finding on the classifier's
+real-world reranking value for the paper.
