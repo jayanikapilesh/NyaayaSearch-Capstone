@@ -976,3 +976,56 @@ body {
   background: #333;
   border-color: #7fd9b8;
 }
+.emergency-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.emergency-item {
+  background: #fdf2f2;
+  border: 1px solid #f0d0d0;
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+
+.emergency-title {
+  font-weight: 600;
+  color: #1a3c34;
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+
+.emergency-number {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #c0392b;
+  margin-bottom: 6px;
+}
+
+.emergency-desc {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.emergency-disclaimer {
+  margin-top: 16px;
+  font-size: 0.8rem;
+  color: #888;
+  font-style: italic;
+}
+
+.dark-mode .emergency-item {
+  background: #2a1f1f;
+  border-color: #4a2f2f;
+}
+
+.dark-mode .emergency-title {
+  color: #7fd9b8;
+}
+
+.dark-mode .emergency-desc,
+.dark-mode .emergency-disclaimer {
+  color: #999;
+}
