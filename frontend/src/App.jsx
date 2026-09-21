@@ -4,7 +4,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Document, Packer, Paragraph, TextRun, HeadingLevel } from "docx";
 import { saveAs } from "file-saver";
-import { DOCUMENT_SCHEMAS, GENERIC_DOCUMENT_TYPES } from "./documentSchemas";
+import { DOCUMENT_SCHEMAS, GENERIC_DOCUMENT_TYPES, ADDITIONAL_DOCUMENT_SCHEMAS } from "./documentSchemas";
 
 const API_URL = "http://127.0.0.1:8000";
 const HISTORY_KEY = "nyaaya-search-history";
@@ -19,9 +19,11 @@ const LANGUAGE_LABELS = {
 
 const ALL_LANGUAGES = ["en", "hi", "kn"];
 
+const MERGED_DOCUMENT_SCHEMAS = Object.assign({}, DOCUMENT_SCHEMAS, ADDITIONAL_DOCUMENT_SCHEMAS);
+
 const ALL_DOCUMENT_TYPE_LABELS = {
-  ...Object.fromEntries(Object.entries(DOCUMENT_SCHEMAS).map(([key, schema]) => [key, schema.label])),
-  ...GENERIC_DOCUMENT_TYPES,
+  ...Object.fromEntries(Object.entries(MERGED_DOCUMENT_SCHEMAS).map(([key, schema]) => [key, schema.label])),
+
 };
 
 function getConfidenceLabel(score, topScore) {
@@ -526,7 +528,7 @@ function App() {
 
     let details = {};
 
-    const schema = DOCUMENT_SCHEMAS[draftType];
+    const schema = MERGED_DOCUMENT_SCHEMAS[draftType];
     if (schema) {
       Object.keys(formValues).forEach(function (key) {
         const value = formValues[key];
@@ -576,7 +578,7 @@ function App() {
   const topScore = results.length > 0 ? results[0].hybrid_score : 0;
   const showLowConfidenceWarning = results.length > 0 && isOverallLowConfidence(topScore);
   const otherLanguages = ALL_LANGUAGES.filter(function (lang) { return lang !== currentLanguage; });
-  const activeSchema = DOCUMENT_SCHEMAS[draftType];
+  const activeSchema = MERGED_DOCUMENT_SCHEMAS[draftType];
 
   return (
     <div className={"app" + (darkMode ? " dark-mode" : "")}>
@@ -953,6 +955,14 @@ function App() {
 }
 
 export default App;
+
+
+
+
+
+
+
+
 
 
 
