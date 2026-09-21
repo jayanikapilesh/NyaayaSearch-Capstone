@@ -1,4 +1,4 @@
-﻿import pandas as pd
+import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier, VotingClassifier
@@ -6,7 +6,7 @@ from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
 import joblib
 
-df = pd.read_csv("../data/eval/classifier_training_data.csv")
+df = pd.read_csv("../data/eval/classifier_training_data_large.csv")
 
 features = ["hybrid_score", "semantic_score", "bm25_score", "matched_term_count"]
 X = df[features]
@@ -84,3 +84,4 @@ print(f"\nBest model by F1: {best_name}")
 
 joblib.dump(best_model, "../relevance_classifier.pkl")
 print(f"Saved best model ({best_name}) to ../relevance_classifier.pkl")
+
