@@ -748,6 +748,16 @@ function App() {
             </button>
           </form>
 
+          {searchHistory.length === 0 && !explanation && !loading && (
+            <div className="example-queries">
+              <span className="example-queries-label">Try asking:</span>
+              <button className="example-chip" onClick={function () { setQuery("landlord not returning deposit"); runSearch("landlord not returning deposit"); }}>Landlord not returning deposit</button>
+              <button className="example-chip" onClick={function () { setQuery("police arrest without warrant"); runSearch("police arrest without warrant"); }}>Police arrest without warrant</button>
+              <button className="example-chip" onClick={function () { setQuery("how to file an RTI request"); runSearch("how to file an RTI request"); }}>How to file an RTI request</button>
+              <button className="example-chip" onClick={function () { setQuery("consumer complaint for defective product"); runSearch("consumer complaint for defective product"); }}>Consumer complaint for defective product</button>
+            </div>
+          )}
+
           {searchHistory.length > 0 && (
             <div className="search-history">
               <span className="search-history-label">Recent:</span>
@@ -877,4 +887,5 @@ function App() {
 }
 
 export default App;
+
 

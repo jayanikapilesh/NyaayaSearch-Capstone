@@ -931,3 +931,48 @@ body {
 
 
 
+.example-queries {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.example-queries-label {
+  font-size: 0.85rem;
+  color: #777;
+  font-weight: 500;
+  width: 100%;
+  margin-bottom: 4px;
+}
+
+.example-chip {
+  padding: 8px 16px;
+  background: white;
+  border: 1px solid #d0d0d0;
+  border-radius: 20px;
+  cursor: pointer;
+  color: #1a3c34;
+  font-size: 0.85rem;
+}
+
+.example-chip:hover {
+  background: #eef6f3;
+  border-color: #1a3c34;
+}
+
+.dark-mode .example-queries-label {
+  color: #999;
+}
+
+.dark-mode .example-chip {
+  background: #2a2a2a;
+  border-color: #444;
+  color: #e8e8e8;
+}
+
+.dark-mode .example-chip:hover {
+  background: #333;
+  border-color: #7fd9b8;
+}
