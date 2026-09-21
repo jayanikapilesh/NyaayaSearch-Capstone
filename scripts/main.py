@@ -116,6 +116,31 @@ def explain(request: SearchRequest):
             "language": detected_language,
         }
 
+    CONFIDENCE_THRESHOLD = 0.30
+    top_score = results[0].get("hybrid_score", 0)
+    if top_score < CONFIDENCE_THRESHOLD:
+        acts_seen = {}
+        for r in results:
+            act = r["act_name"]
+            if act not in acts_seen:
+                acts_seen[act] = []
+            acts_seen[act].append("Section " + str(r["section_number"]) + ": " + str(r["section_title"]))
+        candidates_text = ""
+        for act, sections in acts_seen.items():
+            candidates_text += "\n" + act + ":\n" + "\n".join("  - " + s for s in sections)
+        return {
+            "query": request.query,
+            "translated_query": search_query,
+            "results": results,
+            "explanation": (
+                "I am not confident enough about which section applies to your question to give a definite answer. "
+                "Here are the closest matching sections, grouped by Act - please check which one fits your situation, "
+                "or try rephrasing your question with more specific details:" + candidates_text
+            ),
+            "language": detected_language,
+            "low_confidence": True,
+        }
+
     try:
         explanation = generate_explanation(request.query, results)
     except groq.RateLimitError:
@@ -305,6 +330,10 @@ def bns_lookup_endpoint(request: BNSLookupRequest):
         "legal_text": record["legal_text"],
         "explanation": explanation,
     }
+
+
+
+
 
 
 
