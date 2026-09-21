@@ -135,6 +135,10 @@ function App() {
   const [docAnswer, setDocAnswer] = useState("");
   const [docAsking, setDocAsking] = useState(false);
 
+  const [caseText, setCaseText] = useState("");
+  const [simplifiedCase, setSimplifiedCase] = useState("");
+  const [simplifying, setSimplifying] = useState(false);
+
   const [dictTerm, setDictTerm] = useState("");
   const [dictDefinition, setDictDefinition] = useState("");
   const [dictLoading, setDictLoading] = useState(false);
@@ -437,6 +441,37 @@ function App() {
     }
   };
 
+  const handleSimplifyCase = async function (e) {
+    e.preventDefault();
+    if (!caseText.trim()) return;
+
+    setSimplifying(true);
+    setError(null);
+    setSimplifiedCase("");
+
+    try {
+      const response = await fetch(API_URL + "/simplify-case", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ case_text: caseText }),
+      });
+
+      if (!response.ok) {
+        const message = await extractErrorMessage(response, "Could not simplify this case. Please try again.");
+        setError(message);
+        return;
+      }
+
+      const data = await response.json();
+      setSimplifiedCase(data.simplified_explanation || "");
+    } catch (err) {
+      setError("Could not reach the server. Make sure the backend is running.");
+      console.error(err);
+    } finally {
+      setSimplifying(false);
+    }
+  };
+
   const handleDefine = async function (e) {
     e.preventDefault();
     if (!dictTerm.trim()) return;
@@ -560,6 +595,7 @@ function App() {
         <button className={"tab-button" + (activeTab === "drafter" ? " active" : "")} onClick={function () { setActiveTab("drafter"); }}>Document Generator</button>
         <button className={"tab-button" + (activeTab === "dictionary" ? " active" : "")} onClick={function () { setActiveTab("dictionary"); }}>Dictionary</button>
         <button className={"tab-button" + (activeTab === "documents" ? " active" : "")} onClick={function () { setActiveTab("documents"); }}>My Documents</button>
+        <button className={"tab-button" + (activeTab === "simplifier" ? " active" : "")} onClick={function () { setActiveTab("simplifier"); }}>Case Simplifier</button>
       </nav>
 
       {error && <div className="error">{error}</div>}
@@ -673,6 +709,36 @@ function App() {
               </div>
               <div className="draft-text">
                 <ReactMarkdown remarkPlugins={[remarkGfm]}>{draftText}</ReactMarkdown>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {activeTab === "simplifier" && (
+        <div className="drafter-section">
+          <h2>Case Simplifier</h2>
+          <p className="drafter-intro">Paste a court judgment, order, or legal case text to get a plain-language explanation.</p>
+          <form className="drafter-form" onSubmit={handleSimplifyCase}>
+            <textarea
+              className="drafter-textarea"
+              placeholder="Paste the case text here..."
+              rows={10}
+              value={caseText}
+              onChange={function (e) { setCaseText(e.target.value); }}
+            />
+            <button type="submit" className="search-button" disabled={simplifying}>
+              {simplifying ? "Simplifying..." : "Simplify Case"}
+            </button>
+          </form>
+
+          {simplifiedCase && (
+            <div className="draft-result">
+              <div className="draft-result-header">
+                <h3>Explanation</h3>
+              </div>
+              <div className="draft-text">
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>{simplifiedCase}</ReactMarkdown>
               </div>
             </div>
           )}
@@ -887,5 +953,13 @@ function App() {
 }
 
 export default App;
+
+
+
+
+
+
+
+
 
 
