@@ -1,4 +1,4 @@
-﻿# Comparative Evaluation: NyaayaSearch vs. Nyaaya.org
+# Comparative Evaluation: NyaayaSearch vs. Nyaaya.org
 
 Nyaaya.org (Vidhi Centre for Legal Policy, est. 2016) was selected as the comparison
 baseline: it is the most established, widely-cited public legal-literacy resource for
@@ -34,6 +34,25 @@ and trustworthy.
 | Content depth | Comprehensive, well-written, human-curated by legal experts | Grounded directly in statutory text, generated per-query |
 | Content currency | Last updated Jun 22, 2022 (predates the 2023 code replacement) | Reflects current law |
 
+## Comparison 3: "Consumer complaint for a defective product"
+
+| Criterion | Nyaaya.org | NyaayaSearch |
+|---|---|---|
+| Specific Act/Section cited | Yes - this article cites Sections 2(5), 2(6), 2(7) of the Consumer Protection Act, 2019 via footnotes | Cites Consumer Protection Act, 2019 sections with full original text inline |
+| Actionable next steps | Lists complaint forums (district/state/national commissions), INGRAM portal | Similar procedural guidance grounded in the Act text |
+| Content currency | Article dated as recently as 2026 (appears actively maintained) | Generated live |
+
+**Important correction to Comparisons 1-2:** this third comparison shows Nyaaya.org
+DOES cite specific sections on some topics (Consumer Protection here) but not on
+others (Security Deposit, Arrest, checked above). Citation practice is inconsistent
+across their content rather than uniformly absent - this is a more accurate and
+more interesting finding than claiming they never cite sections. The real, consistent
+difference found across all three comparisons is: (a) NyaayaSearch always includes
+the full original statutory text inline for verification, not just a citation number,
+and (b) NyaayaSearch is generated from the current Act text at query time, so it
+cannot lag behind updates like the confirmed IPC/CrPC vs BNS/BNSS gap found in
+Comparison 2.
+
 ## Honest Assessment
 
 **Where Nyaaya.org is stronger:**
@@ -47,8 +66,7 @@ and trustworthy.
 
 **Where NyaayaSearch is stronger:**
 - **Explicit statutory citation** (Act name + Section number + verbatim text) on every
-  answer - Nyaaya.org's explainers are frequently uncited or cite Acts without section
-  numbers, making independent verification harder for the user
+  answer - Nyaaya.org cites specific sections on some topics but not others
 - **Legal currency**: Nyaaya.org's arrest-related content still references the
   pre-2024 IPC/CrPC framework, which was fully repealed and replaced by BNS/BNSS in
   July 2024. NyaayaSearch is built directly on the current codes. This is a
@@ -79,3 +97,7 @@ factually and without exaggeration in the paper: it does not mean Nyaaya.org is
 unreliable overall, only that its specific arrest-related content had not yet been
 updated to reflect the 2024 code replacement at the time of this comparison
 (content dated June 2022).
+
+
+
+
