@@ -8,6 +8,7 @@ from pdf_core import extract_text_from_pdf, answer_question_about_document, summ
 from dictionary_core import define_term
 from drafter_core import draft_document, DOCUMENT_TYPES
 from case_simplifier_core import simplify_case
+from bns_decoder_core import explain_bns_section
 import groq
 
 app = FastAPI(title="NyaayaSearch API")
@@ -240,6 +241,10 @@ class CaseSimplifyRequest(BaseModel):
     case_text: str
 
 
+class BNSLookupRequest(BaseModel):
+    section_number: str
+
+
 @app.post("/draft-document")
 def draft_document_endpoint(request: DraftRequest):
     if request.document_type not in DOCUMENT_TYPES:
@@ -275,6 +280,33 @@ def simplify_case_endpoint(request: CaseSimplifyRequest):
         raise HTTPException(status_code=500, detail="Something went wrong simplifying this case. Please try again.")
 
     return {"simplified_explanation": simplified}
+
+
+@app.post("/bns-lookup")
+def bns_lookup_endpoint(request: BNSLookupRequest):
+    if not request.section_number or not request.section_number.strip():
+        raise HTTPException(status_code=400, detail="Please enter a BNS section number.")
+
+    record = engine.lookup_section("Bharatiya Nyaya Sanhita", request.section_number.strip())
+    if not record:
+        raise HTTPException(status_code=404, detail=f"Section {request.section_number} of the Bharatiya Nyaya Sanhita was not found in our database.")
+
+    try:
+        explanation = explain_bns_section(record["section_title"], record["legal_text"])
+    except groq.RateLimitError:
+        explanation = "Plain-language explanation is temporarily unavailable due to a usage limit. The section text is shown below."
+    except Exception:
+        explanation = "Could not generate an explanation right now, but the section text is shown below."
+
+    return {
+        "section_number": record["section_number"],
+        "section_title": record["section_title"],
+        "legal_text": record["legal_text"],
+        "explanation": explanation,
+    }
+
+
+
 
 
 

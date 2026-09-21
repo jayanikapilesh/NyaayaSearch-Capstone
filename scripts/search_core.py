@@ -119,6 +119,15 @@ class SearchEngine:
         )
         print("Search system ready.")
 
+    def lookup_section(self, act_name_contains, section_number):
+        section_number = str(section_number).strip()
+        for record in self.records:
+            act_name = str(record.get("act_name", ""))
+            record_section = str(record.get("section_number", "")).strip()
+            if act_name_contains.lower() in act_name.lower() and record_section == section_number:
+                return record
+        return None
+
     def search(self, query, top_k=5):
         expanded_query = expand_query(query)
         query_tokens = tokenize(expanded_query)
@@ -235,3 +244,4 @@ class SearchEngine:
                 "matched_terms": matched_terms,
             })
         return results
+
