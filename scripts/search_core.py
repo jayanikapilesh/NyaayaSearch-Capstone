@@ -46,7 +46,14 @@ SYNONYMS = {
     "doesn't own": ["doesn't own", "ostensible owner", "fraudulent transfer"],
     "seller doesn't own": ["seller doesn't own", "ostensible owner", "fraudulent transfer"],
     "stop": ["stop", "injunction", "restrain", "prevent"],
-    "court order": ["court order", "injunction", "perpetual injunction"]
+    "court order": ["court order", "injunction", "perpetual injunction"],
+    "lying": ["lying", "misrepresentation", "false statement", "suppression of fact"],
+    "break": ["break", "breach", "forfeit", "violate", "default"],
+    "show up": ["show up", "appear", "attendance", "present"],
+    "appeal": ["appeal", "revision", "review", "challenge decision"],
+    "review": ["review", "revision", "reconsider", "appeal"],
+    "bail bond": ["bail bond", "bond", "surety", "forfeited"],
+    "report": ["report", "inform", "notify", "disclose", "give information"]
 }
 
 
@@ -244,4 +251,6 @@ class SearchEngine:
                 "matched_terms": matched_terms,
             })
         return results
+
+
 
