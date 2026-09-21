@@ -9,6 +9,7 @@ from dictionary_core import define_term
 from drafter_core import draft_document, DOCUMENT_TYPES
 from case_simplifier_core import simplify_case
 from bns_decoder_core import explain_bns_section
+
 import groq
 
 app = FastAPI(title="NyaayaSearch API")
@@ -304,6 +305,17 @@ def bns_lookup_endpoint(request: BNSLookupRequest):
         "legal_text": record["legal_text"],
         "explanation": explanation,
     }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
