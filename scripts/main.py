@@ -7,6 +7,7 @@ from citations_core import find_related_cases
 from pdf_core import extract_text_from_pdf, answer_question_about_document, summarize_document, extract_dates_and_deadlines
 from dictionary_core import define_term
 from drafter_core import draft_document, DOCUMENT_TYPES
+from case_simplifier_core import simplify_case
 import groq
 
 app = FastAPI(title="NyaayaSearch API")
@@ -235,6 +236,10 @@ class DraftRequest(BaseModel):
     details: dict = {}
 
 
+class CaseSimplifyRequest(BaseModel):
+    case_text: str
+
+
 @app.post("/draft-document")
 def draft_document_endpoint(request: DraftRequest):
     if request.document_type not in DOCUMENT_TYPES:
@@ -253,3 +258,24 @@ def draft_document_endpoint(request: DraftRequest):
 @app.get("/document-types")
 def get_document_types():
     return {"document_types": DOCUMENT_TYPES}
+
+
+@app.post("/simplify-case")
+def simplify_case_endpoint(request: CaseSimplifyRequest):
+    if not request.case_text or not request.case_text.strip():
+        raise HTTPException(status_code=400, detail="Please paste the case text you want simplified.")
+    if len(request.case_text) > 20000:
+        raise HTTPException(status_code=400, detail="That text is too long. Please paste a shorter excerpt (under 20,000 characters).")
+
+    try:
+        simplified = simplify_case(request.case_text)
+    except groq.RateLimitError:
+        raise HTTPException(status_code=503, detail="The case simplifier is temporarily unavailable due to a usage limit. Please try again later.")
+    except Exception:
+        raise HTTPException(status_code=500, detail="Something went wrong simplifying this case. Please try again.")
+
+    return {"simplified_explanation": simplified}
+
+
+
+
