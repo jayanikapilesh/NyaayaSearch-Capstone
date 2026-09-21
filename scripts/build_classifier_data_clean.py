@@ -1,4 +1,4 @@
-﻿import json
+import json
 import pandas as pd
 from search_core import SearchEngine
 
@@ -16,6 +16,11 @@ with open("../data/training_pairs.jsonl", "r", encoding="utf-8") as f:
         queries_and_targets.append((pair["query"], pair["act_name"], str(pair["section_number"])))
 
 with open("../data/training_pairs_batch2.jsonl", "r", encoding="utf-8") as f:
+    for line in f:
+        pair = json.loads(line)
+        queries_and_targets.append((pair["query"], pair["act_name"], str(pair["section_number"])))
+
+with open("../data/training_pairs_batch3.jsonl", "r", encoding="utf-8") as f:
     for line in f:
         pair = json.loads(line)
         queries_and_targets.append((pair["query"], pair["act_name"], str(pair["section_number"])))
@@ -53,3 +58,4 @@ df.to_csv("../data/eval/classifier_training_data_clean.csv", index=False)
 print(f"\nBuilt {len(df)} labeled examples")
 print(f"Relevant: {df['is_relevant'].sum()}, Not relevant: {(df['is_relevant']==0).sum()}")
 print(f"Unique queries: {df['query'].nunique()}")
+
