@@ -1,0 +1,37 @@
+﻿paired_multilingual_kn2 = [
+    ("Kannada", "ಒಪ್ಪಂದ ರದ್ದುಗೊಳಿಸಿದರೆ ನಾನು ಪಡೆದದ್ದನ್ನು ಹಿಂತಿರುಗಿಸಬೇಕೇ", "Indian Contract Act, 1872", "64"),
+    ("Kannada", "ಶೋಷಣೆಗಾಗಿ ಮಗುವನ್ನು ಭಾರತಕ್ಕೆ ತರುವುದು ಅಪರಾಧವೇ", "Bharatiya Nyaya Sanhita, 2023", "141"),
+    ("Kannada", "ಯಾರೊಬ್ಬರ ಕಂಪ್ಯೂಟರ್ ಕೋಡ್ ಅನ್ನು ರಹಸ್ಯವಾಗಿ ಬದಲಾಯಿಸುವುದು ಕಾನೂನುಬಾಹಿರವೇ", "Information Technology Act, 2000", "65"),
+    ("Kannada", "ಆಶ್ರಯ ಮನೆಗಳಿಗೆ ಕೌಟುಂಬಿಕ ಹಿಂಸೆ ಬಲಿಪಶುಗಳ ಬಗ್ಗೆ ನಿರ್ದಿಷ್ಟ ಕರ್ತವ್ಯಗಳಿವೆಯೇ", "Protection of Women from Domestic Violence Act, 2005", "6"),
+    ("Kannada", "ನಾನು ಈಗಾಗಲೇ ಕೊಟ್ಟ ಉಡುಗೊರೆಯನ್ನು ಹಿಂಪಡೆಯಬಹುದೇ", "Transfer of Property Act, 1882", "126"),
+    ("Kannada", "ಎಲ್ಲಾ ವಾಹನಗಳ ಅಧಿಕೃತ ದಾಖಲೆಯನ್ನು ರಾಜ್ಯ ಇಟ್ಟುಕೊಳ್ಳುತ್ತದೆಯೇ", "Motor Vehicles Act, 1988", "63"),
+    ("Kannada", "ನನ್ನ ಕಾನೂನು ಹಕ್ಕುಗಳನ್ನು ಅಧಿಕೃತವಾಗಿ ಘೋಷಿಸಲು ನ್ಯಾಯಾಲಯವನ್ನು ಕೇಳಬಹುದೇ", "Specific Relief Act, 1963", "34"),
+    ("Kannada", "ಏನನ್ನಾದರೂ ತಡೆಯಲು ನ್ಯಾಯಾಲಯ ತಡೆಯಾಜ್ಞೆಯನ್ನು ಹೇಗೆ ನೀಡುತ್ತದೆ", "Specific Relief Act, 1963", "36"),
+    ("Kannada", "ಅಪರಾಧಿಯನ್ನು ಉದ್ದೇಶಪೂರ್ವಕವಾಗಿ ತಪ್ಪಿಸಿಕೊಳ್ಳಲು ಬಿಟ್ಟ ಸರ್ಕಾರಿ ನೌಕರನಿಗೆ ಶಿಕ್ಷೆ ಆಗಬಹುದೇ", "Bharatiya Nyaya Sanhita, 2023", "260"),
+    ("Kannada", "ಹಾಜರಾಗುವುದಾಗಿ ಖಾತರಿ ನೀಡಲು ನ್ಯಾಯಾಲಯ ನನ್ನಿಂದ ಬಾಂಡ್‌ಗೆ ಸಹಿ ಮಾಡಿಸಬಹುದೇ", "Bharatiya Nagarik Suraksha Sanhita, 2023", "91"),
+    ("Kannada", "ತಮ್ಮ ಪ್ರಮಾಣಪತ್ರ ರದ್ದಾಗಿದೆ ಎಂದು ಪ್ರಮಾಣೀಕರಣ ಪ್ರಾಧಿಕಾರ ಸಾರ್ವಜನಿಕವಾಗಿ ಬಹಿರಂಗಪಡಿಸಬೇಕೇ", "Information Technology Act, 2000", "34"),
+    ("Kannada", "ಹಣ ಪಾವತಿಸುವಂತೆ ಒತ್ತಾಯಿಸಲು ಯಾರಿಗಾದರೂ ಗಾಯ ಮಾಡುವ ಶಿಕ್ಷೆ ಏನು", "Bharatiya Nyaya Sanhita, 2023", "119"),
+    ("Kannada", "ರಾಷ್ಟ್ರೀಯ ಸಮಗ್ರತೆಗೆ ಹಾನಿ ಮಾಡುವ ಹೇಳಿಕೆಗಳನ್ನು ನೀಡುವುದು ಕಾನೂನುಬಾಹಿರವೇ", "Bharatiya Nyaya Sanhita, 2023", "197"),
+    ("Kannada", "ನಾನು ಕಾನೂನುಬದ್ಧವಾಗಿ ನನ್ನನ್ನು ರಕ್ಷಿಸಿಕೊಳ್ಳಲಾಗದ ಸಂದರ್ಭಗಳಿವೆಯೇ", "Bharatiya Nyaya Sanhita, 2023", "37"),
+    ("Kannada", "ಸೈನಿಕನನ್ನು ಆದೇಶ ಪಾಲಿಸದಂತೆ ಪ್ರಚೋದಿಸುವ ಶಿಕ್ಷೆ ಏನು", "Bharatiya Nyaya Sanhita, 2023", "166"),
+    ("Kannada", "ನ್ಯಾಯಾಲಯದ ಆದೇಶದ ನಂತರವೂ ನಾನು ಉಪದ್ರವ ಮುಂದುವರಿಸಿದರೆ ಏನಾಗುತ್ತದೆ", "Bharatiya Nyaya Sanhita, 2023", "293"),
+    ("Kannada", "ರಾಜ್ಯ ಸರ್ಕಾರಗಳು ತಮ್ಮದೇ ಗ್ರಾಹಕ ಸಂರಕ್ಷಣಾ ನಿಯಮಗಳನ್ನು ಮಾಡಬಹುದೇ", "Consumer Protection Act, 2019", "102"),
+    ("Kannada", "ಯಾರಾದರೂ ನನ್ನ ಅನುಮತಿಯಿಲ್ಲದೆ ನನ್ನ ಸರಕುಗಳನ್ನು ಅವರ ಸರಕುಗಳೊಂದಿಗೆ ಬೆರೆಸಿದರೆ ಏನಾಗುತ್ತದೆ", "Indian Contract Act, 1872", "157"),
+    ("Kannada", "ಯಾರಿಗೂ ಹಾನಿಯಾಗದಿದ್ದರೂ ಒಂದು ಕೃತ್ಯ ಅಪರಾಧವಾಗಬಹುದೇ", "Bharatiya Nyaya Sanhita, 2023", "29"),
+    ("Kannada", "ಹೊಸ ಚಾಲನಾ ಪರವಾನಗಿಗೆ ಎಂಡಾರ್ಸ್‌ಮೆಂಟ್ ವರ್ಗಾಯಿಸಬಹುದೇ", "Motor Vehicles Act, 1988", "25"),
+    ("Kannada", "ಪ್ರತಿಫಲವಿಲ್ಲದೆ ಮಾಡಿದ ಭರವಸೆ ಕಾನೂನುಬದ್ಧವಾಗಿ ಬಂಧಿಸುತ್ತದೆಯೇ", "Indian Contract Act, 1872", "25"),
+    ("Kannada", "ಪ್ರೊಟೆಕ್ಷನ್ ಆಫೀಸರ್ ತಮ್ಮ ಕೆಲಸ ಮಾಡದಿದ್ದರೆ ಶಿಕ್ಷೆ ಆಗಬಹುದೇ", "Protection of Women from Domestic Violence Act, 2005", "33"),
+    ("Kannada", "ಚಿಕ್ಕ ಮಗುವನ್ನು ಅಪಹರಿಸಿ ಅದರಿಂದ ಕದಿಯುವ ಶಿಕ್ಷೆ ಏನು", "Bharatiya Nyaya Sanhita, 2023", "97"),
+    ("Kannada", "ಅಪರಾಧದಲ್ಲಿ ಶಿಕ್ಷೆಗೊಳಗಾದರೆ ನನ್ನ ಚಾಲನಾ ಪರವಾನಗಿ ರದ್ದಾಗಬಹುದೇ", "Motor Vehicles Act, 1988", "22"),
+    ("Kannada", "ಜೀವನಾಂಶ ಆದೇಶವನ್ನು ವಾಸ್ತವವಾಗಿ ಹೇಗೆ ಜಾರಿಗೊಳಿಸಲಾಗುತ್ತದೆ", "Bharatiya Nagarik Suraksha Sanhita, 2023", "147"),
+    ("Kannada", "ಅಧಿಕಾರಿಗಳಿಗೆ ಸುಳ್ಳು ಮಾಹಿತಿ ನೀಡುವುದು ಅಪರಾಧವೇ", "Bharatiya Nyaya Sanhita, 2023", "212"),
+    ("Kannada", "ದೊಡ್ಡ ಗುಂಪನ್ನು ಅಪರಾಧ ಮಾಡಲು ಪ್ರಚೋದಿಸುವ ಶಿಕ್ಷೆ ಏನು", "Bharatiya Nyaya Sanhita, 2023", "57"),
+    ("Kannada", "ಪೊಲೀಸರಿಗೆ ನಾನು ನೀಡಿದ ಹೇಳಿಕೆಯನ್ನು ನ್ಯಾಯಾಲಯದಲ್ಲಿ ನನ್ನ ವಿರುದ್ಧ ಬಳಸಬಹುದೇ", "Bharatiya Nagarik Suraksha Sanhita, 2023", "181"),
+    ("Kannada", "ಒಪ್ಪಂದದ ಭಾಗವನ್ನು ಪೂರೈಸುವುದರಿಂದ ಯಾರನ್ನಾದರೂ ನಾನು ಬಿಡುಗಡೆ ಮಾಡಬಹುದೇ", "Indian Contract Act, 1872", "63"),
+    ("Kannada", "ಕಂಪನಿಯೊಂದು ನನ್ನ ವೈಯಕ್ತಿಕ ಡೇಟಾ ಸೋರಿಕೆ ಮಾಡಿದರೆ ಪರಿಹಾರಕ್ಕಾಗಿ ದಾವೆ ಹೂಡಬಹುದೇ", "Information Technology Act, 2000", "43A"),
+]
+
+import json
+with open("../data/eval/final_test_kannada2.json", "w", encoding="utf-8") as f:
+    json.dump(paired_multilingual_kn2, f, indent=2, ensure_ascii=False)
+print(f"Saved {len(paired_multilingual_kn2)} Kannada queries (batch 2)")
