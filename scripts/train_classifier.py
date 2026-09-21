@@ -6,9 +6,9 @@ from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
 import joblib
 
-df = pd.read_csv("../data/eval/classifier_training_data_large.csv")
+df = pd.read_csv("../data/eval/classifier_training_data_v2.csv")
 
-features = ["hybrid_score", "semantic_score", "bm25_score", "matched_term_count"]
+features = ["hybrid_score", "semantic_score", "bm25_score", "matched_term_count", "rank", "reciprocal_rank", "query_length", "matched_term_ratio", "semantic_minus_bm25"]
 X = df[features]
 y = df["is_relevant"]
 
@@ -84,4 +84,6 @@ print(f"\nBest model by F1: {best_name}")
 
 joblib.dump(best_model, "../relevance_classifier.pkl")
 print(f"Saved best model ({best_name}) to ../relevance_classifier.pkl")
+
+
 
