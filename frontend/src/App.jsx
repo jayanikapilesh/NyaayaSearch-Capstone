@@ -5,6 +5,7 @@ import remarkGfm from "remark-gfm";
 import { Document, Packer, Paragraph, TextRun, HeadingLevel } from "docx";
 import { saveAs } from "file-saver";
 import { DOCUMENT_SCHEMAS, GENERIC_DOCUMENT_TYPES, ADDITIONAL_DOCUMENT_SCHEMAS } from "./documentSchemas";
+import { QUIZ_QUESTIONS } from "./quizData";
 
 const API_URL = "http://127.0.0.1:8000";
 const HISTORY_KEY = "nyaaya-search-history";
@@ -144,6 +145,11 @@ function App() {
   const [bnsSectionInput, setBnsSectionInput] = useState("");
   const [bnsResult, setBnsResult] = useState(null);
   const [bnsLoading, setBnsLoading] = useState(false);
+
+  const [quizIndex, setQuizIndex] = useState(0);
+  const [quizScore, setQuizScore] = useState(0);
+  const [quizSelected, setQuizSelected] = useState(null);
+  const [quizFinished, setQuizFinished] = useState(false);
 
   const [dictTerm, setDictTerm] = useState("");
   const [dictDefinition, setDictDefinition] = useState("");
@@ -509,6 +515,30 @@ function App() {
     }
   };
 
+  const handleQuizAnswer = function (optionIndex) {
+    if (quizSelected !== null) return;
+    setQuizSelected(optionIndex);
+    if (optionIndex === QUIZ_QUESTIONS[quizIndex].correctIndex) {
+      setQuizScore(function (prev) { return prev + 1; });
+    }
+  };
+
+  const handleQuizNext = function () {
+    if (quizIndex + 1 < QUIZ_QUESTIONS.length) {
+      setQuizIndex(function (prev) { return prev + 1; });
+      setQuizSelected(null);
+    } else {
+      setQuizFinished(true);
+    }
+  };
+
+  const handleQuizRestart = function () {
+    setQuizIndex(0);
+    setQuizScore(0);
+    setQuizSelected(null);
+    setQuizFinished(false);
+  };
+
   const handleDefine = async function (e) {
     e.preventDefault();
     if (!dictTerm.trim()) return;
@@ -635,6 +665,7 @@ function App() {
         <button className={"tab-button" + (activeTab === "simplifier" ? " active" : "")} onClick={function () { setActiveTab("simplifier"); }}>Case Simplifier</button>
         <button className={"tab-button" + (activeTab === "emergency" ? " active" : "")} onClick={function () { setActiveTab("emergency"); }}>Emergency Help</button>
         <button className={"tab-button" + (activeTab === "bns" ? " active" : "")} onClick={function () { setActiveTab("bns"); }}>BNS Decoder</button>
+        <button className={"tab-button" + (activeTab === "quiz" ? " active" : "")} onClick={function () { setActiveTab("quiz"); }}>Legal IQ Daily</button>
       </nav>
 
       {error && <div className="error">{error}</div>}
@@ -781,6 +812,45 @@ function App() {
                 <p className="bns-original-label">Original text:</p>
                 <p className="bns-original-text">{bnsResult.legal_text}</p>
               </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {activeTab === "quiz" && (
+        <div className="drafter-section">
+          <h2>Legal IQ Daily</h2>
+          {!quizFinished ? (
+            <div>
+              <p className="quiz-progress">Question {quizIndex + 1} of {QUIZ_QUESTIONS.length}</p>
+              <p className="quiz-question">{QUIZ_QUESTIONS[quizIndex].question}</p>
+              <div className="quiz-options">
+                {QUIZ_QUESTIONS[quizIndex].options.map(function (option, i) {
+                  let optionClass = "quiz-option";
+                  if (quizSelected !== null) {
+                    if (i === QUIZ_QUESTIONS[quizIndex].correctIndex) optionClass += " correct";
+                    else if (i === quizSelected) optionClass += " incorrect";
+                  }
+                  return (
+                    <button key={i} className={optionClass} onClick={function () { handleQuizAnswer(i); }} disabled={quizSelected !== null}>
+                      {option}
+                    </button>
+                  );
+                })}
+              </div>
+              {quizSelected !== null && (
+                <div className="quiz-feedback">
+                  <p className="quiz-explanation">{QUIZ_QUESTIONS[quizIndex].explanation}</p>
+                  <button className="search-button" onClick={handleQuizNext}>
+                    {quizIndex + 1 < QUIZ_QUESTIONS.length ? "Next Question" : "See Results"}
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="quiz-results">
+              <p className="quiz-score">You scored {quizScore} out of {QUIZ_QUESTIONS.length}</p>
+              <button className="search-button" onClick={handleQuizRestart}>Try Again</button>
             </div>
           )}
         </div>
@@ -1076,6 +1146,12 @@ function App() {
 }
 
 export default App;
+
+
+
+
+
+
 
 
 
