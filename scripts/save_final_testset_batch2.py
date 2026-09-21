@@ -1,0 +1,37 @@
+﻿final_test_batch2 = [
+    ("If I cancel a contract, do I have to give back what I received?", "Indian Contract Act, 1872", "64"),
+    ("Is it a crime to bring a child into India for exploitation?", "Bharatiya Nyaya Sanhita, 2023", "141"),
+    ("Is it illegal to secretly alter someone's computer code?", "Information Technology Act, 2000", "65"),
+    ("Do shelter homes have specific duties toward domestic violence victims?", "Protection of Women from Domestic Violence Act, 2005", "6"),
+    ("Can I take back a gift I already gave someone?", "Transfer of Property Act, 1882", "126"),
+    ("Does the state keep an official record of all vehicles?", "Motor Vehicles Act, 1988", "63"),
+    ("Can I ask a court to officially declare my legal rights?", "Specific Relief Act, 1963", "34"),
+    ("How does a court grant an injunction to prevent something?", "Specific Relief Act, 1963", "36"),
+    ("Can a public servant be punished for deliberately letting a criminal escape?", "Bharatiya Nyaya Sanhita, 2023", "260"),
+    ("Can a court make me sign a bond to guarantee I'll show up?", "Bharatiya Nagarik Suraksha Sanhita, 2023", "91"),
+    ("Does a Certifying Authority have to publicly disclose if their certificate is revoked?", "Information Technology Act, 2000", "34"),
+    ("What's the punishment for hurting someone to force them to pay you?", "Bharatiya Nyaya Sanhita, 2023", "119"),
+    ("Is it illegal to make statements that harm national unity?", "Bharatiya Nyaya Sanhita, 2023", "197"),
+    ("Are there situations where I can't legally defend myself?", "Bharatiya Nyaya Sanhita, 2023", "37"),
+    ("What's the punishment for encouraging a soldier to disobey orders?", "Bharatiya Nyaya Sanhita, 2023", "166"),
+    ("What happens if I keep causing a nuisance after a court tells me to stop?", "Bharatiya Nyaya Sanhita, 2023", "293"),
+    ("Can state governments make their own consumer protection rules?", "Consumer Protection Act, 2019", "102"),
+    ("What happens if someone mixes my goods with theirs without my permission?", "Indian Contract Act, 1872", "157"),
+    ("Can something still be a crime even if no one was harmed?", "Bharatiya Nyaya Sanhita, 2023", "29"),
+    ("Can I transfer an endorsement to a new driving licence?", "Motor Vehicles Act, 1988", "25"),
+    ("Is a promise legally binding if nothing was exchanged for it?", "Indian Contract Act, 1872", "25"),
+    ("Can a Protection Officer be punished for failing to do their job?", "Protection of Women from Domestic Violence Act, 2005", "33"),
+    ("What's the punishment for kidnapping a young child to rob them?", "Bharatiya Nyaya Sanhita, 2023", "97"),
+    ("Can my driving licence be cancelled if I'm convicted of a crime?", "Motor Vehicles Act, 1988", "22"),
+    ("How is a maintenance payment order actually enforced?", "Bharatiya Nagarik Suraksha Sanhita, 2023", "147"),
+    ("Is it a crime to give false information to authorities?", "Bharatiya Nyaya Sanhita, 2023", "212"),
+    ("What's the punishment for encouraging a large group to commit a crime?", "Bharatiya Nyaya Sanhita, 2023", "57"),
+    ("Can what I tell the police be used against me in court?", "Bharatiya Nagarik Suraksha Sanhita, 2023", "181"),
+    ("Can I let someone off from fulfilling their part of a contract?", "Indian Contract Act, 1872", "63"),
+    ("Can I sue a company for compensation if they leak my personal data?", "Information Technology Act, 2000", "43A"),
+]
+
+import json
+with open("../data/eval/final_test_set_batch2.json", "w", encoding="utf-8") as f:
+    json.dump(final_test_batch2, f, indent=2)
+print(f"Saved {len(final_test_batch2)} queries to final_test_set_batch2.json")

@@ -1,0 +1,37 @@
+﻿paired_multilingual_kn = [
+    ("Kannada", "ಯಾರನ್ನಾದರೂ ಕೊಲ್ಲಲು ಪ್ರಯತ್ನಿಸಿ ವಿಫಲವಾದರೆ ಶಿಕ್ಷೆ ಏನು", "Bharatiya Nyaya Sanhita, 2023", "109"),
+    ("Kannada", "ಉದ್ದೇಶಪೂರ್ವಕವಾಗಿ ಯಾರಿಗಾದರೂ ಗಂಭೀರ ಗಾಯ ಮಾಡುವ ಶಿಕ್ಷೆ ಏನು", "Bharatiya Nyaya Sanhita, 2023", "117"),
+    ("Kannada", "ಸುಳ್ಳು ಜಾಹೀರಾತಿಗೆ ಕಂಪನಿಗೆ ಶಿಕ್ಷೆ ಆಗಬಹುದೇ", "Consumer Protection Act, 2019", "89"),
+    ("Kannada", "ದೋಷಯುಕ್ತ ಉತ್ಪನ್ನ ಮಾರಾಟ ಮಾಡಿದ ಅಂಗಡಿಯನ್ನು ಹೊಣೆಗಾರರನ್ನಾಗಿ ಮಾಡಬಹುದೇ", "Consumer Protection Act, 2019", "86"),
+    ("Kannada", "ದೋಷಯುಕ್ತ ಉತ್ಪನ್ನಕ್ಕಾಗಿ ತಯಾರಕರ ಮೇಲೆ ದಾವೆ ಹೂಡಬಹುದೇ", "Consumer Protection Act, 2019", "84"),
+    ("Kannada", "ನನ್ನನ್ನು ಏಕೆ ಬಂಧಿಸಲಾಗುತ್ತಿದೆ ಎಂದು ಪೊಲೀಸರು ಹೇಳಬೇಕೇ", "Bharatiya Nagarik Suraksha Sanhita, 2023", "47"),
+    ("Kannada", "ಕೌಟುಂಬಿಕ ಹಿಂಸೆ ಬಲಿಪಶುವಿಗೆ ಆರ್ಥಿಕ ಪರಿಹಾರ ಸಿಗಬಹುದೇ", "Protection of Women from Domestic Violence Act, 2005", "20"),
+    ("Kannada", "ಕೌಟುಂಬಿಕ ಹಿಂಸೆ ಪ್ರಕರಣ ಮಕ್ಕಳ ಪಾಲನೆಯ ಮೇಲೆ ಪರಿಣಾಮ ಬೀರಬಹುದೇ", "Protection of Women from Domestic Violence Act, 2005", "21"),
+    ("Kannada", "ಮನೆ ಖಾಲಿ ಮಾಡುವಾಗ ಖಾಲಿಯಾಗಿ ಹಿಂತಿರುಗಿಸಬೇಕೇ", "Karnataka Rent Act, 1999", "41"),
+    ("Kannada", "ನ್ಯಾಯಾಲಯ ಬಾಡಿಗೆ ವಿವಾದಗಳನ್ನು ವಿಚಾರಣೆಯಿಲ್ಲದೆ ಬಗೆಹರಿಸಲು ಪ್ರಯತ್ನಿಸುತ್ತದೆಯೇ", "Karnataka Rent Act, 1999", "44"),
+    ("Kannada", "ಸಾಲ ತೀರಿಸಿದ ನಂತರ ಅಡಮಾನ ಆಸ್ತಿ ವಾಪಸ್ ಪಡೆಯಬಹುದೇ", "Transfer of Property Act, 1882", "62"),
+    ("Kannada", "ನ್ಯಾಯಾಲಯ ಯಾವಾಗ ತಡೆಯಾಜ್ಞೆ ನೀಡಲು ನಿರಾಕರಿಸುತ್ತದೆ", "Specific Relief Act, 1963", "41"),
+    ("Kannada", "ವೈಯಕ್ತಿಕ ಸೇವಾ ಒಪ್ಪಂದ ಪೂರ್ಣಗೊಳಿಸಲು ಯಾರನ್ನಾದರೂ ಒತ್ತಾಯಿಸಬಹುದೇ", "Specific Relief Act, 1963", "14"),
+    ("Kannada", "ನನ್ನ ಆಸ್ತಿಯನ್ನು ಆಕ್ರಮಿಸಿಕೊಂಡವರಿಂದ ಕಾನೂನುಬದ್ಧವಾಗಿ ಹೇಗೆ ಮರಳಿ ಪಡೆಯುವುದು", "Specific Relief Act, 1963", "5"),
+    ("Kannada", "ಗಡುವು ತಪ್ಪಿದ ನಂತರವೂ ನನ್ನ ಅಡಮಾನ ವಸ್ತು ವಾಪಸ್ ಪಡೆಯಬಹುದೇ", "Indian Contract Act, 1872", "177"),
+    ("Kannada", "ನನ್ನ ಏಜೆಂಟ್ ನನ್ನನ್ನು ಕೇಳದೆ ಬೇರೊಬ್ಬರನ್ನು ನನ್ನ ಕೆಲಸಕ್ಕೆ ನೇಮಿಸಬಹುದೇ", "Indian Contract Act, 1872", "190"),
+    ("Kannada", "ಎರಡೂ ಪಕ್ಷಗಳು ಒಪ್ಪಂದ ಬದಲಾಯಿಸಲು ಒಪ್ಪಿದರೆ ಏನಾಗುತ್ತದೆ", "Indian Contract Act, 1872", "62"),
+    ("Kannada", "ಯಾರನ್ನಾದರೂ ಮೋಸಗೊಳಿಸಲು ನಕಲಿ ಡಿಜಿಟಲ್ ಪ್ರಮಾಣಪತ್ರ ರಚಿಸುವುದು ಕಾನೂನುಬಾಹಿರವೇ", "Information Technology Act, 2000", "74"),
+    ("Kannada", "ಸೈಬರ್ ಟ್ರಿಬ್ಯೂನಲ್ ತೀರ್ಪನ್ನು ಹೈಕೋರ್ಟ್‌ನಲ್ಲಿ ಪ್ರಶ್ನಿಸಬಹುದೇ", "Information Technology Act, 2000", "62"),
+    ("Kannada", "ಸರ್ಕಾರ ನನ್ನ ಇಂಟರ್ನೆಟ್ ಸಂವಹನವನ್ನು ಮೇಲ್ವಿಚಾರಣೆ ಮಾಡಬಹುದೇ", "Information Technology Act, 2000", "69"),
+    ("Kannada", "ರೈಲನ್ನು ಹಾನಿಗೊಳಿಸುವ ಶಿಕ್ಷೆ ಏನು", "Bharatiya Nyaya Sanhita, 2023", "327"),
+    ("Kannada", "ಉದ್ದೇಶಪೂರ್ವಕವಾಗಿ ಅಪಾಯಕಾರಿ ರೋಗ ಹರಡುವುದು ಅಪರಾಧವೇ", "Bharatiya Nyaya Sanhita, 2023", "272"),
+    ("Kannada", "ಯಾರೊಬ್ಬರ ಜೀವಕ್ಕೆ ಅಜಾಗರೂಕತೆಯಿಂದ ಅಪಾಯ ತಂದೊಡ್ಡುವ ಶಿಕ್ಷೆ ಏನು", "Bharatiya Nyaya Sanhita, 2023", "125"),
+    ("Kannada", "ಯಾರಿಗಾದರೂ ನ್ಯಾಯಾಲಯದ ಸಮನ್ಸ್ ತಲುಪದಂತೆ ತಡೆಯುವುದು ಕಾನೂನುಬಾಹಿರವೇ", "Bharatiya Nyaya Sanhita, 2023", "207"),
+    ("Kannada", "ನ್ಯಾಯಾಲಯ ಅಧಿಕೃತವಾಗಿ ಸಮನ್ಸ್ ಹೇಗೆ ಕಳುಹಿಸುತ್ತದೆ", "Bharatiya Nagarik Suraksha Sanhita, 2023", "64"),
+    ("Kannada", "ನ್ಯಾಯಾಲಯ ಅಪರಾಧದ ಸಂಜ್ಞಾನ ತೆಗೆದುಕೊಳ್ಳುವುದು ಎಂದರೆ ಏನು", "Bharatiya Nagarik Suraksha Sanhita, 2023", "221"),
+    ("Kannada", "ಮ್ಯಾಜಿಸ್ಟ್ರೇಟ್ ಅನುಮಾನಾಸ್ಪದ ಸಾವುಗಳನ್ನು ತನಿಖೆ ಮಾಡುತ್ತಾರೆಯೇ", "Bharatiya Nagarik Suraksha Sanhita, 2023", "196"),
+    ("Kannada", "ಬಂಧನ ವಾರಂಟ್ ಜಾರಿಗೊಳಿಸುವ ವ್ಯಕ್ತಿಗೆ ಸಹಾಯ ಮಾಡಬೇಕೇ", "Bharatiya Nagarik Suraksha Sanhita, 2023", "32"),
+    ("Kannada", "ಕ್ರಮ ತೆಗೆದುಕೊಳ್ಳುವ ಮೊದಲು ಮ್ಯಾಜಿಸ್ಟ್ರೇಟ್ ದೂರಿನ ಸತ್ಯಾಸತ್ಯತೆ ಪರಿಶೀಲಿಸುತ್ತಾರೆಯೇ", "Bharatiya Nagarik Suraksha Sanhita, 2023", "135"),
+    ("Kannada", "ನನ್ನ ವಿಮಾ ಕಂಪನಿ ನೇರವಾಗಿ ನನ್ನೊಂದಿಗೆ ಕ್ಲೈಮ್ ಇತ್ಯರ್ಥಗೊಳಿಸಬಹುದೇ", "Motor Vehicles Act, 1988", "153"),
+]
+
+import json
+with open("../data/eval/final_test_kannada.json", "w", encoding="utf-8") as f:
+    json.dump(paired_multilingual_kn, f, indent=2, ensure_ascii=False)
+print(f"Saved {len(paired_multilingual_kn)} Kannada queries")
