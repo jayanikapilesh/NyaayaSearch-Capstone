@@ -1,4 +1,4 @@
-﻿import os
+import os
 import re
 from dotenv import load_dotenv
 from groq import Groq
@@ -115,3 +115,16 @@ def generate_explanation(original_query, search_results):
     )
 
     return response.choices[0].message.content
+
+import re
+
+
+def verify_citations(explanation_text, search_results):
+    """Check whether every 'Section X' mentioned in the AI-generated explanation
+    was actually among the retrieved search results. This is a defense-in-depth
+    check against the LLM hallucinating or misremembering a section number that
+    wasn't actually retrieved. Returns (is_valid, list_of_unverified_section_numbers)."""
+    retrieved_sections = set(str(r["section_number"]) for r in search_results)
+    mentioned = re.findall(r"[Ss]ection\s+(\d+[A-Za-z]?)", explanation_text)
+    unverified = [s for s in mentioned if s not in retrieved_sections]
+    return (len(unverified) == 0, unverified)

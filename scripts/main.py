@@ -2,7 +2,7 @@ from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from search_core import SearchEngine
-from rag_core import generate_explanation, translate_to_english, translate_explanation, detect_language
+from rag_core import generate_explanation, translate_to_english, translate_explanation, detect_language, verify_citations
 from citations_core import find_related_cases
 from pdf_core import extract_text_from_pdf, answer_question_about_document, summarize_document, extract_dates_and_deadlines
 from dictionary_core import define_term
@@ -143,6 +143,9 @@ def explain(request: SearchRequest):
 
     try:
         explanation = generate_explanation(request.query, results)
+        is_valid, unverified_sections = verify_citations(explanation, results)
+        if not is_valid:
+            explanation += "\n\n[Note: this explanation may reference a section number not confirmed in our search results (" + ", ".join(unverified_sections) + "). Please cross-check with the original statutory text shown above.]"
     except groq.RateLimitError:
         explanation = "Plain-language explanation is temporarily unavailable due to a service usage limit. Here are the relevant legal sections we found - please review them directly below."
     except Exception:
