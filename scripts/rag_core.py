@@ -40,7 +40,7 @@ def detect_language(text):
 
 def translate_to_english(query):
     response = client.chat.completions.create(
-        model="openai/gpt-oss-20b",
+        model="openai/gpt-oss-120b",
         messages=[
             {
                 "role": "system",
@@ -67,7 +67,7 @@ def translate_explanation(explanation_text, target_language_code):
         return explanation_text
 
     response = client.chat.completions.create(
-        model="openai/gpt-oss-20b",
+        model="openai/gpt-oss-120b",
         messages=[
             {
                 "role": "system",
@@ -110,7 +110,7 @@ def generate_explanation(original_query, search_results):
     for attempt in range(max_retries):
         try:
             response = client.chat.completions.create(
-                model="openai/gpt-oss-20b",
+                model="openai/gpt-oss-120b",
                 messages=[
                     {"role": "system", "content": SYSTEM_PROMPT},
                     {"role": "user", "content": user_prompt},
@@ -139,3 +139,44 @@ def verify_citations(explanation_text, search_results):
     mentioned = re.findall(r"[Ss]ection\s+(\d+[A-Za-z]?)", explanation_text)
     unverified = [s for s in mentioned if s not in retrieved_sections]
     return (len(unverified) == 0, unverified)
+def rewrite_query_for_search(query):
+    """Rewrite an everyday-language legal question into likely legal terminology,
+    to improve search matching against statutory text. Falls back to the original
+    query on any failure, and combines both for safety (search tries the rewritten
+    version first, caller can fall back to original if needed)."""
+    max_retries = 3
+    for attempt in range(max_retries):
+        try:
+            response = client.chat.completions.create(
+                model="openai/gpt-oss-120b",
+                messages=[
+                    {
+                        "role": "system",
+                        "content": (
+                            "You rewrite everyday legal questions into the formal legal "
+                            "terminology an Indian statute would actually use, to improve "
+                            "search matching. For example: 'seriously injuring someone' -> "
+                            "'grievous hurt'. 'reckless driving' -> 'rash driving'. "
+                            "'getting property back from someone occupying it' -> 'recovery "
+                            "of possession'. 'sending a court notice' -> 'service of summons'. "
+                            "Keep the rewritten question short and natural, just replacing "
+                            "vague everyday words with the specific legal terms they map to. "
+                            "Use current Indian law names (Bharatiya Nyaya Sanhita/BNS, "
+                            "Bharatiya Nagarik Suraksha Sanhita/BNSS), never the old repealed "
+                            "IPC or CrPC. Return ONLY the rewritten question, nothing else - "
+                            "no explanation, no quotes."
+                        ),
+                    },
+                    {"role": "user", "content": query},
+                ],
+                temperature=0.2,
+                max_tokens=800,
+            )
+            return response.choices[0].message.content.strip()
+        except groq.RateLimitError:
+            raise
+        except Exception:
+            if attempt < max_retries - 1:
+                time.sleep(2 ** attempt)
+                continue
+            return query
