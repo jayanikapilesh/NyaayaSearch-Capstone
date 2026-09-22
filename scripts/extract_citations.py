@@ -1,4 +1,4 @@
-﻿import re
+import re
 import pandas as pd
 from bs4 import BeautifulSoup
 
@@ -8,7 +8,7 @@ OUTPUT_FILE = "../data/case_law/processed/case_citations.csv"
 WORD = r"(?:[A-Z][a-z]+|of|the|and)"
 
 PATTERN_ACT_SECTION = re.compile(
-    rf"((?:{WORD}\s+){{1,6}}Act,?\s*\d{{4}})\s*-?\s*[:\-]?\s*s\.?\s*(\d+[A-Za-z]?(?:\(\w+\))?)",
+    rf"((?:{WORD}\s+){{1,6}}Act,?\s*\d{{4}})\s*-?\s*[:\-]?\s*(?:s\.?|Sections?)\s*(\d+[A-Za-z]?(?:\(\w+\))?)",
 )
 
 PATTERN_US_OF = re.compile(
@@ -16,7 +16,7 @@ PATTERN_US_OF = re.compile(
 )
 
 PATTERN_CODE_SECTION = re.compile(
-    rf"((?:{WORD}\s+){{0,5}}(?:Penal Code|Code of Criminal Procedure|Insolvency and Bankruptcy Code)),?\s*\d{{4}}\s*[:\-]?\s*ss?\.?\s*(\d+[A-Za-z]?(?:/\d+[A-Za-z]?)*(?:\(\w+\))?)",
+    rf"((?:{WORD}\s+){{0,5}}(?:Penal Code|Code of Criminal Procedure|Code of Civil Procedure|Insolvency and Bankruptcy Code)),?\s*\d{{4}}\s*[:\-]?\s*(?:ss?\.?|Sections?)\s*(\d+[A-Za-z]?(?:/\d+[A-Za-z]?)*(?:\(\w+\))?)",
 )
 
 ACRONYMS = {
@@ -30,16 +30,34 @@ ACRONYMS = {
     "CPC": "Code of Civil Procedure",
     "NDPS Act": "Narcotic Drugs and Psychotropic Substances Act",
     "SARFAESI Act": "SARFAESI Act",
+    "I.P.C.": "Indian Penal Code",
+    "Cr.P.C.": "Code of Criminal Procedure",
+    "C.P.C.": "Code of Civil Procedure",
 }
 
 _acronym_alternation = "|".join(re.escape(a) for a in sorted(ACRONYMS, key=len, reverse=True))
 
 PATTERN_ACRONYM_SECTION = re.compile(
-    rf"\b({_acronym_alternation})\b\s*[-:]?\s*ss?\.?\s*(\d+[A-Za-z]?(?:/\d+[A-Za-z]?)*(?:\(\w+\))?)",
+    rf"\b({_acronym_alternation})(?!\w)\s*[-:]?\s*(?:ss?\.?|Sections?)\s*(\d+[A-Za-z]?(?:/\d+[A-Za-z]?)*(?:\(\w+\))?)",
 )
 
 PATTERN_US_OF_ACRONYM = re.compile(
-    rf"u[/l1]s\.?\s*(\d+[A-Za-z]?(?:\(\w+\))?)\s*of\s*(?:the\s*)?({_acronym_alternation})\b",
+    rf"u[/l1]s\.?\s*(\d+[A-Za-z]?(?:\(\w+\))?)\s*of\s*(?:the\s*)?({_acronym_alternation})(?!\w)",
+)
+
+# NEW: "Section X of (the) Y Act" - full word "Section" instead of "u/s", number-then-Act order
+PATTERN_SECTION_OF_ACT = re.compile(
+    rf"Sections?\.?\s*(\d+[A-Za-z]?(?:\(\w+\))?)\s*(?:of|under)\s*(?:the\s*)?((?:{WORD}\s+){{1,6}}Act)",
+)
+
+# NEW: "Section X of (the) Y Code/Cr.P.C./I.P.C." - number-then-Code order, full word "Section"
+PATTERN_SECTION_OF_CODE = re.compile(
+    rf"Sections?\.?\s*(\d+[A-Za-z]?(?:\(\w+\))?)\s*(?:of|under)\s*(?:the\s*)?((?:{WORD}\s+){{0,5}}(?:Penal Code|Code of Criminal Procedure|Code of Civil Procedure|Insolvency and Bankruptcy Code))",
+)
+
+# NEW: "Section X ACRONYM" (no "of") and "Section X of (the) ACRONYM"
+PATTERN_SECTION_ACRONYM = re.compile(
+    rf"Sections?\.?\s*(\d+[A-Za-z]?(?:\(\w+\))?)\s*(?:of\s*(?:the\s*)?)?({_acronym_alternation})(?!\w)",
 )
 
 # NEW: Constitution Article references, e.g. "Art. 14 of the Constitution", "Article 21"
@@ -123,6 +141,38 @@ def extract_citations(text):
             "section_number": section,
             "low_confidence": is_low_confidence_section(section),
             "source_pattern": "us_of_acronym",
+        })
+        found_any_named_act = True
+
+    for section, act_name in PATTERN_SECTION_OF_ACT.findall(text):
+        cleaned = clean_act_name(act_name)
+        if cleaned.lower() not in BLOCKLIST:
+            citations.append({
+                "act_name": cleaned,
+                "section_number": section,
+                "low_confidence": is_low_confidence_section(section),
+                "source_pattern": "section_of_act",
+            })
+            found_any_named_act = True
+
+    for section, code_name in PATTERN_SECTION_OF_CODE.findall(text):
+        cleaned = clean_act_name(code_name)
+        if cleaned.lower() not in BLOCKLIST:
+            citations.append({
+                "act_name": cleaned,
+                "section_number": section,
+                "low_confidence": is_low_confidence_section(section),
+                "source_pattern": "section_of_code",
+            })
+            found_any_named_act = True
+
+    for section, acronym in PATTERN_SECTION_ACRONYM.findall(text):
+        full_name = ACRONYMS.get(acronym, acronym)
+        citations.append({
+            "act_name": full_name,
+            "section_number": section,
+            "low_confidence": is_low_confidence_section(section),
+            "source_pattern": "section_acronym",
         })
         found_any_named_act = True
 
