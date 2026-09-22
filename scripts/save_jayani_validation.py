@@ -1,0 +1,42 @@
+jayani_validation = [
+    ("Can I be penalized for damaging mortgaged property I'm still living in?", "Transfer of Property Act, 1882", "66"),
+    ("Can a mortgage cover a loan amount that isn't fixed yet?", "Transfer of Property Act, 1882", "79"),
+    ("How do I apply for a Certifying Authority licence?", "Information Technology Act, 2000", "22"),
+    ("Is it a crime if I cause someone very minor harm?", "Bharatiya Nyaya Sanhita, 2023", "33"),
+    ("Can court trials be conducted online?", "Bharatiya Nagarik Suraksha Sanhita, 2023", "530"),
+    ("Can a consumer protection offence be settled instead of going to trial?", "Consumer Protection Act, 2019", "96"),
+    ("Are there general conditions that apply to all transport permits?", "Motor Vehicles Act, 1988", "84"),
+    ("Is it a crime to break open a locked container to steal from it?", "Bharatiya Nyaya Sanhita, 2023", "334"),
+    ("What's the process for applying for a bus route permit?", "Motor Vehicles Act, 1988", "71"),
+    ("Am I protected if I pay rent to someone who turns out not to be the real owner?", "Transfer of Property Act, 1882", "50"),
+    ("What happens if I fail to do my part first in a contract with mutual promises?", "Indian Contract Act, 1872", "54"),
+    ("What makes an electronic signature legally secure?", "Information Technology Act, 2000", "15"),
+    ("What happens after a court commission completes its investigation?", "Bharatiya Nagarik Suraksha Sanhita, 2023", "323"),
+    ("What must drivers do at railway crossings without a gate?", "Motor Vehicles Act, 1988", "131"),
+    ("Can the government order a company to stop a misleading ad?", "Consumer Protection Act, 2019", "21"),
+    ("Can I be penalized for refusing to give information to a transport officer?", "Motor Vehicles Act, 1988", "179"),
+    ("Which court handles a crime committed during a train journey?", "Bharatiya Nagarik Suraksha Sanhita, 2023", "203"),
+    ("What is an owner's responsibility when lending an item to someone?", "Indian Contract Act, 1872", "164"),
+    ("What legally counts as a property mark?", "Bharatiya Nyaya Sanhita, 2023", "345"),
+    ("What qualifications are needed to be on the National Consumer Commission?", "Consumer Protection Act, 2019", "55"),
+    ("Does the High Court have special powers beyond what's written in the law?", "Bharatiya Nagarik Suraksha Sanhita, 2023", "528"),
+    ("Can compensation already paid be refunded in certain cases?", "Motor Vehicles Act, 1988", "163"),
+    ("Can a Sessions Judge review and change a lower court's decision?", "Bharatiya Nagarik Suraksha Sanhita, 2023", "440"),
+    ("Are left-hand-drive vehicles allowed on Indian roads?", "Motor Vehicles Act, 1988", "120"),
+    ("How do I apply for a permit to transport goods?", "Motor Vehicles Act, 1988", "77"),
+    ("What's the punishment for a husband being cruel to his wife?", "Bharatiya Nyaya Sanhita, 2023", "85"),
+    ("How is judgment given in a summary trial?", "Bharatiya Nagarik Suraksha Sanhita, 2023", "287"),
+    ("What are a Protection Officer's responsibilities under domestic violence law?", "Protection of Women from Domestic Violence Act, 2005", "9"),
+    ("What special rules apply to vehicles bought on installment/hire-purchase?", "Motor Vehicles Act, 1988", "51"),
+    ("What's the punishment for causing damage using fire or explosives?", "Bharatiya Nyaya Sanhita, 2023", "326"),
+    ("Can property be legally transferred to a child not yet born?", "Transfer of Property Act, 1882", "20"),
+    ("Am I still guilty of a crime requiring intent if I was drunk?", "Bharatiya Nyaya Sanhita, 2023", "24"),
+    ("Does an owner have to repay expenses someone spent taking care of their item?", "Indian Contract Act, 1872", "158"),
+    ("What's the punishment for human trafficking?", "Bharatiya Nyaya Sanhita, 2023", "143"),
+    ("Can I use civil court remedies to enforce a criminal law?", "Specific Relief Act, 1963", "4"),
+]
+
+import json
+with open("../data/eval/jayani_validation_set.json", "w", encoding="utf-8") as f:
+    json.dump(jayani_validation, f, indent=2)
+print(f"Saved {len(jayani_validation)} queries")
