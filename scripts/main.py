@@ -1,7 +1,8 @@
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from search_core import SearchEngine
+import re
+from search_core import SearchEngine, IPC_TO_BNS
 from rag_core import generate_explanation, translate_to_english, translate_explanation, detect_language, verify_citations
 from citations_core import find_related_cases
 from pdf_core import extract_text_from_pdf, answer_question_about_document, summarize_document, extract_dates_and_deadlines
@@ -142,7 +143,15 @@ def explain(request: SearchRequest):
         }
 
     try:
-        explanation = generate_explanation(request.query, results)
+        explanation_query = request.query
+        query_lower_check = explanation_query.lower()
+        if "ipc" in query_lower_check:
+            numbers_found = re.findall(r"\b(\d+[a-z]?)\b", query_lower_check)
+            for num in numbers_found:
+                if num in IPC_TO_BNS:
+                    explanation_query += f" (Note: IPC Section {num} corresponds to BNS Section {IPC_TO_BNS[num]} under the current law - please explain using the BNS section shown in the results below.)"
+                    break
+        explanation = generate_explanation(explanation_query, results)
         is_valid, unverified_sections = verify_citations(explanation, results)
         if not is_valid:
             explanation += "\n\n[Note: this explanation may reference a section number not confirmed in our search results (" + ", ".join(unverified_sections) + "). Please cross-check with the original statutory text shown above.]"
