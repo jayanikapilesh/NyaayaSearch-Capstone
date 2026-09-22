@@ -1,0 +1,752 @@
+[
+  [
+    "What's the punishment for trying to kill someone but failing?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "109"
+  ],
+  [
+    "What's the punishment for seriously injuring someone on purpose?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "117"
+  ],
+  [
+    "Can a company be punished for false advertising?",
+    "Consumer Protection Act, 2019",
+    "89"
+  ],
+  [
+    "Can a shop be held responsible for selling a defective product?",
+    "Consumer Protection Act, 2019",
+    "86"
+  ],
+  [
+    "Can a manufacturer be sued for a faulty product?",
+    "Consumer Protection Act, 2019",
+    "84"
+  ],
+  [
+    "Do police have to tell me why I'm being arrested?",
+    "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "47"
+  ],
+  [
+    "Can a domestic violence victim get financial compensation?",
+    "Protection of Women from Domestic Violence Act, 2005",
+    "20"
+  ],
+  [
+    "Can a domestic violence case affect child custody?",
+    "Protection of Women from Domestic Violence Act, 2005",
+    "21"
+  ],
+  [
+    "Do I have to give the property back empty when I move out?",
+    "Karnataka Rent Act, 1999",
+    "41"
+  ],
+  [
+    "Does the court try to settle rent disputes outside trial?",
+    "Karnataka Rent Act, 1999",
+    "44"
+  ],
+  [
+    "Can I get my mortgaged property back after paying off the loan?",
+    "Transfer of Property Act, 1882",
+    "62"
+  ],
+  [
+    "When will a court refuse to grant an injunction?",
+    "Specific Relief Act, 1963",
+    "41"
+  ],
+  [
+    "Can I force someone to complete a personal service contract?",
+    "Specific Relief Act, 1963",
+    "14"
+  ],
+  [
+    "How do I legally recover my property from someone occupying it?",
+    "Specific Relief Act, 1963",
+    "5"
+  ],
+  [
+    "Can I get my pawned item back even after missing the deadline?",
+    "Indian Contract Act, 1872",
+    "177"
+  ],
+  [
+    "Can my agent hire someone else to do my work without asking me?",
+    "Indian Contract Act, 1872",
+    "190"
+  ],
+  [
+    "What happens if both parties agree to change a contract?",
+    "Indian Contract Act, 1872",
+    "62"
+  ],
+  [
+    "Is it illegal to create a fake digital certificate to scam someone?",
+    "Information Technology Act, 2000",
+    "74"
+  ],
+  [
+    "Can I appeal a Cyber Tribunal decision to the High Court?",
+    "Information Technology Act, 2000",
+    "62"
+  ],
+  [
+    "Can the government tap my internet communications?",
+    "Information Technology Act, 2000",
+    "69"
+  ],
+  [
+    "What's the punishment for sabotaging a train?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "327"
+  ],
+  [
+    "Is it a crime to knowingly spread a dangerous disease?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "272"
+  ],
+  [
+    "What's the punishment for recklessly endangering someone's life?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "125"
+  ],
+  [
+    "Is it illegal to stop someone from receiving a court summons?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "207"
+  ],
+  [
+    "How does the court officially deliver a summons?",
+    "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "64"
+  ],
+  [
+    "What does it mean for a court to take cognizance of a crime?",
+    "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "221"
+  ],
+  [
+    "Does a magistrate investigate suspicious deaths?",
+    "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "196"
+  ],
+  [
+    "Am I required to help someone who's executing an arrest warrant?",
+    "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "32"
+  ],
+  [
+    "Does the magistrate check if a complaint is true before acting?",
+    "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "135"
+  ],
+  [
+    "Can my insurance company settle a claim directly with me?",
+    "Motor Vehicles Act, 1988",
+    "153"
+  ],
+  [
+    "If I cancel a contract, do I have to give back what I received?",
+    "Indian Contract Act, 1872",
+    "64"
+  ],
+  [
+    "Is it a crime to bring a child into India for exploitation?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "141"
+  ],
+  [
+    "Is it illegal to secretly alter someone's computer code?",
+    "Information Technology Act, 2000",
+    "65"
+  ],
+  [
+    "Do shelter homes have specific duties toward domestic violence victims?",
+    "Protection of Women from Domestic Violence Act, 2005",
+    "6"
+  ],
+  [
+    "Can I take back a gift I already gave someone?",
+    "Transfer of Property Act, 1882",
+    "126"
+  ],
+  [
+    "Does the state keep an official record of all vehicles?",
+    "Motor Vehicles Act, 1988",
+    "63"
+  ],
+  [
+    "Can I ask a court to officially declare my legal rights?",
+    "Specific Relief Act, 1963",
+    "34"
+  ],
+  [
+    "How does a court grant an injunction to prevent something?",
+    "Specific Relief Act, 1963",
+    "36"
+  ],
+  [
+    "Can a public servant be punished for deliberately letting a criminal escape?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "260"
+  ],
+  [
+    "Can a court make me sign a bond to guarantee I'll show up?",
+    "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "91"
+  ],
+  [
+    "Does a Certifying Authority have to publicly disclose if their certificate is revoked?",
+    "Information Technology Act, 2000",
+    "34"
+  ],
+  [
+    "What's the punishment for hurting someone to force them to pay you?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "119"
+  ],
+  [
+    "Is it illegal to make statements that harm national unity?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "197"
+  ],
+  [
+    "Are there situations where I can't legally defend myself?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "37"
+  ],
+  [
+    "What's the punishment for encouraging a soldier to disobey orders?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "166"
+  ],
+  [
+    "What happens if I keep causing a nuisance after a court tells me to stop?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "293"
+  ],
+  [
+    "Can state governments make their own consumer protection rules?",
+    "Consumer Protection Act, 2019",
+    "102"
+  ],
+  [
+    "What happens if someone mixes my goods with theirs without my permission?",
+    "Indian Contract Act, 1872",
+    "157"
+  ],
+  [
+    "Can something still be a crime even if no one was harmed?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "29"
+  ],
+  [
+    "Can I transfer an endorsement to a new driving licence?",
+    "Motor Vehicles Act, 1988",
+    "25"
+  ],
+  [
+    "Is a promise legally binding if nothing was exchanged for it?",
+    "Indian Contract Act, 1872",
+    "25"
+  ],
+  [
+    "Can a Protection Officer be punished for failing to do their job?",
+    "Protection of Women from Domestic Violence Act, 2005",
+    "33"
+  ],
+  [
+    "What's the punishment for kidnapping a young child to rob them?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "97"
+  ],
+  [
+    "Can my driving licence be cancelled if I'm convicted of a crime?",
+    "Motor Vehicles Act, 1988",
+    "22"
+  ],
+  [
+    "How is a maintenance payment order actually enforced?",
+    "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "147"
+  ],
+  [
+    "Is it a crime to give false information to authorities?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "212"
+  ],
+  [
+    "What's the punishment for encouraging a large group to commit a crime?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "57"
+  ],
+  [
+    "Can what I tell the police be used against me in court?",
+    "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "181"
+  ],
+  [
+    "Can I let someone off from fulfilling their part of a contract?",
+    "Indian Contract Act, 1872",
+    "63"
+  ],
+  [
+    "Can I sue a company for compensation if they leak my personal data?",
+    "Information Technology Act, 2000",
+    "43A"
+  ],
+  [
+    "Am I still guilty of a crime if someone forced me to do it under threat?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "32"
+  ],
+  [
+    "What's the punishment for selling a child into prostitution?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "98"
+  ],
+  [
+    "What's the punishment for an acid attack?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "124"
+  ],
+  [
+    "What counts as 'grievous hurt' under the law?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "116"
+  ],
+  [
+    "Can I be punished for carelessly handling explosives?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "288"
+  ],
+  [
+    "What's the punishment for reckless driving?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "281"
+  ],
+  [
+    "Can I be penalized for leaking confidential information I agreed to protect?",
+    "Information Technology Act, 2000",
+    "72A"
+  ],
+  [
+    "What's the punishment for pretending to be someone else online to cheat them?",
+    "Information Technology Act, 2000",
+    "66D"
+  ],
+  [
+    "Can I appeal a rent tribunal's decision?",
+    "Karnataka Rent Act, 1999",
+    "26"
+  ],
+  [
+    "Can a court set a temporary rent amount while a dispute is ongoing?",
+    "Karnataka Rent Act, 1999",
+    "13"
+  ],
+  [
+    "Who appoints Protection Officers under the domestic violence law?",
+    "Protection of Women from Domestic Violence Act, 2005",
+    "8"
+  ],
+  [
+    "What counts as legal consent in a contract?",
+    "Indian Contract Act, 1872",
+    "13"
+  ],
+  [
+    "Is a guarantee void if someone hid important facts to get it?",
+    "Indian Contract Act, 1872",
+    "143"
+  ],
+  [
+    "Can I cancel a contract I was pressured into signing?",
+    "Indian Contract Act, 1872",
+    "19A"
+  ],
+  [
+    "Who is legally allowed to enter into a contract?",
+    "Indian Contract Act, 1872",
+    "11"
+  ],
+  [
+    "How do I legally get back my stolen movable property?",
+    "Specific Relief Act, 1963",
+    "7"
+  ],
+  [
+    "What's the fine for speeding?",
+    "Motor Vehicles Act, 1988",
+    "183"
+  ],
+  [
+    "Can the licensing authority ban me from driving?",
+    "Motor Vehicles Act, 1988",
+    "34"
+  ],
+  [
+    "Can I get relief if my lease is being forfeited?",
+    "Transfer of Property Act, 1882",
+    "114A"
+  ],
+  [
+    "What are my rights in an exchange of property?",
+    "Transfer of Property Act, 1882",
+    "120"
+  ],
+  [
+    "Do police have to ensure my health and safety after arrest?",
+    "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "56"
+  ],
+  [
+    "Can armed forces disperse an unlawful gathering?",
+    "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "150"
+  ],
+  [
+    "Can a court dismiss my complaint without a trial?",
+    "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "226"
+  ],
+  [
+    "Is it a crime to hide that I know someone plans to commit a crime?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "60"
+  ],
+  [
+    "Can a child under 7 be held criminally responsible?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "20"
+  ],
+  [
+    "Can a 10-year-old be punished for a crime?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "21"
+  ],
+  [
+    "Can I have a lawyer represent me in a Cyber Tribunal case?",
+    "Information Technology Act, 2000",
+    "59"
+  ],
+  [
+    "Can an official be punished for knowingly detaining someone illegally?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "258"
+  ],
+  [
+    "Is it a crime to alter a product's trademark to cause harm?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "346"
+  ],
+  [
+    "Does the court keep an official record of questioning the accused?",
+    "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "316"
+  ],
+  [
+    "Can I sue someone for defamation?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "356"
+  ],
+  [
+    "What's the difference between murder and culpable homicide?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "105"
+  ],
+  [
+    "What legally counts as rape under Indian law?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "63"
+  ],
+  [
+    "What's the penalty for overloading a truck?",
+    "Motor Vehicles Act, 1988",
+    "194"
+  ],
+  [
+    "Can my driving licence be revoked due to a medical condition?",
+    "Motor Vehicles Act, 1988",
+    "16"
+  ],
+  [
+    "Can I force a trust to fulfill its contractual obligations?",
+    "Specific Relief Act, 1963",
+    "11"
+  ],
+  [
+    "Can a contract be enforced with modified terms?",
+    "Specific Relief Act, 1963",
+    "18"
+  ],
+  [
+    "Does my agent have to hand over money they collected on my behalf?",
+    "Indian Contract Act, 1872",
+    "218"
+  ],
+  [
+    "Is a contract void if I made a mistake about the law?",
+    "Indian Contract Act, 1872",
+    "21"
+  ],
+  [
+    "What's the punishment for taking away someone's wife against her will?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "84"
+  ],
+  [
+    "Is it illegal to fake the label on a product container?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "350"
+  ],
+  [
+    "What are the penalties for violating the Rent Act?",
+    "Karnataka Rent Act, 1999",
+    "54"
+  ],
+  [
+    "Do I need to notify the landlord if I sublet my rented place?",
+    "Karnataka Rent Act, 1999",
+    "33"
+  ],
+  [
+    "Can a sub-tenant become a full tenant in some situations?",
+    "Karnataka Rent Act, 1999",
+    "34"
+  ],
+  [
+    "Can I get compensation if I was wrongly arrested?",
+    "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "399"
+  ],
+  [
+    "Can police prevent damage to public property?",
+    "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "171"
+  ],
+  [
+    "Is it illegal to obstruct a bus or taxi driver while they're driving?",
+    "Motor Vehicles Act, 1988",
+    "125"
+  ],
+  [
+    "Are there legal safety requirements for motorcycle riders?",
+    "Motor Vehicles Act, 1988",
+    "128"
+  ],
+  [
+    "Can a transport permit be cancelled?",
+    "Motor Vehicles Act, 1988",
+    "86"
+  ],
+  [
+    "How is compensation calculated after a motor vehicle accident?",
+    "Motor Vehicles Act, 1988",
+    "105"
+  ],
+  [
+    "Who has authority to make rules under the Domestic Violence Act?",
+    "Protection of Women from Domestic Violence Act, 2005",
+    "37"
+  ],
+  [
+    "Can a court require additional security for the remaining bond period?",
+    "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "143"
+  ],
+  [
+    "Can I be prosecuted for disrespecting a public official's lawful order?",
+    "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "215"
+  ],
+  [
+    "Can the government seize copies of a banned publication?",
+    "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "98"
+  ],
+  [
+    "What does a court have to include in its judgment?",
+    "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "294"
+  ],
+  [
+    "Can a witness avoid attending court and give evidence another way?",
+    "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "319"
+  ],
+  [
+    "Can a paused court case resume later?",
+    "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "370"
+  ],
+  [
+    "What's the punishment for encouraging a soldier to attack a superior officer?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "161"
+  ],
+  [
+    "How is property divided when multiple people jointly buy it?",
+    "Transfer of Property Act, 1882",
+    "45"
+  ],
+  [
+    "Can a Sessions Judge review a lower court's decision?",
+    "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "440"
+  ],
+  [
+    "How is the standard rent for a property determined?",
+    "Karnataka Rent Act, 1999",
+    "7"
+  ],
+  [
+    "Can I get compensation if someone falsely accused me of a crime?",
+    "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "273"
+  ],
+  [
+    "Where do I file a consumer complaint?",
+    "Consumer Protection Act, 2019",
+    "17"
+  ],
+  [
+    "How is notice served in a domestic violence case?",
+    "Protection of Women from Domestic Violence Act, 2005",
+    "13"
+  ],
+  [
+    "What's the punishment for using force to try to illegally trap someone?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "135"
+  ],
+  [
+    "Are hearings before the Rent Controller treated like a court case?",
+    "Karnataka Rent Act, 1999",
+    "60"
+  ],
+  [
+    "Can I be punished for something I did on a judge's order?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "16"
+  ],
+  [
+    "Can police offer me an incentive to confess?",
+    "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "182"
+  ],
+  [
+    "What happens if I break the rules around my driving licence?",
+    "Motor Vehicles Act, 1988",
+    "182"
+  ],
+  [
+    "What's the punishment for attacking a foreign country India is at peace with?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "154"
+  ],
+  [
+    "Does the court keep records during a quick/summary trial?",
+    "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "286"
+  ],
+  [
+    "If I owe multiple debts and don't specify which payment is for which, how is it applied?",
+    "Indian Contract Act, 1872",
+    "60"
+  ],
+  [
+    "Can a government official be punished for hiding knowledge of a planned crime?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "59"
+  ],
+  [
+    "What legally counts as a 'sale' of property?",
+    "Transfer of Property Act, 1882",
+    "54"
+  ],
+  [
+    "Do driving schools need a license to operate?",
+    "Motor Vehicles Act, 1988",
+    "12"
+  ],
+  [
+    "What actions are protected under the right to self-defence?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "34"
+  ],
+  [
+    "Can a landlord waive their own eviction notice?",
+    "Transfer of Property Act, 1882",
+    "113"
+  ],
+  [
+    "Can a Certifying Authority's license be suspended?",
+    "Information Technology Act, 2000",
+    "25"
+  ],
+  [
+    "Can I get relief against someone who later claims rights to my property?",
+    "Specific Relief Act, 1963",
+    "19"
+  ],
+  [
+    "Can a court order more evidence to be gathered after a trial starts?",
+    "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "408"
+  ],
+  [
+    "Which tribunal handles appeals under the IT Act?",
+    "Information Technology Act, 2000",
+    "48"
+  ],
+  [
+    "What's the punishment for secretly photographing someone in a private moment?",
+    "Information Technology Act, 2000",
+    "66E"
+  ],
+  [
+    "Are e-rickshaws covered under the Motor Vehicles Act?",
+    "Motor Vehicles Act, 1988",
+    "2A"
+  ],
+  [
+    "Do I need to physically bring my vehicle for registration?",
+    "Motor Vehicles Act, 1988",
+    "44"
+  ],
+  [
+    "Can my rent be revised under special circumstances?",
+    "Karnataka Rent Act, 1999",
+    "9"
+  ],
+  [
+    "Am I protected if I did something believing I was legally justified?",
+    "Bharatiya Nyaya Sanhita, 2023",
+    "17"
+  ],
+  [
+    "What are 'service providers' under the Domestic Violence Act?",
+    "Protection of Women from Domestic Violence Act, 2005",
+    "10"
+  ],
+  [
+    "Can I appeal a District Consumer Commission's decision?",
+    "Consumer Protection Act, 2019",
+    "41"
+  ],
+  [
+    "What happens if I can't pay a fine - do I go to jail instead?",
+    "Bharatiya Nagarik Suraksha Sanhita, 2023",
+    "24"
+  ],
+  [
+    "Can accident victims get interim financial relief before the case is resolved?",
+    "Motor Vehicles Act, 1988",
+    "164A"
+  ]
+]
