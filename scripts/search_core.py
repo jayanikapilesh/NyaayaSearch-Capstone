@@ -89,6 +89,43 @@ def tokenize(text):
     return [word for word in words if word not in STOP_WORDS]
 
 
+IPC_TO_BNS = {
+    # Common, high-frequency IPC sections mapped to their BNS 2023 equivalents.
+    # Cross-checked across multiple legal reference sources as of 2026.
+    # NOT an exhaustive or officially verified mapping (511 IPC sections vs
+    # 358 BNS sections means some do not map one-to-one). For legal certainty,
+    # verify against the official bare act.
+    "302": "103",    # Murder
+    "420": "318",    # Cheating
+    "376": "64",     # Rape
+    "498a": "85",    # Cruelty by husband/relatives
+    "307": "109",    # Attempt to murder
+    "304a": "106",   # Causing death by negligence
+    "506": "351",    # Criminal intimidation
+    "509": "79",     # Insulting modesty of a woman
+    "353": "121",    # Assault to deter public servant
+    "336": "125",    # Act endangering life
+    "326": "118",    # Grievous hurt by dangerous weapons
+    "382": "304",    # Theft after preparation for death/hurt
+    "442": "330",    # House-breaking
+    "494": "82",     # Bigamy
+}
+
+
+def expand_ipc_references(query):
+    query_lower = query.lower()
+    if "ipc" not in query_lower:
+        return query
+    numbers_found = re.findall(r"\b(\d+[a-z]?)\b", query_lower)
+    additions = []
+    for num in numbers_found:
+        if num in IPC_TO_BNS:
+            additions.append(f"bns section {IPC_TO_BNS[num]}")
+    if additions:
+        return query + " " + " ".join(additions)
+    return query
+
+
 def expand_query(query):
     query_lower = query.lower()
     expanded = query_lower
@@ -163,6 +200,7 @@ class SearchEngine:
         return None
 
     def search(self, query, top_k=5):
+        query = expand_ipc_references(query)
         expanded_query = expand_query(query)
         query_tokens = tokenize(expanded_query)
 
@@ -179,12 +217,24 @@ class SearchEngine:
         boost = np.ones(len(self.records))
         query_lower = query.lower()
 
+        ipc_target_section = None
+        if "ipc" in query_lower:
+            numbers_found = re.findall(r"\b(\d+[a-z]?)\b", query_lower)
+            for num in numbers_found:
+                if num in IPC_TO_BNS:
+                    ipc_target_section = IPC_TO_BNS[num]
+                    break
+
         for i, record in enumerate(self.records):
             title = str(record.get("section_title") or "").lower()
             legal_text = str(record.get("legal_text") or "").lower()
             act_name = str(record.get("act_name") or "").lower()
             section_number = str(record.get("section_number") or "")
             combined = title + " " + legal_text + " " + act_name
+
+            if ipc_target_section is not None:
+                if "bharatiya nyaya sanhita" in act_name and section_number == ipc_target_section:
+                    boost[i] *= 50.0
 
             if "landlord" in query_lower and "landlord" in combined:
                 boost[i] *= 1.25
@@ -255,6 +305,11 @@ class SearchEngine:
                         final_scores[i] *= 0.3
 
         final_scores = final_scores * boost
+
+        if ipc_target_section is not None:
+            for i, record in enumerate(self.records):
+                if "bharatiya nyaya sanhita" in str(record.get("act_name") or "").lower() and str(record.get("section_number") or "") == ipc_target_section:
+                    final_scores[i] = final_scores.max() + 1.0
 
         top_indices = np.argsort(final_scores)[::-1][:top_k]
 
