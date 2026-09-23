@@ -8,7 +8,7 @@ OUTPUT_FILE = "../data/case_law/processed/case_citations.csv"
 WORD = r"(?:[A-Z][a-z]+|of|the|and)"
 
 PATTERN_ACT_SECTION = re.compile(
-    rf"((?:{WORD}\s+){{1,6}}Act,?\s*\d{{4}})\s*-?\s*[:\-]?\s*(?:s\.?|Sections?)\s*(\d+[A-Za-z]?(?:\(\w+\))?)",
+    rf"((?:{WORD}\s+){{1,6}}Act,?\s*\d{{4}})\s*[\-–—]?\s*[:\-–—]?\s*(?:s\.?|Sections?)\s*(\d+[A-Za-z]?(?:\(\w+\))?)",
 )
 
 PATTERN_US_OF = re.compile(
@@ -16,7 +16,7 @@ PATTERN_US_OF = re.compile(
 )
 
 PATTERN_CODE_SECTION = re.compile(
-    rf"((?:{WORD}\s+){{0,5}}(?:Penal Code|Code of Criminal Procedure|Code of Civil Procedure|Insolvency and Bankruptcy Code)),?\s*\d{{4}}\s*[:\-]?\s*(?:ss?\.?|Sections?)\s*(\d+[A-Za-z]?(?:/\d+[A-Za-z]?)*(?:\(\w+\))?)",
+    rf"((?:{WORD}\s+){{0,5}}(?:Penal Code|Code of Criminal Procedure|Code of Civil Procedure|Insolvency and Bankruptcy Code)),?\s*\d{{4}}\s*[:\-–—]?\s*(?:ss?\.?|Sections?)\s*(\d+[A-Za-z]?(?:/\d+[A-Za-z]?)*(?:\(\w+\))?)",
 )
 
 ACRONYMS = {
@@ -38,7 +38,7 @@ ACRONYMS = {
 _acronym_alternation = "|".join(re.escape(a) for a in sorted(ACRONYMS, key=len, reverse=True))
 
 PATTERN_ACRONYM_SECTION = re.compile(
-    rf"\b({_acronym_alternation})(?!\w)\s*[-:]?\s*(?:ss?\.?|Sections?)\s*(\d+[A-Za-z]?(?:/\d+[A-Za-z]?)*(?:\(\w+\))?)",
+    rf"\b({_acronym_alternation})(?!\w)\s*[–—\-:]?\s*(?:ss?\.?|Sections?)\s*(\d+[A-Za-z]?(?:/\d+[A-Za-z]?)*(?:\(\w+\))?)",
 )
 
 PATTERN_US_OF_ACRONYM = re.compile(
