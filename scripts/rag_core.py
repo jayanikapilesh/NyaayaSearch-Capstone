@@ -53,7 +53,7 @@ def translate_to_english(query):
             {"role": "user", "content": query},
         ],
         temperature=0,
-        max_tokens=200,
+        max_tokens=500,
     )
     return response.choices[0].message.content.strip()
 
