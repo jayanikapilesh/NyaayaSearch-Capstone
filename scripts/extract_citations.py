@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 INPUT_FILE = "../data/case_law/processed/Dataset2_Case_Law_Corpus_2015_2025.csv"
 OUTPUT_FILE = "../data/case_law/processed/case_citations.csv"
 
-WORD = r"(?:[A-Z][a-z]+|of|the|and)"
+WORD = r"(?:[A-Z][a-z]+|of|the|and|\([A-Z][a-z]+\))"
 
 PATTERN_ACT_SECTION = re.compile(
     rf"((?:{WORD}\s+){{1,6}}Act,?\s*\d{{4}})\s*[\-–—]?\s*[:\-–—]?\s*(?:ss?\.?|Sections?)\s*((?:\d+[A-Za-z]?(?:\(\w+\))?\s*(?:,\s*|and\s+))*\d+[A-Za-z]?(?:\(\w+\))?)",
