@@ -147,7 +147,14 @@ plainly because it is true, not because it looks good.
 
 | | Before (earlier) | After (today's fix) |
 |---|---|---|
-| Coverage | 24.9% (2,180/8,757) | **26.8% (2,349/8,757)** |
+| Coverage | 24.9% (2,180/8,757) | **41.8% (3,659/8,757)** |
+
+**Update (later same session):** a second, much larger fix was found - nearly all headnote-
+style citations use an EN-DASH character instead of a regular hyphen, which the regex
+patterns did not recognize. This was a structural/encoding bug, not a content-specific
+pattern, confirmed via direct A/B test (identical text, only the dash character differed).
+Fixing this took coverage from 26.8% to 41.8% - a genuine +15pp jump from one root-cause fix.
+Proof: git commit `7963f58`, `scripts/confirm_endash_bug.py` for the A/B test.
 | Precision | ~90-100% (spot-check) | ~90-100% (unchanged, spot-check) |
 
 **Real bugs found and fixed today** (via actually reading the extraction code, not guessing):
