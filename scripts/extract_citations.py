@@ -8,15 +8,20 @@ OUTPUT_FILE = "../data/case_law/processed/case_citations.csv"
 WORD = r"(?:[A-Z][a-z]+|of|the|and)"
 
 PATTERN_ACT_SECTION = re.compile(
-    rf"((?:{WORD}\s+){{1,6}}Act,?\s*\d{{4}})\s*[\-–—]?\s*[:\-–—]?\s*(?:s\.?|Sections?)\s*(\d+[A-Za-z]?(?:\(\w+\))?)",
+    rf"((?:{WORD}\s+){{1,6}}Act,?\s*\d{{4}})\s*[\-–—]?\s*[:\-–—]?\s*(?:ss?\.?|Sections?)\s*((?:\d+[A-Za-z]?(?:\(\w+\))?\s*(?:,\s*|and\s+))*\d+[A-Za-z]?(?:\(\w+\))?)",
 )
 
 PATTERN_US_OF = re.compile(
-    rf"u[/l1]s\.?\s*(\d+[A-Za-z]?(?:\(\w+\))?)\s*of\s*(?:the\s*)?((?:{WORD}\s+){{1,6}}Act)",
+    rf"u[/l1]ss?\.?\s*((?:\d+[A-Za-z]?(?:\(\w+\))?\s*(?:,\s*|and\s+))*\d+[A-Za-z]?(?:\(\w+\))?)\s*of\s*(?:the\s*)?((?:{WORD}\s+){{1,6}}Act)",
 )
 
 PATTERN_CODE_SECTION = re.compile(
-    rf"((?:{WORD}\s+){{0,5}}(?:Penal Code|Code of Criminal Procedure|Code of Civil Procedure|Insolvency and Bankruptcy Code)),?\s*\d{{4}}\s*[:\-–—]?\s*(?:ss?\.?|Sections?)\s*(\d+[A-Za-z]?(?:/\d+[A-Za-z]?)*(?:\(\w+\))?)",
+    rf"((?:{WORD}\s+){{0,5}}(?:Penal Code|Code of Criminal Procedure|Code of Civil Procedure|Insolvency and Bankruptcy Code)),?\s*\d{{4}}\s*[:\-–—]?\s*(?:ss?\.?|Sections?)\s*((?:\d+[A-Za-z]?(?:/\d+[A-Za-z]?)*(?:\(\w+\))?\s*(?:,\s*|and\s+))*\d+[A-Za-z]?(?:/\d+[A-Za-z]?)*(?:\(\w+\))?)",
+)
+
+# NEW: "u/s(s) X (and Y) of (the) Z Code" - parallel to PATTERN_US_OF but for Code names, not Acts
+PATTERN_US_OF_CODE = re.compile(
+    rf"u[/l1]ss?\.?\s*((?:\d+[A-Za-z]?(?:\(\w+\))?\s*(?:,\s*|and\s+))*\d+[A-Za-z]?(?:\(\w+\))?)\s*of\s*(?:the\s*)?((?:{WORD}\s+){{0,5}}(?:Penal Code|Code of Criminal Procedure|Code of Civil Procedure|Insolvency and Bankruptcy Code))",
 )
 
 ACRONYMS = {
@@ -42,7 +47,7 @@ PATTERN_ACRONYM_SECTION = re.compile(
 )
 
 PATTERN_US_OF_ACRONYM = re.compile(
-    rf"u[/l1]s\.?\s*(\d+[A-Za-z]?(?:\(\w+\))?)\s*of\s*(?:the\s*)?({_acronym_alternation})(?!\w)",
+    rf"u[/l1]ss?\.?\s*(\d+[A-Za-z]?(?:\(\w+\))?)\s*of\s*(?:the\s*)?({_acronym_alternation})(?!\w)",
 )
 
 # NEW: "Section X of (the) Y Act" - full word "Section" instead of "u/s", number-then-Act order
@@ -89,38 +94,66 @@ def extract_citations(text):
     citations = []
     found_any_named_act = False
 
-    for act_name, section in PATTERN_ACT_SECTION.findall(text):
+    for act_name, section_list in PATTERN_ACT_SECTION.findall(text):
         cleaned = clean_act_name(act_name)
         if cleaned.lower() not in BLOCKLIST:
-            citations.append({
-                "act_name": cleaned,
-                "section_number": section,
-                "low_confidence": is_low_confidence_section(section),
-                "source_pattern": "act_year_section",
-            })
+            individual_sections = re.split(r"\s*,\s*|\s+and\s+", section_list)
+            for section in individual_sections:
+                section = section.strip()
+                if section:
+                    citations.append({
+                        "act_name": cleaned,
+                        "section_number": section,
+                        "low_confidence": is_low_confidence_section(section),
+                        "source_pattern": "act_year_section",
+                    })
             found_any_named_act = True
 
-    for section, act_name in PATTERN_US_OF.findall(text):
+    for section_list, act_name in PATTERN_US_OF.findall(text):
         cleaned = clean_act_name(act_name)
         if cleaned.lower() not in BLOCKLIST:
-            citations.append({
-                "act_name": cleaned,
-                "section_number": section,
-                "low_confidence": is_low_confidence_section(section),
-                "source_pattern": "us_of_act",
-            })
+            individual_sections = re.split(r"\s*,\s*|\s+and\s+", section_list)
+            for section in individual_sections:
+                section = section.strip()
+                if section:
+                    citations.append({
+                        "act_name": cleaned,
+                        "section_number": section,
+                        "low_confidence": is_low_confidence_section(section),
+                        "source_pattern": "us_of_act",
+                    })
             found_any_named_act = True
 
-    for code_name, section in PATTERN_CODE_SECTION.findall(text):
+    for section_list, code_name in PATTERN_US_OF_CODE.findall(text):
         cleaned = clean_act_name(code_name)
         if cleaned.lower() not in BLOCKLIST:
-            for sec in section.split("/"):
-                citations.append({
-                    "act_name": cleaned,
-                    "section_number": sec,
-                    "low_confidence": is_low_confidence_section(sec),
-                    "source_pattern": "code_year_section",
-                })
+            individual_sections = re.split(r"\s*,\s*|\s+and\s+", section_list)
+            for section in individual_sections:
+                section = section.strip()
+                if section:
+                    citations.append({
+                        "act_name": cleaned,
+                        "section_number": section,
+                        "low_confidence": is_low_confidence_section(section),
+                        "source_pattern": "us_of_code",
+                    })
+            found_any_named_act = True
+
+    for code_name, section_list in PATTERN_CODE_SECTION.findall(text):
+        cleaned = clean_act_name(code_name)
+        if cleaned.lower() not in BLOCKLIST:
+            comma_split = re.split(r"\s*,\s*|\s+and\s+", section_list)
+            for section_piece in comma_split:
+                section_piece = section_piece.strip()
+                for sec in section_piece.split("/"):
+                    sec = sec.strip()
+                    if sec:
+                        citations.append({
+                            "act_name": cleaned,
+                            "section_number": sec,
+                            "low_confidence": is_low_confidence_section(sec),
+                            "source_pattern": "code_year_section",
+                        })
             found_any_named_act = True
 
     for acronym, section in PATTERN_ACRONYM_SECTION.findall(text):
