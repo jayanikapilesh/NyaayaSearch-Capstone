@@ -1,0 +1,31 @@
+- generic [ref=f1e3]:
+  - banner [ref=f1e13]:
+    - generic [ref=f1e14]: NyaayaSearch
+    - generic [ref=f1e21]:
+      - group "Interface language" [ref=f1e22]:
+        - button "EN" [pressed] [ref=f1e23] [cursor=pointer]
+        - button "HI" [ref=f1e24] [cursor=pointer]
+        - button "KN" [ref=f1e25] [cursor=pointer]
+      - button "Switch to light mode" [ref=f1e26] [cursor=pointer]
+  - main [ref=f1e33]:
+    - generic [ref=f1e191]:
+      - generic [ref=f1e192]:
+        - generic [ref=f1e193]: Describe your legal situation
+        - textbox "Describe your legal situation" [ref=f1e194]:
+          - /placeholder: Describe your legal situation, e.g. 'landlord not returning deposit'
+          - text: landlord not returning deposit
+        - button "Mic" [ref=f1e195] [cursor=pointer]
+        - button "Search" [ref=f1e196] [cursor=pointer]
+      - generic [ref=f1e197]:
+        - generic [ref=f1e198]: "Try asking:"
+        - button "Landlord not returning deposit" [ref=f1e199] [cursor=pointer]
+        - button "Police arrest without warrant" [ref=f1e200] [cursor=pointer]
+        - button "How to file an RTI request" [ref=f1e201] [cursor=pointer]
+        - button "Consumer complaint for defective product" [ref=f1e202] [cursor=pointer]
+  - navigation "Primary" [ref=f1e154]:
+    - button "Home" [ref=f1e155] [cursor=pointer]
+    - button "Search" [active] [ref=f1e162] [cursor=pointer]
+    - button "BNS Decoder" [ref=f1e168] [cursor=pointer]
+    - button "My Documents" [ref=f1e173] [cursor=pointer]
+    - button "More" [ref=f1e178] [cursor=pointer]
+  - button "Emergency Help" [ref=f1e185] [cursor=pointer]

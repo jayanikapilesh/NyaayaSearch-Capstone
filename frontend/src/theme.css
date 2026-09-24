@@ -51,6 +51,7 @@
   /* Shadows and glows */
   --shadow-card: 0 8px 24px rgba(18, 24, 42, 0.08);
   --shadow-gold-glow: 0 0 0 1px rgba(184, 134, 59, 0.35), 0 0 24px rgba(184, 134, 59, 0.25);
+  --shadow-focus-ring: 0 0 0 3px rgba(184, 134, 59, 0.3);
 
   /* Fonts */
   --font-heading: "Playfair Display", Georgia, serif;
@@ -126,4 +127,5 @@
 
   --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.35);
   --shadow-gold-glow: 0 0 0 1px rgba(217, 173, 95, 0.5), 0 0 32px rgba(217, 173, 95, 0.35);
+  --shadow-focus-ring: 0 0 0 3px rgba(217, 173, 95, 0.4);
 }

@@ -159,13 +159,40 @@ Note: the app's brand name is transliterated two different ways across the two l
 
 ## Not yet translated (English-only, out of scope for this pass)
 
-These screens still show English-only text regardless of the language
-setting - flagging so nothing is assumed translated that isn't:
+These strings still show in English regardless of the language setting -
+flagging so nothing is assumed translated that isn't. This was a restyle
+pass (Batch A: Search, BNS Decoder, My Documents); these tabs' *existing*
+translated strings (via `t()` / `UI_STRINGS`) still work exactly as before,
+only the strings below were never wired to a language at all.
 
+### `src/components/SearchTab.jsx`
+- Input placeholder: "Describe your legal situation, e.g. 'landlord not returning deposit'"
+- Screen-reader label: "Describe your legal situation"
+- Mic button tooltip (`title` attribute): "Search by voice"
+- The 4 example-query chips: "Landlord not returning deposit", "Police arrest without warrant", "How to file an RTI request", "Consumer complaint for defective product"
+
+### `src/components/BnsTab.jsx`
+- Heading: "BNS Decoder"
+- Intro line: "Enter a Bharatiya Nyaya Sanhita (BNS) section number to see what it says, explained in plain language."
+- Screen-reader label: "BNS section number"
+- Input placeholder: "e.g. 103"
+- Button: "Looking up..." / "Decode Section"
+- Citation tag label: "Section" (hardcoded here, not routed through the same translation as Search's "Section" label)
+- "Original text:" caption above the source legal text
+
+### `src/components/DocumentsTab.jsx`
+- Heading: "Ask about your own document"
+- Screen-reader label: "Upload a PDF document"
+- Loading text: "Reading and summarizing your document..."
+- Section title: "Important Dates and Deadlines"
+- Screen-reader label: "Ask a question about this document"
+- Input placeholder: "Ask a question about this document..."
+- Button: "Asking..." / "Ask"
+- Error fallback text shown inline (e.g. "Could not upload the document...", "Something went wrong asking about the document.", "Could not reach the server...")
+
+### Tabs not yet restyled or translated (Batch B and beyond)
 - Document Generator (`DrafterTab.jsx`, `documentSchemas.js`) - form labels, field names, generated document text.
 - Dictionary tab (`DictionaryTab.jsx`) - static UI copy (the definitions themselves come from the backend and are English by design).
-- My Documents tab (`DocumentsTab.jsx`) - static UI copy.
 - Case Simplifier tab (`SimplifierTab.jsx`) - static UI copy.
-- BNS Decoder tab (`BnsTab.jsx`) - static UI copy.
 - Legal IQ Daily / quiz (`QuizTab.jsx`, `quizData.js`) - questions, answers, and UI copy.
 - Emergency Help tab content (`EmergencyTab.jsx`) - helpline names/descriptions and the new "Call 112" button.

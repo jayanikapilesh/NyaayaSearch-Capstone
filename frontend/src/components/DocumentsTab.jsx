@@ -81,7 +81,7 @@ function DocumentsTab({ setError }) {
     <div className="upload-section">
       <h2>Ask about your own document</h2>
       <label className="sr-only" htmlFor="pdf-upload">Upload a PDF document</label>
-      <input id="pdf-upload" type="file" accept="application/pdf" onChange={handleFileUpload} />
+      <input id="pdf-upload" className="file-input" type="file" accept="application/pdf" onChange={handleFileUpload} />
       {uploading && <div className="loading">Reading and summarizing your document...</div>}
 
       {uploadedDoc && (
