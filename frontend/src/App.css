@@ -742,7 +742,8 @@ body {
 }
 
 .dark-mode .language-toggle-button,
-.dark-mode .listen-button {
+.dark-mode .listen-button,
+.dark-mode .mic-button {
   background: #2a2a2a;
   border-color: #444;
   color: #e8e8e8;
