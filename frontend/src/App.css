@@ -1684,6 +1684,61 @@ h1, h2, h3 {
   .feature-card-grid {
     grid-template-columns: 1fr;
   }
+
+  /* Compact the hero so its stat row clears the fixed bottom nav on a
+     typical phone viewport without scrolling. Deliberately smaller than
+     desktop/reference proportions - a functional constraint, not a style
+     match. */
+  .home-hero {
+    padding-top: var(--space-6);
+    padding-bottom: var(--space-6);
+  }
+
+  .home-eyebrow-badge {
+    margin-bottom: var(--space-3);
+    padding: var(--space-1) var(--space-4);
+  }
+
+  .home-hero-title {
+    font-size: 1.6rem;
+    margin-bottom: var(--space-3);
+  }
+
+  .home-hero-subtitle {
+    font-size: var(--fs-sm);
+    margin-bottom: var(--space-4);
+  }
+
+  .home-hero-cta {
+    padding: var(--space-3) var(--space-6);
+    font-size: var(--fs-sm);
+    margin-bottom: var(--space-5);
+  }
+
+  .home-stats-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-2);
+  }
+
+  .stat-pill {
+    min-width: 0;
+    padding: var(--space-2) var(--space-2);
+  }
+
+  .stat-pill-value {
+    font-size: var(--fs-base);
+  }
+
+  .stat-pill-label {
+    font-size: 0.65rem;
+    line-height: 1.25;
+  }
+
+  .stat-pill-skeleton {
+    min-width: 0;
+    height: 48px;
+  }
 }
 
 /* Visually hidden but screen-reader-accessible label */

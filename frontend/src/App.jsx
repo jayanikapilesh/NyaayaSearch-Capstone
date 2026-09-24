@@ -76,7 +76,7 @@ function App() {
         <div className="tab-content-boxed" style={{ display: activeTab === "search" ? "block" : "none" }}><SearchTab setError={setError} uiLanguage={uiLanguage} onLanguageChange={setUiLanguage} /></div>
       </main>
 
-      <BottomNav activeTab={activeTab} navigateToTab={navigateToTab} />
+      <BottomNav activeTab={activeTab} navigateToTab={navigateToTab} uiLanguage={uiLanguage} />
       <EmergencyButton navigateToTab={navigateToTab} uiLanguage={uiLanguage} />
     </div>
   );

@@ -1,7 +1,10 @@
 import { ALL_LANGUAGES } from "../constants";
+import { getNavContent } from "../navContent";
 import { BrandIcon, SunIcon, MoonIcon } from "./icons";
 
 function TopBar({ darkMode, toggleDarkMode, uiLanguage, setUiLanguage }) {
+  const content = getNavContent(uiLanguage);
+
   return (
     <header className="top-bar">
       <div className="top-bar-brand">
@@ -9,7 +12,7 @@ function TopBar({ darkMode, toggleDarkMode, uiLanguage, setUiLanguage }) {
         <span className="top-bar-name">Nyaaya<span className="top-bar-name-gold">Search</span></span>
       </div>
       <div className="top-bar-actions">
-        <div className="lang-switcher" role="group" aria-label="Interface language">
+        <div className="lang-switcher" role="group" aria-label={content.languageSwitcherLabel}>
           {ALL_LANGUAGES.map(function (lang) {
             return (
               <button
@@ -28,7 +31,7 @@ function TopBar({ darkMode, toggleDarkMode, uiLanguage, setUiLanguage }) {
           type="button"
           className="theme-toggle-button"
           onClick={toggleDarkMode}
-          aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+          aria-label={darkMode ? content.themeToggleToLight : content.themeToggleToDark}
         >
           {darkMode ? <SunIcon width="18" height="18" /> : <MoonIcon width="18" height="18" />}
         </button>

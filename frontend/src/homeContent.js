@@ -11,7 +11,7 @@ export const HOME_CONTENT = {
     statsLabels: {
       acts: "Acts Covered",
       sections: "Sections Indexed",
-      cases: "Supreme Court Cases Linked",
+      cases: "SC Cases Linked to Acts",
       languages: "Languages Supported",
     },
     workflowHeading: "How NyaayaSearch Works",
@@ -60,7 +60,7 @@ export const HOME_CONTENT = {
     statsLabels: {
       acts: "शामिल अधिनियम",
       sections: "अनुक्रमित धाराएं",
-      cases: "जुड़े सर्वोच्च न्यायालय के मामले",
+      cases: "अधिनियमों से जुड़े सुप्रीम कोर्ट मामले",
       languages: "समर्थित भाषाएं",
     },
     workflowHeading: "न्यायासर्च कैसे काम करता है",
@@ -109,7 +109,7 @@ export const HOME_CONTENT = {
     statsLabels: {
       acts: "ಸೇರಿಸಲಾದ ಕಾಯ್ದೆಗಳು",
       sections: "ಸೂಚ್ಯಂಕಗೊಳಿಸಿದ ವಿಭಾಗಗಳು",
-      cases: "ಲಿಂಕ್ ಆದ ಸುಪ್ರೀಂ ಕೋರ್ಟ್ ಪ್ರಕರಣಗಳು",
+      cases: "ಕಾಯ್ದೆಗಳಿಗೆ ಲಿಂಕ್ ಆದ ಸುಪ್ರೀಂ ಕೋರ್ಟ್ ಪ್ರಕರಣಗಳು",
       languages: "ಬೆಂಬಲಿತ ಭಾಷೆಗಳು",
     },
     workflowHeading: "ನ್ಯಾಯಸರ್ಚ್ ಹೇಗೆ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತದೆ",
