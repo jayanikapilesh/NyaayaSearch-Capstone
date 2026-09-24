@@ -45,7 +45,9 @@ function BnsTab({ setError }) {
       <h2>BNS Decoder</h2>
       <p className="drafter-intro">Enter a Bharatiya Nyaya Sanhita (BNS) section number to see what it says, explained in plain language.</p>
       <form className="drafter-form" onSubmit={handleBnsLookup}>
+        <label className="sr-only" htmlFor="bns-section">BNS section number</label>
         <input
+          id="bns-section"
           type="text"
           className="search-input"
           placeholder="e.g. 103"

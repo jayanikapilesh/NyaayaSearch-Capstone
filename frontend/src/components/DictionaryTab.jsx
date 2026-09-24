@@ -41,7 +41,9 @@ function DictionaryTab() {
     <div className="dictionary-section">
       <h2>Legal Dictionary</h2>
       <form className="dict-form" onSubmit={handleDefine}>
+        <label className="sr-only" htmlFor="dict-term">Legal term to look up</label>
         <input
+          id="dict-term"
           type="text"
           className="search-input"
           placeholder="Look up a legal term, e.g. 'cognizable offence'"

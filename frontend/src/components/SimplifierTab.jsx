@@ -45,7 +45,9 @@ function SimplifierTab({ setError }) {
       <h2>Case Simplifier</h2>
       <p className="drafter-intro">Paste a court judgment, order, or legal case text to get a plain-language explanation.</p>
       <form className="drafter-form" onSubmit={handleSimplifyCase}>
+        <label className="sr-only" htmlFor="case-text">Case text to simplify</label>
         <textarea
+          id="case-text"
           className="drafter-textarea"
           placeholder="Paste the case text here..."
           rows={10}

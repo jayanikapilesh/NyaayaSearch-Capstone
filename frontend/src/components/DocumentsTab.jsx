@@ -80,7 +80,8 @@ function DocumentsTab({ setError }) {
   return (
     <div className="upload-section">
       <h2>Ask about your own document</h2>
-      <input type="file" accept="application/pdf" onChange={handleFileUpload} />
+      <label className="sr-only" htmlFor="pdf-upload">Upload a PDF document</label>
+      <input id="pdf-upload" type="file" accept="application/pdf" onChange={handleFileUpload} />
       {uploading && <div className="loading">Reading and summarizing your document...</div>}
 
       {uploadedDoc && (
@@ -104,7 +105,9 @@ function DocumentsTab({ setError }) {
 
           {uploadedDoc.document_id && (
             <form className="doc-question-form" onSubmit={handleAskDocument}>
+              <label className="sr-only" htmlFor="doc-question">Ask a question about this document</label>
               <input
+                id="doc-question"
                 type="text"
                 className="search-input"
                 placeholder="Ask a question about this document..."

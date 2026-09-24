@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import "./App.css";
 import SearchTab from "./components/SearchTab";
-import DrafterTab from "./components/DrafterTab";
 import DictionaryTab from "./components/DictionaryTab";
 import DocumentsTab from "./components/DocumentsTab";
 import SimplifierTab from "./components/SimplifierTab";
@@ -9,9 +8,12 @@ import EmergencyTab from "./components/EmergencyTab";
 import BnsTab from "./components/BnsTab";
 import QuizTab from "./components/QuizTab";
 
+const DrafterTab = lazy(function () { return import("./components/DrafterTab"); });
+
 function App() {
   const [activeTab, setActiveTab] = useState("search");
   const [error, setError] = useState(null);
+  const [hasVisitedDrafter, setHasVisitedDrafter] = useState(false);
 
   const [darkMode, setDarkMode] = useState(function () {
     try {
@@ -45,20 +47,26 @@ function App() {
       </header>
 
       <nav className="tab-nav">
-        <button className={"tab-button" + (activeTab === "search" ? " active" : "")} onClick={function () { setActiveTab("search"); }}>Search</button>
-        <button className={"tab-button" + (activeTab === "drafter" ? " active" : "")} onClick={function () { setActiveTab("drafter"); }}>Document Generator</button>
-        <button className={"tab-button" + (activeTab === "dictionary" ? " active" : "")} onClick={function () { setActiveTab("dictionary"); }}>Dictionary</button>
-        <button className={"tab-button" + (activeTab === "documents" ? " active" : "")} onClick={function () { setActiveTab("documents"); }}>My Documents</button>
-        <button className={"tab-button" + (activeTab === "simplifier" ? " active" : "")} onClick={function () { setActiveTab("simplifier"); }}>Case Simplifier</button>
-        <button className={"tab-button" + (activeTab === "emergency" ? " active" : "")} onClick={function () { setActiveTab("emergency"); }}>Emergency Help</button>
-        <button className={"tab-button" + (activeTab === "bns" ? " active" : "")} onClick={function () { setActiveTab("bns"); }}>BNS Decoder</button>
-        <button className={"tab-button" + (activeTab === "quiz" ? " active" : "")} onClick={function () { setActiveTab("quiz"); }}>Legal IQ Daily</button>
+        <button aria-current={activeTab === "search" ? "page" : undefined} className={"tab-button" + (activeTab === "search" ? " active" : "")} onClick={function () { setActiveTab("search"); }}>Search</button>
+        <button aria-current={activeTab === "drafter" ? "page" : undefined} className={"tab-button" + (activeTab === "drafter" ? " active" : "")} onClick={function () { setActiveTab("drafter"); setHasVisitedDrafter(true); }}>Document Generator</button>
+        <button aria-current={activeTab === "dictionary" ? "page" : undefined} className={"tab-button" + (activeTab === "dictionary" ? " active" : "")} onClick={function () { setActiveTab("dictionary"); }}>Dictionary</button>
+        <button aria-current={activeTab === "documents" ? "page" : undefined} className={"tab-button" + (activeTab === "documents" ? " active" : "")} onClick={function () { setActiveTab("documents"); }}>My Documents</button>
+        <button aria-current={activeTab === "simplifier" ? "page" : undefined} className={"tab-button" + (activeTab === "simplifier" ? " active" : "")} onClick={function () { setActiveTab("simplifier"); }}>Case Simplifier</button>
+        <button aria-current={activeTab === "emergency" ? "page" : undefined} className={"tab-button" + (activeTab === "emergency" ? " active" : "")} onClick={function () { setActiveTab("emergency"); }}>Emergency Help</button>
+        <button aria-current={activeTab === "bns" ? "page" : undefined} className={"tab-button" + (activeTab === "bns" ? " active" : "")} onClick={function () { setActiveTab("bns"); }}>BNS Decoder</button>
+        <button aria-current={activeTab === "quiz" ? "page" : undefined} className={"tab-button" + (activeTab === "quiz" ? " active" : "")} onClick={function () { setActiveTab("quiz"); }}>Legal IQ Daily</button>
       </nav>
 
-      {error && <div className="error">{error}</div>}
+      {error && <div className="error" role="alert">{error}</div>}
 
       <div style={{ display: activeTab === "dictionary" ? "block" : "none" }}><DictionaryTab /></div>
-      <div style={{ display: activeTab === "drafter" ? "block" : "none" }}><DrafterTab setError={setError} /></div>
+      <div style={{ display: activeTab === "drafter" ? "block" : "none" }}>
+        {hasVisitedDrafter && (
+          <Suspense fallback={<div className="loading">Loading Document Generator...</div>}>
+            <DrafterTab setError={setError} />
+          </Suspense>
+        )}
+      </div>
       <div style={{ display: activeTab === "bns" ? "block" : "none" }}><BnsTab setError={setError} /></div>
       <div style={{ display: activeTab === "quiz" ? "block" : "none" }}><QuizTab /></div>
       <div style={{ display: activeTab === "emergency" ? "block" : "none" }}><EmergencyTab /></div>

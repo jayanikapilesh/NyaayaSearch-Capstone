@@ -10,6 +10,7 @@ import {
   saveHistory,
   loadSavedResults,
   persistSavedResults,
+  t,
 } from "../utils";
 
 function SearchTab({ setError }) {
@@ -236,7 +237,9 @@ function SearchTab({ setError }) {
   return (
     <div>
       <form className="search-form" onSubmit={handleSearch}>
+        <label className="sr-only" htmlFor="search-query">Describe your legal situation</label>
         <input
+          id="search-query"
           type="text"
           className="search-input"
           placeholder="Describe your legal situation, e.g. 'landlord not returning deposit'"
@@ -249,16 +252,16 @@ function SearchTab({ setError }) {
           onClick={startListening}
           title="Search by voice"
         >
-          Mic
+          {t(currentLanguage, "mic")}
         </button>
         <button type="submit" className="search-button" disabled={loading}>
-          {loading ? "Searching..." : "Search"}
+          {loading ? t(currentLanguage, "searching") : t(currentLanguage, "search")}
         </button>
       </form>
 
       {searchHistory.length === 0 && !explanation && !loading && (
         <div className="example-queries">
-          <span className="example-queries-label">Try asking:</span>
+          <span className="example-queries-label">{t(currentLanguage, "tryAsking")}</span>
           <button className="example-chip" onClick={function () { setQuery("landlord not returning deposit"); runSearch("landlord not returning deposit"); }}>Landlord not returning deposit</button>
           <button className="example-chip" onClick={function () { setQuery("police arrest without warrant"); runSearch("police arrest without warrant"); }}>Police arrest without warrant</button>
           <button className="example-chip" onClick={function () { setQuery("how to file an RTI request"); runSearch("how to file an RTI request"); }}>How to file an RTI request</button>
@@ -268,7 +271,7 @@ function SearchTab({ setError }) {
 
       {searchHistory.length > 0 && (
         <div className="search-history">
-          <span className="search-history-label">Recent:</span>
+          <span className="search-history-label">{t(currentLanguage, "recent")}</span>
           {searchHistory.map(function (h, i) {
             return (
               <button key={i} className="history-chip" onClick={function () { handleHistoryClick(h); }}>
@@ -276,21 +279,21 @@ function SearchTab({ setError }) {
               </button>
             );
           })}
-          <button className="history-clear" onClick={clearHistory}>Clear</button>
+          <button className="history-clear" onClick={clearHistory}>{t(currentLanguage, "clear")}</button>
         </div>
       )}
 
       {savedResults.length > 0 && (
         <div className="saved-results-section">
-          <h2>Saved Results</h2>
+          <h2>{t(currentLanguage, "savedResults")}</h2>
           {savedResults.map(function (item) {
             return (
               <div className="saved-result-card" key={item.id}>
                 <div className="saved-result-header">
-                  <span className="saved-result-query" onClick={function () { handleViewSaved(item); }}>
+                  <button type="button" className="saved-result-query" onClick={function () { handleViewSaved(item); }}>
                     {item.query}
-                  </span>
-                  <button className="saved-result-delete" onClick={function () { handleDeleteSaved(item.id); }}>Delete</button>
+                  </button>
+                  <button className="saved-result-delete" onClick={function () { handleDeleteSaved(item.id); }}>{t(currentLanguage, "delete")}</button>
                 </div>
               </div>
             );
@@ -298,22 +301,22 @@ function SearchTab({ setError }) {
         </div>
       )}
 
-      {isListening && <div className="listening-indicator">Listening... (click mic again to stop)</div>}
+      {isListening && <div className="listening-indicator">{t(currentLanguage, "listeningIndicator")}</div>}
 
       {loading && (
-        <div className="loading">Searching legal database and generating explanation...</div>
+        <div className="loading">{t(currentLanguage, "searchingFull")}</div>
       )}
 
       {showLowConfidenceWarning && (
         <div className="low-confidence-warning">
-          We're not fully confident in these results. Try rephrasing your question with more specific details for a better match. Showing our best guess below.
+          {t(currentLanguage, "lowConfidenceWarning")}
         </div>
       )}
 
       {explanation && (
         <div className="explanation-card">
           <div className="explanation-header">
-            <h2>Explanation</h2>
+            <h2>{t(currentLanguage, "explanation")}</h2>
             <div className="explanation-controls">
               <div className="language-toggle">
                 {otherLanguages.map(function (lang) {
@@ -330,15 +333,15 @@ function SearchTab({ setError }) {
                 })}
               </div>
               <button className="listen-button" onClick={speakExplanation}>
-                {isSpeaking ? "Stop" : "Listen"}
+                {isSpeaking ? t(currentLanguage, "stop") : t(currentLanguage, "listen")}
               </button>
               <button className="save-button" onClick={handleSaveResult} disabled={isCurrentResultSaved}>
-                {isCurrentResultSaved ? "Saved" : "Save"}
+                {isCurrentResultSaved ? t(currentLanguage, "saved") : t(currentLanguage, "save")}
               </button>
             </div>
           </div>
           {translating ? (
-            <div className="loading">Translating...</div>
+            <div className="loading">{t(currentLanguage, "translating")}</div>
           ) : (
             <div className="explanation-text"><ReactMarkdown remarkPlugins={[remarkGfm]}>{explanation}</ReactMarkdown></div>
           )}
@@ -347,20 +350,20 @@ function SearchTab({ setError }) {
 
       {results.length > 0 && (
         <div className="results-section">
-          <h2>Sources</h2>
+          <h2>{t(currentLanguage, "sources")}</h2>
           {results.map(function (r, i) {
-            const confidence = getConfidenceLabel(r.hybrid_score, topScore);
+            const confidence = getConfidenceLabel(r.hybrid_score, topScore, currentLanguage);
             return (
               <div className="result-card" key={i}>
                 <div className="result-header">
                   <span className="act-name">{r.act_name}</span>
-                  <span className="section-number">Section {r.section_number}</span>
+                  <span className="section-number">{t(currentLanguage, "section")} {r.section_number}</span>
                 </div>
                 <div className={"confidence-badge " + confidence.className}>{confidence.label}</div>
 
                 {r.matched_terms && r.matched_terms.length > 0 && (
                   <div className="matched-terms">
-                    <span className="matched-terms-label">Why this matched: </span>
+                    <span className="matched-terms-label">{t(currentLanguage, "whyThisMatched")} </span>
                     {r.matched_terms.map(function (term, k) {
                       return <span className="matched-term-tag" key={k}>{term}</span>;
                     })}
@@ -372,7 +375,7 @@ function SearchTab({ setError }) {
 
                 {r.related_cases && r.related_cases.length > 0 && (
                   <div className="related-cases">
-                    <div className="related-cases-title">Related Supreme Court Cases</div>
+                    <div className="related-cases-title">{t(currentLanguage, "relatedCases")}</div>
                     {r.related_cases.map(function (c, j) {
                       return (
                         <div className="case-item" key={j}>

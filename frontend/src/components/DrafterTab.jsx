@@ -4,7 +4,8 @@ import remarkGfm from "remark-gfm";
 import { Packer } from "docx";
 import { saveAs } from "file-saver";
 import { API_URL, MERGED_DOCUMENT_SCHEMAS, ALL_DOCUMENT_TYPE_LABELS } from "../constants";
-import { extractErrorMessage, buildDocxFromMarkdown } from "../utils";
+import { extractErrorMessage } from "../utils";
+import { buildDocxFromMarkdown } from "../docxExport";
 
 function DrafterTab({ setError }) {
   const [draftType, setDraftType] = useState("rent_agreement");
@@ -89,9 +90,10 @@ function DrafterTab({ setError }) {
   return (
     <div className="drafter-section">
       <h2>Legal Document Generator</h2>
-      <p className="drafter-intro">What document do you want to create?</p>
+      <label className="drafter-intro" htmlFor="draft-type">What document do you want to create?</label>
 
       <select
+        id="draft-type"
         className="search-input"
         value={draftType}
         onChange={function (e) { handleDraftTypeChange(e.target.value); }}
@@ -112,9 +114,10 @@ function DrafterTab({ setError }) {
                   {section.fields.map(function (field) {
                     return (
                       <div className="form-field" key={field.key}>
-                        <label className="form-field-label">{field.label}</label>
+                        <label className="form-field-label" htmlFor={"field-" + field.key}>{field.label}</label>
                         {field.type === "textarea" ? (
                           <textarea
+                            id={"field-" + field.key}
                             className="drafter-textarea"
                             placeholder={field.placeholder}
                             rows={2}
@@ -123,6 +126,7 @@ function DrafterTab({ setError }) {
                           />
                         ) : field.type === "select" ? (
                           <select
+                            id={"field-" + field.key}
                             className="search-input"
                             value={formValues[field.key] || ""}
                             onChange={function (e) { handleFormFieldChange(field.key, e.target.value); }}
@@ -134,6 +138,7 @@ function DrafterTab({ setError }) {
                           </select>
                         ) : (
                           <input
+                            id={"field-" + field.key}
                             type={field.type === "date" ? "date" : field.type === "number" ? "number" : "text"}
                             className="search-input"
                             placeholder={field.placeholder}
@@ -150,10 +155,11 @@ function DrafterTab({ setError }) {
           </div>
         ) : (
           <div>
-            <p className="drafter-subtitle">
+            <label className="drafter-subtitle" htmlFor="generic-details">
               This document type doesn't have a detailed form yet. Enter any details you'd like included, one per line (e.g. "name: John Doe") - anything you leave out will appear as a blank line to fill in later.
-            </p>
+            </label>
             <textarea
+              id="generic-details"
               className="drafter-textarea"
               placeholder={"e.g.\nname: John Doe\ndate: 2026-01-01"}
               value={genericDetails}
