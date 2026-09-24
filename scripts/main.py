@@ -4,7 +4,7 @@ from pydantic import BaseModel
 import re
 from search_core import SearchEngine, IPC_TO_BNS
 from rag_core import generate_explanation, translate_to_english, translate_explanation, detect_language, verify_citations
-from citations_core import find_related_cases
+from citations_core import find_related_cases, load_citations
 from pdf_core import extract_text_from_pdf, answer_question_about_document, summarize_document, extract_dates_and_deadlines
 from dictionary_core import define_term
 from drafter_core import draft_document, DOCUMENT_TYPES
@@ -73,6 +73,30 @@ def validate_query(query):
 @app.get("/")
 def root():
     return {"status": "NyaayaSearch API is running"}
+
+
+@app.get("/stats")
+def stats():
+    acts = set()
+    for record in engine.records:
+        name = str(record.get("act_name") or "").strip()
+        # Guard against a stray header-like row occasionally present in the
+        # source workbook (act_name == "act_name"), which would otherwise
+        # inflate the count by one.
+        if name and name.lower() != "act_name":
+            acts.add(name)
+
+    try:
+        citations_df = load_citations()
+        supreme_court_cases = int(citations_df.loc[citations_df["low_confidence"] == False, "case_id"].nunique())
+    except Exception:
+        supreme_court_cases = 0
+
+    return {
+        "acts": len(acts),
+        "sections": len(engine.records),
+        "supreme_court_cases": supreme_court_cases,
+    }
 
 
 @app.post("/search")

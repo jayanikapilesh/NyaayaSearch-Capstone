@@ -52,23 +52,28 @@ function App() {
       <TopBar darkMode={darkMode} toggleDarkMode={toggleDarkMode} uiLanguage={uiLanguage} setUiLanguage={setUiLanguage} />
 
       <main className="app-content">
-        {error && <div className="error" role="alert">{error}</div>}
+        {error && (
+          <div className="tab-content-boxed" style={{ paddingBottom: 0 }}>
+            <div className="error" role="alert">{error}</div>
+          </div>
+        )}
 
-        <div style={{ display: activeTab === "home" ? "block" : "none" }}><HomeTab navigateToTab={navigateToTab} /></div>
-        <div style={{ display: activeTab === "dictionary" ? "block" : "none" }}><DictionaryTab /></div>
-        <div style={{ display: activeTab === "drafter" ? "block" : "none" }}>
+        {/* Home is full-bleed (its own sections manage width); every other tab is boxed to a readable column. */}
+        <div style={{ display: activeTab === "home" ? "block" : "none" }}><HomeTab navigateToTab={navigateToTab} uiLanguage={uiLanguage} /></div>
+        <div className="tab-content-boxed" style={{ display: activeTab === "dictionary" ? "block" : "none" }}><DictionaryTab /></div>
+        <div className="tab-content-boxed" style={{ display: activeTab === "drafter" ? "block" : "none" }}>
           {hasVisitedDrafter && (
             <Suspense fallback={<div className="loading">Loading Document Generator...</div>}>
               <DrafterTab setError={setError} />
             </Suspense>
           )}
         </div>
-        <div style={{ display: activeTab === "bns" ? "block" : "none" }}><BnsTab setError={setError} /></div>
-        <div style={{ display: activeTab === "quiz" ? "block" : "none" }}><QuizTab /></div>
-        <div style={{ display: activeTab === "emergency" ? "block" : "none" }}><EmergencyTab /></div>
-        <div style={{ display: activeTab === "simplifier" ? "block" : "none" }}><SimplifierTab setError={setError} /></div>
-        <div style={{ display: activeTab === "documents" ? "block" : "none" }}><DocumentsTab setError={setError} /></div>
-        <div style={{ display: activeTab === "search" ? "block" : "none" }}><SearchTab setError={setError} uiLanguage={uiLanguage} onLanguageChange={setUiLanguage} /></div>
+        <div className="tab-content-boxed" style={{ display: activeTab === "bns" ? "block" : "none" }}><BnsTab setError={setError} /></div>
+        <div className="tab-content-boxed" style={{ display: activeTab === "quiz" ? "block" : "none" }}><QuizTab /></div>
+        <div className="tab-content-boxed" style={{ display: activeTab === "emergency" ? "block" : "none" }}><EmergencyTab /></div>
+        <div className="tab-content-boxed" style={{ display: activeTab === "simplifier" ? "block" : "none" }}><SimplifierTab setError={setError} /></div>
+        <div className="tab-content-boxed" style={{ display: activeTab === "documents" ? "block" : "none" }}><DocumentsTab setError={setError} /></div>
+        <div className="tab-content-boxed" style={{ display: activeTab === "search" ? "block" : "none" }}><SearchTab setError={setError} uiLanguage={uiLanguage} onLanguageChange={setUiLanguage} /></div>
       </main>
 
       <BottomNav activeTab={activeTab} navigateToTab={navigateToTab} />
