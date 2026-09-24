@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { API_URL, LANGUAGE_LABELS, ALL_LANGUAGES, MAX_HISTORY } from "../constants";
@@ -13,7 +13,7 @@ import {
   t,
 } from "../utils";
 
-function SearchTab({ setError }) {
+function SearchTab({ setError, uiLanguage, onLanguageChange }) {
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState([]);
@@ -167,6 +167,18 @@ function SearchTab({ setError }) {
       setTranslating(false);
     }
   };
+
+  useEffect(function () {
+    if (typeof onLanguageChange === "function") onLanguageChange(currentLanguage);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentLanguage]);
+
+  useEffect(function () {
+    if (!uiLanguage || uiLanguage === currentLanguage || !explanation) return;
+    const timer = setTimeout(function () { handleLanguageSwitch(uiLanguage); }, 0);
+    return function () { clearTimeout(timer); };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [uiLanguage]);
 
   const startListening = function () {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -357,7 +369,10 @@ function SearchTab({ setError }) {
               <div className="result-card" key={i}>
                 <div className="result-header">
                   <span className="act-name">{r.act_name}</span>
-                  <span className="section-number">{t(currentLanguage, "section")} {r.section_number}</span>
+                  <span className="citation-tag">
+                    <span className="citation-tag-label">{t(currentLanguage, "section")}</span>
+                    <span className="citation-tag-number">{r.section_number}</span>
+                  </span>
                 </div>
                 <div className={"confidence-badge " + confidence.className}>{confidence.label}</div>
 

@@ -1,6 +1,8 @@
 function EmergencyTab() {
   return (
     <div className="drafter-section">
+      <a href="tel:112" className="call-112-button">Call 112</a>
+
       <h2>Emergency and Legal Aid Resources</h2>
       <p className="drafter-intro">If you need urgent help, contact these resources directly.</p>
 

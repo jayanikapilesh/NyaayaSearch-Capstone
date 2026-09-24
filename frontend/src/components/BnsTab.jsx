@@ -62,7 +62,13 @@ function BnsTab({ setError }) {
       {bnsResult && (
         <div className="draft-result">
           <div className="draft-result-header">
-            <h3>Section {bnsResult.section_number}: {bnsResult.section_title}</h3>
+            <div className="citation-heading">
+              <span className="citation-tag">
+                <span className="citation-tag-label">Section</span>
+                <span className="citation-tag-number">{bnsResult.section_number}</span>
+              </span>
+              <h3>{bnsResult.section_title}</h3>
+            </div>
           </div>
           <div className="draft-text">
             <ReactMarkdown remarkPlugins={[remarkGfm]}>{bnsResult.explanation}</ReactMarkdown>
