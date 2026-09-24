@@ -453,6 +453,19 @@ h1, h2, h3 {
   cursor: pointer;
 }
 
+/* Secondary action variant (outlined gold) - e.g. "Download as Word",
+   which is secondary to the primary "Generate Document" action. */
+.search-button.secondary-button {
+  background: transparent;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+}
+
+.search-button.secondary-button:hover {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
 .search-button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
@@ -515,6 +528,12 @@ h1, h2, h3 {
   border-radius: var(--radius-sm);
   color: var(--color-ink);
   resize: vertical;
+}
+
+.drafter-textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-focus-ring);
 }
 
 /* Alerts */
@@ -1219,15 +1238,10 @@ h1, h2, h3 {
 }
 
 .emergency-item {
-  background: #fdf2f2;
-  border: 1px solid #f0d0d0;
+  background: var(--color-danger-bg);
+  border: 1px solid var(--color-incorrect-border);
   border-radius: var(--radius-md);
   padding: var(--space-4);
-}
-
-.dark-mode .emergency-item {
-  background: #2a1f1f;
-  border-color: #4a2f2f;
 }
 
 .emergency-title {
@@ -1236,10 +1250,6 @@ h1, h2, h3 {
   color: var(--color-primary);
   font-size: var(--fs-base);
   margin-bottom: var(--space-1);
-}
-
-.dark-mode .emergency-title {
-  color: var(--color-primary);
 }
 
 .emergency-number {

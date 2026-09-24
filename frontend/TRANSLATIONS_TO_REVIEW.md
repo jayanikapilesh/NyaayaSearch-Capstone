@@ -190,9 +190,45 @@ only the strings below were never wired to a language at all.
 - Button: "Asking..." / "Ask"
 - Error fallback text shown inline (e.g. "Could not upload the document...", "Something went wrong asking about the document.", "Could not reach the server...")
 
-### Tabs not yet restyled or translated (Batch B and beyond)
-- Document Generator (`DrafterTab.jsx`, `documentSchemas.js`) - form labels, field names, generated document text.
-- Dictionary tab (`DictionaryTab.jsx`) - static UI copy (the definitions themselves come from the backend and are English by design).
-- Case Simplifier tab (`SimplifierTab.jsx`) - static UI copy.
-- Legal IQ Daily / quiz (`QuizTab.jsx`, `quizData.js`) - questions, answers, and UI copy.
-- Emergency Help tab content (`EmergencyTab.jsx`) - helpline names/descriptions and the new "Call 112" button.
+### `src/components/DrafterTab.jsx`
+- Heading: "Legal Document Generator"
+- Label: "What document do you want to create?"
+- Subtitle template: "Let's create your {document type}"
+- Fallback-form label: "This document type doesn't have a detailed form yet. Enter any details you'd like included, one per line (e.g. "name: John Doe") - anything you leave out will appear as a blank line to fill in later."
+- Fallback textarea placeholder: "e.g. / name: John Doe / date: 2026-01-01"
+- Select placeholder option: "Select..."
+- Button: "Generating..." / "Generate Document"
+- Button: "Download as Word"
+- `src/documentSchemas.js` - every document type's label, section titles, and field labels/placeholders/options (many; not enumerated here since it's most of the file's content). The AI-generated document text itself is produced by the backend in English regardless of `uiLanguage`.
+
+### `src/components/DictionaryTab.jsx`
+- Heading: "Legal Dictionary"
+- Screen-reader label: "Legal term to look up"
+- Input placeholder: "Look up a legal term, e.g. 'cognizable offence'"
+- Button: "Looking up..." / "Define"
+- Error fallback text: "Something went wrong looking up this term.", "Could not reach the server. Please try again."
+- (The definition itself comes from the backend and is English by design.)
+
+### `src/components/SimplifierTab.jsx`
+- Heading: "Case Simplifier"
+- Intro line: "Paste a court judgment, order, or legal case text to get a plain-language explanation."
+- Screen-reader label: "Case text to simplify"
+- Textarea placeholder: "Paste the case text here..."
+- Button: "Simplifying..." / "Simplify Case"
+- Result heading: "Explanation" (hardcoded here, not routed through the same translation as Search's "Explanation" heading)
+- Error fallback text: "Could not simplify this case. Please try again.", "Could not reach the server. Make sure the backend is running."
+
+### `src/components/QuizTab.jsx` and `src/quizData.js`
+- Heading: "Legal IQ Daily"
+- "Question X of Y" progress label
+- Every question, its options, and its explanation (in `quizData.js`; not enumerated here)
+- Button: "Next Question" / "See Results"
+- Results text: "You scored X out of Y"
+- Button: "Try Again"
+
+### `src/components/EmergencyTab.jsx`
+- Heading: "Emergency and Legal Aid Resources"
+- Intro line: "If you need urgent help, contact these resources directly."
+- All 8 helpline cards' titles and descriptions (Police Emergency, Women Helpline, Domestic Violence Helpline, Child Helpline, National Legal Services Authority (NALSA), Consumer Helpline, Cyber Crime Helpline, Senior Citizen Helpline) - numbers themselves don't need translation.
+- Disclaimer: "These are general national helpline numbers. In an emergency, always contact local police or emergency services directly."
+- The "Call 112" button text - left as English intentionally this pass (its styling and behavior were also left unchanged, per instruction).

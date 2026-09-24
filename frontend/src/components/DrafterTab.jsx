@@ -178,7 +178,7 @@ function DrafterTab({ setError }) {
         <div className="draft-result">
           <div className="draft-result-header">
             <h3>{ALL_DOCUMENT_TYPE_LABELS[draftType]}</h3>
-            <button className="search-button" onClick={handleDownloadDraft}>Download as Word</button>
+            <button className="search-button secondary-button" onClick={handleDownloadDraft}>Download as Word</button>
           </div>
           <div className="draft-text">
             <ReactMarkdown remarkPlugins={[remarkGfm]}>{draftText}</ReactMarkdown>
