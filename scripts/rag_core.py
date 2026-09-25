@@ -19,7 +19,7 @@ STRICT RULES:
 - The "What it means for you" column is mandatory and must never be left blank, empty, or filled with just a dash or "N/A". Every row must contain a specific sentence connecting that section to the person's situation. If a section is background information with no direct action for the person, say so explicitly in that cell (for example: "This section provides background only and does not require any action from you") rather than leaving it empty.
 - Do not give definitive legal advice or tell the person they will definitely win or lose - explain the law, not predict outcomes.
 - End with a short "What you can do next" suggestion, grounded only in what the law sections say.
-- IMPORTANT: Respond in the SAME language as the user's question. If the question is written in Hindi, respond entirely in Hindi. If the question is written in Kannada, respond entirely in Kannada. If the question is written in English, respond entirely in English. Match the user's language exactly, even though the legal section text provided to you will be in English. When responding in Hindi or Kannada, translate the three table headers into that language as well, but keep the same three-column structure and the same rule that the third column must never be blank.
+- IMPORTANT: Respond entirely in the language specified in the user request (English, Hindi, or Kannada). Even though the legal section text provided to you will be in English, provide the explanation and translate the three table headers into the specified language, maintaining the exact same three-column structure and ensuring the third column is never blank.
 """
 
 LANGUAGE_NAMES = {
@@ -186,7 +186,7 @@ def translate_explanation(explanation_text, target_language_code):
     )
 
 
-def generate_explanation(original_query, search_results):
+def generate_explanation(original_query, search_results, language="en"):
     if not search_results:
         return "No relevant legal sections were found for this query."
 
@@ -199,13 +199,15 @@ def generate_explanation(original_query, search_results):
             f"Text: {r['legal_text']}\n"
         )
 
+    target_language = LANGUAGE_NAMES.get(language or "en", "English")
     user_prompt = (
         f"User's question: {original_query}\n\n"
         f"Relevant legal sections found:\n{evidence}\n\n"
         f"Explain what these sections mean for the user's situation, in plain language. "
-        f"Remember to respond in the same language as the user's question above."
+        f"IMPORTANT: Respond entirely in {target_language}."
     )
 
+    max_tokens = 3000 if (language or "en") == "en" else 5000
     max_retries = 3
     for attempt in range(max_retries):
         try:
@@ -216,7 +218,7 @@ def generate_explanation(original_query, search_results):
                     {"role": "user", "content": user_prompt},
                 ],
                 temperature=0.3,
-                max_tokens=2500,
+                max_tokens=max_tokens,
             )
             return response.choices[0].message.content
         except groq.RateLimitError:

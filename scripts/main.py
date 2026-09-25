@@ -40,6 +40,7 @@ class SearchRequest(BaseModel):
     query: str
     top_k: int = 5
     rerank: bool | None = None
+    language: str | None = None
 
 
 class DocumentQuestionRequest(BaseModel):
@@ -75,13 +76,23 @@ def validate_query(query):
 
 
 # Common romanized Hindi and Kannada words (excluding common English words like me, do, to, so, is, in, on, he)
-ROMANIZED_VERNACULAR_WORDS = {
-    # Hindi
+ROMANIZED_HINDI_WORDS = {
     "hai", "hain", "nahi", "nahin", "kya", "karu", "karun", "mera", "meri", "mujhe",
     "raha", "rahi", "wapas", "vapas", "pati", "kaise", "kyun", "chahiye",
-    # Kannada
+}
+ROMANIZED_KANNADA_WORDS = {
     "nanna", "nanage", "illa", "kodtilla", "maadi", "hege", "enu", "beku", "beda", "mane",
 }
+ROMANIZED_VERNACULAR_WORDS = ROMANIZED_HINDI_WORDS | ROMANIZED_KANNADA_WORDS
+
+ROMANIZED_HINDI_PATTERN = re.compile(
+    r"\b(" + "|".join(re.escape(w) for w in sorted(ROMANIZED_HINDI_WORDS)) + r")\b",
+    re.IGNORECASE,
+)
+ROMANIZED_KANNADA_PATTERN = re.compile(
+    r"\b(" + "|".join(re.escape(w) for w in sorted(ROMANIZED_KANNADA_WORDS)) + r")\b",
+    re.IGNORECASE,
+)
 ROMANIZED_VERNACULAR_PATTERN = re.compile(
     r"\b(" + "|".join(re.escape(w) for w in sorted(ROMANIZED_VERNACULAR_WORDS)) + r")\b",
     re.IGNORECASE,
@@ -94,7 +105,20 @@ def resolve_search_query(query: str):
     If translation fails (rate limit, error), log it clearly and return a clear error.
     """
     detected_language = detect_language(query)
-    is_romanized = bool(ROMANIZED_VERNACULAR_PATTERN.search(query)) if detected_language == "en" else False
+    is_romanized_hi = False
+    is_romanized_kn = False
+
+    if detected_language == "en":
+        hi_matches = len(ROMANIZED_HINDI_PATTERN.findall(query))
+        kn_matches = len(ROMANIZED_KANNADA_PATTERN.findall(query))
+        if kn_matches > hi_matches:
+            detected_language = "kn"
+            is_romanized_kn = True
+        elif hi_matches > 0:
+            detected_language = "hi"
+            is_romanized_hi = True
+
+    is_romanized = is_romanized_hi or is_romanized_kn
 
     if detected_language != "en" or is_romanized:
         try:
@@ -139,6 +163,7 @@ def explain(request: SearchRequest):
     validate_query(request.query)
 
     search_query, detected_language = resolve_search_query(request.query)
+    target_language = request.language if request.language in ("en", "hi", "kn") else detected_language
 
     try:
         rerank = True if request.rerank is None else request.rerank
@@ -153,7 +178,7 @@ def explain(request: SearchRequest):
             "translated_query": search_query,
             "results": [],
             "explanation": "No relevant legal sections were found for this query. Try rephrasing with more specific details.",
-            "language": detected_language,
+            "language": target_language,
         }
 
     CONFIDENCE_THRESHOLD = 0.30
@@ -177,7 +202,7 @@ def explain(request: SearchRequest):
                 "Here are the closest matching sections, grouped by Act - please check which one fits your situation, "
                 "or try rephrasing your question with more specific details:" + candidates_text
             ),
-            "language": detected_language,
+            "language": target_language,
             "low_confidence": True,
         }
 
@@ -190,7 +215,7 @@ def explain(request: SearchRequest):
                 if num in IPC_TO_BNS:
                     explanation_query += f" (Note: IPC Section {num} corresponds to BNS Section {IPC_TO_BNS[num]} under the current law - please explain using the BNS section shown in the results below.)"
                     break
-        explanation = generate_explanation(explanation_query, results)
+        explanation = generate_explanation(explanation_query, results, language=target_language)
         is_valid, unverified_sections = verify_citations(explanation, results)
         if not is_valid:
             explanation += "\n\n[Note: this explanation may reference a section number not confirmed in our search results (" + ", ".join(unverified_sections) + "). Please cross-check with the original statutory text shown above.]"
@@ -204,7 +229,7 @@ def explain(request: SearchRequest):
         "translated_query": search_query,
         "results": results,
         "explanation": explanation,
-        "language": detected_language,
+        "language": target_language,
     }
 
 
