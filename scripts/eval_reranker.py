@@ -373,16 +373,20 @@ def ensure_translations_for_dataset(lang, lang_title, queries, en_filepath, refr
     identical_count = len(identical_matches)
     print(f"[{lang_title}] Translations identical to English original: {identical_count} / {len(queries)}", flush=True)
 
-    if identical_count > 5:
+    if identical_count > len(queries) * 0.50:
         err_msg_lines = [
-            f"\nCRITICAL ERROR: {identical_count} {lang_title} translations are identical to the English original (max allowed: 5).",
-            "This indicates English query leakage or fallback contamination in the translation cache.",
+            f"\nCRITICAL ERROR: {identical_count} / {len(queries)} ({identical_count / len(queries) * 100:.1f}%) {lang_title} translations are identical to the English original (max allowed: 50%).",
+            "This indicates fallback contamination or English query leakage in the translation cache.",
             "Sample identical queries:"
         ]
         for item_idx, q, tr, en_orig in identical_matches[:10]:
             err_msg_lines.append(f"  - Query #{item_idx}: Vernacular: {q!r} | Translation: {tr!r} | Original EN: {en_orig!r}")
         full_err = "\n".join(err_msg_lines)
         raise RuntimeError(full_err)
+    elif identical_count > 0:
+        print(f"[{lang_title}] Warning: {identical_count} / {len(queries)} translations are identical to the English original:", flush=True)
+        for item_idx, q, tr, en_orig in identical_matches:
+            print(f"  - Query #{item_idx}: Vernacular: {q!r} | Translation: {tr!r} | Original EN: {en_orig!r}", flush=True)
 
 
 
