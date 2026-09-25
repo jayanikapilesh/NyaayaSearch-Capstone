@@ -1,31 +1,31 @@
 """
-Evaluation of Relevance Classifier with Cross-Encoder Reranker Features.
+Evaluation of Relevance Classifier with Cross-Encoder Reranker Features
+and Threshold Tuning without Leakage.
 
-Compares:
-(a) Current 10 features (Model B baseline from fair_comparison.py)
-(b) Current features + cross-encoder score + candidate rank among query's candidates
-
-Uses:
-- Model: cross-encoder/ms-marco-MiniLM-L-6-v2
-- Data: data/eval/classifier_training_data_clean.csv (Model B data)
-- Legal Knowledge Base: Legal_Knowledge_Base_combined.xlsx
-- 5-Fold GroupKFold by query (exact same split & settings as fair_comparison.py)
-- Evaluated on Full Test Set and Unseen Subset (queries not in batches 1+2)
-- Reports F1, Precision, Recall, PR-AUC (mean +/- std) + per-Act F1 for BNS
+Features:
+1. Loads cached cross-encoder scores from data/eval/classifier_training_data_with_reranker.csv.
+2. 5-Fold GroupKFold by query (exact same split as fair_comparison.py).
+3. Leakage-free threshold tuning:
+   - Inside each outer training fold, holds out 20% of its queries (GroupShuffleSplit by query).
+   - Chooses decision threshold that maximizes F1 on that inner holdout.
+   - Retrains on the full outer training fold.
+   - Applies default 0.5 and tuned threshold to the outer test fold.
+4. Compares:
+   - Default 0.5 threshold vs Tuned threshold on 12-feature model (Full Test Set and Unseen Subset).
+   - Evaluates with all rows (20,860) and with the 10 junk rows dropped (20,850 rows, act_name != 'act_name').
+5. No Groq calls, no .pkl files saved.
 """
 
 import os
 import sys
 import json
-import time
 import argparse
 import pandas as pd
 import numpy as np
 
-from sklearn.model_selection import GroupKFold
+from sklearn.model_selection import GroupKFold, GroupShuffleSplit
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import f1_score, precision_score, recall_score, average_precision_score
-from sentence_transformers import CrossEncoder
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.abspath(os.path.join(BASE_DIR, ".."))
@@ -38,116 +38,24 @@ BATCH_FILES = ["training_pairs.jsonl", "training_pairs_batch2.jsonl"]
 BNS_ACT_NAME = "Bharatiya Nyaya Sanhita, 2023"
 
 
-def load_knowledge_base(kb_path):
+def load_dataset():
     """
-    Loads Legal_Knowledge_Base_combined.xlsx and builds a lookup mapping
-    by (normalized act_name, normalized section_number).
+    Loads dataset with reranker features from cached CSV.
     """
-    print(f"Loading Legal Knowledge Base from {kb_path}...", flush=True)
-    kb_df = pd.read_excel(kb_path)
-    kb_map = {}
-    for _, row in kb_df.iterrows():
-        act = str(row.get("act_name") or "").strip().lower()
-        sec = str(row.get("section_number") or "").strip().lower()
-        kb_map[(act, sec)] = {
-            "act_name": str(row.get("act_name") or "").strip(),
-            "section_number": str(row.get("section_number") or "").strip(),
-            "section_title": str(row.get("section_title") or "").strip(),
-            "legal_text": str(row.get("legal_text") or "").strip(),
-        }
-    print(f"Loaded {len(kb_map)} unique act+section entries from Knowledge Base.", flush=True)
-    return kb_map
+    if not os.path.exists(RERANKER_CSV_PATH):
+        raise FileNotFoundError(
+            f"Cached reranker data not found at {RERANKER_CSV_PATH}. "
+            "Please ensure the cached CSV is present."
+        )
 
+    print(f"Loading cached reranker features from {RERANKER_CSV_PATH}...", flush=True)
+    df = pd.read_csv(RERANKER_CSV_PATH)
 
-def compute_cross_encoder_features(df, kb_map, model_name="cross-encoder/ms-marco-MiniLM-L-6-v2", batch_size=128):
-    """
-    Computes cross-encoder score for each (query, section document text) pair.
-    Uses exact same document text format as search_core.py:
-    f"{act_name}, Section {section_number}: {section_title}. {legal_text[:400]}"
-    """
-    print(f"\nBuilding query-document pairs for {len(df)} rows...", flush=True)
-    matched_count = 0
-    unmatched_rows = []
-    pairs = []
-
-    for idx, row in df.iterrows():
-        act_key = str(row.get("act_name") or "").strip().lower()
-        sec_key = str(row.get("section_number") or "").strip().lower()
-        lookup_key = (act_key, sec_key)
-
-        if lookup_key in kb_map:
-            rec = kb_map[lookup_key]
-            act_str = rec["act_name"]
-            sec_str = rec["section_number"]
-            title_str = rec["section_title"]
-            text_str = rec["legal_text"][:400]
-            doc_text = f"{act_str}, Section {sec_str}: {title_str}. {text_str}"
-            matched_count += 1
-        else:
-            unmatched_rows.append((idx, row.get("act_name"), row.get("section_number")))
-            doc_text = f"{row.get('act_name', '')}, Section {row.get('section_number', '')}: "
-
-        query_str = str(row.get("query") or "")
-        pairs.append((query_str, doc_text))
-
-    unmatched_count = len(unmatched_rows)
-    print(f"Row matching status:", flush=True)
-    print(f"  - Matched:   {matched_count:,} / {len(df):,} rows ({matched_count / len(df) * 100:.2f}%)", flush=True)
-    print(f"  - Unmatched: {unmatched_count} / {len(df):,} rows ({unmatched_count / len(df) * 100:.2f}%)", flush=True)
-    if unmatched_count > 0:
-        print(f"  - Unmatched details (first 5): {unmatched_rows[:5]}", flush=True)
-
-    print(f"\nLoading CrossEncoder model: {model_name}...", flush=True)
-    model = CrossEncoder(model_name)
-
-    print(f"Computing cross-encoder scores (batch_size={batch_size})...", flush=True)
-    t0 = time.time()
-    scores = model.predict(pairs, batch_size=batch_size, show_progress_bar=True)
-    elapsed = time.time() - t0
-    print(f"Computed {len(scores):,} scores in {elapsed:.2f}s ({len(scores)/elapsed:.1f} pairs/sec).", flush=True)
-
-    df["cross_encoder_score"] = scores
-
-    # Compute rank of candidate among that query's candidates (1 = highest score, 10 = lowest)
-    df["cross_encoder_rank"] = (
-        df.groupby("query", sort=False)["cross_encoder_score"]
-        .rank(ascending=False, method="min")
-        .astype(int)
-    )
-
-    return df, unmatched_count
-
-
-def load_or_generate_dataset(recompute=False):
-    """
-    Loads dataset with reranker features from CSV if available, or computes and saves it.
-    """
-    if os.path.exists(RERANKER_CSV_PATH) and not recompute:
-        print(f"Loading existing data with reranker features from {RERANKER_CSV_PATH}...", flush=True)
-        df = pd.read_csv(RERANKER_CSV_PATH)
-        # Ensure gap_to_next is present
-        if "gap_to_next" not in df.columns:
-            df["gap_to_next"] = df.groupby("query", sort=False)["hybrid_score"].diff(-1).fillna(0.0)
-        # Verify columns
-        if "cross_encoder_score" in df.columns and "cross_encoder_rank" in df.columns:
-            print(f"Loaded {len(df):,} rows with cross_encoder_score and cross_encoder_rank.", flush=True)
-            return df
-
-    print(f"Generating reranker features from {CLEAN_DATA_PATH}...", flush=True)
-    df = pd.read_csv(CLEAN_DATA_PATH)
-
-    # Ensure gap_to_next is computed exactly as in fair_comparison.py
+    # Ensure gap_to_next is present
     if "gap_to_next" not in df.columns:
         df["gap_to_next"] = df.groupby("query", sort=False)["hybrid_score"].diff(-1).fillna(0.0)
 
-    kb_map = load_knowledge_base(KB_PATH)
-    df, unmatched_count = compute_cross_encoder_features(df, kb_map)
-
-    # Save to CSV so it never needs recomputing
-    os.makedirs(os.path.dirname(RERANKER_CSV_PATH), exist_ok=True)
-    df.to_csv(RERANKER_CSV_PATH, index=False)
-    print(f"Saved dataset with reranker features to {RERANKER_CSV_PATH} ({os.path.getsize(RERANKER_CSV_PATH):,} bytes).", flush=True)
-
+    print(f"Loaded {len(df):,} candidate rows across {df['query'].nunique():,} unique queries.", flush=True)
     return df
 
 
@@ -168,216 +76,235 @@ def fmt(arr):
     return f"{np.mean(arr):.4f} +/- {np.std(arr):.4f}"
 
 
-def run_evaluation(df):
+def run_threshold_tuning_experiment(df, label="All Rows (20,860)", features=None):
     """
-    Runs 5-fold GroupKFold CV comparing:
-    (a) Current 10 features (Model B baseline from fair_comparison.py)
-    (b) Current 10 features + cross_encoder_score + cross_encoder_rank
+    Runs 5-fold GroupKFold by query with leakage-free threshold tuning.
+    Inside each outer training fold:
+      1. Holds out 20% of outer train queries (GroupShuffleSplit).
+      2. Trains an inner model on inner-train (80%).
+      3. Finds threshold T* maximizing F1 on inner-val (20%).
+      4. Retrains model on the entire outer train fold.
+      5. Evaluates default threshold (0.5) and tuned threshold (T*) on outer test fold.
     """
+    if features is None:
+        features = [
+            "hybrid_score",
+            "semantic_score",
+            "bm25_score",
+            "matched_term_count",
+            "rank",
+            "reciprocal_rank",
+            "query_length",
+            "matched_term_ratio",
+            "semantic_minus_bm25",
+            "gap_to_next",
+            "cross_encoder_score",
+            "cross_encoder_rank",
+        ]
+
     prod_826_queries = get_production_queries()
     all_queries = set(df["query"])
     non_826_queries = all_queries - prod_826_queries
 
-    print(f"\nDataset Statistics:")
-    print(f"  - Total queries:  {len(all_queries):,} ({len(df):,} candidate rows)")
-    print(f"  - Prod queries:   {len(prod_826_queries):,} (Batches 1+2)")
-    print(f"  - Unseen queries: {len(non_826_queries):,} ({len(non_826_queries) * 10:,} rows)")
-
-    features_10 = [
-        "hybrid_score",
-        "semantic_score",
-        "bm25_score",
-        "matched_term_count",
-        "rank",
-        "reciprocal_rank",
-        "query_length",
-        "matched_term_ratio",
-        "semantic_minus_bm25",
-        "gap_to_next",
-    ]
-
-    features_12 = features_10 + [
-        "cross_encoder_score",
-        "cross_encoder_rank",
-    ]
-
     gkf = GroupKFold(n_splits=5)
+    gss = GroupShuffleSplit(n_splits=1, test_size=0.20, random_state=42)
 
-    # Accumulators for metrics across folds
-    # Full test set
-    full_metrics = {
-        "10_features": {"f1": [], "precision": [], "recall": [], "pr_auc": [], "bns_f1": []},
-        "12_features": {"f1": [], "precision": [], "recall": [], "pr_auc": [], "bns_f1": []},
+    # Metrics accumulators
+    metrics = {
+        "full_default": {"f1": [], "precision": [], "recall": [], "pr_auc": []},
+        "full_tuned": {"f1": [], "precision": [], "recall": []},
+        "unseen_default": {"f1": [], "precision": [], "recall": [], "pr_auc": []},
+        "unseen_tuned": {"f1": [], "precision": [], "recall": []},
     }
 
-    # Unseen queries subset
-    unseen_metrics = {
-        "10_features": {"f1": [], "precision": [], "recall": [], "pr_auc": [], "bns_f1": []},
-        "12_features": {"f1": [], "precision": [], "recall": [], "pr_auc": [], "bns_f1": []},
-    }
+    chosen_thresholds = []
+    inner_val_f1s = []
 
-    # Per-act F1 accumulators across folds
-    all_acts = sorted([a for a in df["act_name"].unique() if a != "act_name"])
-    per_act_full = {
-        act: {"10_features": [], "12_features": []} for act in all_acts
-    }
-    per_act_unseen = {
-        act: {"10_features": [], "12_features": []} for act in all_acts
-    }
+    threshold_grid = np.arange(0.10, 0.91, 0.01)
 
-    print("\nRunning 5-Fold GroupKFold Cross-Validation...", flush=True)
+    print(f"\nEvaluating: {label} ({len(df):,} rows, {len(all_queries):,} queries)...", flush=True)
 
     for fold, (train_idx, test_idx) in enumerate(gkf.split(df, groups=df["query"]), start=1):
-        train_df = df.iloc[train_idx]
-        test_df = df.iloc[test_idx]
-        test_unseen = test_df[test_df["query"].isin(non_826_queries)]
+        outer_train_df = df.iloc[train_idx]
+        outer_test_df = df.iloc[test_idx]
+        outer_test_unseen = outer_test_df[outer_test_df["query"].isin(non_826_queries)]
 
-        # --- Train Model A (10 features) ---
-        rf_10 = RandomForestClassifier(n_estimators=100, random_state=42, class_weight="balanced")
-        rf_10.fit(train_df[features_10], train_df["is_relevant"])
+        # --- Step 1: Leakage-free inner split on outer training fold ---
+        inner_train_idx, inner_val_idx = next(gss.split(outer_train_df, groups=outer_train_df["query"]))
+        inner_train = outer_train_df.iloc[inner_train_idx]
+        inner_val = outer_train_df.iloc[inner_val_idx]
 
-        # --- Train Model B (12 features: + cross_encoder_score + cross_encoder_rank) ---
-        rf_12 = RandomForestClassifier(n_estimators=100, random_state=42, class_weight="balanced")
-        rf_12.fit(train_df[features_12], train_df["is_relevant"])
+        # --- Step 2: Inner model training to find optimal threshold ---
+        inner_rf = RandomForestClassifier(n_estimators=100, random_state=42, class_weight="balanced")
+        inner_rf.fit(inner_train[features], inner_train["is_relevant"])
 
-        models = [
-            ("10_features", rf_10, features_10),
-            ("12_features", rf_12, features_12),
-        ]
+        val_probs = inner_rf.predict_proba(inner_val[features])[:, 1]
+        val_y = inner_val["is_relevant"].values
 
-        for m_name, model, feat_list in models:
-            # 1. Full test set evaluation
-            yp_full = model.predict(test_df[feat_list])
-            yprob_full = model.predict_proba(test_df[feat_list])[:, 1]
+        best_threshold = 0.5
+        best_val_f1 = -1.0
+        for t in threshold_grid:
+            pred_val = (val_probs >= t).astype(int)
+            f1_val = f1_score(val_y, pred_val, zero_division=0)
+            if f1_val > best_val_f1:
+                best_val_f1 = f1_val
+                best_threshold = float(t)
 
-            f1_f = f1_score(test_df["is_relevant"], yp_full, zero_division=0)
-            prec_f = precision_score(test_df["is_relevant"], yp_full, zero_division=0)
-            rec_f = recall_score(test_df["is_relevant"], yp_full, zero_division=0)
-            prauc_f = average_precision_score(test_df["is_relevant"], yprob_full)
+        chosen_thresholds.append(best_threshold)
+        inner_val_f1s.append(best_val_f1)
 
-            # BNS subset on full test set
-            bns_mask_full = test_df["act_name"] == BNS_ACT_NAME
-            if bns_mask_full.sum() > 0:
-                bns_f1_f = f1_score(test_df.loc[bns_mask_full, "is_relevant"], yp_full[bns_mask_full], zero_division=0)
-            else:
-                bns_f1_f = 0.0
+        # --- Step 3: Retrain model on the FULL outer training fold ---
+        outer_rf = RandomForestClassifier(n_estimators=100, random_state=42, class_weight="balanced")
+        outer_rf.fit(outer_train_df[features], outer_train_df["is_relevant"])
 
-            full_metrics[m_name]["f1"].append(f1_f)
-            full_metrics[m_name]["precision"].append(prec_f)
-            full_metrics[m_name]["recall"].append(rec_f)
-            full_metrics[m_name]["pr_auc"].append(prauc_f)
-            full_metrics[m_name]["bns_f1"].append(bns_f1_f)
+        # Predict on outer test fold
+        test_probs_full = outer_rf.predict_proba(outer_test_df[features])[:, 1]
+        test_probs_unseen = outer_rf.predict_proba(outer_test_unseen[features])[:, 1]
 
-            # Per-act F1 on full test set
-            for act in all_acts:
-                act_mask = test_df["act_name"] == act
-                if act_mask.sum() > 0 and (test_df.loc[act_mask, "is_relevant"] == 1).sum() > 0:
-                    act_f1 = f1_score(test_df.loc[act_mask, "is_relevant"], yp_full[act_mask], zero_division=0)
-                    per_act_full[act][m_name].append(act_f1)
+        y_full = outer_test_df["is_relevant"].values
+        y_unseen = outer_test_unseen["is_relevant"].values
 
-            # 2. Unseen test set evaluation
-            yp_unseen = model.predict(test_unseen[feat_list])
-            yprob_unseen = model.predict_proba(test_unseen[feat_list])[:, 1]
+        # --- Step 4: Evaluate with Default 0.5 Threshold ---
+        # Full Test Set
+        pred_full_def = (test_probs_full >= 0.5).astype(int)
+        metrics["full_default"]["f1"].append(f1_score(y_full, pred_full_def, zero_division=0))
+        metrics["full_default"]["precision"].append(precision_score(y_full, pred_full_def, zero_division=0))
+        metrics["full_default"]["recall"].append(recall_score(y_full, pred_full_def, zero_division=0))
+        metrics["full_default"]["pr_auc"].append(average_precision_score(y_full, test_probs_full))
 
-            f1_u = f1_score(test_unseen["is_relevant"], yp_unseen, zero_division=0)
-            prec_u = precision_score(test_unseen["is_relevant"], yp_unseen, zero_division=0)
-            rec_u = recall_score(test_unseen["is_relevant"], yp_unseen, zero_division=0)
-            prauc_u = average_precision_score(test_unseen["is_relevant"], yprob_unseen)
+        # Unseen Subset
+        pred_uns_def = (test_probs_unseen >= 0.5).astype(int)
+        metrics["unseen_default"]["f1"].append(f1_score(y_unseen, pred_uns_def, zero_division=0))
+        metrics["unseen_default"]["precision"].append(precision_score(y_unseen, pred_uns_def, zero_division=0))
+        metrics["unseen_default"]["recall"].append(recall_score(y_unseen, pred_uns_def, zero_division=0))
+        metrics["unseen_default"]["pr_auc"].append(average_precision_score(y_unseen, test_probs_unseen))
 
-            # BNS subset on unseen test set
-            bns_mask_unseen = test_unseen["act_name"] == BNS_ACT_NAME
-            if bns_mask_unseen.sum() > 0:
-                bns_f1_u = f1_score(test_unseen.loc[bns_mask_unseen, "is_relevant"], yp_unseen[bns_mask_unseen], zero_division=0)
-            else:
-                bns_f1_u = 0.0
+        # --- Step 5: Evaluate with Tuned Threshold (T*) ---
+        # Full Test Set
+        pred_full_tune = (test_probs_full >= best_threshold).astype(int)
+        metrics["full_tuned"]["f1"].append(f1_score(y_full, pred_full_tune, zero_division=0))
+        metrics["full_tuned"]["precision"].append(precision_score(y_full, pred_full_tune, zero_division=0))
+        metrics["full_tuned"]["recall"].append(recall_score(y_full, pred_full_tune, zero_division=0))
 
-            unseen_metrics[m_name]["f1"].append(f1_u)
-            unseen_metrics[m_name]["precision"].append(prec_u)
-            unseen_metrics[m_name]["recall"].append(rec_u)
-            unseen_metrics[m_name]["pr_auc"].append(prauc_u)
-            unseen_metrics[m_name]["bns_f1"].append(bns_f1_u)
+        # Unseen Subset
+        pred_uns_tune = (test_probs_unseen >= best_threshold).astype(int)
+        metrics["unseen_tuned"]["f1"].append(f1_score(y_unseen, pred_uns_tune, zero_division=0))
+        metrics["unseen_tuned"]["precision"].append(precision_score(y_unseen, pred_uns_tune, zero_division=0))
+        metrics["unseen_tuned"]["recall"].append(recall_score(y_unseen, pred_uns_tune, zero_division=0))
 
-            # Per-act F1 on unseen test set
-            for act in all_acts:
-                act_mask = test_unseen["act_name"] == act
-                if act_mask.sum() > 0 and (test_unseen.loc[act_mask, "is_relevant"] == 1).sum() > 0:
-                    act_f1 = f1_score(test_unseen.loc[act_mask, "is_relevant"], yp_unseen[act_mask], zero_division=0)
-                    per_act_unseen[act][m_name].append(act_f1)
+        print(
+            f"  Fold {fold}/5: chosen T* = {best_threshold:.2f} (inner val F1={best_val_f1:.4f}) | "
+            f"Full F1: def={metrics['full_default']['f1'][-1]:.4f} -> tuned={metrics['full_tuned']['f1'][-1]:.4f} | "
+            f"Unseen F1: def={metrics['unseen_default']['f1'][-1]:.4f} -> tuned={metrics['unseen_tuned']['f1'][-1]:.4f}",
+            flush=True,
+        )
 
-        print(f"  Fold {fold}/5 complete (Full F1: 10f={full_metrics['10_features']['f1'][-1]:.4f}, 12f={full_metrics['12_features']['f1'][-1]:.4f} | Unseen F1: 10f={unseen_metrics['10_features']['f1'][-1]:.4f}, 12f={unseen_metrics['12_features']['f1'][-1]:.4f})", flush=True)
+    return {
+        "label": label,
+        "metrics": metrics,
+        "thresholds": chosen_thresholds,
+        "inner_val_f1s": inner_val_f1s,
+    }
 
-    # --- Print Summary Results Table ---
-    print("\n" + "=" * 135)
-    print(f"{'CLASSIFIER WITH RERANKER FEATURES: 5-FOLD GROUPKFOLD COMPARISON':^135}")
-    print("=" * 135)
-    header = f"{'Evaluation Subset':<32} {'Feature Set':<32} {'F1 (Class 1)':<18} {'Precision':<18} {'Recall':<18} {'PR-AUC':<18} {'BNS F1':<18}"
-    print(header)
-    print("-" * 135)
 
-    # Full test set rows
-    m10_f = full_metrics["10_features"]
-    m12_f = full_metrics["12_features"]
-    print(f"{'Full Test Set (5-Fold CV)':<32} {'Current 10 Features (Baseline)':<32} {fmt(m10_f['f1']):<18} {fmt(m10_f['precision']):<18} {fmt(m10_f['recall']):<18} {fmt(m10_f['pr_auc']):<18} {fmt(m10_f['bns_f1']):<18}")
-    print(f"{'Full Test Set (5-Fold CV)':<32} {'10 Features + Cross-Encoder':<32} {fmt(m12_f['f1']):<18} {fmt(m12_f['precision']):<18} {fmt(m12_f['recall']):<18} {fmt(m12_f['pr_auc']):<18} {fmt(m12_f['bns_f1']):<18}")
-    print("-" * 135)
+def print_results(res):
+    """Prints formatted evaluation table for a single experiment."""
+    m = res["metrics"]
+    label = res["label"]
+    thresholds = res["thresholds"]
 
-    # Unseen subset rows
-    m10_u = unseen_metrics["10_features"]
-    m12_u = unseen_metrics["12_features"]
-    print(f"{'Unseen Queries (Not in B1+B2)':<32} {'Current 10 Features (Baseline)':<32} {fmt(m10_u['f1']):<18} {fmt(m10_u['precision']):<18} {fmt(m10_u['recall']):<18} {fmt(m10_u['pr_auc']):<18} {fmt(m10_u['bns_f1']):<18}")
-    print(f"{'Unseen Queries (Not in B1+B2)':<32} {'10 Features + Cross-Encoder':<32} {fmt(m12_u['f1']):<18} {fmt(m12_u['precision']):<18} {fmt(m12_u['recall']):<18} {fmt(m12_u['pr_auc']):<18} {fmt(m12_u['bns_f1']):<18}")
-    print("=" * 135)
-
-    # Baseline verification check against fair_comparison.py
-    f1_10_full_mean = np.mean(m10_f["f1"])
-    f1_10_unseen_mean = np.mean(m10_u["f1"])
-    print("\nBaseline Reproduction Verification:")
-    print(f"  - Full Set F1:   Expected 0.6655 | Actual {f1_10_full_mean:.4f} -> {'MATCH' if abs(f1_10_full_mean - 0.6655) < 0.0005 else 'MISMATCH'}")
-    print(f"  - Unseen Set F1: Expected 0.6037 | Actual {f1_10_unseen_mean:.4f} -> {'MATCH' if abs(f1_10_unseen_mean - 0.6037) < 0.0005 else 'MISMATCH'}")
-
-    # Feature Importance of Model with Cross-Encoder (trained on full dataset for inspection)
-    print("\nFeature Importances (Model B + Reranker features trained on all data):")
-    final_rf = RandomForestClassifier(n_estimators=100, random_state=42, class_weight="balanced")
-    final_rf.fit(df[features_12], df["is_relevant"])
-    importances = list(zip(features_12, final_rf.feature_importances_))
-    importances.sort(key=lambda x: x[1], reverse=True)
-    for rank, (feat, imp) in enumerate(importances, start=1):
-        marker = " <-- RERANKER FEATURE" if "cross_encoder" in feat else ""
-        print(f"  {rank:2d}. {feat:<25}: {imp:.4f}{marker}")
-
-    # --- Per-Act F1 Breakdown Table ---
     print("\n" + "=" * 115)
-    print(f"{'PER-ACT F1 BREAKDOWN (FULL TEST SET & UNSEEN SUBSET)':^115}")
+    print(f"{'12-FEATURE MODEL WITH LEAKAGE-FREE THRESHOLD TUNING':^115}")
+    print(f"{label:^115}")
     print("=" * 115)
-    act_header = f"{'Act Name':<52} {'Full 10-Feat':<15} {'Full 12-Feat':<15} {'Delta (Full)':<13} {'Unseen 12-Feat':<15}"
-    print(act_header)
+    print(f"Decision thresholds chosen per fold: {[round(t, 2) for t in thresholds]} (mean: {np.mean(thresholds):.2f})")
+    print("-" * 115)
+    header = f"{'Evaluation Subset':<35} {'Threshold Setting':<25} {'F1 (Class 1)':<18} {'Precision':<18} {'Recall':<18}"
+    print(header)
     print("-" * 115)
 
-    for act in all_acts:
-        f10_list = per_act_full[act]["10_features"]
-        f12_list = per_act_full[act]["12_features"]
-        u12_list = per_act_unseen[act]["12_features"]
+    fd = m["full_default"]
+    ft = m["full_tuned"]
+    print(f"{'Full Test Set (5-Fold CV)':<35} {'Default (0.50)':<25} {fmt(fd['f1']):<18} {fmt(fd['precision']):<18} {fmt(fd['recall']):<18}")
+    print(f"{'Full Test Set (5-Fold CV)':<35} {'Tuned per Fold':<25} {fmt(ft['f1']):<18} {fmt(ft['precision']):<18} {fmt(ft['recall']):<18}")
+    print("-" * 115)
 
-        f10_mean = np.mean(f10_list) if len(f10_list) > 0 else 0.0
-        f12_mean = np.mean(f12_list) if len(f12_list) > 0 else 0.0
-        u12_mean = np.mean(u12_list) if len(u12_list) > 0 else 0.0
-        delta = f12_mean - f10_mean
-
-        delta_str = f"{delta:+.4f}"
-        bns_tag = " <-- BNS" if act == BNS_ACT_NAME else ""
-        print(f"{act:<52} {f10_mean:<15.4f} {f12_mean:<15.4f} {delta_str:<13} {u12_mean:<15.4f}{bns_tag}")
-
+    ud = m["unseen_default"]
+    ut = m["unseen_tuned"]
+    print(f"{'Unseen Queries (Not in B1+B2)':<35} {'Default (0.50)':<25} {fmt(ud['f1']):<18} {fmt(ud['precision']):<18} {fmt(ud['recall']):<18}")
+    print(f"{'Unseen Queries (Not in B1+B2)':<35} {'Tuned per Fold':<25} {fmt(ut['f1']):<18} {fmt(ut['precision']):<18} {fmt(ut['recall']):<18}")
     print("=" * 115)
-    print("\nDone. Note: No .pkl models were saved or written to disk.")
+
+
+def print_comparison_table(res_all, res_clean):
+    """Prints side-by-side comparison of keeping vs dropping the 10 junk rows."""
+    print("\n" + "=" * 125)
+    print(f"{'IMPACT OF DROPPING 10 JUNK ROWS (act_name == \"act_name\")':^125}")
+    print("=" * 125)
+    header = f"{'Evaluation Subset':<32} {'Setting':<18} {'All Rows (20,860)':<24} {'Clean Rows (20,850)':<24} {'Difference (Delta)':<18}"
+    print(header)
+    print("-" * 125)
+
+    m_all = res_all["metrics"]
+    m_clean = res_clean["metrics"]
+
+    comparisons = [
+        ("Full Test Set", "Default (0.50)", m_all["full_default"]["f1"], m_clean["full_default"]["f1"]),
+        ("Full Test Set", "Tuned Threshold", m_all["full_tuned"]["f1"], m_clean["full_tuned"]["f1"]),
+        ("Unseen Queries", "Default (0.50)", m_all["unseen_default"]["f1"], m_clean["unseen_default"]["f1"]),
+        ("Unseen Queries", "Tuned Threshold", m_all["unseen_tuned"]["f1"], m_clean["unseen_tuned"]["f1"]),
+    ]
+
+    for subset, setting, all_f1, clean_f1 in comparisons:
+        all_mean = np.mean(all_f1)
+        clean_mean = np.mean(clean_f1)
+        delta = clean_mean - all_mean
+        delta_str = f"{delta:+.4f}"
+        print(
+            f"{subset:<32} {setting:<18} {fmt(all_f1):<24} {fmt(clean_f1):<24} {delta_str:<18}"
+        )
+
+    print("=" * 125)
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Evaluate relevance classifier with cross-encoder reranker features.")
-    parser.add_argument("--recompute", action="store_true", help="Recompute cross-encoder scores even if cached CSV exists.")
+    parser = argparse.ArgumentParser(description="Evaluate 12-feature relevance classifier with threshold tuning.")
     args = parser.parse_args()
 
-    df = load_or_generate_dataset(recompute=args.recompute)
-    run_evaluation(df)
+    # 1. Load cached dataset (no recomputation of cross-encoder scores)
+    df_raw = load_dataset()
+
+    # 2. Check for the 10 junk rows
+    junk_mask = df_raw["act_name"] == "act_name"
+    junk_count = junk_mask.sum()
+    print(f"\nJunk Row Audit: Found {junk_count} rows where act_name == 'act_name'.")
+
+    # 3. Experiment A: All Rows (20,860 rows)
+    res_all = run_threshold_tuning_experiment(
+        df_raw,
+        label="ALL ROWS (20,860 rows, including 10 junk rows)"
+    )
+    print_results(res_all)
+
+    # 4. Experiment B: Drop the 10 junk rows (20,850 rows)
+    df_clean = df_raw[~junk_mask].reset_index(drop=True)
+    res_clean = run_threshold_tuning_experiment(
+        df_clean,
+        label="DROPPED 10 JUNK ROWS (20,850 clean rows)"
+    )
+    print_results(res_clean)
+
+    # 5. Side-by-side comparison report
+    print_comparison_table(res_all, res_clean)
+
+    print("\nSummary & Findings on Dropping Junk Rows:")
+    delta_full_tuned = np.mean(res_clean["metrics"]["full_tuned"]["f1"]) - np.mean(res_all["metrics"]["full_tuned"]["f1"])
+    delta_uns_tuned = np.mean(res_clean["metrics"]["unseen_tuned"]["f1"]) - np.mean(res_all["metrics"]["unseen_tuned"]["f1"])
+    print(f"  - Dropping the 10 header rows removes invalid (act_name='act_name', section_number='section_number') entries.")
+    print(f"  - Full Test Set Tuned F1: {np.mean(res_all['metrics']['full_tuned']['f1']):.4f} -> {np.mean(res_clean['metrics']['full_tuned']['f1']):.4f} ({delta_full_tuned:+.4f})")
+    print(f"  - Unseen Queries Tuned F1: {np.mean(res_all['metrics']['unseen_tuned']['f1']):.4f} -> {np.mean(res_clean['metrics']['unseen_tuned']['f1']):.4f} ({delta_uns_tuned:+.4f})")
+    print(f"  - Chosen Thresholds: All Rows={res_all['thresholds']} vs Clean Rows={res_clean['thresholds']}")
+    print("\nDone. Note: No .pkl models were saved or written to disk.")
 
 
 if __name__ == "__main__":
