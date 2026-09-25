@@ -2,7 +2,7 @@
 Google Colab Execution Instructions:
 ===================================
 1. Enable GPU:
-   In Google Colab, go to Runtime -> Change runtime type -> Hardware accelerator -> GPU (T4 or A100).
+   In Google Colab, go to Runtime -> Change runtime type -> Hardware accelerator -> GPU (T4, V100, or A100).
 
 2. Upload required files (or clone the repository):
    Ensure the following input files are available:
@@ -17,7 +17,7 @@ Google Colab Execution Instructions:
    %cd NyaayaSearch-Capstone
 
 3. Install required packages:
-   !pip install -q sentence-transformers pandas openpyxl scikit-learn torch
+   !pip install -q transformers pandas openpyxl scikit-learn torch accelerate
 
 4. Run the script:
    !python scripts/finetune_crossencoder_cv.py
@@ -33,11 +33,15 @@ import pandas as pd
 import numpy as np
 import torch
 import torch.nn as nn
-from torch.utils.data import DataLoader
+from torch.utils.data import Dataset, DataLoader
 
 from sklearn.model_selection import GroupKFold, GroupShuffleSplit
 from sklearn.metrics import f1_score, precision_score, recall_score, average_precision_score
-from sentence_transformers import CrossEncoder, InputExample
+from transformers import (
+    AutoTokenizer,
+    AutoModelForSequenceClassification,
+    get_linear_schedule_with_warmup,
+)
 
 # ---------------------------------------------------------------------------
 # Path Resolutions (Supports running from repo root or /content in Colab)
@@ -141,16 +145,97 @@ def fmt(arr):
     return f"{np.mean(arr):.4f} +/- {np.std(arr):.4f}"
 
 
+# ---------------------------------------------------------------------------
+# PyTorch Dataset and Collate Function
+# ---------------------------------------------------------------------------
+class QueryDocDataset(Dataset):
+    """Dataset for query-document text pairs and optional binary labels."""
+    def __init__(self, queries, doc_texts, labels=None):
+        self.queries = list(queries)
+        self.doc_texts = list(doc_texts)
+        self.labels = [float(l) for l in labels] if labels is not None else None
+
+    def __len__(self):
+        return len(self.queries)
+
+    def __getitem__(self, idx):
+        item = {
+            "query": self.queries[idx],
+            "doc_text": self.doc_texts[idx],
+        }
+        if self.labels is not None:
+            item["label"] = self.labels[idx]
+        return item
+
+
+def make_collate_fn(tokenizer, max_length=256, has_labels=True):
+    """Factory creating tokenizer collate function for DataLoader batches."""
+    def collate_fn(batch):
+        queries = [item["query"] for item in batch]
+        doc_texts = [item["doc_text"] for item in batch]
+        encoded = tokenizer(
+            queries,
+            doc_texts,
+            padding=True,
+            truncation=True,
+            max_length=max_length,
+            return_tensors="pt",
+        )
+        if has_labels:
+            encoded["labels"] = torch.tensor([item["label"] for item in batch], dtype=torch.float)
+        return encoded
+    return collate_fn
+
+
+# ---------------------------------------------------------------------------
+# Scoring Function (Eval Mode + Sigmoid Probabilities)
+# ---------------------------------------------------------------------------
+def score_pairs(model, tokenizer, queries, doc_texts, device, batch_size=64, max_length=256):
+    """
+    Evaluates query-document pairs with AutoModelForSequenceClassification in eval mode.
+    Returns: (raw_logits_np, sigmoid_probs_np)
+    """
+    model.eval()
+    dataset = QueryDocDataset(queries, doc_texts, labels=None)
+    dataloader = DataLoader(
+        dataset,
+        batch_size=batch_size,
+        shuffle=False,
+        collate_fn=make_collate_fn(tokenizer, max_length=max_length, has_labels=False),
+    )
+
+    all_logits = []
+    all_probs = []
+
+    with torch.no_grad():
+        for batch in dataloader:
+            input_ids = batch["input_ids"].to(device)
+            attention_mask = batch["attention_mask"].to(device)
+
+            with torch.cuda.amp.autocast(enabled=(device == "cuda")):
+                outputs = model(input_ids=input_ids, attention_mask=attention_mask)
+                logits = outputs.logits.view(-1)
+                probs = torch.sigmoid(logits)
+
+            all_logits.extend(logits.cpu().float().numpy().tolist())
+            all_probs.extend(probs.cpu().float().numpy().tolist())
+
+    return np.array(all_logits), np.array(all_probs)
+
+
+# ---------------------------------------------------------------------------
+# Main Cross-Validation Routine
+# ---------------------------------------------------------------------------
 def run_cross_encoder_cv(args):
     """
-    Main 5-Fold GroupKFold Cross-Validation for Fine-Tuning CrossEncoder on GPU.
+    Runs 5-fold GroupKFold CV with plain PyTorch training loop on AutoModelForSequenceClassification.
     """
     set_seed(args.seed)
 
     # 1. Device check
     device = "cuda" if torch.cuda.is_available() else "cpu"
     print("=" * 80)
-    print("      NYAAYASEARCH: CROSS-ENCODER 5-FOLD CV FINE-TUNING (COLAB GPU)")
+    print("      NYAAYASEARCH: CROSS-ENCODER 5-FOLD CV FINE-TUNING (PYTORCH GPU)")
     print("=" * 80)
     print(f"PyTorch Device: {device} ({torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'CPU'})")
     if device == "cpu":
@@ -220,50 +305,86 @@ def run_cross_encoder_cv(args):
             flush=True,
         )
 
-        # Prepare PyTorch InputExamples for 80% inner training
-        train_samples = [
-            InputExample(texts=[row["query"], row["doc_text"]], label=float(row["is_relevant"]))
-            for _, row in inner_train.iterrows()
-        ]
-        train_dataloader = DataLoader(train_samples, shuffle=True, batch_size=args.batch_size)
+        # --- Step 2: Initialize Tokenizer and Model ---
+        set_seed(args.seed + fold)
+        print(f"  [Fold {fold}] Loading {args.model_name} from pretrained...", flush=True)
+        tokenizer = AutoTokenizer.from_pretrained(args.model_name)
+        model = AutoModelForSequenceClassification.from_pretrained(args.model_name, num_labels=1)
+        model.to(device)
+
+        # Setup training DataLoader for 80% inner training
+        train_dataset = QueryDocDataset(
+            inner_train["query"],
+            inner_train["doc_text"],
+            labels=inner_train["is_relevant"].values,
+        )
+        train_dataloader = DataLoader(
+            train_dataset,
+            batch_size=args.batch_size,
+            shuffle=True,
+            collate_fn=make_collate_fn(tokenizer, max_length=args.max_length, has_labels=True),
+        )
+
         total_steps = len(train_dataloader) * args.epochs
         warmup_steps = int(total_steps * args.warmup_ratio)
 
-        # --- Step 2: Fine-tune cross-encoder on the 80% only ---
-        set_seed(args.seed + fold)
-        print(f"  [Fold {fold}] Initializing {args.model_name}...", flush=True)
-        model = CrossEncoder(
-            args.model_name,
-            num_labels=1,
-            max_length=512,
-            device=device,
+        optimizer = torch.optim.AdamW(model.parameters(), lr=args.lr, weight_decay=0.01)
+        scheduler = get_linear_schedule_with_warmup(
+            optimizer,
+            num_warmup_steps=warmup_steps,
+            num_training_steps=total_steps,
         )
+        loss_fct = nn.BCEWithLogitsLoss()
+        scaler = torch.cuda.amp.GradScaler(enabled=(device == "cuda"))
 
+        # --- Step 3: Plain PyTorch Training Loop on 80% only (1 epoch) ---
         print(
-            f"  [Fold {fold}] Training 1 epoch (batch_size={args.batch_size}, lr={args.lr}, warmup_steps={warmup_steps})...",
+            f"  [Fold {fold}] Training 1 epoch (batch_size={args.batch_size}, lr={args.lr}, warmup_steps={warmup_steps}, max_length={args.max_length})...",
             flush=True,
         )
         t_train_0 = time.time()
-        model.fit(
-            train_dataloader=train_dataloader,
-            epochs=args.epochs,
-            loss_fct=nn.BCEWithLogitsLoss(),
-            optimizer_params={"lr": args.lr},
-            warmup_steps=warmup_steps,
-            use_amp=(device == "cuda"),
-            show_progress_bar=True,
-        )
-        train_duration = time.time() - t_train_0
-        print(f"  [Fold {fold}] Fine-tuning completed in {train_duration:.1f}s.", flush=True)
+        model.train()
+        running_loss = 0.0
+        log_interval = max(1, len(train_dataloader) // 5)
 
-        # --- Step 3: Pick the threshold that maximizes F1 on the 20% validation split ---
-        print(f"  [Fold {fold}] Predicting on 20% inner validation holdout ({len(inner_val):,} rows)...", flush=True)
-        val_pairs = list(zip(inner_val["query"], inner_val["doc_text"]))
-        val_logits = model.predict(val_pairs, batch_size=args.eval_batch_size, show_progress_bar=False)
-        val_probs = 1.0 / (1.0 + np.exp(-val_logits))
+        for step, batch in enumerate(train_dataloader, start=1):
+            input_ids = batch["input_ids"].to(device)
+            attention_mask = batch["attention_mask"].to(device)
+            labels = batch["labels"].to(device)
+
+            optimizer.zero_grad()
+
+            with torch.cuda.amp.autocast(enabled=(device == "cuda")):
+                outputs = model(input_ids=input_ids, attention_mask=attention_mask)
+                logits = outputs.logits.view(-1)
+                loss = loss_fct(logits, labels)
+
+            scaler.scale(loss).backward()
+            scaler.step(optimizer)
+            scaler.update()
+            scheduler.step()
+
+            running_loss += loss.item()
+            if step % log_interval == 0 or step == len(train_dataloader):
+                avg_loss = running_loss / step
+                print(f"    Step {step}/{len(train_dataloader)} | Avg Loss: {avg_loss:.4f}", flush=True)
+
+        train_duration = time.time() - t_train_0
+        print(f"  [Fold {fold}] Training completed in {train_duration:.1f}s.", flush=True)
+
+        # --- Step 4: Pick optimal threshold on 20% validation split ---
+        print(f"  [Fold {fold}] Scoring 20% inner validation holdout ({len(inner_val):,} rows)...", flush=True)
+        val_logits, val_probs = score_pairs(
+            model=model,
+            tokenizer=tokenizer,
+            queries=inner_val["query"],
+            doc_texts=inner_val["doc_text"],
+            device=device,
+            batch_size=args.eval_batch_size,
+            max_length=args.max_length,
+        )
         val_y = inner_val["is_relevant"].values
 
-        # Search threshold grid [0.10, 0.90] with step 0.01
         threshold_grid = np.arange(0.10, 0.91, 0.01)
         best_t = 0.5
         best_val_f1 = -1.0
@@ -276,14 +397,18 @@ def run_cross_encoder_cv(args):
         chosen_thresholds.append(best_t)
         print(f"  [Fold {fold}] Optimal inner-val threshold T* = {best_t:.2f} (Inner Val F1 = {best_val_f1:.4f})", flush=True)
 
-        # --- Step 4: Score the outer test fold and apply that threshold ---
+        # --- Step 5: Score outer test fold and apply threshold T* ---
         print(f"  [Fold {fold}] Scoring outer test fold ({len(outer_test_df):,} rows)...", flush=True)
-        test_pairs = list(zip(outer_test_df["query"], outer_test_df["doc_text"]))
-        test_logits = model.predict(test_pairs, batch_size=args.eval_batch_size, show_progress_bar=False)
-        test_probs = 1.0 / (1.0 + np.exp(-test_logits))
+        test_logits, test_probs = score_pairs(
+            model=model,
+            tokenizer=tokenizer,
+            queries=outer_test_df["query"],
+            doc_texts=outer_test_df["doc_text"],
+            device=device,
+            batch_size=args.eval_batch_size,
+            max_length=args.max_length,
+        )
         test_y = outer_test_df["is_relevant"].values
-
-        # Apply the chosen inner-val threshold T* to outer test fold
         test_preds = (test_probs >= best_t).astype(int)
 
         # Full outer test fold metrics
@@ -329,6 +454,11 @@ def run_cross_encoder_cv(args):
             flush=True,
         )
 
+        # Clean GPU memory between folds
+        del model
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+
     # 6. Save Out-of-Fold predictions to CSV
     oof_all_df = pd.concat(oof_dfs, ignore_index=True)
     os.makedirs(os.path.dirname(OOF_CSV_PATH), exist_ok=True)
@@ -371,6 +501,7 @@ def main():
     parser.add_argument("--epochs", type=int, default=1, help="Number of training epochs per fold (default: 1)")
     parser.add_argument("--batch_size", type=int, default=32, help="Training batch size (default: 32)")
     parser.add_argument("--eval_batch_size", type=int, default=64, help="Inference evaluation batch size (default: 64)")
+    parser.add_argument("--max_length", type=int, default=256, help="Maximum sequence token length (default: 256)")
     parser.add_argument("--lr", type=float, default=2e-5, help="Learning rate (default: 2e-5)")
     parser.add_argument("--warmup_ratio", type=float, default=0.10, help="Linear warmup ratio (default: 0.10 = 10%)")
     parser.add_argument("--num_folds", type=int, default=5, help="Number of GroupKFold splits (default: 5)")
