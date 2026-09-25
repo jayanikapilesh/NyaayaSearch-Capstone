@@ -74,12 +74,29 @@ def validate_query(query):
         raise HTTPException(status_code=400, detail="That question is too long. Please shorten it to under 2000 characters.")
 
 
+# Common romanized Hindi and Kannada words (excluding common English words like me, do, to, so, is, in, on, he)
+ROMANIZED_VERNACULAR_WORDS = {
+    # Hindi
+    "hai", "hain", "nahi", "nahin", "kya", "karu", "karun", "mera", "meri", "mujhe",
+    "raha", "rahi", "wapas", "vapas", "pati", "kaise", "kyun", "chahiye",
+    # Kannada
+    "nanna", "nanage", "illa", "kodtilla", "maadi", "hege", "enu", "beku", "beda", "mane",
+}
+ROMANIZED_VERNACULAR_PATTERN = re.compile(
+    r"\b(" + "|".join(re.escape(w) for w in sorted(ROMANIZED_VERNACULAR_WORDS)) + r")\b",
+    re.IGNORECASE,
+)
+
+
 def resolve_search_query(query: str):
-    """Detect language and only call translate_to_english() when query is not English.
+    """Detect language and only call translate_to_english() when query is not English
+    or contains common romanized Hindi/Kannada words.
     If translation fails (rate limit, error), log it clearly and return a clear error.
     """
     detected_language = detect_language(query)
-    if detected_language != "en":
+    is_romanized = bool(ROMANIZED_VERNACULAR_PATTERN.search(query)) if detected_language == "en" else False
+
+    if detected_language != "en" or is_romanized:
         try:
             search_query = translate_to_english(query)
         except groq.RateLimitError as e:
