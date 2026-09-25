@@ -1,3 +1,5 @@
+import hashlib
+import json
 import re
 import os
 import numpy as np
@@ -6,6 +8,10 @@ from rank_bm25 import BM25Okapi
 from sentence_transformers import SentenceTransformer
 
 DATASET = os.path.join(os.path.dirname(__file__), "..", "Legal_Knowledge_Base_combined.xlsx")
+CACHE_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
+CACHE_FILE = os.path.join(CACHE_DIR, "section_embeddings_cache.npy")
+CACHE_META_FILE = os.path.join(CACHE_DIR, "section_embeddings_cache_meta.json")
+
 
 STOP_WORDS = {
     "the", "a", "an", "is", "are", "am", "my", "me", "i",
@@ -176,6 +182,14 @@ def find_matched_terms(query_tokens, section_text, max_terms=5):
     return matched[:max_terms]
 
 
+def _compute_embeddings_hash(texts, model_name):
+    hasher = hashlib.sha256(model_name.encode("utf-8"))
+    for t in texts:
+        hasher.update(b"\x00")
+        hasher.update(t.encode("utf-8"))
+    return hasher.hexdigest()
+
+
 class SearchEngine:
     def __init__(self):
         print("Loading legal dataset...")
@@ -216,13 +230,52 @@ class SearchEngine:
         print("Creating BM25 index...")
         self.bm25 = BM25Okapi(documents)
 
-        print("Creating semantic embeddings...")
-        self.model = SentenceTransformer(
-            os.path.join(os.path.dirname(__file__), "..", "finetuned_legal_model")
-        )
-        self.embeddings = self.model.encode(
-            texts, normalize_embeddings=True, show_progress_bar=True
-        )
+        model_path = os.path.join(os.path.dirname(__file__), "..", "finetuned_legal_model")
+        model_name = "finetuned_legal_model"
+        self.model = SentenceTransformer(model_path)
+
+        current_hash = _compute_embeddings_hash(texts, model_name)
+        loaded_from_cache = False
+
+        if os.path.exists(CACHE_FILE) and os.path.exists(CACHE_META_FILE):
+            try:
+                with open(CACHE_META_FILE, "r", encoding="utf-8") as f:
+                    meta = json.load(f)
+                if (
+                    meta.get("hash") == current_hash
+                    and meta.get("model_name") == model_name
+                    and meta.get("num_sections") == len(texts)
+                ):
+                    print("Loading section embeddings from cache...")
+                    self.embeddings = np.load(CACHE_FILE)
+                    if len(self.embeddings) == len(texts):
+                        print(f"Loaded {len(self.embeddings)} section embeddings from cache.")
+                        loaded_from_cache = True
+            except Exception as e:
+                print(f"Warning: Failed to load embeddings cache ({e}), recomputing...")
+
+        if not loaded_from_cache:
+            print("Creating semantic embeddings...")
+            self.embeddings = self.model.encode(
+                texts, normalize_embeddings=True, show_progress_bar=True
+            )
+            try:
+                os.makedirs(CACHE_DIR, exist_ok=True)
+                np.save(CACHE_FILE, self.embeddings)
+                with open(CACHE_META_FILE, "w", encoding="utf-8") as f:
+                    json.dump(
+                        {
+                            "hash": current_hash,
+                            "model_name": model_name,
+                            "num_sections": len(texts),
+                        },
+                        f,
+                        indent=2,
+                    )
+                print(f"Saved {len(self.embeddings)} section embeddings to cache.")
+            except Exception as e:
+                print(f"Warning: Could not save embeddings cache: {e}")
+
         print("Search system ready.")
 
     def lookup_section(self, act_name_contains, section_number):

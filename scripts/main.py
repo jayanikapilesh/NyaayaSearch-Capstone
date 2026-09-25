@@ -11,7 +11,10 @@ from drafter_core import draft_document, DOCUMENT_TYPES
 from case_simplifier_core import simplify_case
 from bns_decoder_core import explain_bns_section
 
+import logging
 import groq
+
+logger = logging.getLogger(__name__)
 
 app = FastAPI(title="NyaayaSearch API")
 
@@ -70,6 +73,31 @@ def validate_query(query):
         raise HTTPException(status_code=400, detail="That question is too long. Please shorten it to under 2000 characters.")
 
 
+def resolve_search_query(query: str):
+    """Detect language and only call translate_to_english() when query is not English.
+    If translation fails (rate limit, error), log it clearly and return a clear error.
+    """
+    detected_language = detect_language(query)
+    if detected_language != "en":
+        try:
+            search_query = translate_to_english(query)
+        except groq.RateLimitError as e:
+            logger.error(f"Translation rate limited for query '{query}': {e}")
+            raise HTTPException(
+                status_code=503,
+                detail="Translation service is temporarily unavailable due to rate limits. Please try again shortly.",
+            )
+        except Exception as e:
+            logger.error(f"Translation failed for query '{query}': {e}", exc_info=True)
+            raise HTTPException(
+                status_code=502,
+                detail="Failed to translate query into English. Please try again or rephrase your question in English.",
+            )
+    else:
+        search_query = query
+    return search_query, detected_language
+
+
 @app.get("/")
 def root():
     return {"status": "NyaayaSearch API is running"}
@@ -78,8 +106,9 @@ def root():
 @app.post("/search")
 def search(request: SearchRequest):
     validate_query(request.query)
+    search_query, _ = resolve_search_query(request.query)
     try:
-        results = engine.search(request.query, top_k=request.top_k)
+        results = engine.search(search_query, top_k=request.top_k)
         results = attach_related_cases(results)
         return {"query": request.query, "results": results}
     except Exception as e:
@@ -90,23 +119,13 @@ def search(request: SearchRequest):
 def explain(request: SearchRequest):
     validate_query(request.query)
 
-    try:
-        search_query = translate_to_english(request.query)
-    except groq.RateLimitError:
-        raise HTTPException(
-            status_code=503,
-            detail="Our AI explanation service has hit its usage limit for now. You can still search for relevant sections, but plain-language explanations are temporarily unavailable. Please try again later."
-        )
-    except Exception:
-        search_query = request.query  # fall back to using the original query untranslated
+    search_query, detected_language = resolve_search_query(request.query)
 
     try:
         results = engine.search(search_query, top_k=request.top_k)
         results = attach_related_cases(results)
     except Exception:
         raise HTTPException(status_code=500, detail="Search failed unexpectedly. Please try again.")
-
-    detected_language = detect_language(request.query)
 
     if not results:
         return {
