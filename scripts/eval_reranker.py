@@ -200,28 +200,173 @@ def get_cross_encoder(model_name="cross-encoder/ms-marco-MiniLM-L-6-v2"):
             raise RuntimeError(f"Failed to load cross-encoder {model_name}: {e2}")
 
 
-# Cache for translated queries to avoid redundant API calls
+TRANSLATION_CACHE_FILE = os.path.join(ROOT_DIR, "data", "eval", "translation_cache.json")
 TRANSLATION_CACHE = {}
 
-def safe_translate(query, fallback_query=None):
-    """
-    Translate non-English query to English via Groq API.
-    If Groq hits a rate limit or error, falls back to the canonical paired English query
-    from test_270_en to prevent blocking while preserving English semantic matching against the KB.
-    """
-    if query in TRANSLATION_CACHE:
-        return TRANSLATION_CACHE[query]
-    if translate_to_english:
+
+def load_translation_cache(refresh=False):
+    global TRANSLATION_CACHE
+    if refresh:
+        TRANSLATION_CACHE = {}
+        return TRANSLATION_CACHE
+    if os.path.exists(TRANSLATION_CACHE_FILE):
         try:
-            translated = translate_to_english(query)
-            time.sleep(0.1)
-            TRANSLATION_CACHE[query] = translated
-            return translated
-        except Exception:
-            if fallback_query:
-                TRANSLATION_CACHE[query] = fallback_query
-                return fallback_query
-    return fallback_query or query
+            with open(TRANSLATION_CACHE_FILE, "r", encoding="utf-8") as f:
+                TRANSLATION_CACHE = json.load(f)
+                return TRANSLATION_CACHE
+        except Exception as e:
+            print(f"Warning: Failed to load translation cache ({e})", flush=True)
+    TRANSLATION_CACHE = {}
+    return TRANSLATION_CACHE
+
+
+def save_translation_cache():
+    try:
+        os.makedirs(os.path.dirname(TRANSLATION_CACHE_FILE), exist_ok=True)
+        with open(TRANSLATION_CACHE_FILE, "w", encoding="utf-8") as f:
+            json.dump(TRANSLATION_CACHE, f, ensure_ascii=False, indent=2)
+    except Exception as e:
+        print(f"Warning: Failed to save translation cache ({e})", flush=True)
+
+
+# Unicode script ranges for Devanagari (\u0900-\u097F) and Kannada (\u0C80-\u0CFF)
+DEVANAGARI_RANGE = chr(0x0900) + "-" + chr(0x097F)
+KANNADA_RANGE = chr(0x0C80) + "-" + chr(0x0CFF)
+VERNACULAR_SCRIPT_RE = re.compile("[" + DEVANAGARI_RANGE + KANNADA_RANGE + "]")
+
+
+def validate_english_translation(query, translated):
+    """
+    Validates a translated English query.
+    Rejects the translation if:
+    - It is empty or whitespace-only
+    - It equals the original input query (case-insensitive stripped)
+    - It still contains Devanagari or Kannada script characters
+    Raises ValueError on validation failure.
+    """
+    if not translated or not translated.strip():
+        raise ValueError("Translation is empty or whitespace-only")
+
+    cleaned = translated.strip()
+    if cleaned.lower() == query.strip().lower():
+        raise ValueError("Translation is identical to input query (untranslated echo)")
+
+    match = VERNACULAR_SCRIPT_RE.search(cleaned)
+    if match:
+        raise ValueError(f"Translation still contains non-English vernacular characters ({repr(match.group(0))})")
+
+    return cleaned
+
+
+def translate_single_query(query, max_retries=3, base_delay=1.0):
+    """
+    Translates a single non-English query to English via translate_to_english().
+    Retries on transient errors or invalid translations with exponential backoff.
+    Returns the validated, stripped translation string on success.
+    Raises RuntimeError on failure after all retries.
+    NEVER substitutes any fallback text.
+    """
+    if not translate_to_english:
+        raise RuntimeError("translate_to_english is not available from rag_core.")
+
+    last_error = None
+    for attempt in range(1, max_retries + 1):
+        try:
+            raw_translated = translate_to_english(query)
+            valid_translated = validate_english_translation(query, raw_translated)
+            return valid_translated
+        except Exception as e:
+            last_error = str(e)
+
+        if attempt < max_retries:
+            time.sleep(base_delay * (2 ** (attempt - 1)))
+
+    raise RuntimeError(f"{last_error} (after {max_retries} attempts)")
+
+
+def ensure_translations_for_dataset(lang, lang_title, queries, en_filepath, refresh=False, max_retries=3):
+    """
+    Validates that all queries for a non-English dataset have valid translations in cache.
+    If translations are missing, refresh=True, or fail validation, translates them via Groq with retries.
+    Never writes failed translations or fallbacks to the cache.
+    If any translations fail, stops the run with a clear error listing all failed queries.
+    After ensuring the cache, counts translations identical to the paired English originals;
+    if > 5, stops the run with an error.
+    """
+    global TRANSLATION_CACHE
+
+    if not os.path.exists(en_filepath):
+        raise FileNotFoundError(f"English test file not found at {en_filepath} to verify translations against.")
+
+    with open(en_filepath, "r", encoding="utf-8") as f:
+        en_raw = json.load(f)
+    en_queries = [item[0] for item in en_raw]
+
+    if len(queries) != len(en_queries):
+        raise ValueError(f"Mismatch between {lang_title} query count ({len(queries)}) and English query count ({len(en_queries)})")
+
+    queries_to_translate = []
+    for idx, (q, _, _) in enumerate(queries):
+        cached_val = TRANSLATION_CACHE.get(q)
+        if refresh or not cached_val:
+            queries_to_translate.append((idx + 1, q))
+        else:
+            try:
+                validate_english_translation(q, cached_val)
+            except ValueError as e:
+                print(f"[{lang_title}] Evicting invalid cached translation for query #{idx + 1}: {e}", flush=True)
+                queries_to_translate.append((idx + 1, q))
+
+    if queries_to_translate:
+        print(f"[{lang_title}] Translating {len(queries_to_translate)} queries to English...", flush=True)
+        failed_queries = []
+        new_translations = {}
+
+        for item_idx, q in queries_to_translate:
+            try:
+                translated_text = translate_single_query(q, max_retries=max_retries)
+                new_translations[q] = translated_text
+            except Exception as e:
+                failed_queries.append((item_idx, q, str(e)))
+
+        if failed_queries:
+            err_msg_lines = [
+                f"\nCRITICAL ERROR: Translation failed for {len(failed_queries)} {lang_title} queries after {max_retries} retries:",
+                "No failed queries or fallbacks were written to the cache.",
+                "Failed queries list:"
+            ]
+            for item_idx, q, err in failed_queries:
+                err_msg_lines.append(f"  - Query #{item_idx}: {q!r} -> Error: {err}")
+            full_err = "\n".join(err_msg_lines)
+            raise RuntimeError(full_err)
+
+        # Update cache with verified successful translations and save
+        TRANSLATION_CACHE.update(new_translations)
+        save_translation_cache()
+        print(f"[{lang_title}] Successfully translated and cached {len(new_translations)} queries.", flush=True)
+
+    # Validate cached translations against the paired English originals
+    identical_matches = []
+    for idx, (q, _, _) in enumerate(queries):
+        cached_translation = TRANSLATION_CACHE.get(q, "").strip().lower()
+        english_original = en_queries[idx].strip().lower()
+        if cached_translation == english_original:
+            identical_matches.append((idx + 1, q, TRANSLATION_CACHE.get(q), en_queries[idx]))
+
+    identical_count = len(identical_matches)
+    print(f"[{lang_title}] Translations identical to English original: {identical_count} / {len(queries)}", flush=True)
+
+    if identical_count > 5:
+        err_msg_lines = [
+            f"\nCRITICAL ERROR: {identical_count} {lang_title} translations are identical to the English original (max allowed: 5).",
+            "This indicates English query leakage or fallback contamination in the translation cache.",
+            "Sample identical queries:"
+        ]
+        for item_idx, q, tr, en_orig in identical_matches[:10]:
+            err_msg_lines.append(f"  - Query #{item_idx}: Vernacular: {q!r} | Translation: {tr!r} | Original EN: {en_orig!r}")
+        full_err = "\n".join(err_msg_lines)
+        raise RuntimeError(full_err)
+
 
 
 def compute_query_metrics(results, expected_act, expected_section):
@@ -457,6 +602,7 @@ def main():
     parser.add_argument("--tune", action="store_true", help="Run hyperparameter grid search on eval_queries.json first")
     parser.add_argument("--clean-synonyms", action="store_true", help="Replace SYNONYMS with pre-bc6c53ff version to evaluate clean baseline")
     parser.add_argument("--strict-clean", action="store_true", help="Strictly clean baseline: remove synonyms from 1d7000c1 and bc6c53ff, disable IPC_TO_BNS score override")
+    parser.add_argument("--refresh-translations", action="store_true", help="Force re-translation of queries via Groq instead of using cached translations")
     args = parser.parse_args()
 
     print("=" * 86, flush=True)
@@ -471,6 +617,14 @@ def main():
         apply_strict_clean(engine)
     elif args.clean_synonyms:
         apply_clean_synonyms()
+
+    # 3. Load translation cache
+    t_cache = load_translation_cache(refresh=args.refresh_translations)
+    if t_cache:
+        print(f"Translation cache: loaded {len(t_cache)} cached query translations from {TRANSLATION_CACHE_FILE}", flush=True)
+    elif args.refresh_translations:
+        print(f"Translation cache: --refresh-translations specified, will re-translate via Groq", flush=True)
+
 
     is_compare = args.compare or args.reranker in ("compare", "both", "all", "l6,l12")
 
@@ -525,8 +679,6 @@ def main():
         "kn": ("Kannada", os.path.join(ROOT_DIR, "data", "eval", "test_270_kn.json")),
     }
 
-    # Preload English queries for paired fallback translation
-    en_queries = load_test_dataset(eval_files["en"][1], "en") if os.path.exists(eval_files["en"][1]) else []
 
     table_rows = []
     significance_results = []
@@ -544,6 +696,15 @@ def main():
         n_queries = len(queries)
         print(f"Evaluating {lang_title} ({n_queries} queries)...", flush=True)
 
+        if lang != "en":
+            ensure_translations_for_dataset(
+                lang=lang,
+                lang_title=lang_title,
+                queries=queries,
+                en_filepath=eval_files["en"][1],
+                refresh=args.refresh_translations,
+            )
+
         prod_metrics = {"recall_at_5": [], "precision_at_1": [], "mrr": [], "ndcg_at_5": [], "time": []}
 
         if is_compare:
@@ -552,8 +713,7 @@ def main():
 
             for idx, (query, expected_act, expected_section) in enumerate(queries, 1):
                 if lang != "en":
-                    fallback_en = en_queries[idx - 1][0] if (idx - 1 < len(en_queries)) else None
-                    search_q = safe_translate(query, fallback_query=fallback_en)
+                    search_q = TRANSLATION_CACHE[query]
                 else:
                     search_q = query
 
@@ -655,8 +815,7 @@ def main():
 
             for idx, (query, expected_act, expected_section) in enumerate(queries, 1):
                 if lang != "en":
-                    fallback_en = en_queries[idx - 1][0] if (idx - 1 < len(en_queries)) else None
-                    search_q = safe_translate(query, fallback_query=fallback_en)
+                    search_q = TRANSLATION_CACHE[query]
                 else:
                     search_q = query
 

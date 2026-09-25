@@ -105,7 +105,10 @@ def translate_to_english(query):
         temperature=0,
         max_tokens=500,
     )
-    return response.choices[0].message.content.strip()
+    content = response.choices[0].message.content
+    if not content or not content.strip():
+        raise RuntimeError("Translation model returned empty response")
+    return content.strip()
 
 
 def translate_explanation(explanation_text, target_language_code):
