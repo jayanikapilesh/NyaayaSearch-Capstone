@@ -175,32 +175,29 @@ def apply_strict_clean(engine):
     print("=" * 86 + "\n", flush=True)
 
 
-def get_cross_encoder():
-    """
-    Attempt to load preferred multilingual cross-encoder (cross-encoder/mmarco-mMiniLMv2-L12-H384-v1).
-    If unavailable or offline, fall back to local cached cross-encoder (cross-encoder/ms-marco-MiniLM-L-6-v2).
-    """
-    candidate_models = [
-        "cross-encoder/mmarco-mMiniLMv2-L12-H384-v1",
-        "cross-encoder/ms-marco-MiniLM-L-6-v2",
-    ]
-    for model_name in candidate_models:
-        try:
-            model = CrossEncoder(model_name, local_files_only=True)
-            print(f"Loaded CrossEncoder from local cache: {model_name}", flush=True)
-            return model, model_name
-        except Exception:
-            pass
+DEFAULT_MODEL_SETTINGS = {
+    "cross-encoder/ms-marco-MiniLM-L-6-v2": {"top_k": 10, "weight": 0.8},
+    "cross-encoder/ms-marco-MiniLM-L-12-v2": {"top_k": 10, "weight": 0.2},
+}
 
-    for model_name in candidate_models:
+
+def get_cross_encoder(model_name="cross-encoder/ms-marco-MiniLM-L-6-v2"):
+    """
+    Load cross-encoder with local_files_only=True.
+    Falls back to Hugging Face Hub if local files are missing.
+    """
+    try:
+        model = CrossEncoder(model_name, local_files_only=True)
+        print(f"Loaded CrossEncoder from local cache: {model_name}", flush=True)
+        return model, model_name
+    except Exception as e:
+        print(f"Notice: local_files_only failed for {model_name} ({e}), attempting online load...", flush=True)
         try:
             model = CrossEncoder(model_name)
             print(f"Loaded CrossEncoder from Hugging Face Hub: {model_name}", flush=True)
             return model, model_name
-        except Exception:
-            pass
-
-    raise RuntimeError("Failed to load any cross-encoder model.")
+        except Exception as e2:
+            raise RuntimeError(f"Failed to load cross-encoder {model_name}: {e2}")
 
 
 # Cache for translated queries to avoid redundant API calls
@@ -453,8 +450,10 @@ def load_test_dataset(filepath, language):
 def main():
     parser = argparse.ArgumentParser(description="Evaluate NyaayaSearch Production vs Production + Reranker.")
     parser.add_argument("--languages", type=str, default="en,hi,kn", help="Comma-separated languages: en,hi,kn")
-    parser.add_argument("--top_n_rerank", type=int, default=10, help="Top-N candidates to rerank (tuned on eval set: 10)")
-    parser.add_argument("--weight_cross", type=float, default=0.8, help="Cross-encoder score weight (tuned on eval set: 0.8)")
+    parser.add_argument("--reranker", type=str, default="cross-encoder/ms-marco-MiniLM-L-6-v2", help="Cross-encoder model name or path (default: cross-encoder/ms-marco-MiniLM-L-6-v2)")
+    parser.add_argument("--compare", action="store_true", help="Compare Production, Production + L-6 reranker, and Production + L-12 reranker in one table")
+    parser.add_argument("--top_n_rerank", type=int, default=None, help="Top-N candidates to rerank (default: model-specific tuned default)")
+    parser.add_argument("--weight_cross", type=float, default=None, help="Cross-encoder score weight (default: model-specific tuned default)")
     parser.add_argument("--tune", action="store_true", help="Run hyperparameter grid search on eval_queries.json first")
     parser.add_argument("--clean-synonyms", action="store_true", help="Replace SYNONYMS with pre-bc6c53ff version to evaluate clean baseline")
     parser.add_argument("--strict-clean", action="store_true", help="Strictly clean baseline: remove synonyms from 1d7000c1 and bc6c53ff, disable IPC_TO_BNS score override")
@@ -473,14 +472,31 @@ def main():
     elif args.clean_synonyms:
         apply_clean_synonyms()
 
-    # 3. Initialize cross-encoder
-    cross_model, model_name = get_cross_encoder()
+    is_compare = args.compare or args.reranker in ("compare", "both", "all", "l6,l12")
 
-    top_n_rerank = args.top_n_rerank
-    weight_cross = args.weight_cross
+    if is_compare:
+        l6_name = "cross-encoder/ms-marco-MiniLM-L-6-v2"
+        l12_name = "cross-encoder/ms-marco-MiniLM-L-12-v2"
+        l6_model, _ = get_cross_encoder(l6_name)
+        l12_model, _ = get_cross_encoder(l12_name)
 
-    if args.tune:
-        top_n_rerank, weight_cross = run_tuning(engine, cross_model)
+        if args.tune:
+            print("\n--- Tuning L-6 on eval_queries.json ---", flush=True)
+            l6_top_k, l6_weight = run_tuning(engine, l6_model)
+            print("\n--- Tuning L-12 on eval_queries.json ---", flush=True)
+            l12_top_k, l12_weight = run_tuning(engine, l12_model)
+        else:
+            l6_top_k = args.top_n_rerank if args.top_n_rerank is not None else DEFAULT_MODEL_SETTINGS[l6_name]["top_k"]
+            l6_weight = args.weight_cross if args.weight_cross is not None else DEFAULT_MODEL_SETTINGS[l6_name]["weight"]
+            l12_top_k = args.top_n_rerank if args.top_n_rerank is not None else DEFAULT_MODEL_SETTINGS[l12_name]["top_k"]
+            l12_weight = args.weight_cross if args.weight_cross is not None else DEFAULT_MODEL_SETTINGS[l12_name]["weight"]
+    else:
+        cross_model, model_name = get_cross_encoder(args.reranker)
+        default_cfg = DEFAULT_MODEL_SETTINGS.get(model_name, {"top_k": 10, "weight": 0.8})
+        top_n_rerank = args.top_n_rerank if args.top_n_rerank is not None else default_cfg["top_k"]
+        weight_cross = args.weight_cross if args.weight_cross is not None else default_cfg["weight"]
+        if args.tune:
+            top_n_rerank, weight_cross = run_tuning(engine, cross_model)
 
     if args.strict_clean:
         syn_status = "Strict Clean Baseline (54 keys: 1d7000c1 & bc6c53ff removed, IPC_TO_BNS disabled)"
@@ -491,10 +507,15 @@ def main():
 
     print(f"\nConfiguration:", flush=True)
     print(f"  - Synonym Dictionary: {syn_status}", flush=True)
-    print(f"  - Model: {model_name}", flush=True)
+    if is_compare:
+        print(f"  - Mode: 3-Way Comparison (Production vs L-6 vs L-12)", flush=True)
+        print(f"  - L-6 Reranker:  {l6_name} (Top-{l6_top_k}, weight={l6_weight:.1f})", flush=True)
+        print(f"  - L-12 Reranker: {l12_name} (Top-{l12_top_k}, weight={l12_weight:.1f})", flush=True)
+    else:
+        print(f"  - Model: {model_name}", flush=True)
+        print(f"  - Candidates reranked: Top-{top_n_rerank}", flush=True)
+        print(f"  - Score fusion: (1 - {weight_cross:.1f}) * norm_hybrid + {weight_cross:.1f} * sigmoid(cross_logit)", flush=True)
     print(f"  - Candidate pool retrieved: Top-20 from SearchEngine.search()", flush=True)
-    print(f"  - Candidates reranked: Top-{top_n_rerank}", flush=True)
-    print(f"  - Score fusion: (1 - {weight_cross:.1f}) * norm_hybrid + {weight_cross:.1f} * sigmoid(cross_logit)", flush=True)
     print(f"  - Match criteria: str(r['act_name']) == expected_act and str(r['section_number']) == expected_section\n", flush=True)
 
     requested_langs = [l.strip().lower() for l in args.languages.split(",") if l.strip()]
@@ -524,142 +545,316 @@ def main():
         print(f"Evaluating {lang_title} ({n_queries} queries)...", flush=True)
 
         prod_metrics = {"recall_at_5": [], "precision_at_1": [], "mrr": [], "ndcg_at_5": [], "time": []}
-        rerank_metrics = {"recall_at_5": [], "precision_at_1": [], "mrr": [], "ndcg_at_5": [], "time": []}
 
-        for idx, (query, expected_act, expected_section) in enumerate(queries, 1):
-            if lang != "en":
-                fallback_en = en_queries[idx - 1][0] if (idx - 1 < len(en_queries)) else None
-                search_q = safe_translate(query, fallback_query=fallback_en)
-            else:
-                search_q = query
+        if is_compare:
+            l6_metrics = {"recall_at_5": [], "precision_at_1": [], "mrr": [], "ndcg_at_5": [], "time": []}
+            l12_metrics = {"recall_at_5": [], "precision_at_1": [], "mrr": [], "ndcg_at_5": [], "time": []}
 
-            # 1. Retrieve top-20 candidates using production search
-            t_s0 = time.perf_counter()
-            candidates = engine.search(search_q, top_k=20)
-            search_time = time.perf_counter() - t_s0
+            for idx, (query, expected_act, expected_section) in enumerate(queries, 1):
+                if lang != "en":
+                    fallback_en = en_queries[idx - 1][0] if (idx - 1 < len(en_queries)) else None
+                    search_q = safe_translate(query, fallback_query=fallback_en)
+                else:
+                    search_q = query
 
-            # 2. Production baseline metrics evaluated across top-10 candidates
-            p_m = compute_query_metrics(candidates[:10], expected_act, expected_section)
-            for k in ["recall_at_5", "precision_at_1", "mrr", "ndcg_at_5"]:
-                prod_metrics[k].append(p_m[k])
-            prod_metrics["time"].append(search_time)
+                # 1. Retrieve top-20 candidates using production search
+                t_s0 = time.perf_counter()
+                candidates = engine.search(search_q, top_k=20)
+                search_time = time.perf_counter() - t_s0
 
-            # 3. Production + Reranker: rerank top-10 candidates
-            reranked_cands, rerank_time = rerank_candidates(
-                search_q, candidates, cross_model, top_n_rerank=top_n_rerank, weight_cross=weight_cross
-            )
-            r_m = compute_query_metrics(reranked_cands[:10], expected_act, expected_section)
-            for k in ["recall_at_5", "precision_at_1", "mrr", "ndcg_at_5"]:
-                rerank_metrics[k].append(r_m[k])
-            rerank_metrics["time"].append(search_time + rerank_time)
+                # 2. Production baseline metrics
+                p_m = compute_query_metrics(candidates[:10], expected_act, expected_section)
+                for k in ["recall_at_5", "precision_at_1", "mrr", "ndcg_at_5"]:
+                    prod_metrics[k].append(p_m[k])
+                prod_metrics["time"].append(search_time)
 
-            if idx % 15 == 0 or idx == n_queries:
-                print(f"  [{lang_title}] Processed {idx}/{n_queries} queries...", flush=True)
+                # 3. L-6 Reranker
+                l6_cands, l6_time = rerank_candidates(
+                    search_q, candidates, l6_model, top_n_rerank=l6_top_k, weight_cross=l6_weight
+                )
+                r6_m = compute_query_metrics(l6_cands[:10], expected_act, expected_section)
+                for k in ["recall_at_5", "precision_at_1", "mrr", "ndcg_at_5"]:
+                    l6_metrics[k].append(r6_m[k])
+                l6_metrics["time"].append(search_time + l6_time)
 
-        # Aggregate averages
-        p_r5 = np.mean(prod_metrics["recall_at_5"])
-        p_p1 = np.mean(prod_metrics["precision_at_1"])
-        p_mrr = np.mean(prod_metrics["mrr"])
-        p_ndcg = np.mean(prod_metrics["ndcg_at_5"])
-        p_time_ms = np.mean(prod_metrics["time"]) * 1000.0
+                # 4. L-12 Reranker
+                l12_cands, l12_time = rerank_candidates(
+                    search_q, candidates, l12_model, top_n_rerank=l12_top_k, weight_cross=l12_weight
+                )
+                r12_m = compute_query_metrics(l12_cands[:10], expected_act, expected_section)
+                for k in ["recall_at_5", "precision_at_1", "mrr", "ndcg_at_5"]:
+                    l12_metrics[k].append(r12_m[k])
+                l12_metrics["time"].append(search_time + l12_time)
 
-        r_r5 = np.mean(rerank_metrics["recall_at_5"])
-        r_p1 = np.mean(rerank_metrics["precision_at_1"])
-        r_mrr = np.mean(rerank_metrics["mrr"])
-        r_ndcg = np.mean(rerank_metrics["ndcg_at_5"])
-        r_time_ms = np.mean(rerank_metrics["time"]) * 1000.0
+                if idx % 15 == 0 or idx == n_queries:
+                    print(f"  [{lang_title}] Processed {idx}/{n_queries} queries...", flush=True)
 
-        table_rows.append({
-            "lang": f"{lang_title} (n={n_queries})",
-            "prod": {"r5": p_r5, "p1": p_p1, "mrr": p_mrr, "ndcg": p_ndcg, "time": p_time_ms},
-            "rerank": {"r5": r_r5, "p1": r_p1, "mrr": r_mrr, "ndcg": r_ndcg, "time": r_time_ms},
-        })
+            p_r5 = np.mean(prod_metrics["recall_at_5"])
+            p_p1 = np.mean(prod_metrics["precision_at_1"])
+            p_mrr = np.mean(prod_metrics["mrr"])
+            p_ndcg = np.mean(prod_metrics["ndcg_at_5"])
+            p_time_ms = np.mean(prod_metrics["time"]) * 1000.0
 
-        # Statistical significance tests
-        mcnemar_p1 = mcnemar_test(prod_metrics["precision_at_1"], rerank_metrics["precision_at_1"])
-        mcnemar_r5 = mcnemar_test(prod_metrics["recall_at_5"], rerank_metrics["recall_at_5"])
-        boot_mrr = paired_bootstrap_mrr(prod_metrics["mrr"], rerank_metrics["mrr"])
+            l6_r5 = np.mean(l6_metrics["recall_at_5"])
+            l6_p1 = np.mean(l6_metrics["precision_at_1"])
+            l6_mrr = np.mean(l6_metrics["mrr"])
+            l6_ndcg = np.mean(l6_metrics["ndcg_at_5"])
+            l6_time_ms = np.mean(l6_metrics["time"]) * 1000.0
 
-        raw_p_values[f"{lang_title}_P@1"] = mcnemar_p1["p_value"]
-        raw_p_values[f"{lang_title}_Recall@5"] = mcnemar_r5["p_value"]
-        raw_p_values[f"{lang_title}_MRR"] = boot_mrr["p_value"]
+            l12_r5 = np.mean(l12_metrics["recall_at_5"])
+            l12_p1 = np.mean(l12_metrics["precision_at_1"])
+            l12_mrr = np.mean(l12_metrics["mrr"])
+            l12_ndcg = np.mean(l12_metrics["ndcg_at_5"])
+            l12_time_ms = np.mean(l12_metrics["time"]) * 1000.0
 
-        significance_results.append({
-            "lang": lang_title,
-            "n": n_queries,
-            "p1": mcnemar_p1,
-            "r5": mcnemar_r5,
-            "mrr": boot_mrr,
-        })
+            table_rows.append({
+                "lang": f"{lang_title} (n={n_queries})",
+                "prod": {"r5": p_r5, "p1": p_p1, "mrr": p_mrr, "ndcg": p_ndcg, "time": p_time_ms},
+                "l6": {"r5": l6_r5, "p1": l6_p1, "mrr": l6_mrr, "ndcg": l6_ndcg, "time": l6_time_ms},
+                "l12": {"r5": l12_r5, "p1": l12_p1, "mrr": l12_mrr, "ndcg": l12_ndcg, "time": l12_time_ms},
+            })
 
-    # Apply Holm-Bonferroni correction across all 9 tests
-    adjusted_p_values = holm_bonferroni_correction(raw_p_values)
+            # Significance tests
+            # L-12 vs Production
+            mcnemar_p1_l12_v_prod = mcnemar_test(prod_metrics["precision_at_1"], l12_metrics["precision_at_1"])
+            mcnemar_r5_l12_v_prod = mcnemar_test(prod_metrics["recall_at_5"], l12_metrics["recall_at_5"])
+            boot_mrr_l12_v_prod = paired_bootstrap_mrr(prod_metrics["mrr"], l12_metrics["mrr"])
 
-    # Print main evaluation table
-    print("\n" + "=" * 98, flush=True)
-    if args.strict_clean:
-        mode_str = "Development set (test_270, previously contaminated) [--strict-clean]"
-    elif args.clean_synonyms:
-        mode_str = "CLEAN SYNONYMS (PRE-COMMIT bc6c53ff)"
-    else:
-        mode_str = "PRODUCTION SYNONYMS"
-    print(f"FINAL EVALUATION RESULTS: {mode_str}", flush=True)
-    print("=" * 98, flush=True)
-    header = f"{'Language / Dataset':<20} | {'System':<23} | {'Recall@5':<9} | {'P@1':<7} | {'MRR':<7} | {'nDCG@5':<7} | {'Latency (CPU)':<13}"
-    print(header, flush=True)
-    print("-" * len(header), flush=True)
+            # L-12 vs L-6
+            mcnemar_p1_l12_v_l6 = mcnemar_test(l6_metrics["precision_at_1"], l12_metrics["precision_at_1"])
+            mcnemar_r5_l12_v_l6 = mcnemar_test(l6_metrics["recall_at_5"], l12_metrics["recall_at_5"])
+            boot_mrr_l12_v_l6 = paired_bootstrap_mrr(l6_metrics["mrr"], l12_metrics["mrr"])
 
-    for row in table_rows:
-        l = row["lang"]
-        p = row["prod"]
-        r = row["rerank"]
-        print(f"{l:<20} | {'Current Production':<23} | {p['r5']:<9.4f} | {p['p1']:<7.4f} | {p['mrr']:<7.4f} | {p['ndcg']:<7.4f} | {p['time']:>7.1f} ms/q", flush=True)
-        print(f"{'':<20} | {'Production + Reranker':<23} | {r['r5']:<9.4f} | {r['p1']:<7.4f} | {r['mrr']:<7.4f} | {r['ndcg']:<7.4f} | {r['time']:>7.1f} ms/q", flush=True)
+            # L-6 vs Production
+            mcnemar_p1_l6_v_prod = mcnemar_test(prod_metrics["precision_at_1"], l6_metrics["precision_at_1"])
+            mcnemar_r5_l6_v_prod = mcnemar_test(prod_metrics["recall_at_5"], l6_metrics["recall_at_5"])
+            boot_mrr_l6_v_prod = paired_bootstrap_mrr(prod_metrics["mrr"], l6_metrics["mrr"])
+
+            raw_p_values[f"{lang_title}_L12_vs_Prod_P@1"] = mcnemar_p1_l12_v_prod["p_value"]
+            raw_p_values[f"{lang_title}_L12_vs_Prod_Recall@5"] = mcnemar_r5_l12_v_prod["p_value"]
+            raw_p_values[f"{lang_title}_L12_vs_Prod_MRR"] = boot_mrr_l12_v_prod["p_value"]
+
+            raw_p_values[f"{lang_title}_L12_vs_L6_P@1"] = mcnemar_p1_l12_v_l6["p_value"]
+            raw_p_values[f"{lang_title}_L12_vs_L6_Recall@5"] = mcnemar_r5_l12_v_l6["p_value"]
+            raw_p_values[f"{lang_title}_L12_vs_L6_MRR"] = boot_mrr_l12_v_l6["p_value"]
+
+            raw_p_values[f"{lang_title}_L6_vs_Prod_P@1"] = mcnemar_p1_l6_v_prod["p_value"]
+            raw_p_values[f"{lang_title}_L6_vs_Prod_Recall@5"] = mcnemar_r5_l6_v_prod["p_value"]
+            raw_p_values[f"{lang_title}_L6_vs_Prod_MRR"] = boot_mrr_l6_v_prod["p_value"]
+
+            significance_results.append({
+                "lang": lang_title,
+                "n": n_queries,
+                "l12_v_prod": {"p1": mcnemar_p1_l12_v_prod, "r5": mcnemar_r5_l12_v_prod, "mrr": boot_mrr_l12_v_prod},
+                "l12_v_l6": {"p1": mcnemar_p1_l12_v_l6, "r5": mcnemar_r5_l12_v_l6, "mrr": boot_mrr_l12_v_l6},
+                "l6_v_prod": {"p1": mcnemar_p1_l6_v_prod, "r5": mcnemar_r5_l6_v_prod, "mrr": boot_mrr_l6_v_prod},
+            })
+
+        else:
+            rerank_metrics = {"recall_at_5": [], "precision_at_1": [], "mrr": [], "ndcg_at_5": [], "time": []}
+
+            for idx, (query, expected_act, expected_section) in enumerate(queries, 1):
+                if lang != "en":
+                    fallback_en = en_queries[idx - 1][0] if (idx - 1 < len(en_queries)) else None
+                    search_q = safe_translate(query, fallback_query=fallback_en)
+                else:
+                    search_q = query
+
+                t_s0 = time.perf_counter()
+                candidates = engine.search(search_q, top_k=20)
+                search_time = time.perf_counter() - t_s0
+
+                p_m = compute_query_metrics(candidates[:10], expected_act, expected_section)
+                for k in ["recall_at_5", "precision_at_1", "mrr", "ndcg_at_5"]:
+                    prod_metrics[k].append(p_m[k])
+                prod_metrics["time"].append(search_time)
+
+                reranked_cands, rerank_time = rerank_candidates(
+                    search_q, candidates, cross_model, top_n_rerank=top_n_rerank, weight_cross=weight_cross
+                )
+                r_m = compute_query_metrics(reranked_cands[:10], expected_act, expected_section)
+                for k in ["recall_at_5", "precision_at_1", "mrr", "ndcg_at_5"]:
+                    rerank_metrics[k].append(r_m[k])
+                rerank_metrics["time"].append(search_time + rerank_time)
+
+                if idx % 15 == 0 or idx == n_queries:
+                    print(f"  [{lang_title}] Processed {idx}/{n_queries} queries...", flush=True)
+
+            p_r5 = np.mean(prod_metrics["recall_at_5"])
+            p_p1 = np.mean(prod_metrics["precision_at_1"])
+            p_mrr = np.mean(prod_metrics["mrr"])
+            p_ndcg = np.mean(prod_metrics["ndcg_at_5"])
+            p_time_ms = np.mean(prod_metrics["time"]) * 1000.0
+
+            r_r5 = np.mean(rerank_metrics["recall_at_5"])
+            r_p1 = np.mean(rerank_metrics["precision_at_1"])
+            r_mrr = np.mean(rerank_metrics["mrr"])
+            r_ndcg = np.mean(rerank_metrics["ndcg_at_5"])
+            r_time_ms = np.mean(rerank_metrics["time"]) * 1000.0
+
+            table_rows.append({
+                "lang": f"{lang_title} (n={n_queries})",
+                "prod": {"r5": p_r5, "p1": p_p1, "mrr": p_mrr, "ndcg": p_ndcg, "time": p_time_ms},
+                "rerank": {"r5": r_r5, "p1": r_p1, "mrr": r_mrr, "ndcg": r_ndcg, "time": r_time_ms},
+            })
+
+            mcnemar_p1 = mcnemar_test(prod_metrics["precision_at_1"], rerank_metrics["precision_at_1"])
+            mcnemar_r5 = mcnemar_test(prod_metrics["recall_at_5"], rerank_metrics["recall_at_5"])
+            boot_mrr = paired_bootstrap_mrr(prod_metrics["mrr"], rerank_metrics["mrr"])
+
+            raw_p_values[f"{lang_title}_P@1"] = mcnemar_p1["p_value"]
+            raw_p_values[f"{lang_title}_Recall@5"] = mcnemar_r5["p_value"]
+            raw_p_values[f"{lang_title}_MRR"] = boot_mrr["p_value"]
+
+            significance_results.append({
+                "lang": lang_title,
+                "n": n_queries,
+                "p1": mcnemar_p1,
+                "r5": mcnemar_r5,
+                "mrr": boot_mrr,
+            })
+
+    if is_compare:
+        # Apply Holm-Bonferroni correction across the 18 primary comparisons (L-12 vs Prod & L-12 vs L-6)
+        raw_p_l12 = {k: v for k, v in raw_p_values.items() if "L12" in k}
+        adjusted_p_values = holm_bonferroni_correction(raw_p_l12)
+        raw_p_l6 = {k: v for k, v in raw_p_values.items() if "L6_vs_Prod" in k}
+        adjusted_p_values.update(holm_bonferroni_correction(raw_p_l6))
+
+        print("\n" + "=" * 105, flush=True)
+        if args.strict_clean:
+            mode_str = "Development set (test_270, previously contaminated) [--strict-clean]"
+        elif args.clean_synonyms:
+            mode_str = "CLEAN SYNONYMS (PRE-COMMIT bc6c53ff)"
+        else:
+            mode_str = "PRODUCTION SYNONYMS"
+        print(f"FINAL EVALUATION RESULTS: {mode_str}", flush=True)
+        print("=" * 105, flush=True)
+        header = f"{'Language / Dataset':<20} | {'System':<27} | {'Recall@5':<9} | {'P@1':<7} | {'MRR':<7} | {'nDCG@5':<7} | {'Latency (CPU)':<13}"
+        print(header, flush=True)
         print("-" * len(header), flush=True)
 
-    print("=" * 98, flush=True)
+        for row in table_rows:
+            l = row["lang"]
+            p = row["prod"]
+            r6 = row["l6"]
+            r12 = row["l12"]
+            print(f"{l:<20} | {'Current Production':<27} | {p['r5']:<9.4f} | {p['p1']:<7.4f} | {p['mrr']:<7.4f} | {p['ndcg']:<7.4f} | {p['time']:>7.1f} ms/q", flush=True)
+            print(f"{'':<20} | {'Production + L-6 reranker':<27} | {r6['r5']:<9.4f} | {r6['p1']:<7.4f} | {r6['mrr']:<7.4f} | {r6['ndcg']:<7.4f} | {r6['time']:>7.1f} ms/q", flush=True)
+            print(f"{'':<20} | {'Production + L-12 reranker':<27} | {r12['r5']:<9.4f} | {r12['p1']:<7.4f} | {r12['mrr']:<7.4f} | {r12['ndcg']:<7.4f} | {r12['time']:>7.1f} ms/q", flush=True)
+            print("-" * len(header), flush=True)
 
-    # Print statistical significance table with Holm correction
-    print("\n" + "=" * 122, flush=True)
-    sig_label = "Development set (test_270, previously contaminated)" if args.strict_clean else "STATISTICAL SIGNIFICANCE TESTS"
-    print(f"STATISTICAL SIGNIFICANCE TESTS: {sig_label}", flush=True)
-    print("(McNemar on P@1/Recall@5, Paired Bootstrap 95% CI on MRR, Holm-Bonferroni Correction across all 9 tests)", flush=True)
-    print("=" * 122, flush=True)
-    sig_header = f"{'Language':<10} | {'Metric':<10} | {'Discordant Pairs (b/c)':<24} | {'Stat / Chi2':<12} | {'Raw p-val':<11} | {'Holm Adj p':<11} | {'95% CI (Paired Diff)':<28}"
-    print(sig_header, flush=True)
-    print("-" * len(sig_header), flush=True)
+        print("=" * 105, flush=True)
 
-    for s in significance_results:
-        lang = s["lang"]
-        p1_res = s["p1"]
-        r5_res = s["r5"]
-        mrr_res = s["mrr"]
-
-        # P@1
-        p1_key = f"{lang}_P@1"
-        p1_disc = f"+{p1_res['b']} / -{p1_res['c']}"
-        p1_raw_p = f"p={p1_res['p_value']:.4f}"
-        p1_adj_p = f"p={adjusted_p_values[p1_key]:.4f}" + (" *" if adjusted_p_values[p1_key] < 0.05 else "")
-        print(f"{lang:<10} | {'P@1':<10} | {p1_disc:<24} | chi2={p1_res['chi2']:<7.2f} | {p1_raw_p:<11} | {p1_adj_p:<11} | N/A (contingency)", flush=True)
-
-        # Recall@5
-        r5_key = f"{lang}_Recall@5"
-        r5_disc = f"+{r5_res['b']} / -{r5_res['c']}"
-        r5_raw_p = f"p={r5_res['p_value']:.4f}"
-        r5_adj_p = f"p={adjusted_p_values[r5_key]:.4f}" + (" *" if adjusted_p_values[r5_key] < 0.05 else "")
-        print(f"{'':<10} | {'Recall@5':<10} | {r5_disc:<24} | chi2={r5_res['chi2']:<7.2f} | {r5_raw_p:<11} | {r5_adj_p:<11} | N/A (contingency)", flush=True)
-
-        # MRR
-        mrr_key = f"{lang}_MRR"
-        mrr_diff = mrr_res["diff_mean"]
-        mrr_ci = mrr_res["diff_ci"]
-        mrr_raw_p = f"p={mrr_res['p_value']:.4f}"
-        mrr_adj_p = f"p={adjusted_p_values[mrr_key]:.4f}" + (" *" if adjusted_p_values[mrr_key] < 0.05 else "")
-        ci_str = f"+{mrr_diff:.4f} [{mrr_ci[0]:+.4f}, {mrr_ci[1]:+.4f}]"
-        print(f"{'':<10} | {'MRR':<10} | N/A (continuous)         | N/A          | {mrr_raw_p:<11} | {mrr_adj_p:<11} | {ci_str:<28}", flush=True)
+        print("\n" + "=" * 135, flush=True)
+        sig_label = "Development set (test_270, previously contaminated)" if args.strict_clean else "STATISTICAL SIGNIFICANCE TESTS"
+        print(f"STATISTICAL SIGNIFICANCE TESTS: {sig_label}", flush=True)
+        print("(McNemar on P@1/Recall@5, Paired Bootstrap 95% CI on MRR, Holm-Bonferroni Correction)", flush=True)
+        print("=" * 135, flush=True)
+        sig_header = f"{'Language':<10} | {'Comparison':<20} | {'Metric':<10} | {'Discordant Pairs (b/c)':<24} | {'Stat / Chi2':<12} | {'Raw p-val':<11} | {'Holm Adj p':<11} | {'95% CI (Paired Diff)':<28}"
+        print(sig_header, flush=True)
         print("-" * len(sig_header), flush=True)
 
-    print("=" * 122, flush=True)
+        for s in significance_results:
+            lang = s["lang"]
+            for comp_name, comp_key, comp_data in [
+                ("L-12 vs Production", "L12_vs_Prod", s["l12_v_prod"]),
+                ("L-12 vs L-6", "L12_vs_L6", s["l12_v_l6"]),
+                ("L-6 vs Production", "L6_vs_Prod", s["l6_v_prod"]),
+            ]:
+                p1_res = comp_data["p1"]
+                r5_res = comp_data["r5"]
+                mrr_res = comp_data["mrr"]
+
+                p1_k = f"{lang}_{comp_key}_P@1"
+                r5_k = f"{lang}_{comp_key}_Recall@5"
+                mrr_k = f"{lang}_{comp_key}_MRR"
+
+                p1_disc = f"+{p1_res['b']} / -{p1_res['c']}"
+                p1_raw_p = f"p={p1_res['p_value']:.4f}"
+                p1_adj_p = f"p={adjusted_p_values[p1_k]:.4f}" + (" *" if adjusted_p_values[p1_k] < 0.05 else "")
+
+                r5_disc = f"+{r5_res['b']} / -{r5_res['c']}"
+                r5_raw_p = f"p={r5_res['p_value']:.4f}"
+                r5_adj_p = f"p={adjusted_p_values[r5_k]:.4f}" + (" *" if adjusted_p_values[r5_k] < 0.05 else "")
+
+                mrr_diff = mrr_res["diff_mean"]
+                mrr_ci = mrr_res["diff_ci"]
+                mrr_raw_p = f"p={mrr_res['p_value']:.4f}"
+                mrr_adj_p = f"p={adjusted_p_values[mrr_k]:.4f}" + (" *" if adjusted_p_values[mrr_k] < 0.05 else "")
+                ci_str = f"{mrr_diff:+.4f} [{mrr_ci[0]:+.4f}, {mrr_ci[1]:+.4f}]"
+
+                print(f"{lang:<10} | {comp_name:<20} | {'P@1':<10} | {p1_disc:<24} | chi2={p1_res['chi2']:<7.2f} | {p1_raw_p:<11} | {p1_adj_p:<11} | N/A (contingency)", flush=True)
+                print(f"{'':<10} | {'':<20} | {'Recall@5':<10} | {r5_disc:<24} | chi2={r5_res['chi2']:<7.2f} | {r5_raw_p:<11} | {r5_adj_p:<11} | N/A (contingency)", flush=True)
+                print(f"{'':<10} | {'':<20} | {'MRR':<10} | N/A (continuous)         | N/A          | {mrr_raw_p:<11} | {mrr_adj_p:<11} | {ci_str:<28}", flush=True)
+                print("-" * len(sig_header), flush=True)
+
+        print("=" * 135, flush=True)
+
+    else:
+        adjusted_p_values = holm_bonferroni_correction(raw_p_values)
+
+        print("\n" + "=" * 98, flush=True)
+        if args.strict_clean:
+            mode_str = "Development set (test_270, previously contaminated) [--strict-clean]"
+        elif args.clean_synonyms:
+            mode_str = "CLEAN SYNONYMS (PRE-COMMIT bc6c53ff)"
+        else:
+            mode_str = "PRODUCTION SYNONYMS"
+        print(f"FINAL EVALUATION RESULTS: {mode_str}", flush=True)
+        print("=" * 98, flush=True)
+        header = f"{'Language / Dataset':<20} | {'System':<23} | {'Recall@5':<9} | {'P@1':<7} | {'MRR':<7} | {'nDCG@5':<7} | {'Latency (CPU)':<13}"
+        print(header, flush=True)
+        print("-" * len(header), flush=True)
+
+        for row in table_rows:
+            l = row["lang"]
+            p = row["prod"]
+            r = row["rerank"]
+            print(f"{l:<20} | {'Current Production':<23} | {p['r5']:<9.4f} | {p['p1']:<7.4f} | {p['mrr']:<7.4f} | {p['ndcg']:<7.4f} | {p['time']:>7.1f} ms/q", flush=True)
+            print(f"{'':<20} | {'Production + Reranker':<23} | {r['r5']:<9.4f} | {r['p1']:<7.4f} | {r['mrr']:<7.4f} | {r['ndcg']:<7.4f} | {r['time']:>7.1f} ms/q", flush=True)
+            print("-" * len(header), flush=True)
+
+        print("=" * 98, flush=True)
+
+        print("\n" + "=" * 122, flush=True)
+        sig_label = "Development set (test_270, previously contaminated)" if args.strict_clean else "STATISTICAL SIGNIFICANCE TESTS"
+        print(f"STATISTICAL SIGNIFICANCE TESTS: {sig_label}", flush=True)
+        print("(McNemar on P@1/Recall@5, Paired Bootstrap 95% CI on MRR, Holm-Bonferroni Correction across all tests)", flush=True)
+        print("=" * 122, flush=True)
+        sig_header = f"{'Language':<10} | {'Metric':<10} | {'Discordant Pairs (b/c)':<24} | {'Stat / Chi2':<12} | {'Raw p-val':<11} | {'Holm Adj p':<11} | {'95% CI (Paired Diff)':<28}"
+        print(sig_header, flush=True)
+        print("-" * len(sig_header), flush=True)
+
+        for s in significance_results:
+            lang = s["lang"]
+            p1_res = s["p1"]
+            r5_res = s["r5"]
+            mrr_res = s["mrr"]
+
+            p1_key = f"{lang}_P@1"
+            p1_disc = f"+{p1_res['b']} / -{p1_res['c']}"
+            p1_raw_p = f"p={p1_res['p_value']:.4f}"
+            p1_adj_p = f"p={adjusted_p_values[p1_key]:.4f}" + (" *" if adjusted_p_values[p1_key] < 0.05 else "")
+            print(f"{lang:<10} | {'P@1':<10} | {p1_disc:<24} | chi2={p1_res['chi2']:<7.2f} | {p1_raw_p:<11} | {p1_adj_p:<11} | N/A (contingency)", flush=True)
+
+            r5_key = f"{lang}_Recall@5"
+            r5_disc = f"+{r5_res['b']} / -{r5_res['c']}"
+            r5_raw_p = f"p={r5_res['p_value']:.4f}"
+            r5_adj_p = f"p={adjusted_p_values[r5_key]:.4f}" + (" *" if adjusted_p_values[r5_key] < 0.05 else "")
+            print(f"{'':<10} | {'Recall@5':<10} | {r5_disc:<24} | chi2={r5_res['chi2']:<7.2f} | {r5_raw_p:<11} | {r5_adj_p:<11} | N/A (contingency)", flush=True)
+
+            mrr_key = f"{lang}_MRR"
+            mrr_diff = mrr_res["diff_mean"]
+            mrr_ci = mrr_res["diff_ci"]
+            mrr_raw_p = f"p={mrr_res['p_value']:.4f}"
+            mrr_adj_p = f"p={adjusted_p_values[mrr_key]:.4f}" + (" *" if adjusted_p_values[mrr_key] < 0.05 else "")
+            ci_str = f"+{mrr_diff:.4f} [{mrr_ci[0]:+.4f}, {mrr_ci[1]:+.4f}]"
+            print(f"{'':<10} | {'MRR':<10} | N/A (continuous)         | N/A          | {mrr_raw_p:<11} | {mrr_adj_p:<11} | {ci_str:<28}", flush=True)
+            print("-" * len(sig_header), flush=True)
+
+        print("=" * 122, flush=True)
+
 
 
 if __name__ == "__main__":
