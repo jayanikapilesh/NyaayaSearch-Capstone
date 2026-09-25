@@ -300,10 +300,27 @@ def ensure_translations_for_dataset(lang, lang_title, queries, en_filepath, refr
 
     with open(en_filepath, "r", encoding="utf-8") as f:
         en_raw = json.load(f)
-    en_queries = [item[0] for item in en_raw]
 
-    if len(queries) != len(en_queries):
-        raise ValueError(f"Mismatch between {lang_title} query count ({len(queries)}) and English query count ({len(en_queries)})")
+    if len(queries) > len(en_raw):
+        raise ValueError(f"More {lang_title} queries ({len(queries)}) than English queries ({len(en_raw)})")
+
+    paired_en = en_raw[:len(queries)]
+    en_queries = [item[0] for item in paired_en]
+
+    # Verify that for every index, the Hindi/Kannada item has the same act and section as the English item
+    mismatches = []
+    for idx, ((q, act, sec), (en_q, en_act, en_sec)) in enumerate(zip(queries, paired_en), start=1):
+        if str(act).strip() != str(en_act).strip() or str(sec).strip() != str(en_sec).strip():
+            mismatches.append(
+                f"  - Query #{idx}: {lang_title}=({act}, Sec {sec}) vs English=({en_act}, Sec {en_sec})"
+            )
+
+    if mismatches:
+        err_msg = (
+            f"CRITICAL ERROR: Ground truth mismatch between {lang_title} and paired English items:\n"
+            + "\n".join(mismatches)
+        )
+        raise RuntimeError(err_msg)
 
     queries_to_translate = []
     for idx, (q, _, _) in enumerate(queries):
