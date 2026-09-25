@@ -39,6 +39,7 @@ def load_engine():
 class SearchRequest(BaseModel):
     query: str
     top_k: int = 5
+    rerank: bool | None = None
 
 
 class DocumentQuestionRequest(BaseModel):
@@ -108,7 +109,8 @@ def search(request: SearchRequest):
     validate_query(request.query)
     search_query, _ = resolve_search_query(request.query)
     try:
-        results = engine.search(search_query, top_k=request.top_k)
+        rerank = True if request.rerank is None else request.rerank
+        results = engine.search(search_query, top_k=request.top_k, rerank=rerank)
         results = attach_related_cases(results)
         return {"query": request.query, "results": results}
     except Exception as e:
@@ -122,7 +124,8 @@ def explain(request: SearchRequest):
     search_query, detected_language = resolve_search_query(request.query)
 
     try:
-        results = engine.search(search_query, top_k=request.top_k)
+        rerank = True if request.rerank is None else request.rerank
+        results = engine.search(search_query, top_k=request.top_k, rerank=rerank)
         results = attach_related_cases(results)
     except Exception:
         raise HTTPException(status_code=500, detail="Search failed unexpectedly. Please try again.")

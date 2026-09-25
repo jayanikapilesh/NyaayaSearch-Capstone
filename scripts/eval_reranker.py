@@ -631,7 +631,11 @@ def main():
     if is_compare:
         l6_name = "cross-encoder/ms-marco-MiniLM-L-6-v2"
         l12_name = "cross-encoder/ms-marco-MiniLM-L-12-v2"
-        l6_model, _ = get_cross_encoder(l6_name)
+        if getattr(engine, "cross_encoder", None) is not None:
+            l6_model = engine.cross_encoder
+            print(f"Using SearchEngine built-in CrossEncoder: {l6_name}", flush=True)
+        else:
+            l6_model, _ = get_cross_encoder(l6_name)
         l12_model, _ = get_cross_encoder(l12_name)
 
         if args.tune:
@@ -645,7 +649,12 @@ def main():
             l12_top_k = args.top_n_rerank if args.top_n_rerank is not None else DEFAULT_MODEL_SETTINGS[l12_name]["top_k"]
             l12_weight = args.weight_cross if args.weight_cross is not None else DEFAULT_MODEL_SETTINGS[l12_name]["weight"]
     else:
-        cross_model, model_name = get_cross_encoder(args.reranker)
+        if args.reranker == "cross-encoder/ms-marco-MiniLM-L-6-v2" and getattr(engine, "cross_encoder", None) is not None:
+            cross_model = engine.cross_encoder
+            model_name = args.reranker
+            print(f"Using SearchEngine built-in CrossEncoder: {model_name}", flush=True)
+        else:
+            cross_model, model_name = get_cross_encoder(args.reranker)
         default_cfg = DEFAULT_MODEL_SETTINGS.get(model_name, {"top_k": 10, "weight": 0.8})
         top_n_rerank = args.top_n_rerank if args.top_n_rerank is not None else default_cfg["top_k"]
         weight_cross = args.weight_cross if args.weight_cross is not None else default_cfg["weight"]
@@ -717,9 +726,9 @@ def main():
                 else:
                     search_q = query
 
-                # 1. Retrieve top-20 candidates using production search
+                # 1. Retrieve top-20 candidates using production search (without reranker)
                 t_s0 = time.perf_counter()
-                candidates = engine.search(search_q, top_k=20)
+                candidates = engine.search(search_q, top_k=20, rerank=False)
                 search_time = time.perf_counter() - t_s0
 
                 # 2. Production baseline metrics
@@ -728,23 +737,24 @@ def main():
                     prod_metrics[k].append(p_m[k])
                 prod_metrics["time"].append(search_time)
 
-                # 3. L-6 Reranker
-                l6_cands, l6_time = rerank_candidates(
-                    search_q, candidates, l6_model, top_n_rerank=l6_top_k, weight_cross=l6_weight
-                )
+                # 3. L-6 Reranker: calls built-in SearchEngine reranking
+                t_l6_0 = time.perf_counter()
+                l6_cands = engine.search(search_q, top_k=20, rerank=True)
+                l6_time = time.perf_counter() - t_l6_0
+
                 r6_m = compute_query_metrics(l6_cands[:10], expected_act, expected_section)
                 for k in ["recall_at_5", "precision_at_1", "mrr", "ndcg_at_5"]:
                     l6_metrics[k].append(r6_m[k])
-                l6_metrics["time"].append(search_time + l6_time)
+                l6_metrics["time"].append(l6_time)
 
                 # 4. L-12 Reranker
-                l12_cands, l12_time = rerank_candidates(
+                l12_cands, l12_rerank_time = rerank_candidates(
                     search_q, candidates, l12_model, top_n_rerank=l12_top_k, weight_cross=l12_weight
                 )
                 r12_m = compute_query_metrics(l12_cands[:10], expected_act, expected_section)
                 for k in ["recall_at_5", "precision_at_1", "mrr", "ndcg_at_5"]:
                     l12_metrics[k].append(r12_m[k])
-                l12_metrics["time"].append(search_time + l12_time)
+                l12_metrics["time"].append(search_time + l12_rerank_time)
 
                 if idx % 15 == 0 or idx == n_queries:
                     print(f"  [{lang_title}] Processed {idx}/{n_queries} queries...", flush=True)
@@ -820,7 +830,7 @@ def main():
                     search_q = query
 
                 t_s0 = time.perf_counter()
-                candidates = engine.search(search_q, top_k=20)
+                candidates = engine.search(search_q, top_k=20, rerank=False)
                 search_time = time.perf_counter() - t_s0
 
                 p_m = compute_query_metrics(candidates[:10], expected_act, expected_section)
@@ -828,13 +838,29 @@ def main():
                     prod_metrics[k].append(p_m[k])
                 prod_metrics["time"].append(search_time)
 
-                reranked_cands, rerank_time = rerank_candidates(
-                    search_q, candidates, cross_model, top_n_rerank=top_n_rerank, weight_cross=weight_cross
+                is_builtin_l6 = (
+                    model_name == "cross-encoder/ms-marco-MiniLM-L-6-v2"
+                    and top_n_rerank == 10
+                    and abs(weight_cross - 0.8) < 1e-4
+                    and getattr(engine, "cross_encoder", None) is not None
                 )
-                r_m = compute_query_metrics(reranked_cands[:10], expected_act, expected_section)
-                for k in ["recall_at_5", "precision_at_1", "mrr", "ndcg_at_5"]:
-                    rerank_metrics[k].append(r_m[k])
-                rerank_metrics["time"].append(search_time + rerank_time)
+
+                if is_builtin_l6:
+                    t_r0 = time.perf_counter()
+                    reranked_cands = engine.search(search_q, top_k=20, rerank=True)
+                    rerank_total_time = time.perf_counter() - t_r0
+                    r_m = compute_query_metrics(reranked_cands[:10], expected_act, expected_section)
+                    for k in ["recall_at_5", "precision_at_1", "mrr", "ndcg_at_5"]:
+                        rerank_metrics[k].append(r_m[k])
+                    rerank_metrics["time"].append(rerank_total_time)
+                else:
+                    reranked_cands, rerank_time = rerank_candidates(
+                        search_q, candidates, cross_model, top_n_rerank=top_n_rerank, weight_cross=weight_cross
+                    )
+                    r_m = compute_query_metrics(reranked_cands[:10], expected_act, expected_section)
+                    for k in ["recall_at_5", "precision_at_1", "mrr", "ndcg_at_5"]:
+                        rerank_metrics[k].append(r_m[k])
+                    rerank_metrics["time"].append(search_time + rerank_time)
 
                 if idx % 15 == 0 or idx == n_queries:
                     print(f"  [{lang_title}] Processed {idx}/{n_queries} queries...", flush=True)

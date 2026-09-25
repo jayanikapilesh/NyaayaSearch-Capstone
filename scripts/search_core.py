@@ -5,7 +5,7 @@ import os
 import numpy as np
 import openpyxl
 from rank_bm25 import BM25Okapi
-from sentence_transformers import SentenceTransformer
+from sentence_transformers import SentenceTransformer, CrossEncoder
 
 DATASET = os.path.join(os.path.dirname(__file__), "..", "Legal_Knowledge_Base_combined.xlsx")
 CACHE_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
@@ -276,6 +276,21 @@ class SearchEngine:
             except Exception as e:
                 print(f"Warning: Could not save embeddings cache: {e}")
 
+        # Cross-Encoder Reranker: loaded ONCE at startup
+        self.reranker_model_name = "cross-encoder/ms-marco-MiniLM-L-6-v2"
+        self.use_reranker = os.environ.get("USE_RERANKER", "1").lower() in ("1", "true", "yes")
+        self.cross_encoder = None
+        try:
+            try:
+                self.cross_encoder = CrossEncoder(self.reranker_model_name, local_files_only=True)
+                print(f"Loaded CrossEncoder from local cache: {self.reranker_model_name}")
+            except Exception:
+                self.cross_encoder = CrossEncoder(self.reranker_model_name)
+                print(f"Loaded CrossEncoder: {self.reranker_model_name}")
+        except Exception as e:
+            print(f"Warning: Failed to load cross-encoder {self.reranker_model_name} ({e}), reranking disabled.")
+            self.use_reranker = False
+
         print("Search system ready.")
 
     def lookup_section(self, act_name_contains, section_number):
@@ -287,7 +302,8 @@ class SearchEngine:
                 return record
         return None
 
-    def search(self, query, top_k=5):
+    def search(self, query, top_k=5, rerank=True):
+        raw_query = query
         query = expand_ipc_references(query)
         expanded_query = expand_query(query)
         query_tokens = tokenize(expanded_query)
@@ -399,18 +415,46 @@ class SearchEngine:
                 if "bharatiya nyaya sanhita" in str(record.get("act_name") or "").lower() and str(record.get("section_number") or "") == ipc_target_section:
                     final_scores[i] = final_scores.max() + 1.0
 
-        top_indices = np.argsort(final_scores)[::-1][:top_k]
+        # Determine if reranking should be performed
+        should_rerank = bool(rerank) and self.cross_encoder is not None
+        if os.environ.get("USE_RERANKER", "1").lower() in ("0", "false", "no"):
+            should_rerank = False
 
-        results = []
-        for index in top_indices:
+        if not should_rerank:
+            top_indices = np.argsort(final_scores)[::-1][:top_k]
+            results = []
+            for index in top_indices:
+                record = self.records[index]
+                section_text = (
+                    str(record.get("section_title") or "") + " " +
+                    str(record.get("legal_text") or "")
+                )
+                matched_terms = find_matched_terms(query_tokens, section_text)
+                results.append({
+                    "act_name": record.get("act_name"),
+                    "section_number": record.get("section_number"),
+                    "section_title": record.get("section_title"),
+                    "legal_text": record.get("legal_text"),
+                    "hybrid_score": float(final_scores[index]),
+                    "semantic_score": float(semantic_scores[index]),
+                    "bm25_score": float(bm25_scores[index]),
+                    "matched_terms": matched_terms,
+                })
+            return results
+
+        # Reranking path: retrieve top-20 (or max(20, top_k)), rerank top-10
+        pool_k = max(20, top_k)
+        candidate_indices = np.argsort(final_scores)[::-1][:pool_k]
+
+        candidates = []
+        for index in candidate_indices:
             record = self.records[index]
             section_text = (
                 str(record.get("section_title") or "") + " " +
                 str(record.get("legal_text") or "")
             )
             matched_terms = find_matched_terms(query_tokens, section_text)
-
-            results.append({
+            candidates.append({
                 "act_name": record.get("act_name"),
                 "section_number": record.get("section_number"),
                 "section_title": record.get("section_title"),
@@ -420,7 +464,37 @@ class SearchEngine:
                 "bm25_score": float(bm25_scores[index]),
                 "matched_terms": matched_terms,
             })
-        return results
+
+        n_rerank = min(10, len(candidates))
+        if n_rerank <= 1:
+            return candidates[:top_k]
+
+        to_rerank = candidates[:n_rerank]
+        remaining = candidates[n_rerank:]
+
+        pairs = [
+            (raw_query, f"{r.get('act_name', '')}, Section {r.get('section_number', '')}: {r.get('section_title', '')}. {str(r.get('legal_text') or '')[:400]}")
+            for r in to_rerank
+        ]
+
+        cross_logits = self.cross_encoder.predict(pairs, show_progress_bar=False)
+
+        hybrid_scores = np.array([r.get("hybrid_score", 0.0) for r in to_rerank], dtype=float)
+        h_max = hybrid_scores.max() if hybrid_scores.max() > 0 else 1.0
+        h_norm = hybrid_scores / h_max
+
+        c_norm = 1.0 / (1.0 + np.exp(-cross_logits))
+        rerank_scores = 0.2 * h_norm + 0.8 * c_norm
+
+        for i, r in enumerate(to_rerank):
+            r["rerank_score"] = float(rerank_scores[i])
+
+        for r in remaining:
+            r["rerank_score"] = float(0.2 * (r.get("hybrid_score", 0.0) / h_max))
+
+        sort_order = np.argsort(rerank_scores)[::-1]
+        reranked = [to_rerank[i] for i in sort_order] + remaining
+        return reranked[:top_k]
 
 
 
