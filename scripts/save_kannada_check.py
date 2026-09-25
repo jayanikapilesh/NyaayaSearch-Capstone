@@ -1,0 +1,22 @@
+kannada_check = [
+    ("ಅಜಾಗರೂಕ ಚಾಲನೆಗೆ ಶಿಕ್ಷೆ ಏನು", "Bharatiya Nyaya Sanhita, 2023", "281"),
+    ("ಸ್ಥಳೀಯ ಮಿತಿಯ ಹೊರಗೆ ಸಮನ್ಸ್ ಹೇಗೆ ತಲುಪಿಸಲಾಗುತ್ತದೆ", "Bharatiya Nagarik Suraksha Sanhita, 2023", "69"),
+    ("ಕದ್ದ ಕಂಪ್ಯೂಟರ್ ಸಾಧನವನ್ನು ಸ್ವೀಕರಿಸುವುದು ಅಪರಾಧವೇ", "Information Technology Act, 2000", "66B"),
+    ("ಕೌಟುಂಬಿಕ ಹಿಂಸೆ ಪ್ರಕರಣದಲ್ಲಿ ನೋಟಿಸ್ ಹೇಗೆ ನೀಡಲಾಗುತ್ತದೆ", "Protection of Women from Domestic Violence Act, 2005", "13"),
+    ("ಮೋಟಾರು ವಾಹನ ಪ್ರಾಧಿಕಾರದ ನಿರ್ಧಾರದ ವಿರುದ್ಧ ಮೇಲ್ಮನವಿ ಸಲ್ಲಿಸಬಹುದೇ", "Motor Vehicles Act, 1988", "89"),
+    ("ಮನೆ ಖಾಲಿ ಮಾಡುವ ನೋಟಿಸ್ ಅನ್ನು ಮಾಲೀಕ ಬಿಟ್ಟುಬಿಡಬಹುದೇ", "Transfer of Property Act, 1882", "113"),
+    ("ಸುಳ್ಳು ಮಾಹಿತಿ ಹರಡುವುದು ಅಪರಾಧವೇ", "Bharatiya Nyaya Sanhita, 2023", "353"),
+    ("ಪೊಲೀಸರಿಗೆ ಅಪರಾಧದ ಮಾಹಿತಿ ಹೇಗೆ ನೀಡುವುದು", "Bharatiya Nagarik Suraksha Sanhita, 2023", "173"),
+    ("ನ್ಯಾಯಾಲಯ ಆರೋಪಿಯನ್ನು ಪ್ರಶ್ನಿಸಬಹುದೇ", "Bharatiya Nagarik Suraksha Sanhita, 2023", "351"),
+    ("ವಿಚಾರಣೆ ಬಾಕಿ ಇರುವಾಗ ನ್ಯಾಯಾಲಯ ತಡೆಯಾಜ್ಞೆ ನೀಡಬಹುದೇ", "Bharatiya Nagarik Suraksha Sanhita, 2023", "161"),
+    ("ಅಪೂರ್ಣ ಹಕ್ಕು ಇರುವ ವ್ಯಕ್ತಿಯಿಂದ ಖರೀದಿಸಿದರೆ ಏನಾಗುತ್ತದೆ", "Specific Relief Act, 1963", "13"),
+    ("ಕಂಡಕ್ಟರ್ ಪರವಾನಗಿಗೂ ಚಾಲಕ ಪರವಾನಗಿಯ ನಿಯಮಗಳು ಅನ್ವಯಿಸುತ್ತವೆಯೇ", "Motor Vehicles Act, 1988", "36"),
+    ("ಬೀಗ ಹಾಕಿದ ಪೆಟ್ಟಿಗೆಯನ್ನು ಒಡೆದು ಕಳ್ಳತನ ಮಾಡುವುದು ಅಪರಾಧವೇ", "Bharatiya Nyaya Sanhita, 2023", "334"),
+    ("ಸಾರಿಗೆ ಪ್ರಾಧಿಕಾರದ ಆದೇಶವನ್ನು ಮರುಪರಿಶೀಲಿಸಬಹುದೇ", "Motor Vehicles Act, 1988", "90"),
+    ("ಆಸ್ತಿ ಮಾರಾಟ ಮಾಡದಂತೆ ಷರತ್ತು ವಿಧಿಸಬಹುದೇ", "Transfer of Property Act, 1882", "10"),
+]
+
+import json
+with open("../data/eval/kannada_check_set.json", "w", encoding="utf-8") as f:
+    json.dump(kannada_check, f, indent=2, ensure_ascii=False)
+print(f"Saved {len(kannada_check)} queries")

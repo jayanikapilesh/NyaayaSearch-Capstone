@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "gradient-text",
+        "value": "*",
+        "files": [
+          "src/App.css"
+        ],
+        "createdAt": "2026-09-24T16:10:23.637Z",
+        "reason": "user explicitly requested gradient on first words of hero headline in original design brief"
+      }
+    ]
+  }
+}

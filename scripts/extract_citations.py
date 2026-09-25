@@ -5,10 +5,10 @@ from bs4 import BeautifulSoup
 INPUT_FILE = "../data/case_law/processed/Dataset2_Case_Law_Corpus_2015_2025.csv"
 OUTPUT_FILE = "../data/case_law/processed/case_citations.csv"
 
-WORD = r"(?:[A-Z][a-z]+|of|the|and)"
+WORD = r"(?:[A-Z][a-z]+|of|the|and|\((?:[A-Z][a-z]+|of|and|the)(?:\s+(?:[A-Z][a-z]+|of|and|the)){0,4}\))"
 
 PATTERN_ACT_SECTION = re.compile(
-    rf"((?:{WORD}\s+){{1,6}}Act,?\s*\d{{4}})\s*[\-–—]?\s*[:\-–—]?\s*(?:ss?\.?|Sections?)\s*((?:\d+[A-Za-z]?(?:\(\w+\))?\s*(?:,\s*|and\s+))*\d+[A-Za-z]?(?:\(\w+\))?)",
+    rf"((?:{WORD}\s+){{1,6}}Act[,.]?\s*\d{{4}})\s*[\-–—]?\s*[:\-–—]?\s*(?:ss?\.?|Sections?)\s*((?:\d+[A-Za-z]?(?:\(\w+\))?\s*(?:,\s*|and\s+))*\d+[A-Za-z]?(?:\(\w+\))?)",
 )
 
 PATTERN_US_OF = re.compile(
@@ -16,7 +16,7 @@ PATTERN_US_OF = re.compile(
 )
 
 PATTERN_CODE_SECTION = re.compile(
-    rf"((?:{WORD}\s+){{0,5}}(?:Penal Code|Code of Criminal Procedure|Code of Civil Procedure|Insolvency and Bankruptcy Code)),?\s*\d{{4}}\s*[:\-–—]?\s*(?:ss?\.?|Sections?)\s*((?:\d+[A-Za-z]?(?:/\d+[A-Za-z]?)*(?:\(\w+\))?\s*(?:,\s*|and\s+))*\d+[A-Za-z]?(?:/\d+[A-Za-z]?)*(?:\(\w+\))?)",
+    rf"((?:{WORD}\s+){{0,5}}(?:Penal Code|Code of Criminal Procedure|Code of Civil Procedure|Insolvency and Bankruptcy Code))[,.]?\s*\d{{4}}\s*[:\-–—]?\s*(?:ss?\.?|Sections?)\s*((?:\d+[A-Za-z]?(?:/\d+[A-Za-z]?)*(?:\(\w+\))?\s*(?:,\s*|and\s+))*\d+[A-Za-z]?(?:/\d+[A-Za-z]?)*(?:\(\w+\))?)",
 )
 
 # NEW: "u/s(s) X (and Y) of (the) Z Code" - parallel to PATTERN_US_OF but for Code names, not Acts

@@ -1,0 +1,131 @@
+/* ==========================================================================
+   Nyaaya Search theme tokens.
+   Single source of truth for color and font variables, consumed by every
+   component's CSS via var(--token-name). Light theme lives in :root,
+   dark theme (the brand's primary look) overrides under .dark-mode.
+   ========================================================================== */
+
+:root {
+  /* Brand colors (light theme) */
+  --color-bg: #F7F4EA;
+  --color-bg-alt: #F0EADA;
+  --color-surface: #FFFFFF;
+  --color-surface-muted: #F1ECDF;
+  --color-ink: #12182A;
+  --color-ink-soft: #3E4B63;
+  --color-primary: #B8863B;
+  --color-primary-strong: #96702F;
+  --color-on-primary: #FFFFFF;
+  --color-secondary: #157167;
+  --color-secondary-strong: #0F5951;
+  --color-on-secondary: #FFFFFF;
+  --color-border: #DED6C0;
+
+  /* Accent (brass/gold) - reserved for the strongest signal on the page */
+  --color-accent: #B8863B;
+  --color-accent-bg: #F6E8CC;
+  --color-accent-text: #7A5C26;
+
+  /* Neutral text scale, tuned to match --color-ink */
+  --color-text-secondary: var(--color-ink-soft);
+  --color-text-muted: #5C6579;
+  --color-text-subtle: #6E7688;
+
+  /* Status colors */
+  --color-danger: #a10000;
+  --color-danger-bg: #fde8e8;
+  --color-danger-strong: #c0392b;
+  --color-warning: #8a6d1a;
+  --color-warning-bg: #fff8e6;
+  --color-warning-border: #f0d896;
+  --color-success-bg: #d4edda;
+  --color-success-border: #28a745;
+  --color-incorrect-bg: #f8d7da;
+  --color-incorrect-border: #dc3545;
+
+  /* Chip/pill tint (language toggle, history chips, hover states) */
+  --color-chip-bg: #EEF5F3;
+  --color-chip-border: #CCE2DC;
+  --color-chip-bg-hover: #DEEEE9;
+
+  /* Shadows and glows */
+  --shadow-card: 0 8px 24px rgba(18, 24, 42, 0.08);
+  --shadow-gold-glow: 0 0 0 1px rgba(184, 134, 59, 0.35), 0 0 24px rgba(184, 134, 59, 0.25);
+  --shadow-focus-ring: 0 0 0 3px rgba(184, 134, 59, 0.3);
+
+  /* Fonts */
+  --font-heading: "Playfair Display", Georgia, serif;
+  --font-body: "Inter", "Noto Sans Devanagari", "Noto Sans Kannada", -apple-system, sans-serif;
+
+  /* Type scale */
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.85rem;
+  --fs-base: 0.95rem;
+  --fs-md: 1.1rem;
+  --fs-lg: 1.35rem;
+  --fs-xl: 2.4rem;
+  --fs-2xl: 3.2rem;
+
+  /* Spacing scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 28px;
+  --space-8: 32px;
+  --space-9: 40px;
+
+  /* Border-radius system: one tier per role, used everywhere */
+  --radius-sm: 8px;    /* inputs, buttons, nested content boxes */
+  --radius-md: 12px;   /* primary card containers */
+  --radius-pill: 999px; /* chips, tags, badges, nav */
+  --radius-tag: 2px;   /* official citation tags (Section N) - deliberately sharp,
+                          distinct from the soft pill/sm/md family, to read as a
+                          stamped label rather than a conversational chip */
+}
+
+.dark-mode {
+  /* Brand colors (dark theme - primary brand identity) */
+  --color-bg: #0B1220;
+  --color-bg-alt: #101A2C;
+  --color-surface: #151F34;
+  --color-surface-muted: #1B2740;
+  --color-ink: #F2EFE6;
+  --color-ink-soft: #C9D1E0;
+  --color-primary: #D9AD5F;
+  --color-primary-strong: #F0C877;
+  --color-on-primary: #14202E;
+  --color-secondary: #4DD8C8;
+  --color-secondary-strong: #7FE9DC;
+  --color-on-secondary: #08201C;
+  --color-border: #2A3650;
+
+  --color-accent: #D9AD5F;
+  --color-accent-bg: #3A2E15;
+  --color-accent-text: #E0B866;
+
+  --color-text-secondary: #A8B2C7;
+  --color-text-muted: #8590A6;
+  --color-text-subtle: #7B8699;
+
+  --color-danger: #e08080;
+  --color-danger-bg: #3a1c1c;
+  --color-danger-strong: #e2695c;
+  --color-warning: #e0c980;
+  --color-warning-bg: #3a341c;
+  --color-warning-border: #5a4f28;
+  --color-success-bg: #1f3d24;
+  --color-success-border: #3fbf63;
+  --color-incorrect-bg: #3d1f22;
+  --color-incorrect-border: #e0555f;
+
+  --color-chip-bg: #17262A;
+  --color-chip-border: #2A3F42;
+  --color-chip-bg-hover: #1E3236;
+
+  --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-gold-glow: 0 0 0 1px rgba(217, 173, 95, 0.5), 0 0 32px rgba(217, 173, 95, 0.35);
+  --shadow-focus-ring: 0 0 0 3px rgba(217, 173, 95, 0.4);
+}
