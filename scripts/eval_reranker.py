@@ -86,6 +86,95 @@ def apply_clean_synonyms():
     print(f"  - Patch verified: expand_query('{test_q}') -> '{expanded}' (no leak)\n", flush=True)
 
 
+def extract_added_synonym_keys(commit_hash):
+    """
+    Extracts synonym keys added in a given commit using git diff on scripts/search_core.py.
+    """
+    cmd = ["git", "diff", f"{commit_hash}~1..{commit_hash}", "scripts/search_core.py"]
+    try:
+        diff_text = subprocess.check_output(cmd, text=True, encoding="utf-8")
+    except Exception as e:
+        raise RuntimeError(f"Failed to run git diff on commit {commit_hash}: {e}")
+
+    keys = set()
+    for line in diff_text.splitlines():
+        if line.startswith("+") and not line.startswith("+++"):
+            m = re.search(r'"([^"]+)"\s*:\s*\[', line)
+            if m:
+                keys.add(m.group(1))
+    return keys
+
+
+def apply_strict_clean(engine):
+    """
+    In-memory strict clean mode:
+    (a) Removes all synonym keys added in commits 1d7000c1 and bc6c53ff
+        (extracted dynamically via git diff).
+    (b) Disables the IPC_TO_BNS score override added in d4ace4a8.
+    Verifies each patch with example queries.
+    """
+    # Pre-patch queries
+    syn1_q = "What's the punishment for seriously injuring someone on purpose?"  # from 1d7000c1
+    syn2_q = "What happens if I give the property back empty"  # from bc6c53ff
+    ipc_q = "What is IPC 302?"  # from d4ace4a8
+
+    exp1_pre = search_core.expand_query(syn1_q)
+    exp2_pre = search_core.expand_query(syn2_q)
+    ipc_exp_pre = search_core.expand_ipc_references(ipc_q)
+
+    res_pre = engine.search(ipc_q, top_k=3)
+    search_pre_ipc = f"{res_pre[0]['act_name']} Sec {res_pre[0]['section_number']} (score={res_pre[0]['hybrid_score']:.4f})"
+
+    # (a) Remove synonym keys added in 1d7000c1 and bc6c53ff
+    keys_1d = extract_added_synonym_keys("1d7000c1")
+    keys_bc = extract_added_synonym_keys("bc6c53ff")
+    keys_to_remove = keys_1d | keys_bc
+
+    orig_syn_count = len(search_core.SYNONYMS)
+    for k in keys_to_remove:
+        search_core.SYNONYMS.pop(k, None)
+    new_syn_count = len(search_core.SYNONYMS)
+
+    # (b) Disable IPC_TO_BNS score override
+    orig_ipc_count = len(search_core.IPC_TO_BNS)
+    search_core.IPC_TO_BNS.clear()
+    new_ipc_count = len(search_core.IPC_TO_BNS)
+
+    # Post-patch verification queries
+    exp1_post = search_core.expand_query(syn1_q)
+    exp2_post = search_core.expand_query(syn2_q)
+    ipc_exp_post = search_core.expand_ipc_references(ipc_q)
+    res_post = engine.search(ipc_q, top_k=3)
+    search_post_ipc = f"{res_post[0]['act_name']} Sec {res_post[0]['section_number']} (score={res_post[0]['hybrid_score']:.4f})"
+
+    assert "grievous hurt" not in exp1_post, "Patch (a) verification failed: 'grievous hurt' still present!"
+    assert "vacant possession" not in exp2_post, "Patch (a) verification failed: 'vacant possession' still present!"
+    assert "bns section 103" not in ipc_exp_post, "Patch (b) verification failed: IPC reference still expanded!"
+    assert ("103" not in search_post_ipc or res_post[0]["hybrid_score"] < 1.0), "Patch (b) verification failed: score override still active!"
+
+    print("\n" + "=" * 86, flush=True)
+    print("      [--strict-clean] IN-MEMORY PATCHES APPLIED & INDEPENDENTLY VERIFIED", flush=True)
+    print("=" * 86, flush=True)
+    print(f"Patch (a): Removed synonym keys from commits 1d7000c1 ({len(keys_1d)} keys) and bc6c53ff ({len(keys_bc)} keys)", flush=True)
+    print(f"  - Total unique synonym keys removed: {len(keys_to_remove)} (dictionary size: {orig_syn_count} -> {new_syn_count})", flush=True)
+    print("  - Verification Example 1 (commit 1d7000c1 - 'seriously injuring' -> 'grievous hurt'):", flush=True)
+    print(f"      Query: '{syn1_q}'", flush=True)
+    print(f"      Before patch: 'grievous hurt' in expand_query: {'grievous hurt' in exp1_pre}", flush=True)
+    print(f"      After patch:  'grievous hurt' in expand_query: {'grievous hurt' in exp1_post} [REMOVED]", flush=True)
+    print("  - Verification Example 2 (commit bc6c53ff - 'give the property back empty' -> 'vacant possession'):", flush=True)
+    print(f"      Query: '{syn2_q}'", flush=True)
+    print(f"      Before patch: 'vacant possession' in expand_query: {'vacant possession' in exp2_pre}", flush=True)
+    print(f"      After patch:  'vacant possession' in expand_query: {'vacant possession' in exp2_post} [REMOVED]", flush=True)
+
+    print(f"\nPatch (b): Disabled IPC_TO_BNS score override from commit d4ace4a8", flush=True)
+    print(f"  - IPC_TO_BNS mappings cleared in-memory: {orig_ipc_count} -> {new_ipc_count}", flush=True)
+    print("  - Verification Example (commit d4ace4a8 - IPC 302 -> BNS 103 direct score override):", flush=True)
+    print(f"      Query: '{ipc_q}'", flush=True)
+    print(f"      Before patch top result: {search_pre_ipc} [OVERRIDDEN: score > 1.0]", flush=True)
+    print(f"      After patch top result:  {search_post_ipc} [NATURAL RETRIEVAL: score < 1.0]", flush=True)
+    print("=" * 86 + "\n", flush=True)
+
+
 def get_cross_encoder():
     """
     Attempt to load preferred multilingual cross-encoder (cross-encoder/mmarco-mMiniLMv2-L12-H384-v1).
@@ -368,18 +457,23 @@ def main():
     parser.add_argument("--weight_cross", type=float, default=0.8, help="Cross-encoder score weight (tuned on eval set: 0.8)")
     parser.add_argument("--tune", action="store_true", help="Run hyperparameter grid search on eval_queries.json first")
     parser.add_argument("--clean-synonyms", action="store_true", help="Replace SYNONYMS with pre-bc6c53ff version to evaluate clean baseline")
+    parser.add_argument("--strict-clean", action="store_true", help="Strictly clean baseline: remove synonyms from 1d7000c1 and bc6c53ff, disable IPC_TO_BNS score override")
     args = parser.parse_args()
 
     print("=" * 86, flush=True)
     print("            NYAAYASEARCH: PRODUCTION VS. RERANKER EVALUATION", flush=True)
     print("=" * 86, flush=True)
 
-    # 1. Apply clean synonyms patch if requested
-    if args.clean_synonyms:
+    # 1. Initialize search engine
+    engine = SearchEngine()
+
+    # 2. Apply clean patches if requested
+    if args.strict_clean:
+        apply_strict_clean(engine)
+    elif args.clean_synonyms:
         apply_clean_synonyms()
 
-    # 2. Initialize search engine and cross-encoder
-    engine = SearchEngine()
+    # 3. Initialize cross-encoder
     cross_model, model_name = get_cross_encoder()
 
     top_n_rerank = args.top_n_rerank
@@ -388,7 +482,13 @@ def main():
     if args.tune:
         top_n_rerank, weight_cross = run_tuning(engine, cross_model)
 
-    syn_status = "Pre-bc6c53ff Clean Baseline (65 keys)" if args.clean_synonyms else "Current Repo (with 29+6 synonym patches, 97 keys)"
+    if args.strict_clean:
+        syn_status = "Strict Clean Baseline (54 keys: 1d7000c1 & bc6c53ff removed, IPC_TO_BNS disabled)"
+    elif args.clean_synonyms:
+        syn_status = "Pre-bc6c53ff Clean Baseline (65 keys)"
+    else:
+        syn_status = "Current Repo (with 29+6 synonym patches, 97 keys, IPC_TO_BNS active)"
+
     print(f"\nConfiguration:", flush=True)
     print(f"  - Synonym Dictionary: {syn_status}", flush=True)
     print(f"  - Model: {model_name}", flush=True)
@@ -497,7 +597,12 @@ def main():
 
     # Print main evaluation table
     print("\n" + "=" * 98, flush=True)
-    mode_str = "CLEAN SYNONYMS (PRE-COMMIT bc6c53ff)" if args.clean_synonyms else "PRODUCTION SYNONYMS"
+    if args.strict_clean:
+        mode_str = "Development set (test_270, previously contaminated) [--strict-clean]"
+    elif args.clean_synonyms:
+        mode_str = "CLEAN SYNONYMS (PRE-COMMIT bc6c53ff)"
+    else:
+        mode_str = "PRODUCTION SYNONYMS"
     print(f"FINAL EVALUATION RESULTS: {mode_str}", flush=True)
     print("=" * 98, flush=True)
     header = f"{'Language / Dataset':<20} | {'System':<23} | {'Recall@5':<9} | {'P@1':<7} | {'MRR':<7} | {'nDCG@5':<7} | {'Latency (CPU)':<13}"
@@ -516,7 +621,9 @@ def main():
 
     # Print statistical significance table with Holm correction
     print("\n" + "=" * 122, flush=True)
-    print("STATISTICAL SIGNIFICANCE TESTS (McNemar on P@1/Recall@5, Paired Bootstrap 95% CI on MRR, Holm-Bonferroni Correction)", flush=True)
+    sig_label = "Development set (test_270, previously contaminated)" if args.strict_clean else "STATISTICAL SIGNIFICANCE TESTS"
+    print(f"STATISTICAL SIGNIFICANCE TESTS: {sig_label}", flush=True)
+    print("(McNemar on P@1/Recall@5, Paired Bootstrap 95% CI on MRR, Holm-Bonferroni Correction across all 9 tests)", flush=True)
     print("=" * 122, flush=True)
     sig_header = f"{'Language':<10} | {'Metric':<10} | {'Discordant Pairs (b/c)':<24} | {'Stat / Chi2':<12} | {'Raw p-val':<11} | {'Holm Adj p':<11} | {'95% CI (Paired Diff)':<28}"
     print(sig_header, flush=True)
