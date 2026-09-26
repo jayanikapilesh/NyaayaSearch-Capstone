@@ -60,7 +60,7 @@ function App() {
 
         {/* Home is full-bleed (its own sections manage width); every other tab is boxed to a readable column. */}
         <div style={{ display: activeTab === "home" ? "block" : "none" }}><HomeTab navigateToTab={navigateToTab} uiLanguage={uiLanguage} /></div>
-        <div className="tab-content-boxed" style={{ display: activeTab === "dictionary" ? "block" : "none" }}><DictionaryTab /></div>
+        <div className="tab-content-boxed" style={{ display: activeTab === "dictionary" ? "block" : "none" }}><DictionaryTab uiLanguage={uiLanguage} /></div>
         <div className="tab-content-boxed" style={{ display: activeTab === "drafter" ? "block" : "none" }}>
           {hasVisitedDrafter && (
             <Suspense fallback={<div className="loading">Loading Document Generator...</div>}>

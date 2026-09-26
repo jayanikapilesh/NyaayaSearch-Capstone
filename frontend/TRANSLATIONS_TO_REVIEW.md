@@ -184,6 +184,19 @@ Note: the app's brand name is transliterated two different ways across the two l
 | seniorDesc | National helpline for elderly citizens needing assistance. | बुजुर्ग नागरिकों की सहायता के लिए राष्ट्रीय हेल्पलाइन। | ಹಿರಿಯ ನಾಗರಿಕರ ಸಹಾಯ ಮತ್ತು ನೆರವಿಗಾಗಿ ರಾಷ್ಟ್ರೀಯ ಸಹಾಯವಾಣಿ. |
 | disclaimer | These are general national helpline numbers. In an emergency, always contact local police or emergency services directly. | ये सामान्य राष्ट्रीय हेल्पलाइन नंबर हैं। किसी भी आपात स्थिति में, हमेशा स्थानीय पुलिस या नजदीकी आपातकालीन सेवा से सीधे संपर्क करें। | ಇವು ಸಾಮಾನ್ಯ ರಾಷ್ಟ್ರೀಯ ಸಹಾಯವಾಣಿ ಸಂಖ್ಯೆಗಳು. ತುರ್ತು ಸಂದರ್ಭದಲ್ಲಿ, ಯಾವಾಗಲೂ ಸ್ಥಳೀಯ ಪೊಲೀಸರನ್ನು ಅಥವಾ ಹತ್ತಿರದ ತುರ್ತು ಸೇವೆಯನ್ನು ನೇರವಾಗಿ ಸಂಪರ್ಕಿಸಿ। |
 
+## `src/dictionaryContent.js` & `src/components/DictionaryTab.jsx` - Legal Dictionary tab
+
+| Key | English source | Hindi | Kannada |
+|---|---|---|---|
+| heading | Legal Dictionary | कानूनी शब्दकोश | ಕಾನೂನು ನಿಘಂಟು |
+| srLabel | Legal term to look up | खोजने के लिए कानूनी शब्द | ಹುಡುಕಬೇಕಾದ ಕಾನೂನು ಪದ |
+| placeholder | Look up a legal term, e.g. 'cognizable offence' | कोई कानूनी शब्द खोजें, जैसे 'cognizable offence' | ಕಾನೂನು ಪದವನ್ನು ಹುಡುಕಿ, ಉದಾ: 'cognizable offence' |
+| buttonLookingUp | Looking up... | खोज रहे हैं... | ಹುಡುಕಲಾಗುತ್ತಿದೆ... |
+| buttonDefine | Define | मतलब देखें | ಅರ್ಥ ನೋಡಿ |
+| notFoundFallback | No definition found. | इस शब्द का मतलब नहीं मिला। | ಈ ಪದದ ಅರ್ಥ ಸಿಗಲಿಲ್ಲ. |
+| errDefault | Something went wrong looking up this term. | इस शब्द को खोजने में कुछ समस्या आई। | ಈ ಪದವನ್ನು ಹುಡುಕುವಲ್ಲಿ ಏನೋ ತೊಂದರೆಯಾಗಿದೆ. |
+| errNetwork | Could not reach the server. Please try again. | सर्वर से संपर्क नहीं हो पाया। फिर से कोशिश करें। | ಸರ್ವರ್ ಸಂಪರ್ಕಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ. |
+
 ## Not yet translated (English-only, out of scope for this pass)
 
 These strings still show in English regardless of the language setting -
@@ -227,14 +240,6 @@ only the strings below were never wired to a language at all.
 - Button: "Generating..." / "Generate Document"
 - Button: "Download as Word"
 - `src/documentSchemas.js` - every document type's label, section titles, and field labels/placeholders/options (many; not enumerated here since it's most of the file's content). The AI-generated document text itself is produced by the backend in English regardless of `uiLanguage`.
-
-### `src/components/DictionaryTab.jsx`
-- Heading: "Legal Dictionary"
-- Screen-reader label: "Legal term to look up"
-- Input placeholder: "Look up a legal term, e.g. 'cognizable offence'"
-- Button: "Looking up..." / "Define"
-- Error fallback text: "Something went wrong looking up this term.", "Could not reach the server. Please try again."
-- (The definition itself comes from the backend and is English by design.)
 
 ### `src/components/SimplifierTab.jsx`
 - Heading: "Case Simplifier"
