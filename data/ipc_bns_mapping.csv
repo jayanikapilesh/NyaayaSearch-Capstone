@@ -1,13 +1,11 @@
 ipc_section,bns_section,bns_base_section,subject,relation,source_page,source
-1,1,1,Title and extent of operation of the Code,split,1,pdf
-1,1(1),1,,split,1,pdf
+1,1(1),1,Title and extent of operation of the Code,direct,1,pdf
 N/A,1(2),1,,new_in_bns,1,pdf
 2,1(3),1,Punishment of offences committed within India,direct,1,pdf
 3,1(4),1,"Punishment of offences committed beyond, but which by law may be tried within, India",direct,1,pdf
 4,1(5),1,Extension of Code to extra-territorial offences,direct,1,pdf
 5,1(6),1,Certain laws not to be affected by this Act,direct,1,pdf
-33,2,2,Definitions,split,1,pdf
-33,2(1),2,“Act”. “Omission”,split,1,pdf
+33,2(1),2,Definitions,split,1,pdf
 47,2(2),2,“Animal”,direct,1,pdf
 N/A,2(3),2,‘child’,new_in_bns,1,pdf
 28,2(4),2,“Counterfeit”,direct,1,pdf
@@ -50,8 +48,7 @@ N/A,2(3),2,‘child’,new_in_bns,1,pdf
 23,2(37),2,“Wrongful loss”,split,2,pdf
 23,2(38),2,“gaining wrongfully’ and ‘losing wrongfully”,split,2,pdf
 N/A,2(39),2,,new_in_bns,2,pdf
-6,3,3,Definitions in the Code to be understood subject,split,2,pdf
-6,3(1),3,to exceptions,split,2,pdf
+6,3(1),3,Definitions in the Code to be understood subject,direct,2,pdf
 7,3(2),3,Sense of expression once explained,direct,2,pdf
 27,3(3),3,"Property in possession of wife, clerk or servant",direct,2,pdf
 32,3(4),3,Words referring to acts include illegal omissions,direct,2,pdf
@@ -66,8 +63,7 @@ N/A,2(39),2,,new_in_bns,2,pdf
 55,5,5,Commutation of sentence of imprisonment for life,direct,2,pdf
 57,6,6,Fractions of terms of punishment,direct,2,pdf
 60,7,7,Sentence may be (in certain cases of imprisonment) wholly or partly rigorous or simple,direct,2,pdf
-63,8,8,Amount of fine,split,2,pdf
-63,8(1),8,,split,2,pdf
+63,8(1),8,Amount of fine,direct,2,pdf
 64,8(2),8,Sentence of imprisonment for non-payment of fine,direct,2,pdf
 65,8(3),8,"Limit to imprisonment for non-payment of fine, when imprisonment and fine awardable",direct,2,pdf
 66,8(4),8,Description of imprisonment for non-payment of fine,direct,2,pdf
@@ -127,21 +123,18 @@ N/A,48,48,Abetment outside India for offence in India,new_in_bns,4,pdf
 118,58,58,Concealing design to commit offence punishable with death or imprisonment for life,direct,4,pdf
 119,59,59,Public servant concealing design to commit offence which it is his duty to prevent,direct,4,pdf
 ,60,60,with imprisonment. CRIMINAL CONSPIRACY,direct,4,pdf
-120A,61,61,Definition of criminal conspiracy,split,5,pdf
-120A,61(1),61,,split,5,pdf
+120A,61(1),61,Definition of criminal conspiracy,direct,5,pdf
 120B,61(2),61,Punishment of criminal conspiracy,direct,5,pdf
 511,62,62,Punishment for attempting to commit offences punishable with imprisonment for life or other imprisonment. Sexual Offences,direct,5,pdf
 375,63,63,Rape,direct,5,pdf
 376,64,64,Punishment for rape,split,5,pdf
-376,65,65,,split,5,pdf
 376,65(1),65,,split,5,pdf
 376AB,65(2),65,Punishment for rape on woman under twelve years of age,direct,5,pdf
 376A,66,66,Punishment for causing death or resulting in persistent vegetative state of victim,direct,5,pdf
 376B,67,67,Sexual intercourse by husband upon his wife during separation,direct,5,pdf
 376C,68,68,Sexual intercourse by a person in authority,direct,5,pdf
 N/A,69,69,Sexual intercourse by employing deceitful means etc,new_in_bns,5,pdf
-376D,70,70,Gang rape,split,5,pdf
-376D,70(1),70,,split,5,pdf
+376D,70(1),70,Gang rape,direct,5,pdf
 376DA,70(2),70,Punishment for gang rape on woman under sixteen years of age,direct,5,pdf
 376DB,70(2),70,Punishment for gang rape on woman under twelve years of age,direct,5,pdf
 376E,71,71,Punishment for repeat offenders,direct,5,pdf
@@ -156,8 +149,7 @@ N/A,69,69,Sexual intercourse by employing deceitful means etc,new_in_bns,5,pdf
 509,79,79,"Word, gesture or act intended to insult the modesty of a woman",direct,5,pdf
 304B,80,80,Dowry death,direct,6,pdf
 493,81,81,Cohabitation caused by a man deceitfully inducing a belief of lawful marriage,direct,6,pdf
-494,82,82,Marrying again during lifetime of husband or wife,split,6,pdf
-494,82(1),82,,split,6,pdf
+494,82(1),82,Marrying again during lifetime of husband or wife,direct,6,pdf
 495,82(2),82,Same offence with concealment of former marriage from person with whom subsequent marriage is contracted,direct,6,pdf
 496,83,83,Marriage ceremony fraudulently gone through without lawful marriage,direct,6,pdf
 497,Deleted,N/A,Adultery,omitted_from_ipc,6,pdf
@@ -180,7 +172,7 @@ N/A,95,95,"Hiring, employing or engaging a child to commit an offence",new_in_bn
 299,100,100,Culpable homicide,direct,7,pdf
 300,101,101,Murder,direct,7,pdf
 301,102,102,Culpable homicide by causing death of person other than person whose death was intended,direct,7,pdf
-302,103(1),103,Punishment for murder,direct,7,pdf
+302,103,103,Punishment for murder,direct,7,pdf
 303,104,104,Punishment for murder by life-convict,direct,7,pdf
 304,105,105,Punishment for culpable homicide not amounting to murder,direct,7,pdf
 304A,106,106,Causing death by negligence,direct,7,pdf
@@ -193,39 +185,30 @@ N/A,111,111,Organised crime,new_in_bns,7,pdf
 N/A,112,112,Petty organised crime,new_in_bns,7,pdf
 N/A,113,113,Terrorist act,new_in_bns,7,pdf
 319,114,114,Hurt,direct,7,pdf
-321,115,115,Voluntarily causing hurt,split,7,pdf
-321,115(1),115,,split,7,pdf
+321,115(1),115,Voluntarily causing hurt,direct,7,pdf
 323,115(2),115,Punishment for voluntarily causing hurt,direct,7,pdf
 320,116,116,Grievous hurt,direct,7,pdf
-322,117,117,Voluntarily causing grievous hurt,split,7,pdf
-322,117(1),117,,split,7,pdf
+322,117(1),117,Voluntarily causing grievous hurt,direct,7,pdf
 325,117(2),117,Punishment for voluntarily causing grievous hurt,direct,7,pdf
-324,118,118,Voluntarily causing hurt by dangerous weapons or means,split,7,pdf
-324,118(1),118,,split,7,pdf
+324,118(1),118,Voluntarily causing hurt by dangerous weapons or means,direct,7,pdf
 326,118(2),118,Voluntarily causing grievous hurt by dangerous weapons or means,direct,7,pdf
-327,119,119,"Voluntarily causing hurt to extort property, or to constrain to an illegal to an act",split,7,pdf
-327,119(1),119,,split,7,pdf
+327,119(1),119,"Voluntarily causing hurt to extort property, or to constrain to an illegal to an act",direct,7,pdf
 329,119(2),119,"Voluntarily causing grievous hurt to extort property, or to constrain to an illegal act",direct,7,pdf
 330,120(1),120,"Voluntarily causing hurt to extort confession, or to compel restoration of property",direct,7,pdf
 331,120(2),120,"Voluntarily causing grievous hurt to extort confession, or to compel restoration of property",direct,7,pdf
-332,121,121,Voluntarily causing hurt to deter public servant from his duty,split,8,pdf
-332,121(1),121,,split,8,pdf
+332,121(1),121,Voluntarily causing hurt to deter public servant from his duty,direct,8,pdf
 333,121(2),121,Voluntarily causing grievous hurt to deter public servant from his duty,direct,8,pdf
-334,122,122,Voluntarily causing hurt on provocation,split,8,pdf
-334,122(1),122,,split,8,pdf
+334,122(1),122,Voluntarily causing hurt on provocation,direct,8,pdf
 335,122(2),122,Voluntarily causing grievous hurt on provocation,direct,8,pdf
 328,123,123,"Causing hurt by means of poison, etc., with intent to commit and offence",direct,8,pdf
-326A,124,124,"Voluntarily causing grievous hurt by use of acid, etc",split,8,pdf
-326A,124(1),124,,split,8,pdf
+326A,124(1),124,"Voluntarily causing grievous hurt by use of acid, etc",direct,8,pdf
 326B,124(2),124,Voluntarily throwing or attempting to throw acid,direct,8,pdf
 336,125,125,Act endangering life or personal safety of others,direct,8,pdf
 337,125,125,Causing hurt by act endangering life or personal safety of others,direct,8,pdf
 338,125,125,Causing grievous hurt by act endangering life or personal safety of others,direct,8,pdf
-339,126,126,Wrongful restraint,split,8,pdf
-339,126(1),126,,split,8,pdf
+339,126(1),126,Wrongful restraint,direct,8,pdf
 341,126(2),126,Punishment for wrongful restraint,direct,8,pdf
-340,127,127,Wrongful confinement,split,8,pdf
-340,127(1),127,,split,8,pdf
+340,127(1),127,Wrongful confinement,direct,8,pdf
 342,127(2),127,Punishment for wrongful confinement,direct,8,pdf
 343,127(3),127,Wrongful confinement for three or more days,direct,8,pdf
 344,127(4),127,Wrongful confinement for ten or more days,direct,8,pdf
@@ -242,15 +225,13 @@ N/A,113,113,Terrorist act,new_in_bns,7,pdf
 356,134,134,Assault or criminal force in attempt to commit theft of property carried by a person,direct,9,pdf
 357,135,135,Assault or criminal force in attempt wrongfully to confine a person,direct,9,pdf
 358,136,136,Assault or criminal force on grave provocation. Labour,direct,9,pdf
-359,137,137,Kidnapping,split,9,pdf
-359,137(1),137,,split,9,pdf
+359,137(1),137,Kidnapping,direct,9,pdf
 360,137(1),137,Kidnapping from India,direct,9,pdf
 361,137(1),137,Kidnapping from lawful guardianship,direct,9,pdf
 363,137(2),137,Punishment for kidnapping,direct,9,pdf
 362,138,138,Abduction,direct,9,pdf
 363A,139,139,Kidnapping or maiming a minor for purposes of begging,direct,9,pdf
-364,140,140,Kidnapping or abducting in order to murder,split,9,pdf
-364,140(1),140,,split,9,pdf
+364,140(1),140,Kidnapping or abducting in order to murder,direct,9,pdf
 364A,140(2),140,"Kidnapping for ransom, etc",direct,9,pdf
 365,140(3),140,Kidnapping or abducting with intent secretly and wrongfully to confine person,direct,9,pdf
 367,140(4),140,"Kidnapping or abducting in order to subject person to grievous hurt, slavery, etc",direct,9,pdf
@@ -318,8 +299,8 @@ N/A,152,152,"Acts endangering sovereignty, unity and integrity of India",new_in_
 253,180,180,Possession of Indian coin by person who knew it to be altered when he became possessed thereof,direct,11,pdf
 259,180,180,Having possession of counterfeit Government stamp,direct,11,pdf
 489C,180,180,Possession of forged or counterfeit currency- notes or bank-notes,direct,11,pdf
-234,181,181,coin,split,11,pdf
-234,181,181,Making or selling instrument for counterfeiting Indian coin,split,12,pdf
+234,181,181,coin,direct,11,pdf
+234,181,181,Making or selling instrument for counterfeiting Indian coin,direct,12,pdf
 235,181,181,Possession of instrument or material for the purpose of using the same for counterfeiting coin,direct,12,pdf
 256,181,181,Having possession of instrument or material for counterfeiting Government stamp,direct,12,pdf
 257,181,181,Making or selling instrument for counterfeiting Government stamp,direct,12,pdf
@@ -332,8 +313,7 @@ N/A,152,152,"Acts endangering sovereignty, unity and integrity of India",new_in_
 263A,186,186,Prohibition of fictitious stamps,direct,12,pdf
 244,187,187,Person employed in mint causing coin to be of different weight or composition from that fixed by law,direct,12,pdf
 245,188,188,Unlawfully taking coining instrument from mint,direct,12,pdf
-141,189,189,Unlawful assembly,split,12,pdf
-141,189(1),189,,split,12,pdf
+141,189(1),189,Unlawful assembly,direct,12,pdf
 143,189(2),189,Punishment,direct,12,pdf
 145,189(3),189,"Joining or continuing in unlawful assembly, knowing it has been commanded to disperse",direct,12,pdf
 144,189(4),189,Joining unlawful assembly armed with deadly weapon,direct,12,pdf
@@ -343,17 +323,14 @@ N/A,152,152,"Acts endangering sovereignty, unity and integrity of India",new_in_
 158,189(8),189,Being hired to take part in an unlawful assembly or riot,split,12,pdf
 158,189(9),189,or to go armed,split,12,pdf
 149,190,190,Every member of unlawful assembly guilty of offence committed in prosecution of common object,direct,12,pdf
-146,191,191,Rioting,split,13,pdf
-146,191(1),191,,split,13,pdf
+146,191(1),191,Rioting,direct,13,pdf
 147,191(2),191,Punishment for rioting,direct,13,pdf
 148,191(3),191,"Rioting, armed with deadly weapon",direct,13,pdf
 153,192,192,Wantonly giving provocation with intent to cause riot-if rioting be committed; if not committed,direct,13,pdf
-154,193,193,Owner or occupier of land on which an unlawful assembly is held,split,13,pdf
-154,193(1),193,,split,13,pdf
+154,193(1),193,Owner or occupier of land on which an unlawful assembly is held,direct,13,pdf
 155,193(2),193,Liability of person for whose benefit riot is committed,direct,13,pdf
 156,193(3),193,Liability of agent of owner or occupier for whose benefit riot is committed,direct,13,pdf
-159,194,194,Affray,split,13,pdf
-159,194(1),194,,split,13,pdf
+159,194(1),194,Affray,direct,13,pdf
 160,194(2),194,Punishment for committing affray,direct,13,pdf
 152,195,195,"Assaulting or obstructing public servant when suppressing riot, etc",direct,13,pdf
 153A,196,196,"Promoting enmity between different groups on ground of religion, race, place of birth, residence, language, etc., and doing acts prejudicial to maintenance of harmony",direct,13,pdf
@@ -468,28 +445,24 @@ N/A,226,226,Attempt to commit suicide to compel or restraint exercise of lawful 
 296,300,300,Disturbing religious assembly,direct,17,pdf
 297,301,301,"Trespassing on burial places, etc",direct,17,pdf
 298,302,302,"Uttering words, etc., with deliberate intent to wound religious feelings of any person",direct,17,pdf
-378,303,303,Theft,split,17,pdf
-378,303(1),303,,split,18,pdf
+378,303(1),303,Theft,direct,18,pdf
 379,303(2),303,Punishment for theft,direct,18,pdf
 N/A,304,304,Snatching,new_in_bns,18,pdf
 380,305,305,"Theft in dwelling house, etc",direct,18,pdf
 381,306,306,Theft by clerk or servant of property in possession of master,direct,18,pdf
 382,307,307,"Theft after preparation made for causing death, hurt or restraint in order to the committing of the theft",direct,18,pdf
-383,308,308,Extortion,split,18,pdf
-383,308(1),308,,split,18,pdf
+383,308(1),308,Extortion,direct,18,pdf
 384,308(2),308,Punishment for extortion,direct,18,pdf
 385,308(3),308,Putting person in fear of injury in order to commit extortion,direct,18,pdf
 387,308(4),308,"Putting person in fear of death or of grievous hurt, in order to commit extortion",direct,18,pdf
 386,308(5),308,Extortion by putting a person in fear of death or grievous hurt,direct,18,pdf
 389,308(6),308,"Putting person in fear or accusation of offence, in order to commit extortion",direct,18,pdf
 388,308(7),308,"Extortion by threat of accusation of an offence punishable with death or imprisonment for life, etc",direct,18,pdf
-390,309,309,Robbery,split,18,pdf
-390,309(1)(2)(3),309,,split,18,pdf
+390,309(1)(2)(3),309,Robbery,direct,18,pdf
 392,309(4),309,Punishment for robbery,direct,18,pdf
 393,309(5),309,Attempt to commit robbery,direct,18,pdf
 394,309(6),309,Voluntarily causing hurt in committing robbery,direct,18,pdf
-391,310,310,Dacoity,split,18,pdf
-391,310(1),310,,split,18,pdf
+391,310(1),310,Dacoity,direct,18,pdf
 395,310(2),310,Punishment for dacoity,direct,18,pdf
 396,310(3),310,Dacoity with murder,direct,18,pdf
 399,310(4),310,Making preparation to commit dacoity,direct,18,pdf
@@ -500,20 +473,17 @@ N/A,304,304,Snatching,new_in_bns,18,pdf
 401,313,313,Punishment for belonging to gang of thieves,direct,18,pdf
 403,314,314,Dishonest misappropriation of property,direct,18,pdf
 404,315,315,Dishonest misappropriation of property possessed by deceased person at the time of his death,direct,18,pdf
-405,316,316,Criminal breach of trust,split,19,pdf
-405,316(1),316,,split,19,pdf
+405,316(1),316,Criminal breach of trust,direct,19,pdf
 406,316(2),316,Punishment for criminal breach of trust,direct,19,pdf
 407,316(3),316,"Criminal breach of trust by carrier, etc",direct,19,pdf
 408,316(4),316,Criminal breach of trust by clerk or servant,direct,19,pdf
 409,316(5),316,"Criminal breach of trust by public servant, or by banker, merchant or agent",direct,19,pdf
-410,317,317,Stolen property,split,19,pdf
-410,317(1),317,,split,19,pdf
+410,317(1),317,Stolen property,direct,19,pdf
 411,317(2),317,Dishonestly receiving stolen property,direct,19,pdf
 412,317(3),317,Dishonestly receiving property stolen in the commission of a dacoity,direct,19,pdf
 413,317(4),317,Habitually dealing in stolen property,direct,19,pdf
 414,317(5),317,Assisting in concealment of stolen property,direct,19,pdf
-415,318,318,Cheating,split,19,pdf
-415,318(1),318,,split,19,pdf
+415,318(1),318,Cheating,direct,19,pdf
 417,318(2),318,Punishment for cheating,direct,19,pdf
 418,318(3),318,Cheating with knowledge that wrongful loss may ensue to person whose interest offender is bound to protect,direct,19,pdf
 420,318(4),318,Cheating and dishonestly inducing delivery of property,direct,19,pdf
@@ -524,8 +494,7 @@ N/A,304,304,Snatching,new_in_bns,18,pdf
 422,321,321,Dishonestly or fraudulently preventing debt being available for creditors,direct,19,pdf
 423,322,322,Dishonest or fraudulent execution of deed of transfer containing false statement of consideration,direct,19,pdf
 424,323,323,Dishonest or fraudulent removal or concealment of property,direct,19,pdf
-425,324,324,Mischief,split,19,pdf
-425,324(1),324,,split,19,pdf
+425,324(1),324,Mischief,direct,19,pdf
 426,324(2),324,Punishment for mischief,direct,19,pdf
 N/A,324(3),324,,new_in_bns,19,pdf
 427,324(4),324,Mischief causing damage to the amount of fifty rupees,direct,19,pdf
@@ -540,22 +509,18 @@ N/A,324(5),324,,new_in_bns,19,pdf
 434,326,326,"Mischief by destroying or moving, etc., a land- mark fixed by public authority",direct,20,pdf
 435,326,326,Mischief by fire or explosive substance with intent to cause damage to amount of one hundred or (in case of agricultural produce) ten rupees,direct,20,pdf
 436,326,326,"Mischief by fire or explosive substance with intent to destroy house, etc",direct,20,pdf
-437,327,327,Mischief with intent to destroy or make unsafe a decked vessel or one of twenty tons burden,split,20,pdf
-437,327(1),327,,split,20,pdf
+437,327(1),327,Mischief with intent to destroy or make unsafe a decked vessel or one of twenty tons burden,direct,20,pdf
 438,327(2),327,Punishment for the mischief described in section 437 committed by fire or explosive substance,direct,20,pdf
 439,328,328,"Punishment for intentionally running vessel aground or ashore with intent to commit theft, etc",direct,20,pdf
-441,329,329,Criminal trespass,split,20,pdf
-441,329(1),329,,split,20,pdf
+441,329(1),329,Criminal trespass,direct,20,pdf
 442,329(2),329,House-trespass,direct,20,pdf
 447,329(3),329,Punishment for criminal trespass,direct,20,pdf
 448,329(4),329,Punishment for house-trespass,direct,20,pdf
-443,330,330,Lurking house-trespass,split,20,pdf
-443,330(1),330,,split,20,pdf
+443,330(1),330,Lurking house-trespass,direct,20,pdf
 444,Deleted,N/A,Lurking house-trespass by night,omitted_from_ipc,20,pdf
 445,330(2),330,House-breaking,direct,20,pdf
 446,Deleted,N/A,House-breaking by night,omitted_from_ipc,20,pdf
-453,331,331,Punishment for lurking house-trespass or house- breaking,split,20,pdf
-453,331(1),331,,split,20,pdf
+453,331(1),331,Punishment for lurking house-trespass or house- breaking,direct,20,pdf
 456,331(2),331,Punishment for lurking house-trespass or house- breaking by night,direct,20,pdf
 454,331(3),331,Lurking house-trespass or house-breaking in order to commit offence punishable with imprisonment,direct,20,pdf
 457,331(4),331,Lurking house-trespass or house-breaking by night in order to commit offence punishable with imprisonment,direct,20,pdf
@@ -567,20 +532,17 @@ N/A,324(5),324,,new_in_bns,19,pdf
 450,332,332,House-trespass in order to commit offence punishable with imprisonment for life,direct,21,pdf
 451,332,332,House-trespass in order to commit offence punishable with imprisonment,direct,21,pdf
 452,333,333,"House-trespass after preparation for hurt, assault or wrongful restraint",direct,21,pdf
-461,334,334,Dishonestly breaking open receptacle containing property,split,21,pdf
-461,334(1),334,,split,21,pdf
+461,334(1),334,Dishonestly breaking open receptacle containing property,direct,21,pdf
 462,334(2),334,Punishment for same offence when committed by person entrusted with custody. PROPERTY MARKS,direct,21,pdf
 464,335,335,Making a false document,direct,21,pdf
-463,336,336,Forgery,split,21,pdf
-463,336(1),336,,split,21,pdf
+463,336(1),336,Forgery,direct,21,pdf
 465,336(2),336,Punishment for forgery,direct,21,pdf
 468,336(3),336,Forgery for purpose of cheating,direct,21,pdf
 469,336(4),336,Forgery for purpose of harming reputation,direct,21,pdf
 466,337,337,"Forgery of record of Court or of public register, etc",direct,21,pdf
 467,338,338,"Forgery of valuable security, will, etc",split,21,pdf
 474,339,339,"Having possession of document described in section 466 or 467, knowing it to be forged and intending to use it genuine",direct,21,pdf
-470,340,340,Forged document or electronic record,split,21,pdf
-470,340(1),340,,split,21,pdf
+470,340(1),340,Forged document or electronic record,direct,21,pdf
 471,340(2),340,Using as genuine a forged document or electronic record,direct,21,pdf
 472,341,341,"Making or possessing counterfeit seal, etc., with intent to commit forgery punishable under section",split,21,pdf
 467,341,341,,split,21,pdf
@@ -588,34 +550,28 @@ N/A,324(5),324,,new_in_bns,19,pdf
 473,341(2),341,"Making or possessing counterfeit seal, etc., with intent to commit forgery punishable otherwise",direct,21,pdf
 N/A,341(3),341,,new_in_bns,21,pdf
 N/A,341(4),341,,new_in_bns,22,pdf
-475,342,342,"Counterfeiting device or mark used for authenticating documents described in section 467, or possessing counterfeit marked material",split,22,pdf
-475,342(1),342,,split,22,pdf
+475,342(1),342,"Counterfeiting device or mark used for authenticating documents described in section 467, or possessing counterfeit marked material",direct,22,pdf
 476,342(2),342,"Counterfeiting device or mark used for authenticating documents other than those described in section 467, or possessing counterfeit marked material",direct,22,pdf
 477,343,343,"Fraudulent cancellation, destruction, etc., of will, authority to adopt, or valuable security",direct,22,pdf
 477A,344,344,Falsification of accounts. Of Property and Other Marks,direct,22,pdf
-479,345,345,Property mark,split,22,pdf
-479,345(1),345,,split,22,pdf
+479,345(1),345,Property mark,direct,22,pdf
 481,345(2),345,Using a false property mark,direct,22,pdf
 482,345(3),345,Punishment for using a false property mark,direct,22,pdf
 489,346,346,Tampering with property mark with intent to cause injury,direct,22,pdf
-483,347,347,Counterfeiting a property mark used by another,split,22,pdf
-483,347(1),347,,split,22,pdf
+483,347(1),347,Counterfeiting a property mark used by another,direct,22,pdf
 484,347(2),347,Counterfeiting a mark used by a public servant,direct,22,pdf
 485,348,348,Making or possession of any instrument for counterfeiting a property mark,direct,22,pdf
 486,349,349,Selling goods marked with a counterfeit property mark,direct,22,pdf
-487,350,350,Making a false mark upon any receptacle containing goods,split,22,pdf
-487,350(1),350,,split,22,pdf
+487,350(1),350,Making a false mark upon any receptacle containing goods,direct,22,pdf
 488,350(2),350,"Punishment for making use of any such false mark. OF CRIMINAL INTIMIDATION, INSULT AND ANNOYANCE",direct,22,pdf
-503,351,351,Criminal intimidation,split,22,pdf
-503,351(1),351,,split,22,pdf
+503,351(1),351,Criminal intimidation,direct,22,pdf
 506,351(2),351,Punishment for criminal intimidation,direct,22,pdf
 507,351(4),351,Criminal intimidation by an anonymous communication,direct,22,pdf
 504,352,352,Intentional insult with intent to provoke breach of the peace,direct,22,pdf
 505,353,353,Statements conducing to public mischief,direct,22,pdf
 508,354,354,Act caused by inducing person to believe that he will be rendered an object of the Divine displeasure,direct,22,pdf
 510,355,355,Misconduct in public by a drunken person,direct,22,pdf
-499,356,356,Defamation,split,22,pdf
-499,356(1),356,,split,22,pdf
+499,356(1),356,Defamation,direct,22,pdf
 500,356(2),356,Punishment for defamation,direct,23,pdf
 501,356(3),356,Printing or engraving matter known to be defamatory,direct,23,pdf
 502,356(4),356,Sale of printed or engraved substance containing defamatory matter. OF THE CRIMINAL BREACH OF CONTRACTS OF SERVICE,direct,23,pdf
@@ -624,4 +580,4 @@ N/A,358,358,Repeal and savings,new_in_bns,23,pdf
 309,Deleted,N/A,“Attempt to commit suicide”,omitted_from_ipc,23,pdf
 310,Deleted,N/A,“Thug”,omitted_from_ipc,23,pdf
 311,Deleted,N/A,“Punishment”,omitted_from_ipc,23,pdf
-N/A,103(2),103,"Punishment for murder by group / mob lynching on grounds of race, caste, community, etc.",new_in_bns,manual,manual
+N/A,103(2),103,"Murder by group of five or more on grounds of race, caste, community etc. (not in source PDF; added from BNS text)",new_in_bns,manual,manual

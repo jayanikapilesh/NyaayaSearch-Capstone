@@ -1,3 +1,5 @@
+# Original source is the NCRB section table (ncrb.gov.in), via the UP Police PDF.
+
 import re
 import csv
 import random
@@ -197,7 +199,7 @@ def parse_comparative_pdf():
 
         temp_rows.append({
             'ipc_section': ipc_sec,
-            'bns_section': bns_sec if bns_sec != '103' else '103(1)',
+            'bns_section': bns_sec,
             'bns_base_section': bns_base if bns_base else ('N/A' if bns_sec == 'Deleted' else bns_sec),
             'subject': subject,
             'relation': relation,
@@ -212,7 +214,7 @@ def parse_comparative_pdf():
             'ipc_section': 'N/A',
             'bns_section': '103(2)',
             'bns_base_section': '103',
-            'subject': 'Punishment for murder by group / mob lynching on grounds of race, caste, community, etc.',
+            'subject': 'Murder by group of five or more on grounds of race, caste, community etc. (not in source PDF; added from BNS text)',
             'relation': 'new_in_bns',
             'source_page': 'manual',
             'source': 'manual'
@@ -228,6 +230,30 @@ def parse_comparative_pdf():
         if r['ipc_section'] and r['ipc_section'] not in ['N/A', 'Deleted']:
             ipc_counts[r['ipc_section']] += 1
 
+    # Merge parent BNS section with first sub-section where PDF gives parent followed by sub-section
+    parent_sub_changed_count = 0
+    to_remove = set()
+    for i in range(len(temp_rows) - 1):
+        r1 = temp_rows[i]
+        r2 = temp_rows[i+1]
+        if r1['ipc_section'] and r1['ipc_section'] == r2['ipc_section'] and r1['ipc_section'] not in ['N/A', 'Deleted']:
+            if r1['bns_base_section'] == r2['bns_base_section'] and r1['bns_section'] == r1['bns_base_section'] and '(' in r2['bns_section']:
+                r2['subject'] = r1['subject'] if r1['subject'] else r2['subject']
+                to_remove.add(i)
+                parent_sub_changed_count += 1
+
+    temp_rows = [r for idx, r in enumerate(temp_rows) if idx not in to_remove]
+    print(f"Parent to sub-section merged rows: {parent_sub_changed_count}")
+
+    ipc_distinct_bns = {}
+    for r in temp_rows:
+        ipc = r['ipc_section']
+        bns = r['bns_section']
+        if ipc and ipc not in ['N/A', 'Deleted']:
+            if ipc not in ipc_distinct_bns:
+                ipc_distinct_bns[ipc] = set()
+            ipc_distinct_bns[ipc].add(bns)
+
     final_rows = []
     seen_rows = set()
     exact_duplicates_count = 0
@@ -235,11 +261,10 @@ def parse_comparative_pdf():
     for r in temp_rows:
         rel = r['relation']
         ipc = r['ipc_section']
-        bns = r['bns_section']
 
         if not rel:
             if ipc and ipc not in ['N/A', 'Deleted']:
-                if ipc_counts[ipc] > 1:
+                if len(ipc_distinct_bns.get(ipc, set())) > 1:
                     rel = 'split'
                 else:
                     rel = 'direct'
