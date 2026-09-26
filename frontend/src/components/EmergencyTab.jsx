@@ -1,55 +1,59 @@
-function EmergencyTab() {
+import { getEmergencyContent } from "../emergencyContent";
+
+function EmergencyTab({ uiLanguage }) {
+  const content = getEmergencyContent(uiLanguage);
+
   return (
     <div className="drafter-section">
-      <a href="tel:112" className="call-112-button">Call 112</a>
+      <a href="tel:112" className="call-112-button">{content.call112}</a>
 
-      <h2>Emergency and Legal Aid Resources</h2>
-      <p className="drafter-intro">If you need urgent help, contact these resources directly.</p>
+      <h2>{content.heading}</h2>
+      <p className="drafter-intro">{content.intro}</p>
 
       <div className="emergency-list">
         <div className="emergency-item">
-          <div className="emergency-title">Police Emergency</div>
+          <div className="emergency-title">{content.policeTitle}</div>
           <div className="emergency-number">100 / 112</div>
-          <div className="emergency-desc">National emergency helpline for police assistance.</div>
+          <div className="emergency-desc">{content.policeDesc}</div>
         </div>
         <div className="emergency-item">
-          <div className="emergency-title">Women Helpline</div>
+          <div className="emergency-title">{content.womenTitle}</div>
           <div className="emergency-number">1091</div>
-          <div className="emergency-desc">National helpline for women in distress.</div>
+          <div className="emergency-desc">{content.womenDesc}</div>
         </div>
         <div className="emergency-item">
-          <div className="emergency-title">Domestic Violence Helpline</div>
+          <div className="emergency-title">{content.domesticTitle}</div>
           <div className="emergency-number">181</div>
-          <div className="emergency-desc">National helpline for domestic violence support.</div>
+          <div className="emergency-desc">{content.domesticDesc}</div>
         </div>
         <div className="emergency-item">
-          <div className="emergency-title">Child Helpline</div>
+          <div className="emergency-title">{content.childTitle}</div>
           <div className="emergency-number">1098</div>
-          <div className="emergency-desc">National helpline for children in need of help.</div>
+          <div className="emergency-desc">{content.childDesc}</div>
         </div>
         <div className="emergency-item">
-          <div className="emergency-title">National Legal Services Authority (NALSA)</div>
+          <div className="emergency-title">{content.nalsaTitle}</div>
           <div className="emergency-number">15100</div>
-          <div className="emergency-desc">Free legal aid and services for eligible citizens.</div>
+          <div className="emergency-desc">{content.nalsaDesc}</div>
         </div>
         <div className="emergency-item">
-          <div className="emergency-title">Consumer Helpline</div>
+          <div className="emergency-title">{content.consumerTitle}</div>
           <div className="emergency-number">1915</div>
-          <div className="emergency-desc">National Consumer Helpline for consumer grievances.</div>
+          <div className="emergency-desc">{content.consumerDesc}</div>
         </div>
         <div className="emergency-item">
-          <div className="emergency-title">Cyber Crime Helpline</div>
+          <div className="emergency-title">{content.cyberTitle}</div>
           <div className="emergency-number">1930</div>
-          <div className="emergency-desc">National helpline to report cyber crimes and online fraud.</div>
+          <div className="emergency-desc">{content.cyberDesc}</div>
         </div>
         <div className="emergency-item">
-          <div className="emergency-title">Senior Citizen Helpline</div>
+          <div className="emergency-title">{content.seniorTitle}</div>
           <div className="emergency-number">14567</div>
-          <div className="emergency-desc">National helpline for elderly citizens needing assistance.</div>
+          <div className="emergency-desc">{content.seniorDesc}</div>
         </div>
       </div>
 
-      <p className="emergency-disclaimer">These are general national helpline numbers. In an emergency, always contact local police or emergency services directly.</p>
+      <p className="emergency-disclaimer">{content.disclaimer}</p>
     </div>
   );
 }

@@ -157,7 +157,32 @@ Note: the app's brand name is transliterated two different ways across the two l
 
 | Key | English source | Hindi | Kannada |
 |---|---|---|---|
-| full (label + aria-label) | Emergency Help | आपात सहायता | ತುರ್ತು ಸಹಾಯ |
+| full (label + aria-label) | Emergency Help | आपात सहायता | ತುರ್ತು सहायता |
+
+## `src/emergencyContent.js` & `src/components/EmergencyTab.jsx` - Emergency tab
+
+| Key | English source | Hindi | Kannada |
+|---|---|---|---|
+| call112 | Call 112 | 112 पर कॉल करें | 112 ಕ್ಕೆ ಕರೆ ಮಾಡಿ |
+| heading | Emergency and Legal Aid Resources | इमरजेंसी और कानूनी सहायता नंबर | ತುರ್ತು ಮತ್ತು ಕಾನೂನು ನೆರವಿನ ಸಂಖ್ಯೆಗಳು |
+| intro | If you need urgent help, contact these resources directly. | अगर आपको तुरंत मदद चाहिए, तो सीधे इन नंबरों पर संपर्क करें। | ನಿಮಗೆ ತಕ್ಷಣದ ಸಹಾಯ ಬೇಕಾದರೆ, ಈ ಸಂಖ್ಯೆಗಳನ್ನು ನೇರವಾಗಿ ಸಂಪರ್ಕಿಸಿ. |
+| policeTitle | Police Emergency | पुलिस आपातकालीन सेवा | ಪೊಲೀಸ್ ತುರ್ತು ಸೇವೆ |
+| policeDesc | National emergency helpline for police assistance. | पुलिस की मदद के लिए राष्ट्रीय इमरजेंसी नंबर। | ಪೊಲೀಸ್ ನೆರವಿಗಾಗಿ ರಾಷ್ಟ್ರೀಯ ತುರ್ತು ಸಹಾಯವಾಣಿ. |
+| womenTitle | Women Helpline | महिला हेल्पलाइन | ಮಹಿಳಾ ಸಹಾಯವಾಣಿ |
+| womenDesc | National helpline for women in distress. | संकट में फंसी महिलाओं के लिए राष्ट्रीय हेल्पलाइन। | ಸಂಕಷ್ಟದಲ್ಲಿರುವ ಮಹಿಳೆಯರಿಗಾಗಿ ರಾಷ್ಟ್ರೀಯ ಸಹಾಯವಾಣಿ. |
+| domesticTitle | Domestic Violence Helpline | घरेलू हिंसा हेल्पलाइन | ಕೌಟುಂಬಿಕ ದೌರ್ಜನ್ಯ ಸಹಾಯವಾಣಿ |
+| domesticDesc | National helpline for domestic violence support. | घरेलू हिंसा से पीड़ित लोगों की मदद के लिए राष्ट्रीय हेल्पलाइन। | ಕೌಟುಂಬಿಕ ದೌರ್ಜನ್ಯಕ್ಕೆ ಒಳಗಾದವರ ನೆರವಿಗಾಗಿ ರಾಷ್ಟ್ರೀಯ ಸಹಾಯವಾಣಿ. |
+| childTitle | Child Helpline | चाइल्ड हेल्पलाइन (बच्चों की मदद) | ಮಕ್ಕಳ ಸಹಾಯವಾಣಿ |
+| childDesc | National helpline for children in need of help. | मदद की जरूरत वाले बच्चों के लिए राष्ट्रीय हेल्पलाइन। | ನೆರವು ಬೇಕಾದ ಮಕ್ಕಳಿಗಾಗಿ ರಾಷ್ಟ್ರೀಯ ಸಹಾಯವಾಣಿ. |
+| nalsaTitle | National Legal Services Authority (NALSA) | राष्ट्रीय कानूनी सेवा प्राधिकरण (NALSA) | ರಾಷ್ಟ್ರೀಯ ಕಾನೂನು ಸೇವೆಗಳ ಪ್ರಾಧಿಕಾರ (NALSA) |
+| nalsaDesc | Free legal aid and services for eligible citizens. | जरूरतमंद नागरिकों के लिए मुफ्त कानूनी मदद और सेवाएं। | ಅರ್ಹ ನಾಗರಿಕರಿಗೆ ಉಚಿತ ಕಾನೂನು ನೆರವು ಮತ್ತು ಸೇವೆಗಳು. |
+| consumerTitle | Consumer Helpline | ग्राहक हेल्पलाइन | ಗ್ರಾಹಕ ಸಹಾಯವಾಣಿ |
+| consumerDesc | National Consumer Helpline for consumer grievances. | खरीदे गए सामान या सेवा से जुड़ी शिकायतों के लिए राष्ट्रीय हेल्पलाइन। | ಗ್ರಾಹಕ ಹಕ್ಕುಗಳು ಮತ್ತು ದೂರುಗಳಿಗಾಗಿ ರಾಷ್ಟ್ರೀಯ ಸಹಾಯವಾಣಿ. |
+| cyberTitle | Cyber Crime Helpline | साइबर क्राइम हेल्पलाइन | ಸೈಬರ್ ಕ್ರೈಮ್ ಸಹಾಯವಾಣಿ |
+| cyberDesc | National helpline to report cyber crimes and online fraud. | ऑनलाइन धोखाधड़ी और साइबर अपराध की रिपोर्ट करने के लिए हेल्पलाइन। | ಆನ್‌ಲೈನ್ ವಂಚನೆ ಮತ್ತು ಸೈಬರ್ ಅಪರಾಧ ದೂರುಗಳಿಗಾಗಿ ಸಹಾಯವಾಣಿ. |
+| seniorTitle | Senior Citizen Helpline | वरिष्ठ नागरिक हेल्पलाइन | ಹಿರಿಯ ನಾಗರಿಕರ ಸಹಾಯವಾಣಿ |
+| seniorDesc | National helpline for elderly citizens needing assistance. | बुजुर्ग नागरिकों की सहायता के लिए राष्ट्रीय हेल्पलाइन। | ಹಿರಿಯ ನಾಗರಿಕರ ಸಹಾಯ ಮತ್ತು ನೆರವಿಗಾಗಿ ರಾಷ್ಟ್ರೀಯ ಸಹಾಯವಾಣಿ. |
+| disclaimer | These are general national helpline numbers. In an emergency, always contact local police or emergency services directly. | ये सामान्य राष्ट्रीय हेल्पलाइन नंबर हैं। किसी भी आपात स्थिति में, हमेशा स्थानीय पुलिस या नजदीकी आपातकालीन सेवा से सीधे संपर्क करें। | ಇವು ಸಾಮಾನ್ಯ ರಾಷ್ಟ್ರೀಯ ಸಹಾಯವಾಣಿ ಸಂಖ್ಯೆಗಳು. ತುರ್ತು ಸಂದರ್ಭದಲ್ಲಿ, ಯಾವಾಗಲೂ ಸ್ಥಳೀಯ ಪೊಲೀಸರನ್ನು ಅಥವಾ ಹತ್ತಿರದ ತುರ್ತು ಸೇವೆಯನ್ನು ನೇರವಾಗಿ ಸಂಪರ್ಕಿಸಿ। |
 
 ## Not yet translated (English-only, out of scope for this pass)
 
@@ -227,10 +252,3 @@ only the strings below were never wired to a language at all.
 - Button: "Next Question" / "See Results"
 - Results text: "You scored X out of Y"
 - Button: "Try Again"
-
-### `src/components/EmergencyTab.jsx`
-- Heading: "Emergency and Legal Aid Resources"
-- Intro line: "If you need urgent help, contact these resources directly."
-- All 8 helpline cards' titles and descriptions (Police Emergency, Women Helpline, Domestic Violence Helpline, Child Helpline, National Legal Services Authority (NALSA), Consumer Helpline, Cyber Crime Helpline, Senior Citizen Helpline) - numbers themselves don't need translation.
-- Disclaimer: "These are general national helpline numbers. In an emergency, always contact local police or emergency services directly."
-- The "Call 112" button text - left as English intentionally this pass (its styling and behavior were also left unchanged, per instruction).
