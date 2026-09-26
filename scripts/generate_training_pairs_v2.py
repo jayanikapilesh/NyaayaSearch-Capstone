@@ -286,7 +286,8 @@ def main():
         if not questions or skip_reason:
             skipped_count += 1
             reason_clean = str(skip_reason if skip_reason else "No questions generated").strip()
-            print(f"[{idx+1}/{len(sections_to_do)}] {act} Sec {sec} -> SKIPPED ({reason_clean})")
+            printable_reason = reason_clean.encode('ascii', errors='replace').decode('ascii')
+            print(f"[{idx+1}/{len(sections_to_do)}] {act} Sec {sec} -> SKIPPED ({printable_reason})")
             
             with open(SKIPPED_CSV, "a", newline="", encoding="utf-8") as f:
                 writer = csv.writer(f)
