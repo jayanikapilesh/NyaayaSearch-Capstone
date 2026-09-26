@@ -88,10 +88,11 @@ def find_stray_script_words(text, target_language_code):
     allowed = target_range + basic_ascii + general_punctuation + whitespace
     return re.findall("[^" + allowed + "]+", text)
 
-def translate_to_english(query):
-    response = client.chat.completions.create(
-        model="openai/gpt-oss-120b",
-        messages=[
+def translate_to_english(query, return_usage=False):
+    reasoning_effort = os.environ.get("TRANSLATION_REASONING", "low")
+    kwargs = {
+        "model": "openai/gpt-oss-120b",
+        "messages": [
             {
                 "role": "system",
                 "content": (
@@ -102,12 +103,18 @@ def translate_to_english(query):
             },
             {"role": "user", "content": query},
         ],
-        temperature=0,
-        max_tokens=500,
-    )
+        "temperature": 0,
+        "max_tokens": 500,
+    }
+    if reasoning_effort and reasoning_effort.lower() not in ("none", "null", "false", "off", "0"):
+        kwargs["reasoning_effort"] = reasoning_effort
+
+    response = client.chat.completions.create(**kwargs)
     content = response.choices[0].message.content
     if not content or not content.strip():
         raise RuntimeError("Translation model returned empty response")
+    if return_usage:
+        return content.strip(), response.usage
     return content.strip()
 
 

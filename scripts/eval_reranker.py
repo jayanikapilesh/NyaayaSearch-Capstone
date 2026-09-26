@@ -204,6 +204,11 @@ TRANSLATION_CACHE_FILE = os.path.join(ROOT_DIR, "data", "eval", "translation_cac
 TRANSLATION_CACHE = {}
 
 
+def get_translation_cache_key(query):
+    reasoning = os.environ.get("TRANSLATION_REASONING", "low").strip()
+    return f"{reasoning}:{query}"
+
+
 def load_translation_cache(refresh=False):
     global TRANSLATION_CACHE
     if refresh:
@@ -324,7 +329,8 @@ def ensure_translations_for_dataset(lang, lang_title, queries, en_filepath, refr
 
     queries_to_translate = []
     for idx, (q, _, _) in enumerate(queries):
-        cached_val = TRANSLATION_CACHE.get(q)
+        cache_key = get_translation_cache_key(q)
+        cached_val = TRANSLATION_CACHE.get(cache_key)
         if refresh or not cached_val:
             queries_to_translate.append((idx + 1, q))
         else:
@@ -342,7 +348,8 @@ def ensure_translations_for_dataset(lang, lang_title, queries, en_filepath, refr
         for item_idx, q in queries_to_translate:
             try:
                 translated_text = translate_single_query(q, max_retries=max_retries)
-                new_translations[q] = translated_text
+                cache_key = get_translation_cache_key(q)
+                new_translations[cache_key] = translated_text
             except Exception as e:
                 failed_queries.append((item_idx, q, str(e)))
 
@@ -365,10 +372,11 @@ def ensure_translations_for_dataset(lang, lang_title, queries, en_filepath, refr
     # Validate cached translations against the paired English originals
     identical_matches = []
     for idx, (q, _, _) in enumerate(queries):
-        cached_translation = TRANSLATION_CACHE.get(q, "").strip().lower()
+        cache_key = get_translation_cache_key(q)
+        cached_translation = TRANSLATION_CACHE.get(cache_key, "").strip().lower()
         english_original = en_queries[idx].strip().lower()
         if cached_translation == english_original:
-            identical_matches.append((idx + 1, q, TRANSLATION_CACHE.get(q), en_queries[idx]))
+            identical_matches.append((idx + 1, q, TRANSLATION_CACHE.get(cache_key), en_queries[idx]))
 
     identical_count = len(identical_matches)
     print(f"[{lang_title}] Translations identical to English original: {identical_count} / {len(queries)}", flush=True)
@@ -743,7 +751,7 @@ def main():
 
             for idx, (query, expected_act, expected_section) in enumerate(queries, 1):
                 if lang != "en":
-                    search_q = TRANSLATION_CACHE[query]
+                    search_q = TRANSLATION_CACHE[get_translation_cache_key(query)]
                 else:
                     search_q = query
 
@@ -846,7 +854,7 @@ def main():
 
             for idx, (query, expected_act, expected_section) in enumerate(queries, 1):
                 if lang != "en":
-                    search_q = TRANSLATION_CACHE[query]
+                    search_q = TRANSLATION_CACHE[get_translation_cache_key(query)]
                 else:
                     search_q = query
 
