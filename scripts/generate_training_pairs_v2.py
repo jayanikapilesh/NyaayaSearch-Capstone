@@ -6,7 +6,7 @@ import argparse
 import csv
 import re
 from datetime import datetime
-import pandas as pd
+import openpyxl
 from dotenv import load_dotenv
 from groq import Groq
 
@@ -40,7 +40,7 @@ Rules:
 """
 
 def normalize_sec(sec):
-    if pd.isna(sec):
+    if sec is None:
         return ""
     s = str(sec).strip()
     if s.endswith(".0"):
@@ -65,12 +65,13 @@ def load_processed_and_skipped():
 
     skipped = set()
     if os.path.exists(SKIPPED_CSV):
-        df_skip = pd.read_csv(SKIPPED_CSV)
-        for _, r in df_skip.iterrows():
-            act = str(r.get("act_name", "")).strip()
-            sec = normalize_sec(r.get("section_number"))
-            if act and sec:
-                skipped.add((act, sec))
+        with open(SKIPPED_CSV, "r", encoding="utf-8") as f:
+            reader = csv.DictReader(f)
+            for r in reader:
+                act = str(r.get("act_name", "")).strip()
+                sec = normalize_sec(r.get("section_number"))
+                if act and sec:
+                    skipped.add((act, sec))
 
     return processed, skipped
 
@@ -208,31 +209,42 @@ def main():
         print(f"Error: {UNCOVERED_CSV} not found. Run scripts/coverage_report.py first.")
         sys.exit(1)
 
-    df_unc = pd.read_csv(UNCOVERED_CSV)
-    df_unc["clean_act"] = df_unc["act_name"].astype(str).str.strip()
-    df_target = df_unc[df_unc["clean_act"] == target_act].copy()
+    unc_rows = []
+    with open(UNCOVERED_CSV, "r", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        for r in reader:
+            if str(r.get("act_name", "")).strip() == target_act:
+                unc_rows.append(r)
 
-    if df_target.empty:
+    if not unc_rows:
         print(f"No uncovered sections found for Act: '{target_act}'")
         sys.exit(0)
 
     print(f"Loading legal text from KB for {target_act}...")
-    df_kb = pd.read_excel(KB_EXCEL)
-    df_kb["clean_act"] = df_kb["act_name"].astype(str).str.strip()
-    df_kb["norm_sec"] = df_kb["section_number"].apply(normalize_sec)
-    
+    wb = openpyxl.load_workbook(KB_EXCEL, data_only=True)
+    ws = wb.active
+    headers = [str(cell.value).strip() if cell.value is not None else "" for cell in ws[1]]
+    act_idx = headers.index("act_name") if "act_name" in headers else -1
+    sec_idx = headers.index("section_number") if "section_number" in headers else -1
+    title_idx = headers.index("section_title") if "section_title" in headers else -1
+    text_idx = headers.index("legal_text") if "legal_text" in headers else -1
+
     kb_dict = {}
-    for _, r in df_kb[df_kb["clean_act"] == target_act].iterrows():
-        sec = r["norm_sec"]
-        kb_dict[sec] = {
-            "section_title": r.get("section_title", ""),
-            "legal_text": str(r.get("legal_text", ""))
-        }
+    for row in ws.iter_rows(min_row=2, values_only=True):
+        row_act = str(row[act_idx]).strip() if act_idx != -1 and row[act_idx] is not None else ""
+        if row_act == target_act:
+            sec = normalize_sec(row[sec_idx]) if sec_idx != -1 else ""
+            title = str(row[title_idx]) if title_idx != -1 and row[title_idx] is not None else ""
+            text = str(row[text_idx]) if text_idx != -1 and row[text_idx] is not None else ""
+            kb_dict[sec] = {
+                "section_title": title,
+                "legal_text": text
+            }
 
     processed_set, skipped_set = load_processed_and_skipped()
     
     sections_to_do = []
-    for _, r in df_target.iterrows():
+    for r in unc_rows:
         sec = normalize_sec(r["section_number"])
         if (target_act, sec) not in processed_set and (target_act, sec) not in skipped_set:
             sections_to_do.append({
@@ -246,7 +258,7 @@ def main():
     if limit and limit > 0:
         sections_to_do = sections_to_do[:limit]
 
-    print(f"Found {len(df_target)} uncovered sections for '{target_act}'. {len(processed_set | skipped_set)} already handled. To process: {len(sections_to_do)} (out of {total_available}).")
+    print(f"Found {len(unc_rows)} uncovered sections for '{target_act}'. {len(processed_set | skipped_set)} already handled. To process: {len(sections_to_do)} (out of {total_available}).")
 
     if not sections_to_do:
         print("All target sections are already processed or skipped.")
