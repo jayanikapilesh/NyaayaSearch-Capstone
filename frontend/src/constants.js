@@ -50,7 +50,7 @@ export const UI_STRINGS = {
     searchingFull: "कानूनी डेटाबेस खोजा जा रहा है और व्याख्या तैयार की जा रही है...",
     mic: "माइक",
     listeningIndicator: "सुन रहे हैं... (रोकने के लिए माइक पर फिर से क्लिक करें)",
-    tryAsking: "यह पूछने का प्रयास करें:",
+    tryAsking: "ऐसे पूछकर देखें:",
     recent: "हाल ही में:",
     clear: "साफ़ करें",
     savedResults: "सहेजे गए परिणाम",

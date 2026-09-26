@@ -1,3 +1,5 @@
+Hindi reviewed by Jayani (native speaker): 4 fixes applied. Kannada reviewed: no changes needed.
+
 # Translations to review
 
 Every Hindi and Kannada string currently in the frontend, with its English
@@ -23,7 +25,7 @@ content.
 | searchingFull | Searching legal database and generating explanation... | कानूनी डेटाबेस खोजा जा रहा है और व्याख्या तैयार की जा रही है... | ಕಾನೂನು ಡೇಟಾಬೇಸ್ ಹುಡುಕಲಾಗುತ್ತಿದೆ ಮತ್ತು ವಿವರಣೆಯನ್ನು ರಚಿಸಲಾಗುತ್ತಿದೆ... |
 | mic | Mic | माइक | ಮೈಕ್ |
 | listeningIndicator | Listening... (click mic again to stop) | सुन रहे हैं... (रोकने के लिए माइक पर फिर से क्लिक करें) | ಆಲಿಸಲಾಗುತ್ತಿದೆ... (ನಿಲ್ಲಿಸಲು ಮೈಕ್ ಅನ್ನು ಮತ್ತೆ ಕ್ಲಿಕ್ ಮಾಡಿ) |
-| tryAsking | Try asking: | यह पूछने का प्रयास करें: | ಹೀಗೆ ಕೇಳಲು ಪ್ರಯತ್ನಿಸಿ: |
+| tryAsking | Try asking: | ऐसे पूछकर देखें: | ಹೀಗೆ ಕೇಳಲು ಪ್ರಯತ್ನಿಸಿ: |
 | recent | Recent: | हाल ही में: | ಇತ್ತೀಚಿನ: |
 | clear | Clear | साफ़ करें | ತೆರವುಗೊಳಿಸಿ |
 | savedResults | Saved Results | सहेजे गए परिणाम | ಉಳಿಸಿದ ಫಲಿತಾಂಶಗಳು |
@@ -62,7 +64,7 @@ Note: `heroHeadlineLine1`'s Hindi/Kannada translations restructure the sentence 
 | Key | English source | Hindi | Kannada |
 |---|---|---|---|
 | statsLabels.acts | Acts Covered | शामिल अधिनियम | ಸೇರಿಸಲಾದ ಕಾಯ್ದೆಗಳು |
-| statsLabels.sections | Sections Indexed | अनुक्रमित धाराएं | ಸೂಚ್ಯಂಕಗೊಳಿಸಿದ ವಿಭಾಗಗಳು |
+| statsLabels.sections | Sections Indexed | शामिल धाराएं | ಸೂಚ್ಯಂಕಗೊಳಿಸಿದ ವಿಭಾಗಗಳು |
 | statsLabels.cases | SC Cases Linked to Acts | अधिनियमों से जुड़े सुप्रीम कोर्ट मामले | ಕಾಯ್ದೆಗಳಿಗೆ ಲಿಂಕ್ ಆದ ಸುಪ್ರೀಂ ಕೋರ್ಟ್ ಪ್ರಕರಣಗಳು |
 | statsLabels.languages | Languages Supported | समर्थित भाषाएं | ಬೆಂಬಲಿತ ಭಾಷೆಗಳು |
 
@@ -76,7 +78,7 @@ Note: `heroHeadlineLine1`'s Hindi/Kannada translations restructure the sentence 
 | workflowSteps[1].title | We search real statutes | हम वास्तविक कानूनों में खोजते हैं | ನಾವು ನಿಜವಾದ ಕಾನೂನುಗಳಲ್ಲಿ ಹುಡುಕುತ್ತೇವೆ |
 | workflowSteps[1].description | Hybrid search matches your question to the exact Acts and Sections that apply. | हाइब्रिड खोज आपके प्रश्न को सही अधिनियमों और धाराओं से मिलाती है। | ಹೈಬ್ರಿಡ್ ಹುಡುಕಾಟ ನಿಮ್ಮ ಪ್ರಶ್ನೆಯನ್ನು ಸರಿಯಾದ ಕಾಯ್ದೆಗಳು ಮತ್ತು ವಿಭಾಗಗಳೊಂದಿಗೆ ಹೊಂದಿಸುತ್ತದೆ. |
 | workflowSteps[2].title | Get a plain-language explanation | सरल भाषा में व्याख्या पाएं | ಸರಳ ಭಾಷೆಯಲ್ಲಿ ವಿವರಣೆ ಪಡೆಯಿರಿ |
-| workflowSteps[2].description | See what the law means for you, with every citation traceable to its source section. | देखें कि कानून का आपके लिए क्या अर्थ है, हर उद्धरण अपने स्रोत धारा तक जाने योग्य है। | ಕಾನೂನು ನಿಮಗೆ ಏನು ಅರ್ಥೈಸುತ್ತದೆ ಎಂಬುದನ್ನು ನೋಡಿ, ಪ್ರತಿ ಉಲ್ಲೇಖವನ್ನೂ ಅದರ ಮೂಲ ವಿಭಾಗಕ್ಕೆ ಪತ್ತೆಹಚ್ಚಬಹುದು. |
+| workflowSteps[2].description | See what the law means for you, with every citation traceable to its source section. | देखें कि कानून का आपके लिए क्या अर्थ है, हर हवाला उसकी मूल धारा से जुड़ा है। | ಕಾನೂನು ನಿಮಗೆ ಏನು ಅರ್ಥೈಸುತ್ತದೆ ಎಂಬುದನ್ನು ನೋಡಿ, ಪ್ರತಿ ಉಲ್ಲೇಖವನ್ನೂ ಅದರ ಮೂಲ ವಿಭಾಗಕ್ಕೆ ಪತ್ತೆಹಚ್ಚಬಹುದು. |
 | workflowSteps[3].title | Explore more tools | और उपकरण देखें | ಇನ್ನಷ್ಟು ಸಾಧನಗಳನ್ನು ಅನ್ವೇಷಿಸಿ |
 | workflowSteps[3].description | Draft documents, decode BNS sections, simplify judgments, and more. | दस्तावेज़ तैयार करें, बीएनएस धाराएं समझें, फैसले सरल करें, और भी बहुत कुछ। | ದಾಖಲೆಗಳನ್ನು ರಚಿಸಿ, ಬಿಎನ್‌ಎಸ್ ವಿಭಾಗಗಳನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳಿ, ತೀರ್ಪುಗಳನ್ನು ಸರಳಗೊಳಿಸಿ, ಮತ್ತು ಇನ್ನಷ್ಟು. |
 
@@ -93,7 +95,7 @@ Note: `heroHeadlineLine1`'s Hindi/Kannada translations restructure the sentence 
 | featureCards[dictionary].description | Look up legal terms in plain English. | कानूनी शब्दों का सरल अंग्रेज़ी में अर्थ देखें। | ಕಾನೂನು ಪದಗಳ ಅರ್ಥವನ್ನು ಸರಳ ಇಂಗ್ಲಿಷ್‌ನಲ್ಲಿ ನೋಡಿ. |
 | featureCards[documents].title | My Documents | मेरे दस्तावेज़ | ನನ್ನ ದಾಖಲೆಗಳು |
 | featureCards[documents].description | Revisit your saved searches and uploaded PDFs anytime. | अपनी सहेजी गई खोजें और अपलोड की गई पीडीएफ़ कभी भी दोबारा देखें। | ನಿಮ್ಮ ಉಳಿಸಿದ ಹುಡುಕಾಟಗಳು ಮತ್ತು ಅಪ್‌ಲೋಡ್ ಮಾಡಿದ ಪಿಡಿಎಫ್‌ಗಳನ್ನು ಯಾವಾಗ ಬೇಕಾದರೂ ನೋಡಿ. |
-| featureCards[simplifier].title | Case Simplifier | मामला सरलीकरण | ಪ್ರಕರಣ ಸರಳೀಕರಣ |
+| featureCards[simplifier].title | Case Simplifier | फैसला सरल भाषा में | ಪ್ರಕರಣ ಸರಳೀಕರಣ |
 | featureCards[simplifier].description | Paste a court judgment and get a plain-language summary. | किसी अदालती फैसले को पेस्ट करें और सरल भाषा में सारांश पाएं। | ನ್ಯಾಯಾಲಯದ ತೀರ್ಪನ್ನು ಅಂಟಿಸಿ ಮತ್ತು ಸರಳ ಭಾಷೆಯ ಸಾರಾಂಶ ಪಡೆಯಿರಿ. |
 | featureCards[bns].title | BNS Decoder | बीएनएस डिकोडर | ಬಿಎನ್‌ಎಸ್ ಡಿಕೋಡರ್ |
 | featureCards[bns].description | Look up any Bharatiya Nyaya Sanhita section number and see what it means. | किसी भी भारतीय न्याय संहिता धारा संख्या का अर्थ जानें। | ಯಾವುದೇ ಭಾರತೀಯ ನ್ಯಾಯ ಸಂಹಿತೆ ವಿಭಾಗ ಸಂಖ್ಯೆಯ ಅರ್ಥವನ್ನು ನೋಡಿ. |
@@ -148,7 +150,7 @@ Note: the app's brand name is transliterated two different ways across the two l
 | nav.more | More | अधिक | ಇನ್ನಷ್ಟು |
 | more.drafter | Document Generator | दस्तावेज़ जनरेटर | ದಾಖಲೆ ಜನರೇಟರ್ |
 | more.dictionary | Dictionary | शब्दकोश | ನಿಘಂಟು |
-| more.simplifier | Case Simplifier | मामला सरलीकरण | ಪ್ರಕರಣ ಸರಳೀಕರಣ |
+| more.simplifier | Case Simplifier | फैसला सरल भाषा में | ಪ್ರಕರಣ ಸರಳೀಕರಣ |
 | more.quiz | Legal IQ Daily | लीगल आईक्यू डेली | ಲೀಗಲ್ ಐಕ್ಯೂ ಡೈಲಿ |
 
 ## `src/components/EmergencyButton.jsx` - Floating emergency button

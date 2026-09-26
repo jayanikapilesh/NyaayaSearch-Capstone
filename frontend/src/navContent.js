@@ -39,7 +39,7 @@ export const NAV_CONTENT = {
     more: {
       drafter: "दस्तावेज़ जनरेटर",
       dictionary: "शब्दकोश",
-      simplifier: "मामला सरलीकरण",
+      simplifier: "फैसला सरल भाषा में",
       quiz: "लीगल आईक्यू डेली",
     },
   },
