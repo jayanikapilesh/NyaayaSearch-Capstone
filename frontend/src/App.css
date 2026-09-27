@@ -1301,6 +1301,17 @@ h1, h2, h3 {
   color: var(--color-text-muted);
 }
 
+.legal-disclaimer {
+  margin-top: var(--space-3);
+  font-size: var(--fs-xs);
+  color: var(--color-text-subtle);
+  font-style: italic;
+}
+
+.dark-mode .legal-disclaimer {
+  color: var(--color-text-muted);
+}
+
 /* BNS decoder */
 
 .bns-original-label {

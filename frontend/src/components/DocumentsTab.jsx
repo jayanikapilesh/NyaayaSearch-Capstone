@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { API_URL } from "../constants";
 import { extractErrorMessage } from "../utils";
+import { getLegalDisclaimer } from "../legalDisclaimerContent";
 
 const PRIVACY_NOTICES = {
   en: "Uploaded documents are sent to an AI service to answer your questions; don't upload sensitive personal documents.",
@@ -97,6 +98,7 @@ function DocumentsTab({ setError, uiLanguage = "en" }) {
         <div className="document-card">
           <div className="document-filename">{uploadedDoc.filename}</div>
           <div className="document-summary">{uploadedDoc.summary}</div>
+          <p className="legal-disclaimer">{getLegalDisclaimer(uiLanguage)}</p>
 
           {uploadedDoc.dates && uploadedDoc.dates.length > 0 && (
             <div className="dates-section">
@@ -129,7 +131,12 @@ function DocumentsTab({ setError, uiLanguage = "en" }) {
             </form>
           )}
 
-          {docAnswer && <div className="document-answer">{docAnswer}</div>}
+          {docAnswer && (
+            <div>
+              <div className="document-answer">{docAnswer}</div>
+              <p className="legal-disclaimer">{getLegalDisclaimer(uiLanguage)}</p>
+            </div>
+          )}
         </div>
       )}
     </div>

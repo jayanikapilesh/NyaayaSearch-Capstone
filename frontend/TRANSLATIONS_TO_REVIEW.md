@@ -282,6 +282,16 @@ Static fallback and system messages returned by `/explain` when no search result
 |---|---|---|---|
 | privacyNotice | Uploaded documents are sent to an AI service to answer your questions; don't upload sensitive personal documents. | अपलोड किए गए दस्तावेज़ आपके प्रश्नों के उत्तर देने के लिए एक एआई सेवा को भेजे जाते हैं; संवेदनशील व्यक्तिगत दस्तावेज़ अपलोड न करें। | ನಿಮ್ಮ ಪ್ರಶ್ನೆಗಳಿಗೆ ಉತ್ತರಿಸಲು ಅಪ್‌ಲೋಡ್ ಮಾಡಿದ ದಾಖಲೆಗಳನ್ನು AI ಸೇವೆಗೆ ಕಳುಹಿಸಲಾಗುತ್ತದೆ; ಸೂಕ್ಷ್ಮ ವೈಯಕ್ತಿಕ ದಾಖಲೆಗಳನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಬೇಡಿ. |
 
+## `src/legalDisclaimerContent.js` - "Not legal advice" line (needs native review)
+
+Shown under every AI-generated answer: Search explanation, BNS Decoder,
+My Documents (uploaded-document summary and Q&A answers), Case Simplifier,
+and Dictionary.
+
+| Key | English source | Hindi | Kannada |
+|---|---|---|---|
+| (default export) | This is general legal information, not legal advice. For your specific situation, consult a lawyer or free legal aid (NALSA 15100). | यह सामान्य कानूनी जानकारी है, कानूनी सलाह नहीं है। अपनी विशेष स्थिति के लिए किसी वकील या निःशुल्क कानूनी सहायता (NALSA 15100) से सलाह लें। (needs native review) | ಇದು ಸಾಮಾನ್ಯ ಕಾನೂನು ಮಾಹಿತಿ, ಕಾನೂನು ಸಲಹೆಯಲ್ಲ. ನಿಮ್ಮ ನಿರ್ದಿಷ್ಟ ಪರಿಸ್ಥಿತಿಗಾಗಿ, ವಕೀಲರನ್ನು ಅಥವಾ ಉಚಿತ ಕಾನೂನು ನೆರವು (NALSA 15100) ಸಂಪರ್ಕಿಸಿ. (needs native review) |
+
 ## Rate Limiting Messages (`scripts/rate_limiter.py`) - needs native review
 
 | Key | English source | Hindi | Kannada |
