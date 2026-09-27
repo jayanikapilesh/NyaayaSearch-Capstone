@@ -3,8 +3,10 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { API_URL } from "../constants";
 import { extractErrorMessage } from "../utils";
+import { getBnsContent } from "../bnsContent";
 
-function BnsTab({ setError }) {
+function BnsTab({ setError, uiLanguage = "en" }) {
+  const content = getBnsContent(uiLanguage);
   const [bnsSectionInput, setBnsSectionInput] = useState("");
   const [bnsResult, setBnsResult] = useState(null);
   const [bnsLoading, setBnsLoading] = useState(false);
@@ -21,7 +23,10 @@ function BnsTab({ setError }) {
       const response = await fetch(API_URL + "/bns-lookup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ section_number: bnsSectionInput.trim() }),
+        body: JSON.stringify({
+          section_number: bnsSectionInput.trim(),
+          language: uiLanguage,
+        }),
       });
 
       if (!response.ok) {
@@ -42,20 +47,20 @@ function BnsTab({ setError }) {
 
   return (
     <div className="drafter-section">
-      <h2>BNS Decoder</h2>
-      <p className="drafter-intro">Enter a Bharatiya Nyaya Sanhita (BNS) section number to see what it says, explained in plain language.</p>
+      <h2>{content.heading}</h2>
+      <p className="drafter-intro">{content.intro}</p>
       <form className="drafter-form" onSubmit={handleBnsLookup}>
-        <label className="sr-only" htmlFor="bns-section">BNS section number</label>
+        <label className="sr-only" htmlFor="bns-section">{content.srLabel}</label>
         <input
           id="bns-section"
           type="text"
           className="search-input"
-          placeholder="e.g. 103"
+          placeholder={content.placeholder}
           value={bnsSectionInput}
           onChange={function (e) { setBnsSectionInput(e.target.value); }}
         />
         <button type="submit" className="search-button" disabled={bnsLoading}>
-          {bnsLoading ? "Looking up..." : "Decode Section"}
+          {bnsLoading ? content.buttonLoading : content.buttonDecode}
         </button>
       </form>
 
@@ -64,7 +69,7 @@ function BnsTab({ setError }) {
           <div className="draft-result-header">
             <div className="citation-heading">
               <span className="citation-tag">
-                <span className="citation-tag-label">Section</span>
+                <span className="citation-tag-label">{content.sectionLabel}</span>{" "}
                 <span className="citation-tag-number">{bnsResult.section_number}</span>
               </span>
               <h3>{bnsResult.section_title}</h3>
@@ -72,7 +77,7 @@ function BnsTab({ setError }) {
           </div>
           <div className="draft-text">
             <ReactMarkdown remarkPlugins={[remarkGfm]}>{bnsResult.explanation}</ReactMarkdown>
-            <p className="bns-original-label">Original text:</p>
+            <p className="bns-original-label">{content.originalText}</p>
             <p className="bns-original-text">{bnsResult.legal_text}</p>
           </div>
         </div>
@@ -82,3 +87,4 @@ function BnsTab({ setError }) {
 }
 
 export default BnsTab;
+

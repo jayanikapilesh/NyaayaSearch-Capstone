@@ -453,6 +453,7 @@ class CaseSimplifyRequest(BaseModel):
 
 class BNSLookupRequest(BaseModel):
     section_number: str
+    language: str | None = "en"
 
 
 @app.post("/draft-document")
@@ -494,19 +495,46 @@ def simplify_case_endpoint(request: CaseSimplifyRequest):
 
 @app.post("/bns-lookup")
 def bns_lookup_endpoint(request: BNSLookupRequest):
-    if not request.section_number or not request.section_number.strip():
-        raise HTTPException(status_code=400, detail="Please enter a BNS section number.")
+    lang = (request.language or "en").lower().strip()
+    if lang not in ("en", "hi", "kn"):
+        lang = "en"
 
-    record = engine.lookup_section("Bharatiya Nyaya Sanhita", request.section_number.strip())
+    sec = (request.section_number or "").strip()
+    if not sec:
+        if lang == "hi":
+            err_msg = "कृपया एक बीएनएस (BNS) धारा संख्या दर्ज करें।"
+        elif lang == "kn":
+            err_msg = "ದಯವಿಟ್ಟು ಬಿಎನ್‌ಎಸ್ (BNS) ವಿಭಾಗ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ."
+        else:
+            err_msg = "Please enter a BNS section number."
+        raise HTTPException(status_code=400, detail=err_msg)
+
+    record = engine.lookup_section("Bharatiya Nyaya Sanhita", sec)
     if not record:
-        raise HTTPException(status_code=404, detail=f"Section {request.section_number} of the Bharatiya Nyaya Sanhita was not found in our database.")
+        if lang == "hi":
+            not_found_msg = f"भारतीय न्याय संहिता की धारा {sec} हमारे डेटाबेस में नहीं मिली।"
+        elif lang == "kn":
+            not_found_msg = f"ಭಾರತೀಯ ನ್ಯಾಯ ಸಂಹಿತೆಯ ವಿಭಾಗ {sec} ನಮ್ಮ ಡೇಟಾಬೇಸ್‌ನಲ್ಲಿ ಕಂಡುಬಂದಿಲ್ಲ."
+        else:
+            not_found_msg = f"Section {sec} of the Bharatiya Nyaya Sanhita was not found in our database."
+        raise HTTPException(status_code=404, detail=not_found_msg)
 
     try:
-        explanation = explain_bns_section(record["section_title"], record["legal_text"])
+        explanation = explain_bns_section(record["section_title"], record["legal_text"], language=lang)
     except groq.RateLimitError:
-        explanation = "Plain-language explanation is temporarily unavailable due to a usage limit. The section text is shown below."
+        if lang == "hi":
+            explanation = "सेवा उपयोग सीमा के कारण सरल भाषा में व्याख्या अस्थायी रूप से अनुपलब्ध है। मूल धारा नीचे दी गई है।"
+        elif lang == "kn":
+            explanation = "ಸೇವಾ ಬಳಕೆಯ ಮಿತಿಯಿಂದಾಗಿ ಸರಳ ಭಾಷೆಯ ವಿವರಣೆಯು ತಾತ್ಕಾಲಿಕವಾಗಿ ಲಭ್ಯವಿಲ್ಲ. ಮೂಲ ವಿಭಾಗವನ್ನು ಕೆಳಗೆ ನೀಡಲಾಗಿದೆ."
+        else:
+            explanation = "Plain-language explanation is temporarily unavailable due to a usage limit. The section text is shown below."
     except Exception:
-        explanation = "Could not generate an explanation right now, but the section text is shown below."
+        if lang == "hi":
+            explanation = "हम अभी व्याख्या तैयार नहीं कर सके, लेकिन मूल धारा नीचे दी गई है।"
+        elif lang == "kn":
+            explanation = "ನಾವು ಇದೀಗ ವಿವರಣೆಯನ್ನು ರಚಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ, ಆದರೆ ಮೂಲ ವಿಭಾಗವನ್ನು ಕೆಳಗೆ ನೀಡಲಾಗಿದೆ."
+        else:
+            explanation = "Could not generate an explanation right now, but the section text is shown below."
 
     return {
         "section_number": record["section_number"],

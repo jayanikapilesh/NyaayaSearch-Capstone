@@ -198,6 +198,19 @@ Note: the app's brand name is transliterated two different ways across the two l
 | errDefault | Something went wrong looking up this term. | इस शब्द को खोजने में कुछ समस्या आई। | ಈ ಪದವನ್ನು ಹುಡುಕುವಲ್ಲಿ ಏನೋ ತೊಂದರೆಯಾಗಿದೆ. |
 | errNetwork | Could not reach the server. Please try again. | सर्वर से संपर्क नहीं हो पाया। फिर से कोशिश करें। | ಸರ್ವರ್ ಸಂಪರ್ಕಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ. |
 
+## `src/bnsContent.js` - BNS Decoder (needs native review)
+
+| Key | English source | Hindi | Kannada |
+|---|---|---|---|
+| heading | BNS Decoder | बीएनएस डिकोडर | ಬಿಎನ್‌ಎಸ್ ಡಿಕೋಡರ್ |
+| intro | Enter a Bharatiya Nyaya Sanhita (BNS) section number to see what it says, explained in plain language. | भारतीय न्याय संहिता (BNS) की धारा संख्या दर्ज करें और देखें कि वह सरल भाषा में क्या कहती है। | ಭಾರತೀಯ ನ್ಯಾಯ ಸಂಹಿತೆ (BNS) ಯ ವಿಭಾಗ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ ಮತ್ತು ಅದು ಸರಳ ಭಾಷೆಯಲ್ಲಿ ಏನು ಹೇಳುತ್ತದೆ ಎಂಬುದನ್ನು ನೋಡಿ. |
+| srLabel | BNS section number | बीएनएस धारा संख्या | ಬಿಎನ್‌ಎಸ್ ವಿಭಾಗ ಸಂಖ್ಯೆ |
+| placeholder | e.g. 103 | जैसे 103 | ಉದಾ. 103 |
+| buttonDecode | Decode Section | धारा समझें | ವಿಭಾಗವನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳಿ |
+| buttonLoading | Looking up... | खोज रहे हैं... | ಹುಡುಕಲಾಗುತ್ತಿದೆ... |
+| sectionLabel | Section | धारा | ವಿಭಾಗ |
+| originalText | Original text: | मूल पाठ: | ಮೂಲ ಪಠ್ಯ: |
+
 ## Not yet translated (English-only, out of scope for this pass)
 
 These strings still show in English regardless of the language setting -
@@ -211,15 +224,6 @@ only the strings below were never wired to a language at all.
 - Screen-reader label: "Describe your legal situation"
 - Mic button tooltip (`title` attribute): "Search by voice"
 - The 4 example-query chips: "Landlord not returning deposit", "Police arrest without warrant", "How to file an RTI request", "Consumer complaint for defective product"
-
-### `src/components/BnsTab.jsx`
-- Heading: "BNS Decoder"
-- Intro line: "Enter a Bharatiya Nyaya Sanhita (BNS) section number to see what it says, explained in plain language."
-- Screen-reader label: "BNS section number"
-- Input placeholder: "e.g. 103"
-- Button: "Looking up..." / "Decode Section"
-- Citation tag label: "Section" (hardcoded here, not routed through the same translation as Search's "Section" label)
-- "Original text:" caption above the source legal text
 
 ### `src/components/DocumentsTab.jsx`
 - Heading: "Ask about your own document"
@@ -270,4 +274,5 @@ Static fallback and system messages returned by `/explain` when no search result
 | section_label | Section | धारा | ವಿಭಾಗ |
 | rate_limit | Plain-language explanation is temporarily unavailable due to a service usage limit. Here are the relevant legal sections we found - please review them directly below. | सेवा उपयोग सीमा के कारण सरल भाषा में व्याख्या अस्थायी रूप से अनुपलब्ध है। हमें जो प्रासंगिक कानूनी धाराएं मिली हैं, वे यहां दी गई हैं - कृपया नीचे सीधे उनकी समीक्षा करें। | ಸೇವಾ ಬಳಕೆಯ ಮಿತಿಯಿಂದಾಗಿ ಸರಳ ಭಾಷೆಯ ವಿವರಣೆಯು ತಾತ್ಕಾಲಿಕವಾಗಿ ಲಭ್ಯವಿಲ್ಲ. ನಾವು ಕಂಡುಕೊಂಡ ಸಂಬಂಧಿತ ಕಾನೂನು ವಿಭಾಗಗಳು ಇಲ್ಲಿವೆ - ದಯವಿಟ್ಟು ಅವುಗಳನ್ನು ಕೆಳಗೆ ನೇರವಾಗಿ ಪರಿಶೀಲಿಸಿ. |
 | error | We couldn't generate an explanation right now, but here are the relevant legal sections we found below. | हम अभी व्याख्या तैयार नहीं कर सके, लेकिन हमें जो प्रासंगिक कानूनी धाराएं मिली हैं, वे नीचे दी गई हैं। | ನಾವು ಇದೀಗ ವಿವರಣೆಯನ್ನು ರಚಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ, ಆದರೆ ನಾವು ಕಂಡುಕೊಂಡ ಸಂಬಂಧಿತ ಕಾನೂನು ವಿಭಾಗಗಳನ್ನು ಕೆಳಗೆ ನೀಡಲಾಗಿದೆ. |
+| bns_not_found | Section {sec} of the Bharatiya Nyaya Sanhita was not found in our database. | भारतीय न्याय संहिता की धारा {sec} हमारे डेटाबेस में नहीं मिली। | ಭಾರತೀಯ ನ್ಯಾಯ ಸಂಹಿತೆಯ ವಿಭಾಗ {sec} ನಮ್ಮ ಡೇಟಾಬೇಸ್‌ನಲ್ಲಿ ಕಂಡುಬಂದಿಲ್ಲ. |
 
