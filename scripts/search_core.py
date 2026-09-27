@@ -207,6 +207,13 @@ def expand_query(query):
     for key, values in SYNONYMS.items():
         if key in query_lower:
             expanded += " " + " ".join(values)
+
+    # Added after app testing (not from test sets); report in paper.
+    abuse_pattern = r"\b(beat|beats|beating|hit|hits|slap|slaps|abuse|abuses|harass|harasses|torture|violence|maarta|marta(?:\s+hai)?|peet|peetta|pitai|hodeyuttane)\b"
+    family_pattern = r"\b(husband|wife|in-laws?|in\s+laws?|mother-in-law|mother\s+in\s+law|pati|sasural|gandu)\b"
+    if re.search(abuse_pattern, query_lower) and re.search(family_pattern, query_lower):
+        expanded += ' "domestic violence" "protection order" "cruelty"'
+
     return expanded
 
 
