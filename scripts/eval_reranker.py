@@ -631,6 +631,7 @@ def main():
     parser.add_argument("--tune", action="store_true", help="Run hyperparameter grid search on eval_queries.json first")
     parser.add_argument("--clean-synonyms", action="store_true", help="Replace SYNONYMS with pre-bc6c53ff version to evaluate clean baseline")
     parser.add_argument("--strict-clean", action="store_true", help="Strictly clean baseline: remove synonyms from 1d7000c1 and bc6c53ff, disable IPC_TO_BNS score override")
+    parser.add_argument("--test-file", "--test_file", type=str, default=None, help="Path, pattern, or prefix for test dataset files (default: data/eval/test_270_{lang}.json)")
     parser.add_argument("--refresh-translations", action="store_true", help="Force re-translation of queries via Groq instead of using cached translations")
     args = parser.parse_args()
 
@@ -714,10 +715,43 @@ def main():
     print(f"  - Match criteria: str(r['act_name']) == expected_act and str(r['section_number']) == expected_section\n", flush=True)
 
     requested_langs = [l.strip().lower() for l in args.languages.split(",") if l.strip()]
+
+    def resolve_test_file(test_file_arg, lang):
+        if not test_file_arg:
+            return os.path.join(ROOT_DIR, "data", "eval", f"test_270_{lang}.json")
+        if "{en,hi,kn}" in test_file_arg:
+            resolved = test_file_arg.replace("{en,hi,kn}", lang)
+        elif "{lang}" in test_file_arg or "{language}" in test_file_arg:
+            resolved = test_file_arg.replace("{lang}", lang).replace("{language}", lang)
+        elif any(test_file_arg.endswith(f"_{l}.json") for l in ["en", "hi", "kn"]):
+            for l in ["en", "hi", "kn"]:
+                if test_file_arg.endswith(f"_{l}.json"):
+                    resolved = test_file_arg[:-len(f"_{l}.json")] + f"_{lang}.json"
+                    break
+        elif test_file_arg.endswith(".json"):
+            resolved = test_file_arg
+        else:
+            if test_file_arg.endswith("_"):
+                resolved = f"{test_file_arg}{lang}.json"
+            else:
+                resolved = f"{test_file_arg}_{lang}.json"
+
+        if not os.path.isabs(resolved):
+            candidate_paths = [
+                os.path.join(ROOT_DIR, resolved),
+                os.path.join(ROOT_DIR, "data", "eval", os.path.basename(resolved)),
+                os.path.abspath(resolved),
+            ]
+            for cp in candidate_paths:
+                if os.path.exists(cp):
+                    return cp
+            return os.path.join(ROOT_DIR, resolved)
+        return resolved
+
     eval_files = {
-        "en": ("English", os.path.join(ROOT_DIR, "data", "eval", "test_270_en.json")),
-        "hi": ("Hindi", os.path.join(ROOT_DIR, "data", "eval", "test_270_hi.json")),
-        "kn": ("Kannada", os.path.join(ROOT_DIR, "data", "eval", "test_270_kn.json")),
+        "en": ("English", resolve_test_file(args.test_file, "en")),
+        "hi": ("Hindi", resolve_test_file(args.test_file, "hi")),
+        "kn": ("Kannada", resolve_test_file(args.test_file, "kn")),
     }
 
 
@@ -939,7 +973,9 @@ def main():
         adjusted_p_values.update(holm_bonferroni_correction(raw_p_l6))
 
         print("\n" + "=" * 105, flush=True)
-        if args.strict_clean:
+        if args.test_file:
+            mode_str = f"Test set ({os.path.basename(args.test_file)})" + (" [--strict-clean]" if args.strict_clean else "")
+        elif args.strict_clean:
             mode_str = "Development set (test_270, previously contaminated) [--strict-clean]"
         elif args.clean_synonyms:
             mode_str = "CLEAN SYNONYMS (PRE-COMMIT bc6c53ff)"
@@ -964,7 +1000,12 @@ def main():
         print("=" * 105, flush=True)
 
         print("\n" + "=" * 135, flush=True)
-        sig_label = "Development set (test_270, previously contaminated)" if args.strict_clean else "STATISTICAL SIGNIFICANCE TESTS"
+        if args.test_file:
+            sig_label = f"Test set ({os.path.basename(args.test_file)})"
+        elif args.strict_clean:
+            sig_label = "Development set (test_270, previously contaminated)"
+        else:
+            sig_label = "STATISTICAL SIGNIFICANCE TESTS"
         print(f"STATISTICAL SIGNIFICANCE TESTS: {sig_label}", flush=True)
         print("(McNemar on P@1/Recall@5, Paired Bootstrap 95% CI on MRR, Holm-Bonferroni Correction)", flush=True)
         print("=" * 135, flush=True)
@@ -1012,7 +1053,9 @@ def main():
         adjusted_p_values = holm_bonferroni_correction(raw_p_values)
 
         print("\n" + "=" * 98, flush=True)
-        if args.strict_clean:
+        if args.test_file:
+            mode_str = f"Test set ({os.path.basename(args.test_file)})" + (" [--strict-clean]" if args.strict_clean else "")
+        elif args.strict_clean:
             mode_str = "Development set (test_270, previously contaminated) [--strict-clean]"
         elif args.clean_synonyms:
             mode_str = "CLEAN SYNONYMS (PRE-COMMIT bc6c53ff)"
@@ -1035,7 +1078,12 @@ def main():
         print("=" * 98, flush=True)
 
         print("\n" + "=" * 122, flush=True)
-        sig_label = "Development set (test_270, previously contaminated)" if args.strict_clean else "STATISTICAL SIGNIFICANCE TESTS"
+        if args.test_file:
+            sig_label = f"Test set ({os.path.basename(args.test_file)})"
+        elif args.strict_clean:
+            sig_label = "Development set (test_270, previously contaminated)"
+        else:
+            sig_label = "STATISTICAL SIGNIFICANCE TESTS"
         print(f"STATISTICAL SIGNIFICANCE TESTS: {sig_label}", flush=True)
         print("(McNemar on P@1/Recall@5, Paired Bootstrap 95% CI on MRR, Holm-Bonferroni Correction across all tests)", flush=True)
         print("=" * 122, flush=True)
