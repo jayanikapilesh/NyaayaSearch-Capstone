@@ -1,6 +1,9 @@
 import os
 import re
 import time
+import json
+import string
+import threading
 import groq
 from dotenv import load_dotenv
 from groq import Groq
@@ -9,17 +12,155 @@ load_dotenv()
 
 client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
 
+CACHE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "data", "cache"))
+EXPLANATION_CACHE_PATH = os.path.join(CACHE_DIR, "explanation_cache.json")
+TRANSLATION_CACHE_PATH = os.path.join(CACHE_DIR, "translation_cache.json")
+
+_cache_lock = threading.Lock()
+
+
+def _ensure_cache_dir():
+    os.makedirs(CACHE_DIR, exist_ok=True)
+
+
+def _load_json_file(file_path):
+    if not os.path.exists(file_path):
+        return {}
+    try:
+        with open(file_path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return {}
+
+
+def _save_json_file(file_path, data):
+    _ensure_cache_dir()
+    tmp_path = file_path + ".tmp"
+    with open(tmp_path, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+    os.replace(tmp_path, file_path)
+
+
+PUNCT_TO_STRIP = string.punctuation + "“”‘’।॥"
+
+
+def normalize_text(text: str) -> str:
+    """Normalize query text for caching: lowercase, collapse spaces, strip punctuation at ends."""
+    if not text:
+        return ""
+    text = text.lower()
+    text = re.sub(r"\s+", " ", text).strip()
+    text = text.strip(PUNCT_TO_STRIP).strip()
+    return text
+
+
+# Bump the version whenever the prompt changes to invalidate old cache entries.
+EXPLANATION_PROMPT_VERSION = "v2"
+
+
+def make_explanation_cache_key(query: str, language: str, search_results: list, model: str = "openai/gpt-oss-120b") -> str:
+    norm_q = normalize_text(query)
+    lang = (language or "en").lower().strip()
+    sec_list = [
+        [str(r.get("act_name") or "").strip(), str(r.get("section_number") or "").strip()]
+        for r in (search_results or [])
+    ]
+    return json.dumps([EXPLANATION_PROMPT_VERSION, model, norm_q, lang, sec_list], ensure_ascii=False)
+
+
+def get_cached_explanation(query: str, language: str, search_results: list, model: str = "openai/gpt-oss-120b"):
+    if os.environ.get("NYAAYA_DISABLE_CACHE") == "1":
+        return None
+    key = make_explanation_cache_key(query, language, search_results, model=model)
+    with _cache_lock:
+        data = _load_json_file(EXPLANATION_CACHE_PATH)
+        hit = data.get(key)
+        if hit is not None:
+            return hit
+        # If looking up default primary model, check if backup model answered it
+        if model == "openai/gpt-oss-120b":
+            backup_key = make_explanation_cache_key(query, language, search_results, model="openai/gpt-oss-20b")
+            return data.get(backup_key)
+        return None
+
+
+def save_cached_explanation(query: str, language: str, search_results: list, explanation: str, model_used: str):
+    if os.environ.get("NYAAYA_DISABLE_CACHE") == "1":
+        return
+    model = model_used or "openai/gpt-oss-120b"
+    key = make_explanation_cache_key(query, language, search_results, model=model)
+    with _cache_lock:
+        data = _load_json_file(EXPLANATION_CACHE_PATH)
+        data[key] = {
+            "explanation": explanation,
+            "model_used": model,
+        }
+        _save_json_file(EXPLANATION_CACHE_PATH, data)
+
+
+def make_translation_cache_key(query: str, model: str = "openai/gpt-oss-120b", reasoning_effort: str = None) -> str:
+    norm_q = normalize_text(query)
+    if reasoning_effort is None:
+        reasoning_effort = os.environ.get("TRANSLATION_REASONING", "low")
+    reasoning_str = (reasoning_effort or "none").lower().strip()
+    return json.dumps([model, reasoning_str, norm_q], ensure_ascii=False)
+
+
+def get_cached_translation(query: str, model: str = "openai/gpt-oss-120b", reasoning_effort: str = None):
+    if os.environ.get("NYAAYA_DISABLE_CACHE") == "1":
+        return None
+    key = make_translation_cache_key(query, model=model, reasoning_effort=reasoning_effort)
+    with _cache_lock:
+        data = _load_json_file(TRANSLATION_CACHE_PATH)
+        return data.get(key)
+
+
+def save_cached_translation(query: str, translation: str, model: str = "openai/gpt-oss-120b", reasoning_effort: str = None):
+    if os.environ.get("NYAAYA_DISABLE_CACHE") == "1":
+        return
+    key = make_translation_cache_key(query, model=model, reasoning_effort=reasoning_effort)
+    with _cache_lock:
+        data = _load_json_file(TRANSLATION_CACHE_PATH)
+        data[key] = translation
+        _save_json_file(TRANSLATION_CACHE_PATH, data)
+
+
+def _is_tokens_per_day_error(e: Exception) -> bool:
+    """Check if an exception indicates a tokens-per-day (TPD) rate limit."""
+    msg = str(e).lower()
+    body_str = ""
+    if hasattr(e, "body"):
+        try:
+            body_str = str(e.body).lower()
+        except Exception:
+            pass
+    combined = f"{msg} {body_str}"
+    tpd_indicators = (
+        "tokens per day",
+        "tokens-per-day",
+        "tokens_per_day",
+        "tpd",
+        "daily limit",
+        "daily-limit",
+        "daily_limit",
+        "day limit",
+    )
+    return any(ind in combined for ind in tpd_indicators)
+
 SYSTEM_PROMPT = """You are a legal information assistant for Indian law. You explain laws in plain, simple language for ordinary people who are not lawyers.
 
 STRICT RULES:
 - Only use the legal sections provided to you below. Do not invent or assume any Act, Section, case, citation, or deadline that is not explicitly given.
+- Only explain sections that directly apply to the user's situation. Omit any section that does not apply. Never write "this does not apply, but...".
+- For procedural sections, state only what the section's text literally covers. If it applies only to specific other sections (e.g. "offence under section 67", "sections 81 to 84"), include it ONLY if the user's situation falls under those sections; otherwise omit it.
+- Never speculate about suicide, self-harm or death of the user; omit such sections unless the user mentioned them.
 - If the provided sections do not fully answer the question, say so clearly instead of guessing.
 - Write in plain, everyday language, not legal jargon.
 - Present the relevant sections in a markdown table with exactly these three columns, in this exact order, using these exact headers: "Section" | "What it says" | "What it means for you". Do not add, remove, rename, or reorder columns, and do not use any other table shape.
-- The "What it means for you" column is mandatory and must never be left blank, empty, or filled with just a dash or "N/A". Every row must contain a specific sentence connecting that section to the person's situation. If a section is background information with no direct action for the person, say so explicitly in that cell (for example: "This section provides background only and does not require any action from you") rather than leaving it empty.
+- The "What it means for you" column is mandatory and must never be left blank, empty, or filled with just a dash or "N/A". Every row must contain a specific sentence connecting that section to the person's situation.
 - Do not give definitive legal advice or tell the person they will definitely win or lose - explain the law, not predict outcomes.
-- End with a short "What you can do next" suggestion, grounded only in what the law sections say.
-- IMPORTANT: Respond in the SAME language as the user's question. If the question is written in Hindi, respond entirely in Hindi. If the question is written in Kannada, respond entirely in Kannada. If the question is written in English, respond entirely in English. Match the user's language exactly, even though the legal section text provided to you will be in English. When responding in Hindi or Kannada, translate the three table headers into that language as well, but keep the same three-column structure and the same rule that the third column must never be blank.
+- End with a short "What you can do next" suggestion, grounded only in what the law sections say. For violence, abuse, threats or danger, end "What you can do next" with: emergency 112; women's helpline 181 (translated in hi/kn, numbers unchanged).
+- IMPORTANT: Respond entirely in the language specified in the user request (English, Hindi, or Kannada). Even though the legal section text provided to you will be in English, provide the explanation and translate the three table headers into the specified language, maintaining the exact same three-column structure and ensuring the third column is never blank.
 """
 
 LANGUAGE_NAMES = {
@@ -88,10 +229,19 @@ def find_stray_script_words(text, target_language_code):
     allowed = target_range + basic_ascii + general_punctuation + whitespace
     return re.findall("[^" + allowed + "]+", text)
 
-def translate_to_english(query):
-    response = client.chat.completions.create(
-        model="openai/gpt-oss-120b",
-        messages=[
+def translate_to_english(query, return_usage=False):
+    model = "openai/gpt-oss-120b"
+    reasoning_effort = os.environ.get("TRANSLATION_REASONING", "low")
+
+    cached = get_cached_translation(query, model=model, reasoning_effort=reasoning_effort)
+    if cached is not None:
+        if return_usage:
+            return cached, None
+        return cached
+
+    kwargs = {
+        "model": model,
+        "messages": [
             {
                 "role": "system",
                 "content": (
@@ -102,10 +252,21 @@ def translate_to_english(query):
             },
             {"role": "user", "content": query},
         ],
-        temperature=0,
-        max_tokens=500,
-    )
-    return response.choices[0].message.content.strip()
+        "temperature": 0,
+        "max_tokens": 500,
+    }
+    if reasoning_effort and reasoning_effort.lower() not in ("none", "null", "false", "off", "0"):
+        kwargs["reasoning_effort"] = reasoning_effort
+
+    response = client.chat.completions.create(**kwargs)
+    content = response.choices[0].message.content
+    if not content or not content.strip():
+        raise RuntimeError("Translation model returned empty response")
+    translated_text = content.strip()
+    save_cached_translation(query, translated_text, model=model, reasoning_effort=reasoning_effort)
+    if return_usage:
+        return translated_text, response.usage
+    return translated_text
 
 
 def translate_explanation(explanation_text, target_language_code):
@@ -183,9 +344,10 @@ def translate_explanation(explanation_text, target_language_code):
     )
 
 
-def generate_explanation(original_query, search_results):
+def generate_explanation(original_query, search_results, language="en", return_model=False):
     if not search_results:
-        return "No relevant legal sections were found for this query."
+        msg = "No relevant legal sections were found for this query."
+        return (msg, None) if return_model else msg
 
     evidence = ""
     for r in search_results:
@@ -196,14 +358,18 @@ def generate_explanation(original_query, search_results):
             f"Text: {r['legal_text']}\n"
         )
 
+    target_language = LANGUAGE_NAMES.get(language or "en", "English")
     user_prompt = (
         f"User's question: {original_query}\n\n"
         f"Relevant legal sections found:\n{evidence}\n\n"
         f"Explain what these sections mean for the user's situation, in plain language. "
-        f"Remember to respond in the same language as the user's question above."
+        f"IMPORTANT: Respond entirely in {target_language}."
     )
 
+    max_tokens = 3000 if (language or "en") == "en" else 5000
     max_retries = 3
+
+    use_backup = False
     for attempt in range(max_retries):
         try:
             response = client.chat.completions.create(
@@ -213,16 +379,38 @@ def generate_explanation(original_query, search_results):
                     {"role": "user", "content": user_prompt},
                 ],
                 temperature=0.3,
-                max_tokens=2500,
+                max_tokens=max_tokens,
             )
-            return response.choices[0].message.content
-        except groq.RateLimitError:
+            content = response.choices[0].message.content
+            return (content, "openai/gpt-oss-120b") if return_model else content
+        except groq.RateLimitError as e:
+            if _is_tokens_per_day_error(e):
+                use_backup = True
+                break
             raise
-        except Exception:
+        except Exception as e:
+            if _is_tokens_per_day_error(e):
+                use_backup = True
+                break
             if attempt < max_retries - 1:
                 time.sleep(2 ** attempt)
                 continue
             raise
+
+    if use_backup:
+        # Retry once with openai/gpt-oss-20b
+        response = client.chat.completions.create(
+            model="openai/gpt-oss-20b",
+            messages=[
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": user_prompt},
+            ],
+            temperature=0.3,
+            max_tokens=max_tokens,
+            reasoning_effort="low",
+        )
+        content = response.choices[0].message.content
+        return (content, "openai/gpt-oss-20b") if return_model else content
 
 import re
 
@@ -277,3 +465,50 @@ def rewrite_query_for_search(query):
                 time.sleep(2 ** attempt)
                 continue
             return query
+
+
+STATIC_SYSTEM_MESSAGES = {
+    "no_results": {
+        "en": "No relevant legal sections were found for this query. Try rephrasing with more specific details.",
+        "hi": "इस सवाल से जुड़ी कोई कानूनी धारा नहीं मिली। थोड़ा और विस्तार से पूछकर देखें।",
+        "kn": "ಈ ಪ್ರಶ್ನೆಗೆ ಸಂಬಂಧಿಸಿದ ಯಾವುದೇ ಕಾನೂನು ವಿಭಾಗ ಸಿಗಲಿಲ್ಲ. ಇನ್ನಷ್ಟು ವಿವರವಾಗಿ ಮತ್ತೆ ಕೇಳಿ ನೋಡಿ.",
+    },
+    "low_confidence_prefix": {
+        "en": (
+            "I am not confident enough about which section applies to your question to give a definite answer. "
+            "Here are the closest matching sections, grouped by Act - please check which one fits your situation, "
+            "or try rephrasing your question with more specific details:"
+        ),
+        "hi": (
+            "हमें पक्का पता नहीं कि आपके सवाल पर कौन-सी धारा लागू होती है। "
+            "नीचे सबसे मिलती-जुलती धाराएं कानून के हिसाब से दी गई हैं — "
+            "देखें कौन-सी आपकी स्थिति से मेल खाती है, या थोड़ा और विस्तार से पूछें:"
+        ),
+        "kn": (
+            "ನಿಮ್ಮ ಪ್ರಶ್ನೆಗೆ ಯಾವ ವಿಭಾಗ ಅನ್ವಯಿಸುತ್ತದೆ ಎಂದು ನಮಗೆ ಖಚಿತವಿಲ್ಲ. "
+            "ಹತ್ತಿರದ ವಿಭಾಗಗಳನ್ನು ಕಾಯ್ದೆಯ ಪ್ರಕಾರ ಕೆಳಗೆ ನೀಡಲಾಗಿದೆ — "
+            "ನಿಮ್ಮ ಪರಿಸ್ಥಿತಿಗೆ ಯಾವುದು ಹೊಂದುತ್ತದೆ ನೋಡಿ, ಅಥವಾ ಇನ್ನಷ್ಟು ವಿವರವಾಗಿ ಕೇಳಿ:"
+        ),
+    },
+    "section_label": {
+        "en": "Section",
+        "hi": "धारा",
+        "kn": "ವಿಭಾಗ",
+    },
+    "rate_limit": {
+        "en": "Plain-language explanation is temporarily unavailable due to a service usage limit. Here are the relevant legal sections we found - please review them directly below.",
+        "hi": "अभी आसान भाषा में जवाब नहीं बन पा रहा। हमें जो कानूनी धाराएं मिलीं, वे नीचे दी गई हैं।",
+        "kn": "ಈಗ ಸರಳ ವಿವರಣೆ ಸಿಗುತ್ತಿಲ್ಲ. ನಾವು ಕಂಡುಕೊಂಡ ಕಾನೂನು ವಿಭಾಗಗಳು ಕೆಳಗೆ ಇವೆ.",
+    },
+    "error": {
+        "en": "We couldn't generate an explanation right now, but here are the relevant legal sections we found below.",
+        "hi": "अभी जवाब तैयार नहीं हो सका, लेकिन हमें जो कानूनी धाराएं मिलीं, वे नीचे दी गई हैं।",
+        "kn": "ನಾವು ಇದೀಗ ವಿವರಣೆಯನ್ನು ರಚಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ, ಆದರೆ ನಾವು ಕಂಡುಕೊಂಡ ಸಂಬಂಧಿತ ಕಾನೂನು ವಿಭಾಗಗಳನ್ನು ಕೆಳಗೆ ನೀಡಲಾಗಿದೆ.",
+    },
+}
+
+
+def get_static_message(key, language="en"):
+    msgs = STATIC_SYSTEM_MESSAGES.get(key, {})
+    return msgs.get(language) or msgs.get("en", "")
+

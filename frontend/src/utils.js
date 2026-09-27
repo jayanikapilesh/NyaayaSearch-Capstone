@@ -11,10 +11,6 @@ export function getConfidenceLabel(score, topScore, lang) {
   return { label: t(lang, "possibleMatch"), className: "confidence-weak" };
 }
 
-export function isOverallLowConfidence(topScore) {
-  return topScore < 0.75;
-}
-
 export async function extractErrorMessage(response, fallback) {
   try {
     const data = await response.json();

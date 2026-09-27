@@ -22,7 +22,8 @@ content.
 |---|---|---|---|
 | search | Search | खोजें | ಹುಡುಕಿ |
 | searching | Searching... | खोज रहे हैं... | ಹುಡುಕಲಾಗುತ್ತಿದೆ... |
-| searchingFull | Searching legal database and generating explanation... | कानूनी डेटाबेस खोजा जा रहा है और व्याख्या तैयार की जा रही है... | ಕಾನೂನು ಡೇಟಾಬೇಸ್ ಹುಡುಕಲಾಗುತ್ತಿದೆ ಮತ್ತು ವಿವರಣೆಯನ್ನು ರಚಿಸಲಾಗುತ್ತಿದೆ... |
+| searchingFull | Searching legal database... | कानूनी डेटाबेस खोजा जा रहा है... | ಕಾನೂನು ಡೇಟಾಬೇಸ್ ಹುಡುಕಲಾಗುತ್ತಿದೆ... |
+| loadingExplanation | Generating plain-language explanation... | सरल भाषा में व्याख्या तैयार की जा रही है... (needs native review (Jayani)) | ಸರಳ ಭಾಷೆಯ ವಿವರಣೆಯನ್ನು ರಚಿಸಲಾಗುತ್ತಿದೆ... (needs native review (Jayani)) |
 | mic | Mic | माइक | ಮೈಕ್ |
 | listeningIndicator | Listening... (click mic again to stop) | सुन रहे हैं... (रोकने के लिए माइक पर फिर से क्लिक करें) | ಆಲಿಸಲಾಗುತ್ತಿದೆ... (ನಿಲ್ಲಿಸಲು ಮೈಕ್ ಅನ್ನು ಮತ್ತೆ ಕ್ಲಿಕ್ ಮಾಡಿ) |
 | tryAsking | Try asking: | ऐसे पूछकर देखें: | ಹೀಗೆ ಕೇಳಲು ಪ್ರಯತ್ನಿಸಿ: |
@@ -168,10 +169,10 @@ Note: the app's brand name is transliterated two different ways across the two l
 | intro | If you need urgent help, contact these resources directly. | अगर आपको तुरंत मदद चाहिए, तो सीधे इन नंबरों पर संपर्क करें। | ನಿಮಗೆ ತಕ್ಷಣದ ಸಹಾಯ ಬೇಕಾದರೆ, ಈ ಸಂಖ್ಯೆಗಳನ್ನು ನೇರವಾಗಿ ಸಂಪರ್ಕಿಸಿ. |
 | policeTitle | Police Emergency | पुलिस आपातकालीन सेवा | ಪೊಲೀಸ್ ತುರ್ತು ಸೇವೆ |
 | policeDesc | National emergency helpline for police assistance. | पुलिस की मदद के लिए राष्ट्रीय इमरजेंसी नंबर। | ಪೊಲೀಸ್ ನೆರವಿಗಾಗಿ ರಾಷ್ಟ್ರೀಯ ತುರ್ತು ಸಹಾಯವಾಣಿ. |
-| womenTitle | Women Helpline | महिला हेल्पलाइन | ಮಹಿಳಾ ಸಹಾಯವಾಣಿ |
-| womenDesc | National helpline for women in distress. | संकट में फंसी महिलाओं के लिए राष्ट्रीय हेल्पलाइन। | ಸಂಕಷ್ಟದಲ್ಲಿರುವ ಮಹಿಳೆಯರಿಗಾಗಿ ರಾಷ್ಟ್ರೀಯ ಸಹಾಯವಾಣಿ. |
-| domesticTitle | Domestic Violence Helpline | घरेलू हिंसा हेल्पलाइन | ಕೌಟುಂಬಿಕ ದೌರ್ಜನ್ಯ ಸಹಾಯವಾಣಿ |
-| domesticDesc | National helpline for domestic violence support. | घरेलू हिंसा से पीड़ित लोगों की मदद के लिए राष्ट्रीय हेल्पलाइन। | ಕೌಟುಂಬಿಕ ದೌರ್ಜನ್ಯಕ್ಕೆ ಒಳಗಾದವರ ನೆರವಿಗಾಗಿ ರಾಷ್ಟ್ರೀಯ ಸಹಾಯವಾಣಿ. |
+| womenTitle | Women in Distress (Police) | संकटग्रस्त महिलाएं (पुलिस) (needs native review) | ಸಂಕಷ್ಟದಲ್ಲಿರುವ ಮಹಿಳೆಯರು (ಪೊಲೀಸ್) (needs native review) |
+| womenDesc | Police emergency helpline for women in distress. | संकट में फंसी महिलाओं के लिए पुलिस हेल्पलाइन। (needs native review) | ಸಂಕಷ್ಟದಲ್ಲಿರುವ ಮಹಿಳೆಯರಿಗಾಗಿ ಪೊಲೀಸ್ ಸಹಾಯವಾಣಿ. (needs native review) |
+| domesticTitle | Women Helpline (181) | महिला हेल्पलाइन (181) (needs native review) | ಮಹಿಳಾ ಸಹಾಯವಾಣಿ (181) (needs native review) |
+| domesticDesc | National helpline for domestic violence support and women in distress. | घरेलू हिंसा और संकट में फंसी महिलाओं के लिए राष्ट्रीय हेल्पलाइन। (needs native review) | ಕೌಟುಂಬಿಕ ದೌರ್ಜನ್ಯ ಮತ್ತು ಸಂಕಷ್ಟದಲ್ಲಿರುವ ಮಹಿಳೆಯರಿಗಾಗಿ ರಾಷ್ಟ್ರೀಯ ಸಹಾಯವಾಣಿ. (needs native review) |
 | childTitle | Child Helpline | चाइल्ड हेल्पलाइन (बच्चों की मदद) | ಮಕ್ಕಳ ಸಹಾಯವಾಣಿ |
 | childDesc | National helpline for children in need of help. | मदद की जरूरत वाले बच्चों के लिए राष्ट्रीय हेल्पलाइन। | ನೆರವು ಬೇಕಾದ ಮಕ್ಕಳಿಗಾಗಿ ರಾಷ್ಟ್ರೀಯ ಸಹಾಯವಾಣಿ. |
 | nalsaTitle | National Legal Services Authority (NALSA) | राष्ट्रीय कानूनी सेवा प्राधिकरण (NALSA) | ರಾಷ್ಟ್ರೀಯ ಕಾನೂನು ಸೇವೆಗಳ ಪ್ರಾಧಿಕಾರ (NALSA) |
@@ -197,6 +198,19 @@ Note: the app's brand name is transliterated two different ways across the two l
 | errDefault | Something went wrong looking up this term. | इस शब्द को खोजने में कुछ समस्या आई। | ಈ ಪದವನ್ನು ಹುಡುಕುವಲ್ಲಿ ಏನೋ ತೊಂದರೆಯಾಗಿದೆ. |
 | errNetwork | Could not reach the server. Please try again. | सर्वर से संपर्क नहीं हो पाया। फिर से कोशिश करें। | ಸರ್ವರ್ ಸಂಪರ್ಕಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ. |
 
+## `src/bnsContent.js` - BNS Decoder (needs native review)
+
+| Key | English source | Hindi | Kannada |
+|---|---|---|---|
+| heading | BNS Decoder | बीएनएस डिकोडर | ಬಿಎನ್‌ಎಸ್ ಡಿಕೋಡರ್ |
+| intro | Enter a Bharatiya Nyaya Sanhita (BNS) section number to see what it says, explained in plain language. | भारतीय न्याय संहिता (BNS) की धारा संख्या दर्ज करें और देखें कि वह सरल भाषा में क्या कहती है। | ಭಾರತೀಯ ನ್ಯಾಯ ಸಂಹಿತೆ (BNS) ಯ ವಿಭಾಗ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ ಮತ್ತು ಅದು ಸರಳ ಭಾಷೆಯಲ್ಲಿ ಏನು ಹೇಳುತ್ತದೆ ಎಂಬುದನ್ನು ನೋಡಿ. |
+| srLabel | BNS section number | बीएनएस धारा संख्या | ಬಿಎನ್‌ಎಸ್ ವಿಭಾಗ ಸಂಖ್ಯೆ |
+| placeholder | e.g. 103 | जैसे 103 | ಉದಾ. 103 |
+| buttonDecode | Decode Section | धारा समझें | ವಿಭಾಗವನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳಿ |
+| buttonLoading | Looking up... | खोज रहे हैं... | ಹುಡುಕಲಾಗುತ್ತಿದೆ... |
+| sectionLabel | Section | धारा | ವಿಭಾಗ |
+| originalText | Original text: | मूल पाठ: | ಮೂಲ ಪಠ್ಯ: |
+
 ## Not yet translated (English-only, out of scope for this pass)
 
 These strings still show in English regardless of the language setting -
@@ -210,15 +224,6 @@ only the strings below were never wired to a language at all.
 - Screen-reader label: "Describe your legal situation"
 - Mic button tooltip (`title` attribute): "Search by voice"
 - The 4 example-query chips: "Landlord not returning deposit", "Police arrest without warrant", "How to file an RTI request", "Consumer complaint for defective product"
-
-### `src/components/BnsTab.jsx`
-- Heading: "BNS Decoder"
-- Intro line: "Enter a Bharatiya Nyaya Sanhita (BNS) section number to see what it says, explained in plain language."
-- Screen-reader label: "BNS section number"
-- Input placeholder: "e.g. 103"
-- Button: "Looking up..." / "Decode Section"
-- Citation tag label: "Section" (hardcoded here, not routed through the same translation as Search's "Section" label)
-- "Original text:" caption above the source legal text
 
 ### `src/components/DocumentsTab.jsx`
 - Heading: "Ask about your own document"
@@ -257,3 +262,29 @@ only the strings below were never wired to a language at all.
 - Button: "Next Question" / "See Results"
 - Results text: "You scored X out of Y"
 - Button: "Try Again"
+
+## Backend System Messages (`scripts/rag_core.py` / `scripts/main.py`) - needs native review (Jayani)
+
+Static fallback and system messages returned by `/explain` when no search results match, when confidence is below threshold, or when service limits are encountered.
+
+| Key | English source | Hindi | Kannada |
+|---|---|---|---|
+| no_results | No relevant legal sections were found for this query. Try rephrasing with more specific details. | इस प्रश्न के लिए कोई प्रासंगिक कानूनी धाराएं नहीं मिलीं। अधिक विशिष्ट विवरण के साथ दोबारा पूछने का प्रयास करें। | ಈ ಪ್ರಶ್ನೆಗೆ ಯಾವುದೇ ಸಂಬಂಧಿತ ಕಾನೂನು ವಿಭಾಗಗಳು ಕಂಡುಬಂದಿಲ್ಲ. ಹೆಚ್ಚು ನಿರ್ದಿಷ್ಟ ವಿವರಗಳೊಂದಿಗೆ ಮರುರೂಪಿಸಲು ಪ್ರಯತ್ನಿಸಿ. |
+| low_confidence_prefix | I am not confident enough about which section applies to your question to give a definite answer. Here are the closest matching sections, grouped by Act - please check which one fits your situation, or try rephrasing your question with more specific details: | मुझे पूरा भरोसा नहीं है कि आपके प्रश्न पर कौन सी धारा लागू होती है ताकि कोई निश्चित उत्तर दिया जा सके। यहां निकटतम मेल खाने वाली धाराएं दी गई हैं, जिन्हें अधिनियम के अनुसार समूहीकृत किया गया है - कृपया जांचें कि कौन सी आपकी स्थिति के अनुकूल है, या अधिक विशिष्ट विवरण के साथ अपने प्रश्न को दोबारा लिखने का प्रयास करें: | ನಿಮ್ಮ ಪ್ರಶ್ನೆಗೆ ಯಾವ ವಿಭಾಗವು ಅನ್ವಯಿಸುತ್ತದೆ ಎಂಬುದರ ಕುರಿತು ಖಚಿತವಾದ ಉತ್ತರವನ್ನು ನೀಡಲು ನನಗೆ ಸಾಕಷ್ಟು ವಿಶ್ವಾಸವಿಲ್ಲ. ಕಾಯ್ದೆಯ ಪ್ರಕಾರ ಗುಂಪು ಮಾಡಲಾದ ಅತ್ಯಂತ ನಿಕಟ ಹೊಂದಾಣಿಕೆಯ ವಿಭಾಗಗಳು ಇಲ್ಲಿವೆ - ನಿಮ್ಮ ಪರಿಸ್ಥಿತಿಗೆ ಯಾವುದು ಸರಿಹೊಂದುತ್ತದೆ ಎಂಬುದನ್ನು ದಯವಿಟ್ಟು ಪರಿಶೀಲಿಸಿ, ಅಥವಾ ಹೆಚ್ಚು ನಿರ್ದಿಷ್ಟ ವಿವರಗಳೊಂದಿಗೆ ನಿಮ್ಮ ಪ್ರಶ್ನೆಯನ್ನು ಮರುರೂಪಿಸಲು ಪ್ರಯತ್ನಿಸಿ: |
+| section_label | Section | धारा | ವಿಭಾಗ |
+| rate_limit | Plain-language explanation is temporarily unavailable due to a service usage limit. Here are the relevant legal sections we found - please review them directly below. | सेवा उपयोग सीमा के कारण सरल भाषा में व्याख्या अस्थायी रूप से अनुपलब्ध है। हमें जो प्रासंगिक कानूनी धाराएं मिली हैं, वे यहां दी गई हैं - कृपया नीचे सीधे उनकी समीक्षा करें। | ಸೇವಾ ಬಳಕೆಯ ಮಿತಿಯಿಂದಾಗಿ ಸರಳ ಭಾಷೆಯ ವಿವರಣೆಯು ತಾತ್ಕಾಲಿಕವಾಗಿ ಲಭ್ಯವಿಲ್ಲ. ನಾವು ಕಂಡುಕೊಂಡ ಸಂಬಂಧಿತ ಕಾನೂನು ವಿಭಾಗಗಳು ಇಲ್ಲಿವೆ - ದಯವಿಟ್ಟು ಅವುಗಳನ್ನು ಕೆಳಗೆ ನೇರವಾಗಿ ಪರಿಶೀಲಿಸಿ. |
+| error | We couldn't generate an explanation right now, but here are the relevant legal sections we found below. | हम अभी व्याख्या तैयार नहीं कर सके, लेकिन हमें जो प्रासंगिक कानूनी धाराएं मिली हैं, वे नीचे दी गई हैं। | ನಾವು ಇದೀಗ ವಿವರಣೆಯನ್ನು ರಚಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ, ಆದರೆ ನಾವು ಕಂಡುಕೊಂಡ ಸಂಬಂಧಿತ ಕಾನೂನು ವಿಭಾಗಗಳನ್ನು ಕೆಳಗೆ ನೀಡಲಾಗಿದೆ. |
+| bns_not_found | Section {sec} of the Bharatiya Nyaya Sanhita was not found in our database. | भारतीय न्याय संहिता की धारा {sec} हमारे डेटाबेस में नहीं मिली। | ಭಾರತೀಯ ನ್ಯಾಯ ಸಂಹಿತೆಯ ವಿಭಾಗ {sec} ನಮ್ಮ ಡೇಟಾಬೇಸ್‌ನಲ್ಲಿ ಕಂಡುಬಂದಿಲ್ಲ. |
+
+## `src/components/DocumentsTab.jsx` - Privacy Notice - needs native review
+
+| Key | English source | Hindi | Kannada |
+|---|---|---|---|
+| privacyNotice | Uploaded documents are sent to an AI service to answer your questions; don't upload sensitive personal documents. | अपलोड किए गए दस्तावेज़ आपके प्रश्नों के उत्तर देने के लिए एक एआई सेवा को भेजे जाते हैं; संवेदनशील व्यक्तिगत दस्तावेज़ अपलोड न करें। | ನಿಮ್ಮ ಪ್ರಶ್ನೆಗಳಿಗೆ ಉತ್ತರಿಸಲು ಅಪ್‌ಲೋಡ್ ಮಾಡಿದ ದಾಖಲೆಗಳನ್ನು AI ಸೇವೆಗೆ ಕಳುಹಿಸಲಾಗುತ್ತದೆ; ಸೂಕ್ಷ್ಮ ವೈಯಕ್ತಿಕ ದಾಖಲೆಗಳನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಬೇಡಿ. |
+
+## Rate Limiting Messages (`scripts/rate_limiter.py`) - needs native review
+
+| Key | English source | Hindi | Kannada |
+|---|---|---|---|
+| 429_rate_limit | Too many requests. Please wait a few minutes before trying again (limit: 20 requests per 10 minutes). | बहुत अधिक अनुरोध। कृपया कुछ मिनट बाद पुनः प्रयास करें (सीमा: 10 मिनट में 20 अनुरोध)। | ಹೆಚ್ಚಿನ ವಿನಂತಿಗಳು ಬಂದಿವೆ. ದಯವಿಟ್ಟು ಕೆಲವು ನಿಮಿಷಗಳ ನಂತರ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ (ಮಿತಿ: 10 ನಿಮಿಷಗಳಲ್ಲಿ 20 ವಿನಂತಿಗಳು). |
+

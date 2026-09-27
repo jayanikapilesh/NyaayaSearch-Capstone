@@ -1,6 +1,6 @@
 import { DOCUMENT_SCHEMAS, ADDITIONAL_DOCUMENT_SCHEMAS } from "./documentSchemas";
 
-export const API_URL = "http://127.0.0.1:8000";
+export const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
 export const HISTORY_KEY = "nyaaya-search-history";
 export const MAX_HISTORY = 8;
 export const SAVED_RESULTS_KEY = "nyaaya-saved-results";
@@ -21,7 +21,8 @@ export const UI_STRINGS = {
   en: {
     search: "Search",
     searching: "Searching...",
-    searchingFull: "Searching legal database and generating explanation...",
+    searchingFull: "Searching legal database...",
+    loadingExplanation: "Generating plain-language explanation...",
     mic: "Mic",
     listeningIndicator: "Listening... (click mic again to stop)",
     tryAsking: "Try asking:",
@@ -47,7 +48,8 @@ export const UI_STRINGS = {
   hi: {
     search: "खोजें",
     searching: "खोज रहे हैं...",
-    searchingFull: "कानूनी डेटाबेस खोजा जा रहा है और व्याख्या तैयार की जा रही है...",
+    searchingFull: "कानूनी डेटाबेस खोजा जा रहा है...",
+    loadingExplanation: "आसान भाषा में जवाब तैयार हो रहा है...",
     mic: "माइक",
     listeningIndicator: "सुन रहे हैं... (रोकने के लिए माइक पर फिर से क्लिक करें)",
     tryAsking: "ऐसे पूछकर देखें:",
@@ -73,7 +75,8 @@ export const UI_STRINGS = {
   kn: {
     search: "ಹುಡುಕಿ",
     searching: "ಹುಡುಕಲಾಗುತ್ತಿದೆ...",
-    searchingFull: "ಕಾನೂನು ಡೇಟಾಬೇಸ್ ಹುಡುಕಲಾಗುತ್ತಿದೆ ಮತ್ತು ವಿವರಣೆಯನ್ನು ರಚಿಸಲಾಗುತ್ತಿದೆ...",
+    searchingFull: "ಕಾನೂನು ಡೇಟಾಬೇಸ್ ಹುಡುಕಲಾಗುತ್ತಿದೆ...",
+    loadingExplanation: "ಸರಳ ಭಾಷೆಯ ವಿವರಣೆಯನ್ನು ರಚಿಸಲಾಗುತ್ತಿದೆ...",
     mic: "ಮೈಕ್",
     listeningIndicator: "ಆಲಿಸಲಾಗುತ್ತಿದೆ... (ನಿಲ್ಲಿಸಲು ಮೈಕ್ ಅನ್ನು ಮತ್ತೆ ಕ್ಲಿಕ್ ಮಾಡಿ)",
     tryAsking: "ಹೀಗೆ ಕೇಳಲು ಪ್ರಯತ್ನಿಸಿ:",

@@ -68,11 +68,11 @@ function App() {
             </Suspense>
           )}
         </div>
-        <div className="tab-content-boxed" style={{ display: activeTab === "bns" ? "block" : "none" }}><BnsTab setError={setError} /></div>
+        <div className="tab-content-boxed" style={{ display: activeTab === "bns" ? "block" : "none" }}><BnsTab setError={setError} uiLanguage={uiLanguage} /></div>
         <div className="tab-content-boxed" style={{ display: activeTab === "quiz" ? "block" : "none" }}><QuizTab /></div>
         <div className="tab-content-boxed" style={{ display: activeTab === "emergency" ? "block" : "none" }}><EmergencyTab uiLanguage={uiLanguage} /></div>
         <div className="tab-content-boxed" style={{ display: activeTab === "simplifier" ? "block" : "none" }}><SimplifierTab setError={setError} /></div>
-        <div className="tab-content-boxed" style={{ display: activeTab === "documents" ? "block" : "none" }}><DocumentsTab setError={setError} /></div>
+        <div className="tab-content-boxed" style={{ display: activeTab === "documents" ? "block" : "none" }}><DocumentsTab setError={setError} uiLanguage={uiLanguage} /></div>
         <div className="tab-content-boxed" style={{ display: activeTab === "search" ? "block" : "none" }}><SearchTab setError={setError} uiLanguage={uiLanguage} onLanguageChange={setUiLanguage} /></div>
       </main>
 
