@@ -13,42 +13,58 @@ function EmergencyTab({ uiLanguage }) {
       <div className="emergency-list">
         <div className="emergency-item">
           <div className="emergency-title">{content.policeTitle}</div>
-          <div className="emergency-number">100 / 112</div>
+          <div className="emergency-number">
+            <a href="tel:100">100</a> / <a href="tel:112">112</a>
+          </div>
           <div className="emergency-desc">{content.policeDesc}</div>
         </div>
         <div className="emergency-item">
           <div className="emergency-title">{content.womenTitle}</div>
-          <div className="emergency-number">1091</div>
+          <div className="emergency-number">
+            <a href="tel:1091">1091</a>
+          </div>
           <div className="emergency-desc">{content.womenDesc}</div>
         </div>
         <div className="emergency-item">
           <div className="emergency-title">{content.domesticTitle}</div>
-          <div className="emergency-number">181</div>
+          <div className="emergency-number">
+            <a href="tel:181">181</a>
+          </div>
           <div className="emergency-desc">{content.domesticDesc}</div>
         </div>
         <div className="emergency-item">
           <div className="emergency-title">{content.childTitle}</div>
-          <div className="emergency-number">1098</div>
+          <div className="emergency-number">
+            <a href="tel:1098">1098</a>
+          </div>
           <div className="emergency-desc">{content.childDesc}</div>
         </div>
         <div className="emergency-item">
           <div className="emergency-title">{content.nalsaTitle}</div>
-          <div className="emergency-number">15100</div>
+          <div className="emergency-number">
+            <a href="tel:15100">15100</a>
+          </div>
           <div className="emergency-desc">{content.nalsaDesc}</div>
         </div>
         <div className="emergency-item">
           <div className="emergency-title">{content.consumerTitle}</div>
-          <div className="emergency-number">1915</div>
+          <div className="emergency-number">
+            <a href="tel:1915">1915</a>
+          </div>
           <div className="emergency-desc">{content.consumerDesc}</div>
         </div>
         <div className="emergency-item">
           <div className="emergency-title">{content.cyberTitle}</div>
-          <div className="emergency-number">1930</div>
+          <div className="emergency-number">
+            <a href="tel:1930">1930</a>
+          </div>
           <div className="emergency-desc">{content.cyberDesc}</div>
         </div>
         <div className="emergency-item">
           <div className="emergency-title">{content.seniorTitle}</div>
-          <div className="emergency-number">14567</div>
+          <div className="emergency-number">
+            <a href="tel:14567">14567</a>
+          </div>
           <div className="emergency-desc">{content.seniorDesc}</div>
         </div>
       </div>

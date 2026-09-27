@@ -169,10 +169,10 @@ Note: the app's brand name is transliterated two different ways across the two l
 | intro | If you need urgent help, contact these resources directly. | अगर आपको तुरंत मदद चाहिए, तो सीधे इन नंबरों पर संपर्क करें। | ನಿಮಗೆ ತಕ್ಷಣದ ಸಹಾಯ ಬೇಕಾದರೆ, ಈ ಸಂಖ್ಯೆಗಳನ್ನು ನೇರವಾಗಿ ಸಂಪರ್ಕಿಸಿ. |
 | policeTitle | Police Emergency | पुलिस आपातकालीन सेवा | ಪೊಲೀಸ್ ತುರ್ತು ಸೇವೆ |
 | policeDesc | National emergency helpline for police assistance. | पुलिस की मदद के लिए राष्ट्रीय इमरजेंसी नंबर। | ಪೊಲೀಸ್ ನೆರವಿಗಾಗಿ ರಾಷ್ಟ್ರೀಯ ತುರ್ತು ಸಹಾಯವಾಣಿ. |
-| womenTitle | Women Helpline | महिला हेल्पलाइन | ಮಹಿಳಾ ಸಹಾಯವಾಣಿ |
-| womenDesc | National helpline for women in distress. | संकट में फंसी महिलाओं के लिए राष्ट्रीय हेल्पलाइन। | ಸಂಕಷ್ಟದಲ್ಲಿರುವ ಮಹಿಳೆಯರಿಗಾಗಿ ರಾಷ್ಟ್ರೀಯ ಸಹಾಯವಾಣಿ. |
-| domesticTitle | Domestic Violence Helpline | घरेलू हिंसा हेल्पलाइन | ಕೌಟುಂಬಿಕ ದೌರ್ಜನ್ಯ ಸಹಾಯವಾಣಿ |
-| domesticDesc | National helpline for domestic violence support. | घरेलू हिंसा से पीड़ित लोगों की मदद के लिए राष्ट्रीय हेल्पलाइन। | ಕೌಟುಂಬಿಕ ದೌರ್ಜನ್ಯಕ್ಕೆ ಒಳಗಾದವರ ನೆರವಿಗಾಗಿ ರಾಷ್ಟ್ರೀಯ ಸಹಾಯವಾಣಿ. |
+| womenTitle | Women in Distress (Police) | संकटग्रस्त महिलाएं (पुलिस) (needs native review) | ಸಂಕಷ್ಟದಲ್ಲಿರುವ ಮಹಿಳೆಯರು (ಪೊಲೀಸ್) (needs native review) |
+| womenDesc | Police emergency helpline for women in distress. | संकट में फंसी महिलाओं के लिए पुलिस हेल्पलाइन। (needs native review) | ಸಂಕಷ್ಟದಲ್ಲಿರುವ ಮಹಿಳೆಯರಿಗಾಗಿ ಪೊಲೀಸ್ ಸಹಾಯವಾಣಿ. (needs native review) |
+| domesticTitle | Women Helpline (181) | महिला हेल्पलाइन (181) (needs native review) | ಮಹಿಳಾ ಸಹಾಯವಾಣಿ (181) (needs native review) |
+| domesticDesc | National helpline for domestic violence support and women in distress. | घरेलू हिंसा और संकट में फंसी महिलाओं के लिए राष्ट्रीय हेल्पलाइन। (needs native review) | ಕೌಟುಂಬಿಕ ದೌರ್ಜನ್ಯ ಮತ್ತು ಸಂಕಷ್ಟದಲ್ಲಿರುವ ಮಹಿಳೆಯರಿಗಾಗಿ ರಾಷ್ಟ್ರೀಯ ಸಹಾಯವಾಣಿ. (needs native review) |
 | childTitle | Child Helpline | चाइल्ड हेल्पलाइन (बच्चों की मदद) | ಮಕ್ಕಳ ಸಹಾಯವಾಣಿ |
 | childDesc | National helpline for children in need of help. | मदद की जरूरत वाले बच्चों के लिए राष्ट्रीय हेल्पलाइन। | ನೆರವು ಬೇಕಾದ ಮಕ್ಕಳಿಗಾಗಿ ರಾಷ್ಟ್ರೀಯ ಸಹಾಯವಾಣಿ. |
 | nalsaTitle | National Legal Services Authority (NALSA) | राष्ट्रीय कानूनी सेवा प्राधिकरण (NALSA) | ರಾಷ್ಟ್ರೀಯ ಕಾನೂನು ಸೇವೆಗಳ ಪ್ರಾಧಿಕಾರ (NALSA) |

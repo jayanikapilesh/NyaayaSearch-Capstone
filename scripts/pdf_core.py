@@ -1,4 +1,4 @@
-﻿import fitz  # PyMuPDF
+import fitz  # PyMuPDF
 from groq import Groq
 import os
 import json
@@ -11,7 +11,10 @@ client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
 DOCUMENT_SYSTEM_PROMPT = """You are a legal document assistant. You help people understand a specific document they have uploaded.
 
 STRICT RULES:
-- Only use the document text provided to you below. Do not invent or assume any fact, date, clause, or detail not explicitly present in the document.
+- Answer ONLY from the document's text.
+- Do not add details, amounts, frequencies, or consequences that are not written in it. Never invent or substitute time units or frequencies (for example, if the text says 'for the period of occupation', state that exact phrase—do NOT say 'per month' or 'each month').
+- When another clause of the same document changes or qualifies the answer (an exception or condition), mention it and name the clause number.
+- Any clause giving a right to hold possession or remain without paying rent (such as when the owner fails to refund a deposit or meet another condition) qualifies a clause requiring vacating or imposing damages for not vacating: you MUST mention both the consequence for not vacating and this qualifying exception/condition, naming each clause number.
 - If the document does not contain the answer to the question, say so clearly instead of guessing.
 - Write in plain, everyday language, not legal jargon.
 - Do not give definitive legal advice - explain what the document says, not what the person should legally do.
@@ -51,7 +54,9 @@ def answer_question_about_document(document_text, question):
         f"Document text:\n{truncated}\n\n"
         f"{'[Note: document was truncated due to length]' if was_truncated else ''}\n\n"
         f"User's question: {question}\n\n"
-        f"Answer based only on the document text above."
+        f"Answer based only on the document text above. "
+        f"When another clause of the same document changes or qualifies the answer (an exception or condition), mention it and name the clause number. "
+        f"Note: any clause allowing a party to hold possession or remain without paying rent qualifies a clause requiring them to vacate or pay damages—state both clauses and their numbers."
     )
 
     response = client.chat.completions.create(

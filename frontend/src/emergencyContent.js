@@ -5,10 +5,10 @@ export const EMERGENCY_CONTENT = {
     intro: "If you need urgent help, contact these resources directly.",
     policeTitle: "Police Emergency",
     policeDesc: "National emergency helpline for police assistance.",
-    womenTitle: "Women Helpline",
-    womenDesc: "National helpline for women in distress.",
-    domesticTitle: "Domestic Violence Helpline",
-    domesticDesc: "National helpline for domestic violence support.",
+    womenTitle: "Women in Distress (Police)",
+    womenDesc: "Police emergency helpline for women in distress.",
+    domesticTitle: "Women Helpline (181)",
+    domesticDesc: "National helpline for domestic violence support and women in distress.",
     childTitle: "Child Helpline",
     childDesc: "National helpline for children in need of help.",
     nalsaTitle: "National Legal Services Authority (NALSA)",
@@ -28,10 +28,10 @@ export const EMERGENCY_CONTENT = {
     intro: "अगर आपको तुरंत मदद चाहिए, तो सीधे इन नंबरों पर संपर्क करें।",
     policeTitle: "पुलिस आपातकालीन सेवा",
     policeDesc: "पुलिस की मदद के लिए राष्ट्रीय इमरजेंसी नंबर।",
-    womenTitle: "महिला हेल्पलाइन",
-    womenDesc: "संकट में फंसी महिलाओं के लिए राष्ट्रीय हेल्पलाइन।",
-    domesticTitle: "घरेलू हिंसा हेल्पलाइन",
-    domesticDesc: "घरेलू हिंसा से पीड़ित लोगों की मदद के लिए राष्ट्रीय हेल्पलाइन।",
+    womenTitle: "संकटग्रस्त महिलाएं (पुलिस)", // (needs native review)
+    womenDesc: "संकट में फंसी महिलाओं के लिए पुलिस हेल्पलाइन।", // (needs native review)
+    domesticTitle: "महिला हेल्पलाइन (181)", // (needs native review)
+    domesticDesc: "घरेलू हिंसा और संकट में फंसी महिलाओं के लिए राष्ट्रीय हेल्पलाइन।", // (needs native review)
     childTitle: "चाइल्ड हेल्पलाइन (बच्चों की मदद)",
     childDesc: "मदद की जरूरत वाले बच्चों के लिए राष्ट्रीय हेल्पलाइन।",
     nalsaTitle: "राष्ट्रीय कानूनी सेवा प्राधिकरण (NALSA)",
@@ -51,10 +51,10 @@ export const EMERGENCY_CONTENT = {
     intro: "ನಿಮಗೆ ತಕ್ಷಣದ ಸಹಾಯ ಬೇಕಾದರೆ, ಈ ಸಂಖ್ಯೆಗಳನ್ನು ನೇರವಾಗಿ ಸಂಪರ್ಕಿಸಿ.",
     policeTitle: "ಪೊಲೀಸ್ ತುರ್ತು ಸೇವೆ",
     policeDesc: "ಪೊಲೀಸ್ ನೆರವಿಗಾಗಿ ರಾಷ್ಟ್ರೀಯ ತುರ್ತು ಸಹಾಯವಾಣಿ.",
-    womenTitle: "ಮಹಿಳಾ ಸಹಾಯವಾಣಿ",
-    womenDesc: "ಸಂಕಷ್ಟದಲ್ಲಿರುವ ಮಹಿಳೆಯರಿಗಾಗಿ ರಾಷ್ಟ್ರೀಯ ಸಹಾಯವಾಣಿ.",
-    domesticTitle: "ಕೌಟುಂಬಿಕ ದೌರ್ಜನ್ಯ ಸಹಾಯವಾಣಿ",
-    domesticDesc: "ಕೌಟುಂಬಿಕ ದೌರ್ಜನ್ಯಕ್ಕೆ ಒಳಗಾದವರ ನೆರವಿಗಾಗಿ ರಾಷ್ಟ್ರೀಯ ಸಹಾಯವಾಣಿ.",
+    womenTitle: "ಸಂಕಷ್ಟದಲ್ಲಿರುವ ಮಹಿಳೆಯರು (ಪೊಲೀಸ್)", // (needs native review)
+    womenDesc: "ಸಂಕಷ್ಟದಲ್ಲಿರುವ ಮಹಿಳೆಯರಿಗಾಗಿ ಪೊಲೀಸ್ ಸಹಾಯವಾಣಿ.", // (needs native review)
+    domesticTitle: "ಮಹಿಳಾ ಸಹಾಯವಾಣಿ (181)", // (needs native review)
+    domesticDesc: "ಕೌಟುಂಬಿಕ ದೌರ್ಜನ್ಯ ಮತ್ತು ಸಂಕಷ್ಟದಲ್ಲಿರುವ ಮಹಿಳೆಯರಿಗಾಗಿ ರಾಷ್ಟ್ರೀಯ ಸಹಾಯವಾಣಿ.", // (needs native review)
     childTitle: "ಮಕ್ಕಳ ಸಹಾಯವಾಣಿ",
     childDesc: "ನೆರವು ಬೇಕಾದ ಮಕ್ಕಳಿಗಾಗಿ ರಾಷ್ಟ್ರೀಯ ಸಹಾಯವಾಣಿ.",
     nalsaTitle: "ರಾಷ್ಟ್ರೀಯ ಕಾನೂನು ಸೇವೆಗಳ ಪ್ರಾಧಿಕಾರ (NALSA)",
