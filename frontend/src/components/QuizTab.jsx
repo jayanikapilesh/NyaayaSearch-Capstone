@@ -1,70 +1,105 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { QUIZ_QUESTIONS } from "../quizData";
+import { getQuizContent } from "../quizContent";
+import { loadDailyQuizState, saveDailyQuizState, getTodayDateKey, getDailyQuizIndex, daysBetweenDateKeys } from "../utils";
 
-function QuizTab() {
-  const [quizIndex, setQuizIndex] = useState(0);
-  const [quizScore, setQuizScore] = useState(0);
-  const [quizSelected, setQuizSelected] = useState(null);
-  const [quizFinished, setQuizFinished] = useState(false);
+// Works out which day's state to show, given whatever was last persisted
+// (or nothing, on a first-ever visit). Pure given its argument - the only
+// wall-clock read (getTodayDateKey) lives in utils.js, not here - so this
+// is safe to call from a render body or an effect.
+function computeDailyState(stored) {
+  const dateKey = getTodayDateKey();
+  const questionIndex = getDailyQuizIndex(dateKey, QUIZ_QUESTIONS.length);
 
-  const handleQuizAnswer = function (optionIndex) {
-    if (quizSelected !== null) return;
-    setQuizSelected(optionIndex);
-    if (optionIndex === QUIZ_QUESTIONS[quizIndex].correctIndex) {
-      setQuizScore(function (prev) { return prev + 1; });
-    }
-  };
+  if (stored && stored.dateKey === dateKey) {
+    // Same day as last visit - restore exactly as left it (answered or
+    // not) rather than resetting, so revisiting today never loses progress.
+    return { dateKey: dateKey, questionIndex: questionIndex, selected: stored.selected, streak: stored.streak };
+  }
 
-  const handleQuizNext = function () {
-    if (quizIndex + 1 < QUIZ_QUESTIONS.length) {
-      setQuizIndex(function (prev) { return prev + 1; });
-      setQuizSelected(null);
-    } else {
-      setQuizFinished(true);
-    }
-  };
+  // A new day (or nothing stored yet). The streak only carries forward if
+  // the previous entry was answered yesterday specifically - a gap of more
+  // than a day, or an unanswered day, breaks it.
+  const wasYesterday = stored && daysBetweenDateKeys(dateKey, stored.dateKey) === 1;
+  const continuedStreak = wasYesterday && stored.selected !== null ? stored.streak : 0;
+  return { dateKey: dateKey, questionIndex: questionIndex, selected: null, streak: continuedStreak };
+}
 
-  const handleQuizRestart = function () {
-    setQuizIndex(0);
-    setQuizScore(0);
-    setQuizSelected(null);
-    setQuizFinished(false);
+// NOTE: quiz question/option/explanation text comes from quizData.js and is
+// still English-only by design (see quizContent.js for why). Only the
+// surrounding UI chrome here is localized.
+//
+// "Legal IQ Daily" rotates through the existing question bank one question
+// per calendar day (same day => same question for everyone), persists
+// whether today's question has been answered so it doesn't reset on every
+// visit, and tracks a small streak of consecutive days answered. No scores,
+// leaderboards, badges, or notifications - just a lightweight daily habit.
+function QuizTab({ uiLanguage = "en", isActive }) {
+  const content = getQuizContent(uiLanguage);
+
+  const [dailyState, setDailyState] = useState(function () {
+    const computed = computeDailyState(loadDailyQuizState());
+    saveDailyQuizState(computed);
+    return computed;
+  });
+
+  // Tabs in this app never unmount (App.jsx just toggles display), so if
+  // someone leaves this tab open across midnight, only switching back to it
+  // will notice the day has changed - re-check whenever that happens.
+  useEffect(function () {
+    if (!isActive) return;
+    const timer = setTimeout(function () {
+      setDailyState(function (prev) {
+        const computed = computeDailyState(loadDailyQuizState());
+        if (computed.dateKey === prev.dateKey && computed.selected === prev.selected && computed.streak === prev.streak) {
+          return prev;
+        }
+        saveDailyQuizState(computed);
+        return computed;
+      });
+    }, 0);
+    return function () { clearTimeout(timer); };
+  }, [isActive]);
+
+  const question = QUIZ_QUESTIONS[dailyState.questionIndex];
+  const hasAnswered = dailyState.selected !== null;
+
+  const handleAnswer = function (optionIndex) {
+    if (hasAnswered) return;
+    setDailyState(function (prev) {
+      const updated = { dateKey: prev.dateKey, questionIndex: prev.questionIndex, selected: optionIndex, streak: prev.streak + 1 };
+      saveDailyQuizState(updated);
+      return updated;
+    });
   };
 
   return (
     <div className="drafter-section">
-      <h2>Legal IQ Daily</h2>
-      {!quizFinished ? (
-        <div>
-          <p className="quiz-progress">Question {quizIndex + 1} of {QUIZ_QUESTIONS.length}</p>
-          <p className="quiz-question">{QUIZ_QUESTIONS[quizIndex].question}</p>
-          <div className="quiz-options">
-            {QUIZ_QUESTIONS[quizIndex].options.map(function (option, i) {
-              let optionClass = "quiz-option";
-              if (quizSelected !== null) {
-                if (i === QUIZ_QUESTIONS[quizIndex].correctIndex) optionClass += " correct";
-                else if (i === quizSelected) optionClass += " incorrect";
-              }
-              return (
-                <button key={i} className={optionClass} onClick={function () { handleQuizAnswer(i); }} disabled={quizSelected !== null}>
-                  {option}
-                </button>
-              );
-            })}
-          </div>
-          {quizSelected !== null && (
-            <div className="quiz-feedback">
-              <p className="quiz-explanation">{QUIZ_QUESTIONS[quizIndex].explanation}</p>
-              <button className="search-button" onClick={handleQuizNext}>
-                {quizIndex + 1 < QUIZ_QUESTIONS.length ? "Next Question" : "See Results"}
-              </button>
-            </div>
-          )}
-        </div>
-      ) : (
-        <div className="quiz-results">
-          <p className="quiz-score">You scored {quizScore} out of {QUIZ_QUESTIONS.length}</p>
-          <button className="search-button" onClick={handleQuizRestart}>Try Again</button>
+      <div className="quiz-daily-header">
+        <h2>{content.heading}</h2>
+        {dailyState.streak > 0 && (
+          <span className="quiz-streak-badge">{content.streakLabel(dailyState.streak)}</span>
+        )}
+      </div>
+      <p className="quiz-question">{question.question}</p>
+      <div className="quiz-options">
+        {question.options.map(function (option, i) {
+          let optionClass = "quiz-option";
+          if (hasAnswered) {
+            if (i === question.correctIndex) optionClass += " correct";
+            else if (i === dailyState.selected) optionClass += " incorrect";
+          }
+          return (
+            <button key={i} className={optionClass} onClick={function () { handleAnswer(i); }} disabled={hasAnswered}>
+              {option}
+            </button>
+          );
+        })}
+      </div>
+      {hasAnswered && (
+        <div className="quiz-feedback">
+          <p className="quiz-explanation">{question.explanation}</p>
+          <p className="quiz-come-back">{content.comeBackTomorrow}</p>
         </div>
       )}
     </div>

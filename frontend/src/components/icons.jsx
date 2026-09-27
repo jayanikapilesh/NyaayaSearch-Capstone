@@ -128,7 +128,7 @@ function QuizIcon(props) {
 
 function CheckIcon(props) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
       <path d="M4 12.5 9 17.5 20 6.5" />
     </svg>
   );
@@ -136,7 +136,7 @@ function CheckIcon(props) {
 
 function ImageIcon(props) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
       <rect x="3" y="4.5" width="18" height="15" rx="1.5" />
       <circle cx="8.5" cy="9.5" r="1.5" />
       <path d="M3 16.5 8.5 12l3 2.5 4-4 5.5 6" />
@@ -144,9 +144,38 @@ function ImageIcon(props) {
   );
 }
 
+function MicIcon(props) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
+      <rect x="9" y="3" width="6" height="11" rx="3" />
+      <path d="M5.5 11a6.5 6.5 0 0 0 13 0" />
+      <line x1="12" y1="17.5" x2="12" y2="21" />
+      <line x1="8.5" y1="21" x2="15.5" y2="21" />
+    </svg>
+  );
+}
+
+function BackIcon(props) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
+      <path d="M14.5 5 7 12l7.5 7" />
+    </svg>
+  );
+}
+
+function UploadIcon(props) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
+      <path d="M12 15.5V4" />
+      <path d="M7.5 8.5 12 4l4.5 4.5" />
+      <path d="M4.5 15.5v3a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-3" />
+    </svg>
+  );
+}
+
 function WarningIcon(props) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
       <path d="M12 3.5 21.5 20h-19Z" />
       <line x1="12" y1="9.5" x2="12" y2="14" />
       <circle cx="12" cy="17" r="0.9" fill="currentColor" stroke="none" />
@@ -154,7 +183,15 @@ function WarningIcon(props) {
   );
 }
 
+function BookmarkIcon(props) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
+      <path d="M6.5 3.5h11a1 1 0 0 1 1 1V21l-6.5-4-6.5 4V4.5a1 1 0 0 1 1-1Z" />
+    </svg>
+  );
+}
+
 export {
-  BrandIcon, SunIcon, MoonIcon, HomeIcon, SearchIcon, BookIcon, FolderIcon, MoreIcon, WarningIcon,
-  DraftIcon, DictionaryIcon, SimplifyIcon, QuizIcon, CheckIcon, ImageIcon,
+  BrandIcon, SunIcon, MoonIcon, HomeIcon, SearchIcon, BookIcon, FolderIcon, MoreIcon, WarningIcon, UploadIcon, BackIcon, MicIcon,
+  DraftIcon, DictionaryIcon, SimplifyIcon, QuizIcon, CheckIcon, ImageIcon, BookmarkIcon,
 };

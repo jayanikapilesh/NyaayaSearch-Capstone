@@ -3,6 +3,7 @@
 // are best-effort translations (not professionally reviewed).
 export const NAV_CONTENT = {
   en: {
+    backLabel: "Back to Home",
     languageSwitcherLabel: "Interface language",
     themeToggleToDark: "Switch to dark mode",
     themeToggleToLight: "Switch to light mode",
@@ -24,6 +25,7 @@ export const NAV_CONTENT = {
   },
 
   hi: {
+    backLabel: "होम पर वापस जाएं",
     languageSwitcherLabel: "इंटरफ़ेस भाषा",
     themeToggleToDark: "डार्क मोड में बदलें",
     themeToggleToLight: "लाइट मोड में बदलें",
@@ -45,6 +47,7 @@ export const NAV_CONTENT = {
   },
 
   kn: {
+    backLabel: "ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ",
     languageSwitcherLabel: "ಇಂಟರ್ಫೇಸ್ ಭಾಷೆ",
     themeToggleToDark: "ಡಾರ್ಕ್ ಮೋಡ್‌ಗೆ ಬದಲಿಸಿ",
     themeToggleToLight: "ಲೈಟ್ ಮೋಡ್‌ಗೆ ಬದಲಿಸಿ",

@@ -4,10 +4,12 @@ import remarkGfm from "remark-gfm";
 import { Packer } from "docx";
 import { saveAs } from "file-saver";
 import { API_URL, MERGED_DOCUMENT_SCHEMAS, ALL_DOCUMENT_TYPE_LABELS } from "../constants";
-import { extractErrorMessage } from "../utils";
+import { extractErrorMessage, recordGeneratedDocument } from "../utils";
 import { buildDocxFromMarkdown } from "../docxExport";
+import { getDrafterContent } from "../drafterContent";
 
-function DrafterTab({ setError }) {
+function DrafterTab({ setError, uiLanguage = "en" }) {
+  const content = getDrafterContent(uiLanguage);
   const [draftType, setDraftType] = useState("rent_agreement");
   const [formValues, setFormValues] = useState({});
   const [genericDetails, setGenericDetails] = useState("");
@@ -66,15 +68,19 @@ function DrafterTab({ setError }) {
       });
 
       if (!response.ok) {
-        const message = await extractErrorMessage(response, "Could not generate the document.");
+        const message = await extractErrorMessage(response, content.errDefault);
         setError(message);
         return;
       }
 
       const data = await response.json();
       setDraftText(data.document_text || "");
+
+      if (data.document_text) {
+        recordGeneratedDocument(draftType, ALL_DOCUMENT_TYPE_LABELS[draftType] || draftType, data.document_text);
+      }
     } catch (err) {
-      setError("Could not reach the server. Make sure the backend is running.");
+      setError(content.errNetwork);
       console.error(err);
     } finally {
       setDrafting(false);
@@ -89,8 +95,8 @@ function DrafterTab({ setError }) {
 
   return (
     <div className="drafter-section">
-      <h2>Legal Document Generator</h2>
-      <label className="drafter-intro" htmlFor="draft-type">What document do you want to create?</label>
+      <h2>{content.heading}</h2>
+      <label className="drafter-intro" htmlFor="draft-type">{content.typeSelectLabel}</label>
 
       <select
         id="draft-type"
@@ -106,7 +112,7 @@ function DrafterTab({ setError }) {
       <form className="drafter-form" onSubmit={handleDraft}>
         {activeSchema ? (
           <div>
-            <p className="drafter-subtitle">Let's create your {activeSchema.label}</p>
+            <p className="drafter-subtitle">{content.subtitle(activeSchema.label)}</p>
             {activeSchema.sections.map(function (section) {
               return (
                 <div className="form-section" key={section.title}>
@@ -131,7 +137,7 @@ function DrafterTab({ setError }) {
                             value={formValues[field.key] || ""}
                             onChange={function (e) { handleFormFieldChange(field.key, e.target.value); }}
                           >
-                            <option value="">Select...</option>
+                            <option value="">{content.selectPlaceholder}</option>
                             {field.options.map(function (opt) {
                               return <option key={opt} value={opt}>{opt}</option>;
                             })}
@@ -156,7 +162,7 @@ function DrafterTab({ setError }) {
         ) : (
           <div>
             <label className="drafter-subtitle" htmlFor="generic-details">
-              This document type doesn't have a detailed form yet. Enter any details you'd like included, one per line (e.g. "name: John Doe") - anything you leave out will appear as a blank line to fill in later.
+              {content.genericFormNotice}
             </label>
             <textarea
               id="generic-details"
@@ -170,7 +176,7 @@ function DrafterTab({ setError }) {
         )}
 
         <button type="submit" className="search-button" disabled={drafting}>
-          {drafting ? "Generating..." : "Generate Document"}
+          {drafting ? content.submittingButton : content.submitButton}
         </button>
       </form>
 
@@ -178,7 +184,7 @@ function DrafterTab({ setError }) {
         <div className="draft-result">
           <div className="draft-result-header">
             <h3>{ALL_DOCUMENT_TYPE_LABELS[draftType]}</h3>
-            <button className="search-button secondary-button" onClick={handleDownloadDraft}>Download as Word</button>
+            <button className="search-button secondary-button" onClick={handleDownloadDraft}>{content.downloadButton}</button>
           </div>
           <div className="draft-text">
             <ReactMarkdown remarkPlugins={[remarkGfm]}>{draftText}</ReactMarkdown>

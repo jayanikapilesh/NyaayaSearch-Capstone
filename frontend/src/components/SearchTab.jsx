@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { API_URL, LANGUAGE_LABELS, ALL_LANGUAGES, MAX_HISTORY } from "../constants";
+import { API_URL, LANGUAGE_LABELS, ALL_LANGUAGES, MAX_HISTORY, MAX_SAVED_RESULTS } from "../constants";
 import {
   getConfidenceLabel,
   extractErrorMessage,
@@ -9,15 +9,27 @@ import {
   saveHistory,
   loadSavedResults,
   persistSavedResults,
+  loadPinnedQueries,
+  savePinnedQueries,
+  getSpellingSuggestion,
   t,
 } from "../utils";
 
-function SearchTab({ setError, uiLanguage, onLanguageChange }) {
+// The BNS Decoder (main.py's /bns-lookup) only ever explains Bharatiya Nyaya
+// Sanhita sections, not BNSS or BSA - so the "Look up this section" action
+// only makes sense when a result's act is actually the BNS.
+function isBnsAct(actName) {
+  return typeof actName === "string" && /\bbharatiya nyaya sanhita\b/i.test(actName);
+}
+
+function SearchTab({ setError, uiLanguage, onLanguageChange, isActive, pendingViewSavedId, onConsumePendingViewSavedId, onLookUpBnsSection, onSimplifyCase, pendingSearchQuery, onConsumePendingSearchQuery }) {
   const [query, setQuery] = useState("");
   const [loadingSearch, setLoadingSearch] = useState(false);
   const [loadingExplanation, setLoadingExplanation] = useState(false);
   const [results, setResults] = useState([]);
   const [lowConfidence, setLowConfidence] = useState(false);
+  const [searchAttempted, setSearchAttempted] = useState(false);
+  const [showConfidenceInfo, setShowConfidenceInfo] = useState(false);
   const [explanation, setExplanation] = useState("");
   const [isListening, setIsListening] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
@@ -33,7 +45,25 @@ function SearchTab({ setError, uiLanguage, onLanguageChange }) {
   }, [uiLanguage]);
 
   const [searchHistory, setSearchHistory] = useState(function () { return loadHistory(); });
+  const [pinnedQueries, setPinnedQueries] = useState(function () { return loadPinnedQueries(); });
   const [savedResults, setSavedResults] = useState(function () { return loadSavedResults(); });
+  const [confirmingDeleteId, setConfirmingDeleteId] = useState(null);
+
+  // Search history and saved results can also be edited from the My
+  // Documents tab (e.g. deleting a saved search there), which writes to the
+  // same localStorage keys but cannot update this component's in-memory
+  // state directly, since every tab stays mounted for the life of the app.
+  // Re-reading from storage whenever this tab becomes active keeps the two
+  // views from drifting out of sync.
+  useEffect(function () {
+    if (!isActive) return;
+    const timer = setTimeout(function () {
+      setSearchHistory(loadHistory());
+      setPinnedQueries(loadPinnedQueries());
+      setSavedResults(loadSavedResults());
+    }, 0);
+    return function () { clearTimeout(timer); };
+  }, [isActive]);
 
   const addToHistory = function (searchedQuery) {
     setSearchHistory(function (prev) {
@@ -49,6 +79,31 @@ function SearchTab({ setError, uiLanguage, onLanguageChange }) {
     saveHistory([]);
   };
 
+  const deleteHistoryItem = function (queryToRemove) {
+    setSearchHistory(function (prev) {
+      const updated = prev.filter(function (q) { return q !== queryToRemove; });
+      saveHistory(updated);
+      return updated;
+    });
+  };
+
+  const pinQuery = function (queryToPin) {
+    setPinnedQueries(function (prev) {
+      if (prev.includes(queryToPin)) return prev;
+      const updated = [queryToPin].concat(prev);
+      savePinnedQueries(updated);
+      return updated;
+    });
+  };
+
+  const unpinQuery = function (queryToUnpin) {
+    setPinnedQueries(function (prev) {
+      const updated = prev.filter(function (q) { return q !== queryToUnpin; });
+      savePinnedQueries(updated);
+      return updated;
+    });
+  };
+
   const isCurrentResultSaved = savedResults.some(function (r) { return r.query === query && r.explanation === explanation; });
 
   const handleSaveResult = function () {
@@ -58,10 +113,15 @@ function SearchTab({ setError, uiLanguage, onLanguageChange }) {
       query: query,
       explanation: explanation,
       language: uiLanguage,
+      results: results,
       savedAt: new Date().toISOString(),
     };
     setSavedResults(function (prev) {
-      const updated = [newItem].concat(prev);
+      // Capped like the other My Documents lists (uploaded/generated docs)
+      // so saved searches - which duplicate the full explanation and result
+      // set for reliable offline recall - can't grow localStorage without
+      // bound. Oldest saved searches drop off first.
+      const updated = [newItem].concat(prev).slice(0, MAX_SAVED_RESULTS);
       persistSavedResults(updated);
       return updated;
     });
@@ -73,6 +133,15 @@ function SearchTab({ setError, uiLanguage, onLanguageChange }) {
       persistSavedResults(updated);
       return updated;
     });
+    setConfirmingDeleteId(null);
+  };
+
+  const requestDeleteSaved = function (id) {
+    setConfirmingDeleteId(id);
+  };
+
+  const cancelDeleteSaved = function () {
+    setConfirmingDeleteId(null);
   };
 
   const translateExplanationTo = async function (targetLang, sourceText) {
@@ -115,7 +184,7 @@ function SearchTab({ setError, uiLanguage, onLanguageChange }) {
 
   const handleViewSaved = async function (item) {
     setQuery(item.query);
-    setResults([]);
+    setResults(item.results || []);
     setLowConfidence(false);
     setLoadingSearch(false);
     setLoadingExplanation(false);
@@ -132,6 +201,21 @@ function SearchTab({ setError, uiLanguage, onLanguageChange }) {
       await translateExplanationTo(currentUiLang, item.explanation);
     }
   };
+
+  // "Open in Search" from the My Documents tab: App.jsx hands us the id of
+  // the saved search to jump to via a prop rather than a query re-run, since
+  // we already have the full saved result. Consume it once, then clear it
+  // upstream so switching tabs later doesn't re-trigger the same view.
+  useEffect(function () {
+    if (!isActive || !pendingViewSavedId) return;
+    const timer = setTimeout(function () {
+      const item = savedResults.find(function (r) { return r.id === pendingViewSavedId; });
+      if (item) handleViewSaved(item);
+      if (typeof onConsumePendingViewSavedId === "function") onConsumePendingViewSavedId();
+    }, 0);
+    return function () { clearTimeout(timer); };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isActive, pendingViewSavedId, savedResults]);
 
   const runSearch = async function (searchQuery) {
     if (!searchQuery.trim()) {
@@ -184,6 +268,7 @@ function SearchTab({ setError, uiLanguage, onLanguageChange }) {
     setResults(foundResults);
     setLowConfidence(Boolean(searchData.low_confidence));
     setLoadingSearch(false);
+    setSearchAttempted(true);
     addToHistory(searchQuery);
 
     // If no results, display static message and do not call /explain
@@ -259,6 +344,20 @@ function SearchTab({ setError, uiLanguage, onLanguageChange }) {
     }
   };
 
+  // Home's "Continue where you left off" hands us the last query the same
+  // way as the saved-search handoff above: re-run it here rather than
+  // having Home duplicate the search logic.
+  useEffect(function () {
+    if (!isActive || !pendingSearchQuery) return;
+    const timer = setTimeout(function () {
+      setQuery(pendingSearchQuery);
+      runSearch(pendingSearchQuery);
+      if (typeof onConsumePendingSearchQuery === "function") onConsumePendingSearchQuery();
+    }, 0);
+    return function () { clearTimeout(timer); };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isActive, pendingSearchQuery]);
+
   const handleSearch = async function (e) {
     e.preventDefault();
     await runSearch(query);
@@ -311,9 +410,13 @@ function SearchTab({ setError, uiLanguage, onLanguageChange }) {
       recognitionRef.current = null;
       setError("Could not hear you. Please try again.");
     };
+    // interimResults is false, so this only fires once recognition has
+    // settled on a final transcript - safe to submit immediately rather
+    // than making the user press Search again after already speaking it.
     recognition.onresult = function (event) {
       const transcript = event.results[0][0].transcript;
       setQuery(transcript);
+      runSearch(transcript);
     };
 
     recognitionRef.current = recognition;
@@ -347,6 +450,13 @@ function SearchTab({ setError, uiLanguage, onLanguageChange }) {
   const topScore = results.length > 0 ? results[0].hybrid_score : 0;
   const showLowConfidenceWarning = results.length > 0 && lowConfidence;
   const otherLanguages = ALL_LANGUAGES.filter(function (lang) { return lang !== uiLanguage; });
+
+  // Purely derived from the query text - no dictionary lookup - so this is
+  // cheap enough to compute on every render and needs no effect/state of
+  // its own. Only shown once a search has actually come back thin, so it
+  // never nags while someone is still typing.
+  const showSpellingSuggestion = searchAttempted && !loadingSearch && (results.length === 0 || lowConfidence);
+  const spellingSuggestion = showSpellingSuggestion ? getSpellingSuggestion(query) : null;
 
   return (
     <div>
@@ -383,14 +493,34 @@ function SearchTab({ setError, uiLanguage, onLanguageChange }) {
         </div>
       )}
 
-      {searchHistory.length > 0 && (
+      {pinnedQueries.length > 0 && (
+        <div className="search-history">
+          <span className="search-history-label">{t(uiLanguage, "pinned")}</span>
+          {pinnedQueries.map(function (h, i) {
+            return (
+              <div className="history-chip" key={i}>
+                <button type="button" className="history-chip-text" onClick={function () { handleHistoryClick(h); }}>
+                  {h.length > 40 ? h.slice(0, 40) + "..." : h}
+                </button>
+                <button type="button" className="history-chip-action" onClick={function () { unpinQuery(h); }}>{t(uiLanguage, "unpin")}</button>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {searchHistory.filter(function (h) { return !pinnedQueries.includes(h); }).length > 0 && (
         <div className="search-history">
           <span className="search-history-label">{t(uiLanguage, "recent")}</span>
-          {searchHistory.map(function (h, i) {
+          {searchHistory.filter(function (h) { return !pinnedQueries.includes(h); }).map(function (h, i) {
             return (
-              <button key={i} className="history-chip" onClick={function () { handleHistoryClick(h); }}>
-                {h.length > 40 ? h.slice(0, 40) + "..." : h}
-              </button>
+              <div className="history-chip" key={i}>
+                <button type="button" className="history-chip-text" onClick={function () { handleHistoryClick(h); }}>
+                  {h.length > 40 ? h.slice(0, 40) + "..." : h}
+                </button>
+                <button type="button" className="history-chip-action" onClick={function () { pinQuery(h); }}>{t(uiLanguage, "pin")}</button>
+                <button type="button" className="history-chip-action history-chip-action-delete" onClick={function () { deleteHistoryItem(h); }} aria-label={t(uiLanguage, "delete")}>×</button>
+              </div>
             );
           })}
           <button className="history-clear" onClick={clearHistory}>{t(uiLanguage, "clear")}</button>
@@ -407,7 +537,21 @@ function SearchTab({ setError, uiLanguage, onLanguageChange }) {
                   <button type="button" className="saved-result-query" onClick={function () { handleViewSaved(item); }}>
                     {item.query}
                   </button>
-                  <button className="saved-result-delete" onClick={function () { handleDeleteSaved(item.id); }}>{t(uiLanguage, "delete")}</button>
+                  {confirmingDeleteId === item.id ? (
+                    <span className="saved-result-confirm">
+                      <span className="saved-result-confirm-label">{t(uiLanguage, "deleteConfirm")}</span>
+                      <button type="button" className="saved-result-confirm-yes" onClick={function () { handleDeleteSaved(item.id); }}>
+                        {t(uiLanguage, "deleteConfirmYes")}
+                      </button>
+                      <button type="button" className="saved-result-confirm-cancel" onClick={cancelDeleteSaved}>
+                        {t(uiLanguage, "cancel")}
+                      </button>
+                    </span>
+                  ) : (
+                    <button type="button" className="saved-result-delete" onClick={function () { requestDeleteSaved(item.id); }}>
+                      {t(uiLanguage, "delete")}
+                    </button>
+                  )}
                 </div>
               </div>
             );
@@ -419,6 +563,21 @@ function SearchTab({ setError, uiLanguage, onLanguageChange }) {
 
       {loadingSearch && (
         <div className="loading">{t(uiLanguage, "searchingFull")}</div>
+      )}
+
+      {spellingSuggestion && (
+        <div className="spelling-suggestion">
+          <span>
+            {t(uiLanguage, "didYouMean")}{" "}
+            <button
+              type="button"
+              className="spelling-suggestion-link"
+              onClick={function () { setQuery(spellingSuggestion.correctedQuery); runSearch(spellingSuggestion.correctedQuery); }}
+            >
+              {spellingSuggestion.correctedQuery}
+            </button>
+          </span>
+        </div>
       )}
 
       {showLowConfidenceWarning && (
@@ -462,7 +621,11 @@ function SearchTab({ setError, uiLanguage, onLanguageChange }) {
               <button className="listen-button" onClick={speakExplanation}>
                 {isSpeaking ? t(uiLanguage, "stop") : t(uiLanguage, "listen")}
               </button>
-              <button className="save-button" onClick={handleSaveResult} disabled={isCurrentResultSaved || loadingExplanation || !explanation}>
+              <button
+                className={"save-button" + (isCurrentResultSaved ? " save-button-saved" : "")}
+                onClick={handleSaveResult}
+                disabled={isCurrentResultSaved || loadingExplanation || !explanation}
+              >
                 {isCurrentResultSaved ? t(uiLanguage, "saved") : t(uiLanguage, "save")}
               </button>
             </div>
@@ -477,7 +640,25 @@ function SearchTab({ setError, uiLanguage, onLanguageChange }) {
 
       {results.length > 0 && (
         <div className="results-section">
-          <h2>{t(uiLanguage, "sources")}</h2>
+          <div className="results-heading-row">
+            <h2>{t(uiLanguage, "sources")}</h2>
+            <button
+              type="button"
+              className="confidence-info-toggle"
+              onClick={function () { setShowConfidenceInfo(!showConfidenceInfo); }}
+              aria-expanded={showConfidenceInfo}
+            >
+              {t(uiLanguage, "confidenceInfoToggle")}
+            </button>
+          </div>
+          {showConfidenceInfo && (
+            <div className="confidence-info-panel">
+              <p className="confidence-info-intro">{t(uiLanguage, "confidenceInfoIntro")}</p>
+              <p><span className="confidence-badge confidence-strong">{t(uiLanguage, "strongMatch")}</span> {t(uiLanguage, "confidenceInfoStrong")}</p>
+              <p><span className="confidence-badge confidence-good">{t(uiLanguage, "goodMatch")}</span> {t(uiLanguage, "confidenceInfoGood")}</p>
+              <p><span className="confidence-badge confidence-weak">{t(uiLanguage, "possibleMatch")}</span> {t(uiLanguage, "confidenceInfoWeak")}</p>
+            </div>
+          )}
           {results.map(function (r, i) {
             const confidence = getConfidenceLabel(r.hybrid_score, topScore, uiLanguage);
             return (
@@ -489,7 +670,18 @@ function SearchTab({ setError, uiLanguage, onLanguageChange }) {
                     <span className="citation-tag-number">{r.section_number}</span>
                   </span>
                 </div>
-                <div className={"confidence-badge " + confidence.className}>{confidence.label}</div>
+                <div className="result-header-secondary">
+                  <div className={"confidence-badge " + confidence.className}>{confidence.label}</div>
+                  {isBnsAct(r.act_name) && typeof onLookUpBnsSection === "function" && (
+                    <button
+                      type="button"
+                      className="contextual-action-link"
+                      onClick={function () { onLookUpBnsSection(r.section_number); }}
+                    >
+                      {t(uiLanguage, "lookUpSection")}
+                    </button>
+                  )}
+                </div>
 
                 {r.matched_terms && r.matched_terms.length > 0 && (
                   <div className="matched-terms">
@@ -511,6 +703,15 @@ function SearchTab({ setError, uiLanguage, onLanguageChange }) {
                         <div className="case-item" key={j}>
                           <span className="case-title">{c.title}</span>
                           <span className="case-meta">{c.court} - {c.decision_date}</span>
+                          {typeof onSimplifyCase === "function" && (
+                            <button
+                              type="button"
+                              className="contextual-action-link"
+                              onClick={function () { onSimplifyCase({ title: c.title, court: c.court, decision_date: c.decision_date }); }}
+                            >
+                              {t(uiLanguage, "simplifyThisCase")}
+                            </button>
+                          )}
                         </div>
                       );
                     })}
