@@ -4,7 +4,6 @@ import remarkGfm from "remark-gfm";
 import { API_URL, LANGUAGE_LABELS, ALL_LANGUAGES, MAX_HISTORY } from "../constants";
 import {
   getConfidenceLabel,
-  isOverallLowConfidence,
   extractErrorMessage,
   loadHistory,
   saveHistory,
@@ -18,6 +17,7 @@ function SearchTab({ setError, uiLanguage, onLanguageChange }) {
   const [loadingSearch, setLoadingSearch] = useState(false);
   const [loadingExplanation, setLoadingExplanation] = useState(false);
   const [results, setResults] = useState([]);
+  const [lowConfidence, setLowConfidence] = useState(false);
   const [explanation, setExplanation] = useState("");
   const [isListening, setIsListening] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
@@ -116,6 +116,7 @@ function SearchTab({ setError, uiLanguage, onLanguageChange }) {
   const handleViewSaved = async function (item) {
     setQuery(item.query);
     setResults([]);
+    setLowConfidence(false);
     setLoadingSearch(false);
     setLoadingExplanation(false);
     const savedLang = item.language || "en";
@@ -146,6 +147,7 @@ function SearchTab({ setError, uiLanguage, onLanguageChange }) {
     setError(null);
     setExplanation("");
     setResults([]);
+    setLowConfidence(false);
     setExplanationCache({});
 
     // Step 1: Fast search to show matched sections immediately (< 1s)
@@ -180,6 +182,7 @@ function SearchTab({ setError, uiLanguage, onLanguageChange }) {
 
     const foundResults = searchData.results || [];
     setResults(foundResults);
+    setLowConfidence(Boolean(searchData.low_confidence));
     setLoadingSearch(false);
     addToHistory(searchQuery);
 
@@ -342,7 +345,7 @@ function SearchTab({ setError, uiLanguage, onLanguageChange }) {
   };
 
   const topScore = results.length > 0 ? results[0].hybrid_score : 0;
-  const showLowConfidenceWarning = results.length > 0 && isOverallLowConfidence(topScore);
+  const showLowConfidenceWarning = results.length > 0 && lowConfidence;
   const otherLanguages = ALL_LANGUAGES.filter(function (lang) { return lang !== uiLanguage; });
 
   return (
