@@ -1,7 +1,8 @@
-from fastapi import FastAPI, UploadFile, File, Form, HTTPException
+from fastapi import FastAPI, UploadFile, File, Form, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import re
+from rate_limiter import check_rate_limit
 from search_core import SearchEngine, IPC_TO_BNS, IPC_OMITTED, extract_ipc_sections
 from rag_core import (
     generate_explanation,
@@ -227,11 +228,12 @@ def search(request: SearchRequest):
 
 
 @app.post("/explain")
-def explain(request: SearchRequest):
+def explain(request: SearchRequest, raw_request: Request):
     validate_query(request.query)
 
     search_query, detected_language = resolve_search_query(request.query)
     target_language = request.language if request.language in ("en", "hi", "kn") else detected_language
+    check_rate_limit(raw_request, language=target_language)
 
     if request.sections is not None:
         record_map = getattr(engine, "record_map", None)
@@ -342,11 +344,12 @@ def explain(request: SearchRequest):
 
 
 @app.post("/translate-explanation")
-def translate_explanation_endpoint(request: TranslateExplanationRequest):
+def translate_explanation_endpoint(request: TranslateExplanationRequest, raw_request: Request):
     if not request.text or not request.text.strip():
         raise HTTPException(status_code=400, detail="No text provided to translate.")
     if request.target_language not in ("en", "hi", "kn"):
         raise HTTPException(status_code=400, detail="Unsupported target language.")
+    check_rate_limit(raw_request, language=request.target_language)
 
     try:
         translated = translate_explanation(request.text, request.target_language)
@@ -359,7 +362,8 @@ def translate_explanation_endpoint(request: TranslateExplanationRequest):
 
 
 @app.post("/upload-pdf")
-async def upload_pdf(file: UploadFile = File(...)):
+async def upload_pdf(raw_request: Request, file: UploadFile = File(...)):
+    check_rate_limit(raw_request, language="en")
     if not file.filename.lower().endswith(".pdf"):
         raise HTTPException(status_code=400, detail="Please upload a PDF file.")
 
@@ -410,7 +414,8 @@ async def upload_pdf(file: UploadFile = File(...)):
 
 
 @app.post("/ask-document")
-def ask_document(request: DocumentQuestionRequest):
+def ask_document(request: DocumentQuestionRequest, raw_request: Request):
+    check_rate_limit(raw_request, language="en")
     if not request.question or not request.question.strip():
         raise HTTPException(status_code=400, detail="Please enter a question about the document.")
 
@@ -429,7 +434,8 @@ def ask_document(request: DocumentQuestionRequest):
 
 
 @app.post("/define")
-def define(request: DefineRequest):
+def define(request: DefineRequest, raw_request: Request):
+    check_rate_limit(raw_request, language="en")
     if not request.term or not request.term.strip():
         raise HTTPException(status_code=400, detail="Please enter a term to look up.")
 
@@ -457,7 +463,8 @@ class BNSLookupRequest(BaseModel):
 
 
 @app.post("/draft-document")
-def draft_document_endpoint(request: DraftRequest):
+def draft_document_endpoint(request: DraftRequest, raw_request: Request):
+    check_rate_limit(raw_request, language="en")
     if request.document_type not in DOCUMENT_TYPES:
         raise HTTPException(status_code=400, detail=f"Unknown document type. Supported types: {list(DOCUMENT_TYPES.keys())}")
 
@@ -477,7 +484,8 @@ def get_document_types():
 
 
 @app.post("/simplify-case")
-def simplify_case_endpoint(request: CaseSimplifyRequest):
+def simplify_case_endpoint(request: CaseSimplifyRequest, raw_request: Request):
+    check_rate_limit(raw_request, language="en")
     if not request.case_text or not request.case_text.strip():
         raise HTTPException(status_code=400, detail="Please paste the case text you want simplified.")
     if len(request.case_text) > 20000:
@@ -494,10 +502,11 @@ def simplify_case_endpoint(request: CaseSimplifyRequest):
 
 
 @app.post("/bns-lookup")
-def bns_lookup_endpoint(request: BNSLookupRequest):
+def bns_lookup_endpoint(request: BNSLookupRequest, raw_request: Request):
     lang = (request.language or "en").lower().strip()
     if lang not in ("en", "hi", "kn"):
         lang = "en"
+    check_rate_limit(raw_request, language=lang)
 
     sec = (request.section_number or "").strip()
     if not sec:

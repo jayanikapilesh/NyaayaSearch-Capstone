@@ -276,3 +276,15 @@ Static fallback and system messages returned by `/explain` when no search result
 | error | We couldn't generate an explanation right now, but here are the relevant legal sections we found below. | हम अभी व्याख्या तैयार नहीं कर सके, लेकिन हमें जो प्रासंगिक कानूनी धाराएं मिली हैं, वे नीचे दी गई हैं। | ನಾವು ಇದೀಗ ವಿವರಣೆಯನ್ನು ರಚಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ, ಆದರೆ ನಾವು ಕಂಡುಕೊಂಡ ಸಂಬಂಧಿತ ಕಾನೂನು ವಿಭಾಗಗಳನ್ನು ಕೆಳಗೆ ನೀಡಲಾಗಿದೆ. |
 | bns_not_found | Section {sec} of the Bharatiya Nyaya Sanhita was not found in our database. | भारतीय न्याय संहिता की धारा {sec} हमारे डेटाबेस में नहीं मिली। | ಭಾರತೀಯ ನ್ಯಾಯ ಸಂಹಿತೆಯ ವಿಭಾಗ {sec} ನಮ್ಮ ಡೇಟಾಬೇಸ್‌ನಲ್ಲಿ ಕಂಡುಬಂದಿಲ್ಲ. |
 
+## `src/components/DocumentsTab.jsx` - Privacy Notice - needs native review
+
+| Key | English source | Hindi | Kannada |
+|---|---|---|---|
+| privacyNotice | Uploaded documents are sent to an AI service to answer your questions; don't upload sensitive personal documents. | अपलोड किए गए दस्तावेज़ आपके प्रश्नों के उत्तर देने के लिए एक एआई सेवा को भेजे जाते हैं; संवेदनशील व्यक्तिगत दस्तावेज़ अपलोड न करें। | ನಿಮ್ಮ ಪ್ರಶ್ನೆಗಳಿಗೆ ಉತ್ತರಿಸಲು ಅಪ್‌ಲೋಡ್ ಮಾಡಿದ ದಾಖಲೆಗಳನ್ನು AI ಸೇವೆಗೆ ಕಳುಹಿಸಲಾಗುತ್ತದೆ; ಸೂಕ್ಷ್ಮ ವೈಯಕ್ತಿಕ ದಾಖಲೆಗಳನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಬೇಡಿ. |
+
+## Rate Limiting Messages (`scripts/rate_limiter.py`) - needs native review
+
+| Key | English source | Hindi | Kannada |
+|---|---|---|---|
+| 429_rate_limit | Too many requests. Please wait a few minutes before trying again (limit: 20 requests per 10 minutes). | बहुत अधिक अनुरोध। कृपया कुछ मिनट बाद पुनः प्रयास करें (सीमा: 10 मिनट में 20 अनुरोध)। | ಹೆಚ್ಚಿನ ವಿನಂತಿಗಳು ಬಂದಿವೆ. ದಯವಿಟ್ಟು ಕೆಲವು ನಿಮಿಷಗಳ ನಂತರ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ (ಮಿತಿ: 10 ನಿಮಿಷಗಳಲ್ಲಿ 20 ವಿನಂತಿಗಳು). |
+

@@ -1,6 +1,6 @@
 import { DOCUMENT_SCHEMAS, ADDITIONAL_DOCUMENT_SCHEMAS } from "./documentSchemas";
 
-export const API_URL = "http://127.0.0.1:8000";
+export const API_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
 export const HISTORY_KEY = "nyaaya-search-history";
 export const MAX_HISTORY = 8;
 export const SAVED_RESULTS_KEY = "nyaaya-saved-results";

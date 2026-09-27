@@ -1,0 +1,47 @@
+# Virtual environments & dependencies
+.venv/
+venv/
+node_modules/
+*/node_modules/
+frontend/
+
+# Local secrets & environment files
+.env
+.env.*
+
+# Python bytecode & temporary files
+__pycache__/
+*/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Local model directories (downloaded via Hugging Face Hub in Docker)
+finetuned_legal_model/
+finetuned_legal_model_v3/
+
+# Local caches (rebuilt at Docker build time)
+data/cache/
+data/section_embeddings_cache.npy
+data/section_embeddings_cache_meta.json
+*.npy
+
+# Big raw data & offline training/eval files not needed at runtime
+data/raw/
+data/case_law/raw/
+data/scenarios/
+data/eval/
+data/training_pairs*
+data/uncovered_sections.csv
+results/
+
+# Alternative / temporary knowledge base workbooks (only Legal_Knowledge_Base_combined.xlsx is needed)
+Legal_Knowledge_Base_*.xlsx
+!Legal_Knowledge_Base_combined.xlsx
+
+# Git & tooling metadata
+.git/
+.github/
+.claude/
+.vscode/
+.DS_Store

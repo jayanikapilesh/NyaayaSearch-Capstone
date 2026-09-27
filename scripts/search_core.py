@@ -385,7 +385,10 @@ class SearchEngine:
             else:
                 model_path = os.path.join(os.path.dirname(__file__), "..", "finetuned_legal_model_v3")
         if model_name is None:
-            model_name = os.path.basename(os.path.normpath(model_path)) or "finetuned_legal_model_v3"
+            if not os.path.exists(model_path) and ("/" in str(model_path) or "\\" in str(model_path)):
+                model_name = str(model_path).replace("\\", "/")
+            else:
+                model_name = os.path.basename(os.path.normpath(model_path)) or "finetuned_legal_model_v3"
         self.model = SentenceTransformer(model_path)
 
         current_hash = _compute_embeddings_hash(texts, model_name, model_path=model_path)

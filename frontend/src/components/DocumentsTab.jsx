@@ -2,7 +2,13 @@ import { useState } from "react";
 import { API_URL } from "../constants";
 import { extractErrorMessage } from "../utils";
 
-function DocumentsTab({ setError }) {
+const PRIVACY_NOTICES = {
+  en: "Uploaded documents are sent to an AI service to answer your questions; don't upload sensitive personal documents.",
+  hi: "अपलोड किए गए दस्तावेज़ आपके प्रश्नों के उत्तर देने के लिए एक एआई सेवा को भेजे जाते हैं; संवेदनशील व्यक्तिगत दस्तावेज़ अपलोड न करें।",
+  kn: "ನಿಮ್ಮ ಪ್ರಶ್ನೆಗಳಿಗೆ ಉತ್ತರಿಸಲು ಅಪ್‌ಲೋಡ್ ಮಾಡಿದ ದಾಖಲೆಗಳನ್ನು AI ಸೇವೆಗೆ ಕಳುಹಿಸಲಾಗುತ್ತದೆ; ಸೂಕ್ಷ್ಮ ವೈಯಕ್ತಿಕ ದಾಖಲೆಗಳನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಬೇಡಿ.",
+};
+
+function DocumentsTab({ setError, uiLanguage = "en" }) {
   const [uploadedDoc, setUploadedDoc] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [docQuestion, setDocQuestion] = useState("");
@@ -80,6 +86,9 @@ function DocumentsTab({ setError }) {
   return (
     <div className="upload-section">
       <h2>Ask about your own document</h2>
+      <p className="document-privacy-notice" style={{ fontSize: "0.85rem", color: "var(--text-secondary, #666)", marginBottom: "1rem", lineHeight: "1.4" }}>
+        {PRIVACY_NOTICES[uiLanguage] || PRIVACY_NOTICES.en}
+      </p>
       <label className="sr-only" htmlFor="pdf-upload">Upload a PDF document</label>
       <input id="pdf-upload" className="file-input" type="file" accept="application/pdf" onChange={handleFileUpload} />
       {uploading && <div className="loading">Reading and summarizing your document...</div>}

@@ -109,3 +109,60 @@ Both scripts include Colab setup steps and run standalone when the required data
 ## 4. Note on Pinned Versions
 
 The retrieval scores, embedding generation, cross-encoder inference, and evaluation benchmarks strictly depend on the versions pinned in `requirements.txt` (specifically `torch==2.14.0`, `transformers==5.17.0`, `sentence-transformers==6.1.0`, `scikit-learn==1.9.1`, `numpy==2.5.3`, and `scipy==1.18.1`). Upgrading or changing these packages may produce minor floating-point differences in embedding similarity scores or ranking order.
+
+---
+
+## 5. Deployment
+
+The application is architected for dual-platform cloud deployment:
+- **Backend**: Hugging Face Spaces (Docker, CPU tier)
+- **Frontend**: Vercel (Static Single Page App / Vite)
+
+### Backend on Hugging Face Spaces (Docker, CPU)
+
+1. **Create a Space**:
+   - Go to [Hugging Face Spaces](https://huggingface.co/spaces) and click **Create new Space**.
+   - Select **Docker** as the Space SDK (Blank template).
+   - Choose the free **CPU (2 vCPU, 16 GB RAM)** hardware tier.
+
+2. **Configure Secrets & Environment Variables**:
+   - Navigate to **Settings > Variables and secrets** in your Space.
+   - Add Secret:
+     - `GROQ_API_KEY`: Your Groq API key for LLM explanations, translations, and dictionary lookups.
+   - Add Environment Variable:
+     - `NYAAYA_EMBED_MODEL`: Your Hugging Face Hub model ID (e.g. `username/nyaaya-legal-model`). The Docker build downloads this model and builds the embeddings cache at build time so runtime boot is immediate (< 1s).
+     - *(Optional)* `USE_RERANKER=1`: Cross-encoder reranking is enabled by default.
+
+3. **Verify Tracked Data**:
+   - Ensure `data/case_law/processed/case_citations.csv` is tracked in git (`git add -f data/case_law/processed/case_citations.csv`).
+
+4. **Deploy**:
+   - Push your repository to the Hugging Face Space git remote:
+     ```bash
+     git remote add space https://huggingface.co/spaces/<username>/<space-name>
+     git push space main
+     ```
+   - The Docker build will:
+     - Install CPU-only PyTorch and pinned dependencies.
+     - Pre-download `cross-encoder/ms-marco-MiniLM-L-6-v2` and `NYAAYA_EMBED_MODEL`.
+     - Build the section embeddings cache at build time.
+     - Launch Uvicorn on port `7860`.
+
+### Frontend on Vercel
+
+1. **Import Project**:
+   - Log in to [Vercel](https://vercel.com) and click **Add New > Project**.
+   - Connect your GitHub repository.
+
+2. **Configure Build Settings**:
+   - **Root Directory**: `frontend`
+   - **Framework Preset**: `Vite`
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `dist`
+
+3. **Set Environment Variable**:
+   - Under **Environment Variables**, add:
+     - `VITE_API_URL`: The direct HTTPS URL of your Hugging Face Space backend (e.g., `https://<username>-<space-name>.hf.space`). Do not include a trailing slash.
+
+4. **Deploy**:
+   - Click **Deploy**. Vercel will build the frontend assets and deploy globally on edge CDN.
