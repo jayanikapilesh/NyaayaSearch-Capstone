@@ -49,7 +49,7 @@ export const UI_STRINGS = {
     search: "खोजें",
     searching: "खोज रहे हैं...",
     searchingFull: "कानूनी डेटाबेस खोजा जा रहा है...",
-    loadingExplanation: "सरल भाषा में व्याख्या तैयार की जा रही है...",
+    loadingExplanation: "आसान भाषा में जवाब तैयार हो रहा है...",
     mic: "माइक",
     listeningIndicator: "सुन रहे हैं... (रोकने के लिए माइक पर फिर से क्लिक करें)",
     tryAsking: "ऐसे पूछकर देखें:",
