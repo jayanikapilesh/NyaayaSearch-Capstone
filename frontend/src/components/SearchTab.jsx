@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { API_URL, LANGUAGE_LABELS, ALL_LANGUAGES, MAX_HISTORY, MAX_SAVED_RESULTS } from "../constants";
+import { getLegalDisclaimer } from "../legalDisclaimerContent";
 import {
   getConfidenceLabel,
   extractErrorMessage,
@@ -635,6 +636,7 @@ function SearchTab({ setError, uiLanguage, onLanguageChange, isActive, pendingVi
           ) : (
             <div className="explanation-text"><ReactMarkdown remarkPlugins={[remarkGfm]}>{explanation}</ReactMarkdown></div>
           )}
+          <p className="legal-disclaimer">{getLegalDisclaimer(uiLanguage)}</p>
         </div>
       )}
 

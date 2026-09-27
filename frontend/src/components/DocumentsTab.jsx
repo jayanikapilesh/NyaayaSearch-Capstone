@@ -15,6 +15,7 @@ import {
 import { buildDocxFromMarkdown } from "../docxExport";
 import { getDocumentsContent } from "../documentsContent";
 import { UploadIcon, BookmarkIcon } from "./icons";
+import { getLegalDisclaimer } from "../legalDisclaimerContent";
 
 function formatDate(iso) {
   try {
@@ -220,6 +221,7 @@ function DocumentsTab({ setError, uiLanguage = "en", isActive, onOpenSavedSearch
         <div className="document-card">
           <div className="document-filename">{uploadedDoc.filename}</div>
           <div className="document-summary">{uploadedDoc.summary}</div>
+          <p className="legal-disclaimer">{getLegalDisclaimer(uiLanguage)}</p>
 
           {uploadedDoc.dates && uploadedDoc.dates.length > 0 && (
             <div className="dates-section">
@@ -252,7 +254,12 @@ function DocumentsTab({ setError, uiLanguage = "en", isActive, onOpenSavedSearch
             </form>
           )}
 
-          {docAnswer && <div className="document-answer">{docAnswer}</div>}
+          {docAnswer && (
+            <div>
+              <div className="document-answer">{docAnswer}</div>
+              <p className="legal-disclaimer">{getLegalDisclaimer(uiLanguage)}</p>
+            </div>
+          )}
           {uploadedDoc.document_id && <p className="document-reupload-hint">{content.reuploadHint}</p>}
         </div>
       )}

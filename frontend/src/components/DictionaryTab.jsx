@@ -2,6 +2,7 @@ import { useState } from "react";
 import { API_URL } from "../constants";
 import { extractErrorMessage } from "../utils";
 import { getDictionaryContent } from "../dictionaryContent";
+import { getLegalDisclaimer } from "../legalDisclaimerContent";
 
 function DictionaryTab({ uiLanguage }) {
   const content = getDictionaryContent(uiLanguage);
@@ -56,7 +57,12 @@ function DictionaryTab({ uiLanguage }) {
           {dictLoading ? content.buttonLookingUp : content.buttonDefine}
         </button>
       </form>
-      {dictDefinition && <div className="dict-definition">{dictDefinition}</div>}
+      {dictDefinition && (
+        <div>
+          <div className="dict-definition">{dictDefinition}</div>
+          <p className="legal-disclaimer">{getLegalDisclaimer(uiLanguage)}</p>
+        </div>
+      )}
     </div>
   );
 }

@@ -4,6 +4,7 @@ import remarkGfm from "remark-gfm";
 import { API_URL } from "../constants";
 import { extractErrorMessage } from "../utils";
 import { getSimplifierContent } from "../simplifierContent";
+import { getLegalDisclaimer } from "../legalDisclaimerContent";
 
 function SimplifierTab({ setError, uiLanguage = "en", pendingCaseContext, onConsumePendingCaseContext }) {
   const content = getSimplifierContent(uiLanguage);
@@ -99,6 +100,7 @@ function SimplifierTab({ setError, uiLanguage = "en", pendingCaseContext, onCons
           <div className="draft-text">
             <ReactMarkdown remarkPlugins={[remarkGfm]}>{simplifiedCase}</ReactMarkdown>
           </div>
+          <p className="legal-disclaimer">{getLegalDisclaimer(uiLanguage)}</p>
         </div>
       )}
     </div>

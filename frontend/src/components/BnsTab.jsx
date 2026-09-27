@@ -4,6 +4,7 @@ import remarkGfm from "remark-gfm";
 import { API_URL } from "../constants";
 import { extractErrorMessage } from "../utils";
 import { getBnsContent } from "../bnsContent";
+import { getLegalDisclaimer } from "../legalDisclaimerContent";
 
 function BnsTab({ setError, uiLanguage = "en", pendingSection, onConsumePendingSection }) {
   const content = getBnsContent(uiLanguage);
@@ -97,6 +98,7 @@ function BnsTab({ setError, uiLanguage = "en", pendingSection, onConsumePendingS
             <p className="bns-original-label">{content.originalText}</p>
             <p className="bns-original-text">{bnsResult.legal_text}</p>
           </div>
+          <p className="legal-disclaimer">{getLegalDisclaimer(uiLanguage)}</p>
         </div>
       )}
     </div>
