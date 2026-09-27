@@ -99,8 +99,8 @@ $acrPassword = $creds.passwords[0].value
 
 # 7. Ensure App Service Plan exists
 Write-Host "`nStep 5: Checking App Service Plan $AppPlan (SKU B2)..." -ForegroundColor Yellow
-$planExists = az appservice plan show --name $AppPlan --resource-group $ResourceGroup 2>$null
-if (-not $planExists) {
+$planExists = az appservice plan list --resource-group $ResourceGroup --query "[?name=='$AppPlan'].name" -o tsv
+if (-not $planExists -or [string]::IsNullOrWhiteSpace($planExists)) {
     Write-Host "Creating Linux App Service Plan $AppPlan (B2 in $Location)..."
     az appservice plan create --name $AppPlan --resource-group $ResourceGroup --is-linux --sku B2 --location $Location | Out-Null
 }
@@ -108,8 +108,8 @@ Write-Host "App Service Plan $AppPlan is ready." -ForegroundColor Green
 
 # 8. Create or Update Web App
 Write-Host "`nStep 6: Setting up Web App $AppName ..." -ForegroundColor Yellow
-$appExists = az webapp show --name $AppName --resource-group $ResourceGroup 2>$null
-if (-not $appExists) {
+$appExists = az webapp list --resource-group $ResourceGroup --query "[?name=='$AppName'].name" -o tsv
+if (-not $appExists -or [string]::IsNullOrWhiteSpace($appExists)) {
     Write-Host "Creating Web App $AppName with container image $imageName ..."
     az webapp create --resource-group $ResourceGroup --plan $AppPlan --name $AppName --deployment-container-image-name $imageName | Out-Null
 }

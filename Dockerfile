@@ -19,9 +19,10 @@ RUN pip install --no-cache-dir torch==2.14.0 --extra-index-url https://download.
 # Copy repository source code
 COPY . $HOME/app
 
-# Ensure data/ and data/cache/ directories exist and are owned by user (UID 1000)
+# Ensure data/ and data/cache/ directories exist and are owned and writable by user (UID 1000)
 RUN mkdir -p $HOME/app/data/cache && \
-    chown -R user:user $HOME
+    chown -R user:user $HOME && \
+    chmod -R u+w $HOME
 
 # Switch to non-root user
 USER user
