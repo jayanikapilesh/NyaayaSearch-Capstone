@@ -1,8 +1,11 @@
+from collections import defaultdict
+import logging
+import re
+import time
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-import re
-from rate_limiter import check_rate_limit
+import groq
 from search_core import SearchEngine, IPC_TO_BNS, IPC_OMITTED, extract_ipc_sections
 from rag_core import (
     generate_explanation,
@@ -21,10 +24,54 @@ from drafter_core import draft_document, DOCUMENT_TYPES
 from case_simplifier_core import simplify_case
 from bns_decoder_core import explain_bns_section
 
-import logging
-import groq
-
 logger = logging.getLogger(__name__)
+
+# Per-IP in-memory rate limiting for Groq-calling endpoints (20 req/min)
+RATE_LIMIT_REQUESTS = 20
+RATE_LIMIT_WINDOW_SECONDS = 60  # 1 minute
+
+_ip_timestamps: dict[str, list[float]] = defaultdict(list)
+
+RATE_LIMIT_MESSAGES = {
+    "en": "Too many requests. Please wait a minute before trying again (limit: 20 requests per minute).",
+    "hi": "बहुत अधिक अनुरोध। कृपया एक मिनट बाद पुनः प्रयास करें (सीमा: प्रति मिनट 20 अनुरोध)।",
+    "kn": "ಹೆಚ್ಚಿನ ವಿನಂತಿಗಳು ಬಂದಿವೆ. ದಯವಿಟ್ಟು ಒಂದು ನಿಮಿಷದ ನಂತರ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ (ಮಿತಿ: ನಿಮಿಷಕ್ಕೆ 20 ವಿನಂತಿಗಳು).",
+}
+
+
+def get_client_ip(request: Request) -> str:
+    """Extract client IP behind Azure reverse proxy (first value of X-Forwarded-For), falling back to request.client.host."""
+    forwarded = request.headers.get("x-forwarded-for")
+    if forwarded:
+        return forwarded.split(",")[0].strip()
+    if request.client and request.client.host:
+        return request.client.host
+    return "127.0.0.1"
+
+
+def check_rate_limit(request: Request, language: str = "en") -> None:
+    """Checks and records a request for the client IP.
+    Raises HTTPException(429) if the client has exceeded RATE_LIMIT_REQUESTS within RATE_LIMIT_WINDOW_SECONDS.
+    """
+    ip = get_client_ip(request)
+    now = time.time()
+    cutoff = now - RATE_LIMIT_WINDOW_SECONDS
+
+    history = [t for t in _ip_timestamps[ip] if t > cutoff]
+    if len(history) >= RATE_LIMIT_REQUESTS:
+        _ip_timestamps[ip] = history
+        lang = language if language in RATE_LIMIT_MESSAGES else "en"
+        msg = RATE_LIMIT_MESSAGES[lang]
+        raise HTTPException(status_code=429, detail=msg)
+
+    history.append(now)
+    _ip_timestamps[ip] = history
+
+
+def reset_rate_limits() -> None:
+    """Reset all stored timestamps (primarily for tests)."""
+    _ip_timestamps.clear()
+
 
 app = FastAPI(title="NyaayaSearch API")
 
@@ -115,7 +162,7 @@ ROMANIZED_VERNACULAR_PATTERN = re.compile(
 )
 
 
-def resolve_search_query(query: str):
+def resolve_search_query(query: str, raw_request: Request = None):
     """Detect language and only call translate_to_english() when query is not English
     or contains common romanized Hindi/Kannada words.
     If translation fails (rate limit, error), log it clearly and return a clear error.
@@ -137,6 +184,8 @@ def resolve_search_query(query: str):
     is_romanized = is_romanized_hi or is_romanized_kn
 
     if detected_language != "en" or is_romanized:
+        if raw_request is not None:
+            check_rate_limit(raw_request, language=detected_language)
         try:
             search_query = translate_to_english(query)
         except groq.RateLimitError as e:
@@ -186,9 +235,9 @@ def stats():
 
 
 @app.post("/search")
-def search(request: SearchRequest):
+def search(request: SearchRequest, raw_request: Request):
     validate_query(request.query)
-    search_query, detected_language = resolve_search_query(request.query)
+    search_query, detected_language = resolve_search_query(request.query, raw_request=raw_request)
     target_language = request.language if request.language in ("en", "hi", "kn") else detected_language
     try:
         rerank = True if request.rerank is None else request.rerank
@@ -231,9 +280,13 @@ def search(request: SearchRequest):
 def explain(request: SearchRequest, raw_request: Request):
     validate_query(request.query)
 
-    search_query, detected_language = resolve_search_query(request.query)
+    detected_language = detect_language(request.query)
     target_language = request.language if request.language in ("en", "hi", "kn") else detected_language
     check_rate_limit(raw_request, language=target_language)
+
+    search_query, detected_language = resolve_search_query(request.query)
+    if not (request.language in ("en", "hi", "kn")):
+        target_language = detected_language
 
     if request.sections is not None:
         record_map = getattr(engine, "record_map", None)
