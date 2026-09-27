@@ -3,6 +3,10 @@ scripts/build_classifier_data_v3.py
 
 Builds a unified classifier dataset (v3) where OLD and NEW questions are processed identically.
 
+NOTE: This data must be built with the ORIGINAL embedding model
+(set NYAAYA_EMBED_MODEL=finetuned_legal_model), because
+finetuned_legal_model_v3 was trained on these queries and would leak.
+
 1. Queries:
    - Old training queries: all unique queries in data/eval/classifier_training_data_clean.csv with
      their gold act + section matched from original question files data/training_pairs*.jsonl (batches 1-6).
