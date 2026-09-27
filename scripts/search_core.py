@@ -216,8 +216,43 @@ def find_matched_terms(query_tokens, section_text, max_terms=5):
     return matched[:max_terms]
 
 
-def _compute_embeddings_hash(texts, model_name):
+def _get_model_files_hash(model_path):
+    """
+    Computes a deterministic hash of the embedding model folder's weight and configuration files
+    based on relative file paths, sizes, and last modified times (int seconds).
+    If model_path is a file, hashes its size and mtime.
+    If model_path does not exist or is not a local directory/file, returns an empty string.
+    """
+    if not model_path or not os.path.exists(model_path):
+        return ""
+    if os.path.isfile(model_path):
+        st = os.stat(model_path)
+        sig = f"{os.path.basename(model_path)}:{st.st_size}:{int(st.st_mtime)}"
+        return hashlib.sha256(sig.encode("utf-8")).hexdigest()
+
+    entries = []
+    for root, _, files in os.walk(model_path):
+        for f in sorted(files):
+            if not f.startswith(".") and not f.endswith(".pyc"):
+                full_path = os.path.join(root, f)
+                rel_path = os.path.relpath(full_path, model_path).replace("\\", "/")
+                try:
+                    st = os.stat(full_path)
+                    entries.append(f"{rel_path}:{st.st_size}:{int(st.st_mtime)}")
+                except OSError:
+                    pass
+
+    entries.sort()
+    raw_sig = ";".join(entries)
+    return hashlib.sha256(raw_sig.encode("utf-8")).hexdigest()
+
+
+def _compute_embeddings_hash(texts, model_name, model_path=None):
     hasher = hashlib.sha256(model_name.encode("utf-8"))
+    if model_path:
+        files_hash = _get_model_files_hash(model_path)
+        hasher.update(b"\x00")
+        hasher.update(files_hash.encode("utf-8"))
     for t in texts:
         hasher.update(b"\x00")
         hasher.update(t.encode("utf-8"))
@@ -269,7 +304,7 @@ def is_placeholder_record(record):
 
 
 class SearchEngine:
-    def __init__(self):
+    def __init__(self, model_path=None, model_name=None):
         print("Loading legal dataset...")
         wb = openpyxl.load_workbook(DATASET, read_only=True)
         ws = wb.active
@@ -324,11 +359,13 @@ class SearchEngine:
         print("Creating BM25 index...")
         self.bm25 = BM25Okapi(documents)
 
-        model_path = os.path.join(os.path.dirname(__file__), "..", "finetuned_legal_model")
-        model_name = "finetuned_legal_model"
+        if model_path is None:
+            model_path = os.path.join(os.path.dirname(__file__), "..", "finetuned_legal_model")
+        if model_name is None:
+            model_name = os.path.basename(os.path.normpath(model_path)) or "finetuned_legal_model"
         self.model = SentenceTransformer(model_path)
 
-        current_hash = _compute_embeddings_hash(texts, model_name)
+        current_hash = _compute_embeddings_hash(texts, model_name, model_path=model_path)
         loaded_from_cache = False
 
         if os.path.exists(CACHE_FILE) and os.path.exists(CACHE_META_FILE):
@@ -361,6 +398,7 @@ class SearchEngine:
                         {
                             "hash": current_hash,
                             "model_name": model_name,
+                            "model_files_hash": _get_model_files_hash(model_path),
                             "num_sections": len(texts),
                         },
                         f,
