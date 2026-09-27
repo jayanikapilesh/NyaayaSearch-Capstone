@@ -360,9 +360,20 @@ class SearchEngine:
         self.bm25 = BM25Okapi(documents)
 
         if model_path is None:
-            model_path = os.path.join(os.path.dirname(__file__), "..", "finetuned_legal_model")
+            env_model = os.environ.get("NYAAYA_EMBED_MODEL")
+            if env_model:
+                if os.path.isabs(env_model) or os.path.exists(env_model):
+                    model_path = env_model
+                else:
+                    repo_rel = os.path.join(os.path.dirname(__file__), "..", env_model)
+                    if os.path.exists(repo_rel):
+                        model_path = repo_rel
+                    else:
+                        model_path = env_model
+            else:
+                model_path = os.path.join(os.path.dirname(__file__), "..", "finetuned_legal_model_v3")
         if model_name is None:
-            model_name = os.path.basename(os.path.normpath(model_path)) or "finetuned_legal_model"
+            model_name = os.path.basename(os.path.normpath(model_path)) or "finetuned_legal_model_v3"
         self.model = SentenceTransformer(model_path)
 
         current_hash = _compute_embeddings_hash(texts, model_name, model_path=model_path)
