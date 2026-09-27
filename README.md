@@ -35,6 +35,9 @@ Create a `.env` file at the repository root and add your Groq API key:
 GROQ_API_KEY=gsk_your_groq_api_key_here
 ```
 
+### Embedding model (v3)
+The default search model is `finetuned_legal_model_v3/`, which is not in git (too large). Download it from https://drive.google.com/file/d/1O5yzDwBuEI31YLsFc1I9gyJsh2ALt495/view?usp=drive_link and unzip it into the project root so the folder `finetuned_legal_model_v3/` sits next to `scripts/`. To use the old model instead, set `NYAAYA_EMBED_MODEL=finetuned_legal_model`.
+
 ### Optional: Data Preparation
 Tesseract is **not** needed to run the app. It is only used by `scripts/ocr_constitution.py` (one-time data preparation). If running that script:
 - Tesseract OCR must be installed separately (Windows installer: [UB-Mannheim Tesseract Releases](https://github.com/UB-Mannheim/tesseract/wiki)).
