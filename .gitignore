@@ -18,3 +18,5 @@ data/section_embeddings_cache_meta.json
 
 # LLM cache
 data/cache/
+
+finetuned_legal_model_v3/
