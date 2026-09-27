@@ -281,6 +281,10 @@ def is_placeholder_record(record):
     t_low = text.lower()
     tit_low = title.lower()
 
+    # Rule 0: Stray column header rows where act_name or section_number is literally a column name
+    if act.lower() in {"act_name", "act"} or sec.lower() in {"section_number", "section"}:
+        return True, "Stray column header row"
+
     # Rule 1: Amendment markers without statutory text (Ins. / Subs.)
     if tit_low in {"ins.", "subs."} or t_low.startswith("ins. by") or t_low.startswith("subs. by"):
         return True, "Amendment marker without statutory text (Ins./Subs.)"
@@ -317,12 +321,13 @@ class SearchEngine:
             record = dict(zip(headers, row))
             is_ph, reason = is_placeholder_record(record)
             if is_ph:
-                excluded_rows.append({
-                    "act": record.get("act_name"),
-                    "section": record.get("section_number"),
-                    "title": record.get("section_title"),
-                    "reason": reason,
-                })
+                if reason != "Stray column header row":
+                    excluded_rows.append({
+                        "act": record.get("act_name"),
+                        "section": record.get("section_number"),
+                        "title": record.get("section_title"),
+                        "reason": reason,
+                    })
                 continue
             records.append(record)
 
