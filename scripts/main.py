@@ -26,16 +26,16 @@ from bns_decoder_core import explain_bns_section
 
 logger = logging.getLogger(__name__)
 
-# Per-IP in-memory rate limiting for Groq-calling endpoints (20 req/min)
-RATE_LIMIT_REQUESTS = 20
+# Per-IP in-memory rate limiting for Groq-calling endpoints (60 req/min)
+RATE_LIMIT_REQUESTS = 60
 RATE_LIMIT_WINDOW_SECONDS = 60  # 1 minute
 
 _ip_timestamps: dict[str, list[float]] = defaultdict(list)
 
 RATE_LIMIT_MESSAGES = {
-    "en": "Too many requests. Please wait a minute before trying again (limit: 20 requests per minute).",
-    "hi": "बहुत अधिक अनुरोध। कृपया एक मिनट बाद पुनः प्रयास करें (सीमा: प्रति मिनट 20 अनुरोध)।",
-    "kn": "ಹೆಚ್ಚಿನ ವಿನಂತಿಗಳು ಬಂದಿವೆ. ದಯವಿಟ್ಟು ಒಂದು ನಿಮಿಷದ ನಂತರ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ (ಮಿತಿ: ನಿಮಿಷಕ್ಕೆ 20 ವಿನಂತಿಗಳು).",
+    "en": "Too many requests. Please wait a minute before trying again (limit: 60 requests per minute).",
+    "hi": "बहुत अधिक अनुरोध। कृपया एक मिनट बाद पुनः प्रयास करें (सीमा: प्रति मिनट 60 अनुरोध)।",
+    "kn": "ಹೆಚ್ಚಿನ ವಿನಂತಿಗಳು ಬಂದಿವೆ. ದಯವಿಟ್ಟು ಒಂದು ನಿಮಿಷದ ನಂತರ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ (ಮಿತಿ: ನಿಮಿಷಕ್ಕೆ 60 ವಿನಂತಿಗಳು).",
 }
 
 
