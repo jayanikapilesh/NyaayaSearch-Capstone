@@ -1,4 +1,11 @@
 """
+Offline Research Experiment:
+============================
+This classifier is an offline research experiment for relevance classification
+of search results (reported in the paper) and is NOT used in the live app.
+The live app decides low confidence with a fixed rule in scripts/main.py
+(top score < 0.30).
+
 Google Colab Execution Instructions:
 ===================================
 1. Enable GPU:
