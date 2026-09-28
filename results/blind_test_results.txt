@@ -1,0 +1,105 @@
+======================================================================================
+            NYAAYASEARCH: PRODUCTION VS. RERANKER EVALUATION
+======================================================================================
+Loading legal dataset...
+Legal records loaded: 1783
+Creating BM25 index...
+
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]
+Loading weights:  32%|###2      | 64/199 [00:00<00:00, 639.83it/s]
+Loading weights: 100%|##########| 199/199 [00:00<00:00, 1156.57it/s]
+Loading section embeddings from cache...
+Loaded 1783 section embeddings from cache.
+
+Loading weights:   0%|          | 0/105 [00:00<?, ?it/s]
+Loading weights: 100%|##########| 105/105 [00:00<00:00, 1159.83it/s]
+Loaded CrossEncoder from local cache: cross-encoder/ms-marco-MiniLM-L-6-v2
+Search system ready.
+
+======================================================================================
+      [--strict-clean] IN-MEMORY PATCHES APPLIED & INDEPENDENTLY VERIFIED
+======================================================================================
+Patch (a): Removed synonym keys from commits 1d7000c1 (17 keys) and bc6c53ff (29 keys)
+  - Total unique synonym keys removed: 43 (dictionary size: 97 -> 54)
+  - Verification Example 1 (commit 1d7000c1 - 'seriously injuring' -> 'grievous hurt'):
+      Query: 'What's the punishment for seriously injuring someone on purpose?'
+      Before patch: 'grievous hurt' in expand_query: True
+      After patch:  'grievous hurt' in expand_query: False [REMOVED]
+  - Verification Example 2 (commit bc6c53ff - 'give the property back empty' -> 'vacant possession'):
+      Query: 'What happens if I give the property back empty'
+      Before patch: 'vacant possession' in expand_query: True
+      After patch:  'vacant possession' in expand_query: False [REMOVED]
+
+Patch (b): Disabled IPC_TO_BNS score override from commit d4ace4a8
+  - IPC_TO_BNS mappings cleared in-memory: 542 -> 0
+  - Verification Example (commit d4ace4a8 - IPC 302 -> BNS 103 direct score override):
+      Query: 'What is IPC 302?'
+      Before patch top result: Bharatiya Nyaya Sanhita, 2023 Sec 103 (score=7.1795) [OVERRIDDEN: score > 1.0]
+      After patch top result:  Bharatiya Nagarik Suraksha Sanhita, 2023 Sec 2 (score=0.2860) [NATURAL RETRIEVAL: score < 1.0]
+======================================================================================
+
+Translation cache: loaded 240 cached query translations from c:\dev\nyaaya_search\NyaayaSearch-Capstone\data\eval\translation_cache.json
+Using SearchEngine built-in CrossEncoder: cross-encoder/ms-marco-MiniLM-L-6-v2
+
+Configuration:
+  - Synonym Dictionary: Strict Clean Baseline (54 keys: 1d7000c1 & bc6c53ff removed, IPC_TO_BNS disabled)
+  - Model: cross-encoder/ms-marco-MiniLM-L-6-v2
+  - Candidates reranked: Top-10
+  - Score fusion: (1 - 0.8) * norm_hybrid + 0.8 * sigmoid(cross_logit)
+  - Candidate pool retrieved: Top-20 from SearchEngine.search()
+  - Match criteria: str(r['act_name']) == expected_act and str(r['section_number']) == expected_section
+
+Evaluating English (32 queries)...
+  [English] Processed 15/32 queries...
+  [English] Processed 30/32 queries...
+  [English] Processed 32/32 queries...
+Evaluating Hindi (32 queries)...
+[Hindi] Translating 32 queries to English...
+[Hindi] Successfully translated and cached 32 queries.
+[Hindi] Translations identical to English original: 0 / 32
+  [Hindi] Processed 15/32 queries...
+  [Hindi] Processed 30/32 queries...
+  [Hindi] Processed 32/32 queries...
+Evaluating Kannada (32 queries)...
+[Kannada] Translating 32 queries to English...
+[Kannada] Successfully translated and cached 32 queries.
+[Kannada] Translations identical to English original: 0 / 32
+  [Kannada] Processed 15/32 queries...
+  [Kannada] Processed 30/32 queries...
+  [Kannada] Processed 32/32 queries...
+
+==================================================================================================
+FINAL EVALUATION RESULTS: Test set (blind_test) [--strict-clean]
+==================================================================================================
+Language / Dataset   | System                  | Recall@5  | P@1     | MRR     | nDCG@5  | Latency (CPU)
+--------------------------------------------------------------------------------------------------------
+English (n=32)       | Current Production      | 0.5312    | 0.1562  | 0.3220  | 0.3632  |   104.8 ms/q
+                     | Production + Reranker   | 0.5312    | 0.2188  | 0.3481  | 0.3821  |   492.5 ms/q
+--------------------------------------------------------------------------------------------------------
+Hindi (n=32)         | Current Production      | 0.5938    | 0.2812  | 0.4324  | 0.4563  |   102.0 ms/q
+                     | Production + Reranker   | 0.5938    | 0.3438  | 0.4637  | 0.4794  |   491.8 ms/q
+--------------------------------------------------------------------------------------------------------
+Kannada (n=32)       | Current Production      | 0.7188    | 0.2812  | 0.4422  | 0.5107  |    86.6 ms/q
+                     | Production + Reranker   | 0.7188    | 0.3125  | 0.4526  | 0.5182  |   396.0 ms/q
+--------------------------------------------------------------------------------------------------------
+==================================================================================================
+
+==========================================================================================================================
+STATISTICAL SIGNIFICANCE TESTS: Test set (blind_test)
+(McNemar on P@1/Recall@5, Paired Bootstrap 95% CI on MRR, Holm-Bonferroni Correction across all tests)
+==========================================================================================================================
+Language   | Metric     | Discordant Pairs (b/c)   | Stat / Chi2  | Raw p-val   | Holm Adj p  | 95% CI (Paired Diff)        
+----------------------------------------------------------------------------------------------------------------------------
+English    | P@1        | +2 / -0                  | chi2=0.50    | p=0.5000    | p=1.0000    | N/A (contingency)
+           | Recall@5   | +0 / -0                  | chi2=0.00    | p=1.0000    | p=1.0000    | N/A (contingency)
+           | MRR        | N/A (continuous)         | N/A          | p=0.1506    | p=1.0000    | +0.0260 [-0.0104, +0.0781]  
+----------------------------------------------------------------------------------------------------------------------------
+Hindi      | P@1        | +2 / -0                  | chi2=0.50    | p=0.5000    | p=1.0000    | N/A (contingency)
+           | Recall@5   | +0 / -0                  | chi2=0.00    | p=1.0000    | p=1.0000    | N/A (contingency)
+           | MRR        | N/A (continuous)         | N/A          | p=0.1266    | p=1.0000    | +0.0312 [+0.0000, +0.0781]  
+----------------------------------------------------------------------------------------------------------------------------
+Kannada    | P@1        | +1 / -0                  | chi2=0.00    | p=1.0000    | p=1.0000    | N/A (contingency)
+           | Recall@5   | +0 / -0                  | chi2=0.00    | p=1.0000    | p=1.0000    | N/A (contingency)
+           | MRR        | N/A (continuous)         | N/A          | p=0.3876    | p=1.0000    | +0.0104 [-0.0156, +0.0469]  
+----------------------------------------------------------------------------------------------------------------------------
+==========================================================================================================================

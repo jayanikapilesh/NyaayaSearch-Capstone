@@ -1,0 +1,267 @@
+===================================================================================================================
+        FROZEN BLIND TEST COMPARISON: OLD MODEL (v1) VS DEFAULT v3 MODEL
+===================================================================================================================
+Condition A: NYAAYA_EMBED_MODEL=finetuned_legal_model (Old Model)
+Condition B: NYAAYA_EMBED_MODEL=finetuned_legal_model_v3 (Default v3 Model)
+Baseline:    --strict-clean (54 synonym keys, IPC_TO_BNS score override disabled)
+Test Set:    data/eval/blind_test_{en,hi,kn}.json (n=32 per language)
+Reranker:    cross-encoder/ms-marco-MiniLM-L-6-v2 (Top-10 reranked, weight=0.8)
+===================================================================================================================
+
+-------------------------------------------------------------------------------------------------------------------
+METRICS COMPARISON: PRODUCTION + RERANKER
+-------------------------------------------------------------------------------------------------------------------
+Language   | Model                        | Recall@5 [95% CI]          | P@1 [95% CI]             | MRR [95% CI]               | Right Act in Top 5
+---------------------------------------------------------------------------------------------------------------------------------------------------
+English    | Model A (finetuned_legal)    | 0.5000 [0.3125, 0.6875]   | 0.2188 [0.0938, 0.3750] | 0.3283 [0.1981, 0.4680]   | 26/32 (81.2%)
+           | Model B (finetuned_v3)       | 0.5312 [0.3438, 0.7188]   | 0.2188 [0.0938, 0.3750] | 0.3534 [0.2239, 0.4927]   | 28/32 (87.5%)
+---------------------------------------------------------------------------------------------------------------------------------------------------
+Hindi      | Model A (finetuned_legal)    | 0.5000 [0.3125, 0.6562]   | 0.3750 [0.2188, 0.5312] | 0.4559 [0.3014, 0.6108]   | 28/32 (87.5%)
+           | Model B (finetuned_v3)       | 0.5938 [0.4367, 0.7500]   | 0.3438 [0.1875, 0.5000] | 0.4703 [0.3310, 0.6158]   | 30/32 (93.8%)
+---------------------------------------------------------------------------------------------------------------------------------------------------
+Kannada    | Model A (finetuned_legal)    | 0.5938 [0.4062, 0.7500]   | 0.3125 [0.1562, 0.4688] | 0.4366 [0.2941, 0.5775]   | 28/32 (87.5%)
+           | Model B (finetuned_v3)       | 0.7188 [0.5625, 0.8750]   | 0.3125 [0.1562, 0.4688] | 0.4577 [0.3202, 0.5921]   | 31/32 (96.9%)
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------------------------------
+METRICS COMPARISON: SEARCH WITHOUT RERANKER (BM25 + Semantic)
+-------------------------------------------------------------------------------------------------------------------
+Language   | Model                        | Recall@5 [95% CI]          | P@1 [95% CI]             | MRR [95% CI]               | Right Act in Top 5
+---------------------------------------------------------------------------------------------------------------------------------------------------
+English    | Model A (finetuned_legal)    | 0.5000 [0.3125, 0.6875]   | 0.1875 [0.0625, 0.3438] | 0.3116 [0.1906, 0.4468]   | 26/32 (81.2%)
+           | Model B (finetuned_v3)       | 0.5312 [0.3438, 0.7188]   | 0.1562 [0.0312, 0.2812] | 0.3273 [0.2108, 0.4536]   | 28/32 (87.5%)
+---------------------------------------------------------------------------------------------------------------------------------------------------
+Hindi      | Model A (finetuned_legal)    | 0.5000 [0.3125, 0.6562]   | 0.3438 [0.1875, 0.5000] | 0.4403 [0.2896, 0.5878]   | 28/32 (87.5%)
+           | Model B (finetuned_v3)       | 0.5938 [0.4367, 0.7500]   | 0.2812 [0.1250, 0.4375] | 0.4390 [0.3075, 0.5738]   | 30/32 (93.8%)
+---------------------------------------------------------------------------------------------------------------------------------------------------
+Kannada    | Model A (finetuned_legal)    | 0.5938 [0.4062, 0.7500]   | 0.2812 [0.1250, 0.4375] | 0.4194 [0.2834, 0.5579]   | 28/32 (87.5%)
+           | Model B (finetuned_v3)       | 0.7188 [0.5625, 0.8750]   | 0.2812 [0.1250, 0.4375] | 0.4473 [0.3141, 0.5781]   | 31/32 (96.9%)
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+===================================================================================================================
+PAIRED STATISTICAL TESTS: MODEL B (v3) VS MODEL A (Old Model)
+===================================================================================================================
+Language   | Evaluation Mode           | Discordant (B only / A only)     | McNemar Chi2    | Exact p-value  
+---------------------------------------------------------------------------------------------------------
+English    | Production + Reranker     | +2 (B only) / -1 (A only)        | chi2=0.00       | p=1.0000
+Hindi      | Production + Reranker     | +5 (B only) / -2 (A only)        | chi2=0.57       | p=0.4531
+Kannada    | Production + Reranker     | +5 (B only) / -1 (A only)        | chi2=1.50       | p=0.2188
+---------------------------------------------------------------------------------------------------------
+English    | Without Reranker          | +2 (B only) / -1 (A only)        | chi2=0.00       | p=1.0000
+Hindi      | Without Reranker          | +5 (B only) / -2 (A only)        | chi2=0.57       | p=0.4531
+Kannada    | Without Reranker          | +5 (B only) / -1 (A only)        | chi2=1.50       | p=0.2188
+---------------------------------------------------------------------------------------------------------
+
+===================================================================================================================
+QUESTION-BY-QUESTION DIFFERENCES BETWEEN MODEL A AND MODEL B
+===================================================================================================================
+
+--- Differing Questions: WITH RERANKER ---
+
+[English] Differing Questions on Recall@5: 3 / 32
+  * Question #11: Model A (old) got it right
+    - Query: "I bought a faulty washing machine three years ago. Is it too late to complain?"
+    - Target: Consumer Protection Act, 2019, Section 69: Limitation period .
+    - Model A (old): Rank #3 (HIT)
+    - Model B (v3):  Rank #15 (MISS)
+  * Question #19: Model B (v3) got it right
+    - Query: "Police caught my friend driving after drinking. What punishment can he get?"
+    - Target: Motor Vehicles Act, 1988, Section 185: Driving by a drunken person or by a person under the influence of drugs.
+    - Model A (old): Rank #20 (MISS)
+    - Model B (v3):  Rank #5 (HIT)
+  * Question #21: Model B (v3) got it right
+    - Query: "My 15-year-old nephew took the car out and got caught. Will his parents be in trouble?"
+    - Target: Motor Vehicles Act, 1988, Section 199A: Offences by juveniles .
+    - Model A (old): Rank #Not in Top 20 (MISS)
+    - Model B (v3):  Rank #1 (HIT)
+
+[Hindi] Differing Questions on Recall@5: 7 / 32
+  * Question #1: Model B (v3) got it right
+    - Query: "बस स्टैंड पर किसी ने मेरे बैग से फ़ोन चुरा लिया, अब मैं क्या करूँ?"
+    - System Translation: "Someone stole my phone from my bag at the bus stand, what should I do now?"
+    - Target: Bharatiya Nyaya Sanhita, 2023, Section 303: Theft.
+    - Model A (old): Rank #6 (MISS)
+    - Model B (v3):  Rank #2 (HIT)
+  * Question #2: Model B (v3) got it right
+    - Query: "मैंने इंस्टाग्राम पर एक ड्रेस के लिए पैसे भेजे, और बेचने वाले ने बिना भेजे मुझे ब्लॉक कर दिया।"
+    - System Translation: "I sent money for a dress on Instagram, and the seller blocked me without sending it."
+    - Target: Bharatiya Nyaya Sanhita, 2023, Section 318: Cheating.
+    - Model A (old): Rank #Not in Top 20 (MISS)
+    - Model B (v3):  Rank #5 (HIT)
+  * Question #7: Model A (old) got it right
+    - Query: "हमारे कॉन्ट्रैक्ट में लिखा था कि जो पीछे हटेगा उसे ₹50,000 देने होंगे। दूसरी पार्टी पीछे हट गई, क्या मैं वो रकम माँग सकता हूँ?"
+    - System Translation: "Our contract stated that anyone who backs out must pay ₹50,000. The other party backed out; can I claim that amount?"
+    - Target: Indian Contract Act, 1872, Section 74: Compensation for breach of contrac t where penalty stipulated for .
+    - Model A (old): Rank #1 (HIT)
+    - Model B (v3):  Rank #6 (MISS)
+  * Question #11: Model A (old) got it right
+    - Query: "मैंने तीन साल पहले एक खराब वॉशिंग मशीन खरीदी थी, क्या अब शिकायत करने में बहुत देर हो गई?"
+    - System Translation: "I bought a faulty washing machine three years ago, is it now too late to complain?"
+    - Target: Consumer Protection Act, 2019, Section 69: Limitation period .
+    - Model A (old): Rank #3 (HIT)
+    - Model B (v3):  Rank #14 (MISS)
+  * Question #15: Model B (v3) got it right
+    - Query: "मारपीट के बाद मेरे पति ने घर का खर्चा और मेरे अस्पताल का बिल देना बंद कर दिया, क्या मुझे उनसे पैसे मिल सकते हैं?"
+    - System Translation: "After the assault, my husband stopped paying household expenses and my hospital bills. Can I get money from him?"
+    - Target: Protection of Women from Domestic Violence Act, 2005, Section 20: Monetary reliefs.
+    - Model A (old): Rank #Not in Top 20 (MISS)
+    - Model B (v3):  Rank #2 (HIT)
+  * Question #16: Model B (v3) got it right
+    - Query: "किसी ने मेरी फ़ोटो और नाम से फ़र्ज़ी अकाउंट बनाया है और मेरे नाम से लोगों से बात कर रहा है।"
+    - System Translation: "Someone has created a fake account using my photo and name and is talking to people in my name."
+    - Target: Information Technology Act, 2000, Section 66D: Punishment for cheating by personation by using computer resource .–Whoever, by means of any communication device or computer resource cheats by perso
+    - Model A (old): Rank #9 (MISS)
+    - Model B (v3):  Rank #4 (HIT)
+  * Question #21: Model B (v3) got it right
+    - Query: "मेरा 15 साल का भतीजा कार लेकर निकल गया और पकड़ा गया, क्या उसके माँ-बाप पर कार्रवाई होगी?"
+    - System Translation: "My 15-year-old nephew took a car and drove off and was caught; will there be action against his parents?"
+    - Target: Motor Vehicles Act, 1988, Section 199A: Offences by juveniles .
+    - Model A (old): Rank #Not in Top 20 (MISS)
+    - Model B (v3):  Rank #1 (HIT)
+
+[Kannada] Differing Questions on Recall@5: 6 / 32
+  * Question #1: Model B (v3) got it right
+    - Query: "ಬಸ್ ಸ್ಟ್ಯಾಂಡ್‌ನಲ್ಲಿ ಯಾರೋ ನನ್ನ ಬ್ಯಾಗ್‌ನಿಂದ ಫೋನ್ ಕದ್ದುಬಿಟ್ಟರು, ಈಗ ನಾನು ಏನು ಮಾಡಬೇಕು?"
+    - System Translation: "Someone stole my phone from my bag at the bus stand, what should I do now?"
+    - Target: Bharatiya Nyaya Sanhita, 2023, Section 303: Theft.
+    - Model A (old): Rank #6 (MISS)
+    - Model B (v3):  Rank #2 (HIT)
+  * Question #2: Model B (v3) got it right
+    - Query: "ಇನ್‌ಸ್ಟಾಗ್ರಾಮ್‌ನಲ್ಲಿ ಡ್ರೆಸ್‌ಗೆ ದುಡ್ಡು ಕಳಿಸಿದೆ, ಆದರೆ ಮಾರುವವನು ಕಳಿಸದೆ ನನ್ನನ್ನು ಬ್ಲಾಕ್ ಮಾಡಿಬಿಟ್ಟ."
+    - System Translation: "I sent money for a dress on Instagram, but the seller didn't send it and blocked me."
+    - Target: Bharatiya Nyaya Sanhita, 2023, Section 318: Cheating.
+    - Model A (old): Rank #Not in Top 20 (MISS)
+    - Model B (v3):  Rank #5 (HIT)
+  * Question #7: Model A (old) got it right
+    - Query: "ಯಾರು ಹಿಂದೆ ಸರಿದರೂ ₹50,000 ಕೊಡಬೇಕು ಅಂತ ನಮ್ಮ ಕಾಂಟ್ರಾಕ್ಟ್ನಲ್ಲಿ ಇತ್ತು. ಬೇರೆ ಪಾರ್ಟಿ ಹಿಂದೆ ಸರಿದಿದೆ, ಆ ದುಡ್ಡು ಕೇಳಬಹುದಾ?"
+    - System Translation: "Our contract stated that whoever backs out must pay ₹50,000. The other party has backed out; can we demand that money?"
+    - Target: Indian Contract Act, 1872, Section 74: Compensation for breach of contrac t where penalty stipulated for .
+    - Model A (old): Rank #3 (HIT)
+    - Model B (v3):  Rank #11 (MISS)
+  * Question #16: Model B (v3) got it right
+    - Query: "ಯಾರೋ ನನ್ನ ಫೋಟೋ, ಹೆಸರು ಬಳಸಿ ನಕಲಿ ಅಕೌಂಟ್ ಮಾಡಿ, ನಾನೇ ಅಂತ ಜನರ ಜೊತೆ ಚಾಟ್ ಮಾಡ್ತಿದ್ದಾರೆ."
+    - System Translation: "Someone has created a fake account using my photo and name, and they are chatting with people as if I am them."
+    - Target: Information Technology Act, 2000, Section 66D: Punishment for cheating by personation by using computer resource .–Whoever, by means of any communication device or computer resource cheats by perso
+    - Model A (old): Rank #7 (MISS)
+    - Model B (v3):  Rank #4 (HIT)
+  * Question #19: Model B (v3) got it right
+    - Query: "ನನ್ನ ಫ್ರೆಂಡ್ ಕುಡಿದು ಗಾಡಿ ಓಡಿಸ್ತಿದ್ದಾಗ ಪೊಲೀಸ್ ಹಿಡಿದರು, ಅವನಿಗೆ ಏನು ಶಿಕ್ಷೆ ಆಗಬಹುದು?"
+    - System Translation: "My friend was caught by the police while driving drunk, what punishment could he face?"
+    - Target: Motor Vehicles Act, 1988, Section 185: Driving by a drunken person or by a person under the influence of drugs.
+    - Model A (old): Rank #12 (MISS)
+    - Model B (v3):  Rank #4 (HIT)
+  * Question #21: Model B (v3) got it right
+    - Query: "ನನ್ನ 15 ವರ್ಷದ ಸೋದರಳಿಯ ಕಾರ್ ತಗೊಂಡು ಹೋಗಿ ಸಿಕ್ಕಿಬಿದ್ದ, ಅವನ ಅಪ್ಪ-ಅಮ್ಮನಿಗೆ ತೊಂದರೆ ಆಗುತ್ತಾ?"
+    - System Translation: "Will my 15-year-old niece's car being taken away and stuck cause trouble for her parents?"
+    - Target: Motor Vehicles Act, 1988, Section 199A: Offences by juveniles .
+    - Model A (old): Rank #Not in Top 20 (MISS)
+    - Model B (v3):  Rank #4 (HIT)
+
+--- Differing Questions: WITHOUT RERANKER ---
+
+[English] Differing Questions on Recall@5: 3 / 32
+  * Question #11: Model A (old) got it right
+    - Query: "I bought a faulty washing machine three years ago. Is it too late to complain?"
+    - Target: Consumer Protection Act, 2019, Section 69: Limitation period .
+    - Model A (old): Rank #3 (HIT)
+    - Model B (v3):  Rank #15 (MISS)
+  * Question #19: Model B (v3) got it right
+    - Query: "Police caught my friend driving after drinking. What punishment can he get?"
+    - Target: Motor Vehicles Act, 1988, Section 185: Driving by a drunken person or by a person under the influence of drugs.
+    - Model A (old): Rank #20 (MISS)
+    - Model B (v3):  Rank #5 (HIT)
+  * Question #21: Model B (v3) got it right
+    - Query: "My 15-year-old nephew took the car out and got caught. Will his parents be in trouble?"
+    - Target: Motor Vehicles Act, 1988, Section 199A: Offences by juveniles .
+    - Model A (old): Rank #Not in Top 20 (MISS)
+    - Model B (v3):  Rank #1 (HIT)
+
+[Hindi] Differing Questions on Recall@5: 7 / 32
+  * Question #1: Model B (v3) got it right
+    - Query: "बस स्टैंड पर किसी ने मेरे बैग से फ़ोन चुरा लिया, अब मैं क्या करूँ?"
+    - System Translation: "Someone stole my phone from my bag at the bus stand, what should I do now?"
+    - Target: Bharatiya Nyaya Sanhita, 2023, Section 303: Theft.
+    - Model A (old): Rank #6 (MISS)
+    - Model B (v3):  Rank #2 (HIT)
+  * Question #2: Model B (v3) got it right
+    - Query: "मैंने इंस्टाग्राम पर एक ड्रेस के लिए पैसे भेजे, और बेचने वाले ने बिना भेजे मुझे ब्लॉक कर दिया।"
+    - System Translation: "I sent money for a dress on Instagram, and the seller blocked me without sending it."
+    - Target: Bharatiya Nyaya Sanhita, 2023, Section 318: Cheating.
+    - Model A (old): Rank #Not in Top 20 (MISS)
+    - Model B (v3):  Rank #5 (HIT)
+  * Question #7: Model A (old) got it right
+    - Query: "हमारे कॉन्ट्रैक्ट में लिखा था कि जो पीछे हटेगा उसे ₹50,000 देने होंगे। दूसरी पार्टी पीछे हट गई, क्या मैं वो रकम माँग सकता हूँ?"
+    - System Translation: "Our contract stated that anyone who backs out must pay ₹50,000. The other party backed out; can I claim that amount?"
+    - Target: Indian Contract Act, 1872, Section 74: Compensation for breach of contrac t where penalty stipulated for .
+    - Model A (old): Rank #1 (HIT)
+    - Model B (v3):  Rank #6 (MISS)
+  * Question #11: Model A (old) got it right
+    - Query: "मैंने तीन साल पहले एक खराब वॉशिंग मशीन खरीदी थी, क्या अब शिकायत करने में बहुत देर हो गई?"
+    - System Translation: "I bought a faulty washing machine three years ago, is it now too late to complain?"
+    - Target: Consumer Protection Act, 2019, Section 69: Limitation period .
+    - Model A (old): Rank #3 (HIT)
+    - Model B (v3):  Rank #14 (MISS)
+  * Question #15: Model B (v3) got it right
+    - Query: "मारपीट के बाद मेरे पति ने घर का खर्चा और मेरे अस्पताल का बिल देना बंद कर दिया, क्या मुझे उनसे पैसे मिल सकते हैं?"
+    - System Translation: "After the assault, my husband stopped paying household expenses and my hospital bills. Can I get money from him?"
+    - Target: Protection of Women from Domestic Violence Act, 2005, Section 20: Monetary reliefs.
+    - Model A (old): Rank #Not in Top 20 (MISS)
+    - Model B (v3):  Rank #2 (HIT)
+  * Question #16: Model B (v3) got it right
+    - Query: "किसी ने मेरी फ़ोटो और नाम से फ़र्ज़ी अकाउंट बनाया है और मेरे नाम से लोगों से बात कर रहा है।"
+    - System Translation: "Someone has created a fake account using my photo and name and is talking to people in my name."
+    - Target: Information Technology Act, 2000, Section 66D: Punishment for cheating by personation by using computer resource .–Whoever, by means of any communication device or computer resource cheats by perso
+    - Model A (old): Rank #9 (MISS)
+    - Model B (v3):  Rank #4 (HIT)
+  * Question #21: Model B (v3) got it right
+    - Query: "मेरा 15 साल का भतीजा कार लेकर निकल गया और पकड़ा गया, क्या उसके माँ-बाप पर कार्रवाई होगी?"
+    - System Translation: "My 15-year-old nephew took a car and drove off and was caught; will there be action against his parents?"
+    - Target: Motor Vehicles Act, 1988, Section 199A: Offences by juveniles .
+    - Model A (old): Rank #Not in Top 20 (MISS)
+    - Model B (v3):  Rank #1 (HIT)
+
+[Kannada] Differing Questions on Recall@5: 6 / 32
+  * Question #1: Model B (v3) got it right
+    - Query: "ಬಸ್ ಸ್ಟ್ಯಾಂಡ್‌ನಲ್ಲಿ ಯಾರೋ ನನ್ನ ಬ್ಯಾಗ್‌ನಿಂದ ಫೋನ್ ಕದ್ದುಬಿಟ್ಟರು, ಈಗ ನಾನು ಏನು ಮಾಡಬೇಕು?"
+    - System Translation: "Someone stole my phone from my bag at the bus stand, what should I do now?"
+    - Target: Bharatiya Nyaya Sanhita, 2023, Section 303: Theft.
+    - Model A (old): Rank #6 (MISS)
+    - Model B (v3):  Rank #2 (HIT)
+  * Question #2: Model B (v3) got it right
+    - Query: "ಇನ್‌ಸ್ಟಾಗ್ರಾಮ್‌ನಲ್ಲಿ ಡ್ರೆಸ್‌ಗೆ ದುಡ್ಡು ಕಳಿಸಿದೆ, ಆದರೆ ಮಾರುವವನು ಕಳಿಸದೆ ನನ್ನನ್ನು ಬ್ಲಾಕ್ ಮಾಡಿಬಿಟ್ಟ."
+    - System Translation: "I sent money for a dress on Instagram, but the seller didn't send it and blocked me."
+    - Target: Bharatiya Nyaya Sanhita, 2023, Section 318: Cheating.
+    - Model A (old): Rank #Not in Top 20 (MISS)
+    - Model B (v3):  Rank #5 (HIT)
+  * Question #7: Model A (old) got it right
+    - Query: "ಯಾರು ಹಿಂದೆ ಸರಿದರೂ ₹50,000 ಕೊಡಬೇಕು ಅಂತ ನಮ್ಮ ಕಾಂಟ್ರಾಕ್ಟ್ನಲ್ಲಿ ಇತ್ತು. ಬೇರೆ ಪಾರ್ಟಿ ಹಿಂದೆ ಸರಿದಿದೆ, ಆ ದುಡ್ಡು ಕೇಳಬಹುದಾ?"
+    - System Translation: "Our contract stated that whoever backs out must pay ₹50,000. The other party has backed out; can we demand that money?"
+    - Target: Indian Contract Act, 1872, Section 74: Compensation for breach of contrac t where penalty stipulated for .
+    - Model A (old): Rank #3 (HIT)
+    - Model B (v3):  Rank #11 (MISS)
+  * Question #16: Model B (v3) got it right
+    - Query: "ಯಾರೋ ನನ್ನ ಫೋಟೋ, ಹೆಸರು ಬಳಸಿ ನಕಲಿ ಅಕೌಂಟ್ ಮಾಡಿ, ನಾನೇ ಅಂತ ಜನರ ಜೊತೆ ಚಾಟ್ ಮಾಡ್ತಿದ್ದಾರೆ."
+    - System Translation: "Someone has created a fake account using my photo and name, and they are chatting with people as if I am them."
+    - Target: Information Technology Act, 2000, Section 66D: Punishment for cheating by personation by using computer resource .–Whoever, by means of any communication device or computer resource cheats by perso
+    - Model A (old): Rank #7 (MISS)
+    - Model B (v3):  Rank #4 (HIT)
+  * Question #19: Model B (v3) got it right
+    - Query: "ನನ್ನ ಫ್ರೆಂಡ್ ಕುಡಿದು ಗಾಡಿ ಓಡಿಸ್ತಿದ್ದಾಗ ಪೊಲೀಸ್ ಹಿಡಿದರು, ಅವನಿಗೆ ಏನು ಶಿಕ್ಷೆ ಆಗಬಹುದು?"
+    - System Translation: "My friend was caught by the police while driving drunk, what punishment could he face?"
+    - Target: Motor Vehicles Act, 1988, Section 185: Driving by a drunken person or by a person under the influence of drugs.
+    - Model A (old): Rank #12 (MISS)
+    - Model B (v3):  Rank #4 (HIT)
+  * Question #21: Model B (v3) got it right
+    - Query: "ನನ್ನ 15 ವರ್ಷದ ಸೋದರಳಿಯ ಕಾರ್ ತಗೊಂಡು ಹೋಗಿ ಸಿಕ್ಕಿಬಿದ್ದ, ಅವನ ಅಪ್ಪ-ಅಮ್ಮನಿಗೆ ತೊಂದರೆ ಆಗುತ್ತಾ?"
+    - System Translation: "Will my 15-year-old niece's car being taken away and stuck cause trouble for her parents?"
+    - Target: Motor Vehicles Act, 1988, Section 199A: Offences by juveniles .
+    - Model A (old): Rank #Not in Top 20 (MISS)
+    - Model B (v3):  Rank #4 (HIT)
+
+===================================================================================================================
+SUMMARY OF FINDINGS
+===================================================================================================================
+1. Performance across all 3 languages (English, Hindi, Kannada) on the untouched blind test set.
+2. Reranker impact: strictly non-negative on P@1 and Recall@5 across all conditions.
+3. Embeddings cache successfully verified and restored to finetuned_legal_model_v3.
+===================================================================================================================

@@ -128,8 +128,11 @@ SYNONYMS = {
 
 
 def tokenize(text):
-    words = re.findall(r"[a-zA-Z]+", text.lower())
-    return [word for word in words if word not in STOP_WORDS]
+    words = re.findall(r"[a-zA-Z0-9]+", text.lower())
+    return [
+        word for word in words
+        if word not in STOP_WORDS and not (len(word) == 1 and word.isalpha())
+    ]
 
 
 IPC_MAPPING_FILE = os.path.join(CACHE_DIR, "ipc_bns_mapping.csv")
