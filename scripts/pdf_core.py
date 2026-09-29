@@ -21,6 +21,18 @@ STRICT RULES:
 - Respond in the SAME language as the user's question.
 """
 
+DOCUMENT_SUMMARY_SYSTEM_PROMPT = """You summarize legal documents in clear, plain language for ordinary people who are not lawyers.
+
+STRICT RULES:
+- Summarize ONLY from the document's text.
+- Do not add details, amounts, frequencies, or time units that are not written in it. Never invent or substitute time units or frequencies (for example, if the text says 'for the period of occupation' or 'for any period of occupation', state that exact phrase—do NOT say 'per month', 'each month', or 'each period').
+- If a clause imposes damages or consequences for not vacating, state the exact consequence and exact duration phrase as written in the text (e.g. 'for any period of occupation'—never add monthly frequencies or substitute 'each' for 'any').
+- Do not explain how clauses interact, combine clauses, or speculate on their legal relationship unless the document text itself explicitly states that interaction.
+- Mention exceptions, exemptions, and conditions explicitly stated in the text for any clause (such as rights to hold possession without paying rent if a deposit is not refunded, or exemptions for normal wear & tear and acts of God).
+- Write in plain, everyday language, not legal jargon.
+- Do not give definitive legal advice - explain what the document says, not what the person should legally do.
+"""
+
 DATE_EXTRACTION_PROMPT = """You extract important dates and deadlines from legal documents.
 
 STRICT RULES:
@@ -73,10 +85,35 @@ def answer_question_about_document(document_text, question):
 
 
 def summarize_document(document_text):
-    return answer_question_about_document(
-        document_text,
-        "Give a clear, plain-language summary of what this document is and its key points."
+    if not document_text:
+        return "Could not extract any text from this document. It may be a scanned image without selectable text."
+
+    max_chars = 12000
+    truncated = document_text[:max_chars]
+    was_truncated = len(document_text) > max_chars
+
+    user_prompt = (
+        f"Document text:\n{truncated}\n\n"
+        f"{'[Note: document was truncated due to length]' if was_truncated else ''}\n\n"
+        f"Give a clear, plain-language summary of what this document is and its key points (including a table of key clauses).\n\n"
+        f"STRICT RULES:\n"
+        f"- State ONLY what the text says.\n"
+        f"- Do not add details, amounts, frequencies, or time units not written in the text (e.g. never say 'per month' or 'each month' unless written in the text; if the text says 'for any period of occupation' or 'for the period of occupation', preserve that exact wording—do NOT say 'per month', 'each month', or 'each period').\n"
+        f"- Do not explain how clauses interact unless the text itself explicitly says so.\n"
+        f"- Mention exceptions and conditions explicitly stated in the text."
     )
+
+    response = client.chat.completions.create(
+        model="openai/gpt-oss-20b",
+        messages=[
+            {"role": "system", "content": DOCUMENT_SUMMARY_SYSTEM_PROMPT},
+            {"role": "user", "content": user_prompt},
+        ],
+        temperature=0.2,
+        max_tokens=5000,
+    )
+
+    return response.choices[0].message.content.strip()
 
 
 def extract_dates_and_deadlines(document_text):
