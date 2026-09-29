@@ -11,6 +11,7 @@ import {
   loadGeneratedDocs,
   saveGeneratedDocs,
   loadSavedResults,
+  persistSavedResults,
 } from "../utils";
 import { buildDocxFromMarkdown } from "../docxExport";
 import { getDocumentsContent } from "../documentsContent";
@@ -20,7 +21,7 @@ import { getLegalDisclaimer } from "../legalDisclaimerContent";
 function formatDate(iso) {
   try {
     return new Date(iso).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
-  } catch (e) {
+  } catch {
     return "";
   }
 }
@@ -39,7 +40,9 @@ function DocumentsTab({ setError, uiLanguage = "en", isActive, onOpenSavedSearch
   const [generatedDocsList, setGeneratedDocsList] = useState(function () { return loadGeneratedDocs(); });
   const [savedSearchesList, setSavedSearchesList] = useState(function () { return loadSavedResults(); });
   const [expandedGeneratedId, setExpandedGeneratedId] = useState(null);
-  const [confirmingDelete, setConfirmingDelete] = useState(null); // { type: "upload" | "generated", id }
+  const [expandedUploadedId, setExpandedUploadedId] = useState(null);
+  const [storageWarning, setStorageWarning] = useState("");
+  const [confirmingDelete, setConfirmingDelete] = useState(null); // { type: "upload" | "generated" | "savedSearch", id }
 
   // Uploaded docs can be added here, but generated documents are added from
   // the Drafter tab while this tab sits hidden in the background - every tab
@@ -64,10 +67,12 @@ function DocumentsTab({ setError, uiLanguage = "en", isActive, onOpenSavedSearch
     setUploadedDoc(null);
     setDocAnswer("");
     setDocQuestion("");
+    setStorageWarning("");
 
     try {
       const formData = new FormData();
       formData.append("file", file);
+      formData.append("language", uiLanguage);
 
       const response = await fetch(API_URL + "/upload-pdf", {
         method: "POST",
@@ -94,7 +99,12 @@ function DocumentsTab({ setError, uiLanguage = "en", isActive, onOpenSavedSearch
             uploadedAt: new Date().toISOString(),
           };
           const updated = [entry].concat(withoutDupe);
-          saveUploadedDocs(updated);
+          const saveResult = saveUploadedDocs(updated);
+          if (saveResult && !saveResult.success) {
+            setStorageWarning(content.errStorageFull);
+          } else {
+            setStorageWarning("");
+          }
           return updated;
         });
       }
@@ -150,6 +160,13 @@ function DocumentsTab({ setError, uiLanguage = "en", isActive, onOpenSavedSearch
     }
   };
 
+  const handleCloseUploadedDoc = function () {
+    setUploadedDoc(null);
+    setSelectedFileName("");
+    setDocQuestion("");
+    setDocAnswer("");
+  };
+
   const handleOpenUploadedDoc = function (entry) {
     setUploadedDoc({
       document_id: entry.document_id,
@@ -160,6 +177,10 @@ function DocumentsTab({ setError, uiLanguage = "en", isActive, onOpenSavedSearch
     setSelectedFileName(entry.filename);
     setDocQuestion("");
     setDocAnswer("");
+    setExpandedUploadedId(function (prev) {
+      return prev === entry.document_id ? null : entry.document_id;
+    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleDeleteUploadedDoc = function (documentId) {
@@ -169,8 +190,21 @@ function DocumentsTab({ setError, uiLanguage = "en", isActive, onOpenSavedSearch
       return updated;
     });
     if (uploadedDoc && uploadedDoc.document_id === documentId) {
-      setUploadedDoc(null);
+      handleCloseUploadedDoc();
     }
+    if (expandedUploadedId === documentId) {
+      setExpandedUploadedId(null);
+    }
+    setConfirmingDelete(null);
+    setStorageWarning("");
+  };
+
+  const handleDeleteSavedSearch = function (id) {
+    setSavedSearchesList(function (prev) {
+      const updated = prev.filter(function (s) { return s.id !== id; });
+      persistSavedResults(updated);
+      return updated;
+    });
     setConfirmingDelete(null);
   };
 
@@ -217,10 +251,29 @@ function DocumentsTab({ setError, uiLanguage = "en", isActive, onOpenSavedSearch
 
       {uploading && <div className="loading">{content.uploading}</div>}
 
+      {storageWarning && (
+        <div className="document-storage-warning" role="status">
+          {storageWarning}
+        </div>
+      )}
+
       {uploadedDoc && (
         <div className="document-card">
-          <div className="document-filename">{uploadedDoc.filename}</div>
-          <div className="document-summary">{uploadedDoc.summary}</div>
+          <div className="document-card-header">
+            <div className="document-filename">{uploadedDoc.filename}</div>
+            <button
+              type="button"
+              className="document-card-close"
+              onClick={handleCloseUploadedDoc}
+              aria-label={content.closeButton || "Close"}
+              title={content.closeButton || "Close"}
+            >
+              ✕
+            </button>
+          </div>
+          <div className="document-summary explanation-text">
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>{uploadedDoc.summary}</ReactMarkdown>
+          </div>
           <p className="legal-disclaimer">{getLegalDisclaimer(uiLanguage)}</p>
 
           {uploadedDoc.dates && uploadedDoc.dates.length > 0 && (
@@ -292,6 +345,21 @@ function DocumentsTab({ setError, uiLanguage = "en", isActive, onOpenSavedSearch
                     >
                       {content.viewInSearchButton}
                     </button>
+                    {confirmingDelete && confirmingDelete.type === "savedSearch" && confirmingDelete.id === entry.id ? (
+                      <span className="saved-result-confirm">
+                        <span className="saved-result-confirm-label">{content.deleteUploadedConfirm}</span>
+                        <button type="button" className="saved-result-confirm-yes" onClick={function () { handleDeleteSavedSearch(entry.id); }}>
+                          {content.removeConfirmYes || content.deleteConfirmYes}
+                        </button>
+                        <button type="button" className="saved-result-confirm-cancel" onClick={function () { setConfirmingDelete(null); }}>
+                          {content.cancelButton}
+                        </button>
+                      </span>
+                    ) : (
+                      <button type="button" className="saved-result-delete" onClick={function () { setConfirmingDelete({ type: "savedSearch", id: entry.id }); }}>
+                        {content.removeButton || content.deleteButton}
+                      </button>
+                    )}
                   </div>
                 </div>
               );
@@ -306,31 +374,38 @@ function DocumentsTab({ setError, uiLanguage = "en", isActive, onOpenSavedSearch
           ) : (
             uploadedDocsList.map(function (entry) {
               return (
-                <div className="document-list-item" key={entry.document_id}>
-                  <div className="document-list-item-main">
-                    <span className="document-list-item-title">{entry.filename}</span>
-                    <span className="document-list-item-meta">{content.uploadedOnLabel} {formatDate(entry.uploadedAt)}</span>
-                  </div>
-                  <div className="document-list-item-actions">
-                    <button type="button" className="document-list-action" onClick={function () { handleOpenUploadedDoc(entry); }}>
-                      {content.openButton}
-                    </button>
-                    {confirmingDelete && confirmingDelete.type === "upload" && confirmingDelete.id === entry.document_id ? (
-                      <span className="saved-result-confirm">
-                        <span className="saved-result-confirm-label">{content.deleteUploadedConfirm}</span>
-                        <button type="button" className="saved-result-confirm-yes" onClick={function () { handleDeleteUploadedDoc(entry.document_id); }}>
-                          {content.deleteConfirmYes}
-                        </button>
-                        <button type="button" className="saved-result-confirm-cancel" onClick={function () { setConfirmingDelete(null); }}>
-                          {content.cancelButton}
-                        </button>
-                      </span>
-                    ) : (
-                      <button type="button" className="saved-result-delete" onClick={function () { setConfirmingDelete({ type: "upload", id: entry.document_id }); }}>
-                        {content.deleteButton}
+                <div className="document-list-item document-list-item-stacked" key={entry.document_id}>
+                  <div className="document-list-item-row">
+                    <div className="document-list-item-main">
+                      <span className="document-list-item-title">{entry.filename}</span>
+                      <span className="document-list-item-meta">{content.uploadedOnLabel} {formatDate(entry.uploadedAt)}</span>
+                    </div>
+                    <div className="document-list-item-actions">
+                      <button type="button" className="document-list-action" onClick={function () { handleOpenUploadedDoc(entry); }}>
+                        {content.openButton}
                       </button>
-                    )}
+                      {confirmingDelete && confirmingDelete.type === "upload" && confirmingDelete.id === entry.document_id ? (
+                        <span className="saved-result-confirm">
+                          <span className="saved-result-confirm-label">{content.deleteUploadedConfirm}</span>
+                          <button type="button" className="saved-result-confirm-yes" onClick={function () { handleDeleteUploadedDoc(entry.document_id); }}>
+                            {content.removeConfirmYes || content.deleteConfirmYes}
+                          </button>
+                          <button type="button" className="saved-result-confirm-cancel" onClick={function () { setConfirmingDelete(null); }}>
+                            {content.cancelButton}
+                          </button>
+                        </span>
+                      ) : (
+                        <button type="button" className="saved-result-delete" onClick={function () { setConfirmingDelete({ type: "upload", id: entry.document_id }); }}>
+                          {content.removeButton || content.deleteButton}
+                        </button>
+                      )}
+                    </div>
                   </div>
+                  {expandedUploadedId === entry.document_id && (
+                    <div className="document-list-item-expanded document-summary explanation-text">
+                      <ReactMarkdown remarkPlugins={[remarkGfm]}>{entry.summary}</ReactMarkdown>
+                    </div>
+                  )}
                 </div>
               );
             })

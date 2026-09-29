@@ -36,6 +36,10 @@ const DOCUMENTS_CONTENT = {
     deleteGeneratedConfirm: "Delete this generated document? This can't be undone.",
     viewInSearchButton: "Open in Search",
     reuploadHint: "If asking a question about this document doesn't work, the server may have restarted since you uploaded it — upload it again.",
+    removeButton: "Remove",
+    removeConfirmYes: "Yes, remove",
+    closeButton: "Close",
+    errStorageFull: "Storage is full. This document is available now, but couldn't be saved for your next visit. Remove older documents to free up space.",
   },
   hi: {
     heading: "अपने दस्तावेज़ के बारे में पूछें",
@@ -74,6 +78,10 @@ const DOCUMENTS_CONTENT = {
     deleteGeneratedConfirm: "यह जनरेट किया गया दस्तावेज़ हटाएं? यह पूर्ववत नहीं किया जा सकता।",
     viewInSearchButton: "खोज में खोलें",
     reuploadHint: "अगर इस दस्तावेज़ के बारे में सवाल पूछना काम नहीं करता, तो हो सकता है आपके अपलोड करने के बाद सर्वर फिर से शुरू हुआ हो — इसे दोबारा अपलोड करें।",
+    removeButton: "हटाएं",
+    removeConfirmYes: "हां, हटाएं",
+    closeButton: "बंद करें",
+    errStorageFull: "स्टोरेज भर गया है। यह दस्तावेज़ अभी उपलब्ध है, लेकिन अगली बार के लिए सेव नहीं हो सका। जगह खाली करने के लिए पुराने दस्तावेज़ हटाएं।",
   },
   kn: {
     heading: "ನಿಮ್ಮ ದಾಖಲೆಯ ಬಗ್ಗೆ ಕೇಳಿ",
@@ -112,6 +120,10 @@ const DOCUMENTS_CONTENT = {
     deleteGeneratedConfirm: "ಈ ರಚಿಸಿದ ದಾಖಲೆಯನ್ನು ಅಳಿಸುವುದೇ? ಇದನ್ನು ಹಿಂಪಡೆಯಲಾಗುವುದಿಲ್ಲ.",
     viewInSearchButton: "ಹುಡುಕಾಟದಲ್ಲಿ ತೆರೆಯಿರಿ",
     reuploadHint: "ಈ ದಾಖಲೆಯ ಬಗ್ಗೆ ಪ್ರಶ್ನೆ ಕೇಳುವುದು ಕೆಲಸ ಮಾಡದಿದ್ದರೆ, ನೀವು ಅಪ್‌ಲೋಡ್ ಮಾಡಿದ ನಂತರ ಸರ್ವರ್ ಮರುಪ್ರಾರಂಭವಾಗಿರಬಹುದು — ಅದನ್ನು ಮತ್ತೆ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ.",
+    removeButton: "ತೆಗೆದುಹಾಕಿ",
+    removeConfirmYes: "ಹೌದು, ತೆಗೆದುಹಾಕಿ",
+    closeButton: "ಮುಚ್ಚಿ",
+    errStorageFull: "ಸಂಗ್ರಹಣೆ ಭರ್ತಿಯಾಗಿದೆ. ಈ ದಾಖಲೆ ಈಗ ಲಭ್ಯವಿದೆ, ಆದರೆ ಮುಂದಿನ ಭೇಟಿಗಾಗಿ ಉಳಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ಸ್ಥಳಾವಕಾಶ ಮಾಡಲು ಹಳೆಯ ದಾಖಲೆಗಳನ್ನು ತೆಗೆದುಹಾಕಿ.",
   },
 };
 

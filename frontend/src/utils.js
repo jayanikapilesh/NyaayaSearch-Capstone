@@ -60,24 +60,29 @@ export function loadUploadedDocs() {
   try {
     const raw = localStorage.getItem(UPLOADED_DOCS_KEY);
     return raw ? JSON.parse(raw) : [];
-  } catch (e) {
+  } catch {
     return [];
   }
 }
 
 export function saveUploadedDocs(items) {
-  try {
-    localStorage.setItem(UPLOADED_DOCS_KEY, JSON.stringify(items.slice(0, MAX_STORED_DOCS)));
-  } catch (e) {
-    return;
+  let list = items.slice(0, MAX_STORED_DOCS);
+  while (list.length > 0) {
+    try {
+      localStorage.setItem(UPLOADED_DOCS_KEY, JSON.stringify(list));
+      return { success: true };
+    } catch {
+      list = list.slice(0, -1);
+    }
   }
+  return { success: false };
 }
 
 export function loadGeneratedDocs() {
   try {
     const raw = localStorage.getItem(GENERATED_DOCS_KEY);
     return raw ? JSON.parse(raw) : [];
-  } catch (e) {
+  } catch {
     return [];
   }
 }
@@ -85,7 +90,7 @@ export function loadGeneratedDocs() {
 export function saveGeneratedDocs(items) {
   try {
     localStorage.setItem(GENERATED_DOCS_KEY, JSON.stringify(items.slice(0, MAX_STORED_DOCS)));
-  } catch (e) {
+  } catch {
     return;
   }
 }
@@ -110,7 +115,7 @@ export function loadPinnedQueries() {
   try {
     const raw = localStorage.getItem(PINNED_QUERIES_KEY);
     return raw ? JSON.parse(raw) : [];
-  } catch (e) {
+  } catch {
     return [];
   }
 }
@@ -119,7 +124,7 @@ export function loadPinnedQueries() {
 export function savePinnedQueries(queries) {
   try {
     localStorage.setItem(PINNED_QUERIES_KEY, JSON.stringify(queries));
-  } catch (e) {
+  } catch {
     return;
   }
 }
@@ -182,7 +187,7 @@ export function loadDailyQuizState() {
   try {
     const raw = localStorage.getItem(DAILY_QUIZ_KEY);
     return raw ? JSON.parse(raw) : null;
-  } catch (e) {
+  } catch {
     return null;
   }
 }
@@ -190,7 +195,7 @@ export function loadDailyQuizState() {
 export function saveDailyQuizState(state) {
   try {
     localStorage.setItem(DAILY_QUIZ_KEY, JSON.stringify(state));
-  } catch (e) {
+  } catch {
     return;
   }
 }

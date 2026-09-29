@@ -362,8 +362,8 @@ def translate_explanation_endpoint(request: TranslateExplanationRequest, raw_req
 
 
 @app.post("/upload-pdf")
-async def upload_pdf(raw_request: Request, file: UploadFile = File(...)):
-    check_rate_limit(raw_request, language="en")
+async def upload_pdf(raw_request: Request, file: UploadFile = File(...), language: str = Form("en")):
+    check_rate_limit(raw_request, language=language)
     if not file.filename.lower().endswith(".pdf"):
         raise HTTPException(status_code=400, detail="Please upload a PDF file.")
 
@@ -393,14 +393,14 @@ async def upload_pdf(raw_request: Request, file: UploadFile = File(...)):
     document_store[document_id] = text
 
     try:
-        summary = summarize_document(text)
+        summary = summarize_document(text, language=language)
     except groq.RateLimitError:
         summary = "Document uploaded successfully, but AI summarization is temporarily unavailable due to a service usage limit. You can still ask questions about the document below."
     except Exception:
         summary = "Document uploaded, but we couldn't generate a summary right now."
 
     try:
-        dates = extract_dates_and_deadlines(text)
+        dates = extract_dates_and_deadlines(text, language=language)
     except Exception:
         dates = []
 
