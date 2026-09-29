@@ -1,0 +1,1652 @@
+{
+  "[\"v1\", \"openai/gpt-oss-120b\", \"what's the punishment for trying to kill someone but failing?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"109\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"103\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"104\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"105\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"62\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"110\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"312\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"101\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"100\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"102\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"66\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"55\"], [\"Information Technology Act, 2000\", \"84C\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"108\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"32\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"311\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"39\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"26\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"52\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"92\"]]]": {
+    "top5_indices": [
+      1,
+      6,
+      5,
+      4,
+      2
+    ],
+    "total_tokens": 932,
+    "raw": "{\"top5\":[1,6,5,4,2]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"what's the punishment for seriously injuring someone on purpose?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"131\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"115\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"117\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"122\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"52\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"125\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"109\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"66\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"119\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"49\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"248\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"120\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"25\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"62\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"19\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"123\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"39\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"118\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"114\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"51\"]]]": {
+    "top5_indices": [
+      3,
+      18,
+      19,
+      13,
+      1
+    ],
+    "total_tokens": 949,
+    "raw": "{\"top5\":[3,18,19,13,1]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can a company be punished for false advertising?\", [[\"Consumer Protection Act, 2019\", \"89\"], [\"Consumer Protection Act, 2019\", \"21\"], [\"Consumer Protection Act, 2019\", \"17\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"233\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"246\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"283\"], [\"Information Technology Act, 2000\", \"85\"], [\"Motor Vehicles Act, 1988\", \"199\"], [\"Karnataka Rent Act, 1999\", \"55\"], [\"Right to Information Act, 2005\", \"24\"], [\"Right to Information Act, 2005\", \"21\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"344\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"336\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"175\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"212\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"235\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"229\"], [\"Right to Information Act, 2005\", \"20\"], [\"Information Technology Act, 2000\", \"67\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"230\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      7,
+      8,
+      3
+    ],
+    "total_tokens": 1006,
+    "raw": "{\"top5\":[1,2,7,8,3]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can a shop be held responsible for selling a defective product?\", [[\"Consumer Protection Act, 2019\", \"83\"], [\"Consumer Protection Act, 2019\", \"82\"], [\"Consumer Protection Act, 2019\", \"84\"], [\"Consumer Protection Act, 2019\", \"86\"], [\"Consumer Protection Act, 2019\", \"85\"], [\"Consumer Protection Act, 2019\", \"87\"], [\"Consumer Protection Act, 2019\", \"90\"], [\"Consumer Protection Act, 2019\", \"91\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"349\"], [\"Consumer Protection Act, 2019\", \"39\"], [\"Information Technology Act, 2000\", \"85\"], [\"Motor Vehicles Act, 1988\", \"182A\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"295\"], [\"Motor Vehicles Act, 1988\", \"199\"], [\"Transfer of Property Act, 1882\", \"55\"], [\"Consumer Protection Act, 2019\", \"94\"], [\"Indian Contract Act, 1872\", \"187\"], [\"Consumer Protection Act, 2019\", \"21\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"350\"], [\"Consumer Protection Act, 2019\", \"22\"]]]": {
+    "top5_indices": [
+      4,
+      1,
+      3,
+      6,
+      5
+    ],
+    "total_tokens": 1003,
+    "raw": "{\"top5\":[4,1,3,6,5]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can a manufacturer be sued for a faulty product?\", [[\"Consumer Protection Act, 2019\", \"84\"], [\"Consumer Protection Act, 2019\", \"83\"], [\"Consumer Protection Act, 2019\", \"82\"], [\"Consumer Protection Act, 2019\", \"87\"], [\"Consumer Protection Act, 2019\", \"85\"], [\"Consumer Protection Act, 2019\", \"86\"], [\"Consumer Protection Act, 2019\", \"91\"], [\"Consumer Protection Act, 2019\", \"90\"], [\"Motor Vehicles Act, 1988\", \"199\"], [\"Information Technology Act, 2000\", \"85\"], [\"Consumer Protection Act, 2019\", \"39\"], [\"Motor Vehicles Act, 1988\", \"182A\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"349\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"289\"], [\"Consumer Protection Act, 2019\", \"89\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"336\"], [\"Information Technology Act, 2000\", \"25\"], [\"Karnataka Rent Act, 1999\", \"55\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"341\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"348\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      5,
+      6,
+      4
+    ],
+    "total_tokens": 1038,
+    "raw": "{\"top5\":[1,2,5,6,4]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"do police have to tell me why i'm being arrested?\", [[\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"44\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"47\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"49\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"43\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"40\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"57\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"48\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"58\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"36\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"82\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"54\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"62\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"482\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"56\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"41\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"170\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"35\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"38\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"61\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"78\"]]]": {
+    "top5_indices": [
+      2,
+      9,
+      4,
+      17,
+      5
+    ],
+    "total_tokens": 923,
+    "raw": "{\"top5\":[2,9,4,17,5]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can a domestic violence victim get financial compensation?\", [[\"Protection of Women from Domestic Violence Act, 2005\", \"22\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"396\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"20\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"2\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"5\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"3\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"4\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"15\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"18\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"12\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"17\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"35\"], [\"Motor Vehicles Act, 1988\", \"163\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"9\"], [\"Motor Vehicles Act, 1988\", \"164\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"26\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"36\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"10\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"23\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"1\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      3,
+      16,
+      4
+    ],
+    "total_tokens": 767,
+    "raw": "{\"top5\":[1,2,3,16,23]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can a domestic violence case affect child custody?\", [[\"Protection of Women from Domestic Violence Act, 2005\", \"21\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"2\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"3\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"18\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"26\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"17\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"19\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"23\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"5\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"36\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"1\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"28\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"16\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"4\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"219\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"27\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"32\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"35\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"144\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"145\"]]]": {
+    "top5_indices": [
+      1,
+      18,
+      19,
+      2,
+      3
+    ],
+    "total_tokens": 769,
+    "raw": "{\"top5\":[1,18,19,26,23]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"do i have to give the property back empty when i move out?\", [[\"Transfer of Property Act, 1882\", \"42\"], [\"Transfer of Property Act, 1882\", \"38\"], [\"Transfer of Property Act, 1882\", \"12\"], [\"Transfer of Property Act, 1882\", \"10\"], [\"Karnataka Rent Act, 1999\", \"35\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"122\"], [\"Transfer of Property Act, 1882\", \"35\"], [\"Transfer of Property Act, 1882\", \"115\"], [\"Transfer of Property Act, 1882\", \"57\"], [\"Transfer of Property Act, 1882\", \"49\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"498\"], [\"Transfer of Property Act, 1882\", \"66\"], [\"Transfer of Property Act, 1882\", \"108\"], [\"Transfer of Property Act, 1882\", \"41\"], [\"Transfer of Property Act, 1882\", \"40\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"88\"], [\"Transfer of Property Act, 1882\", \"24\"], [\"Specific Relief Act, 1963\", \"5\"], [\"Transfer of Property Act, 1882\", \"7\"], [\"Transfer of Property Act, 1882\", \"52\"]]]": {
+    "top5_indices": [
+      5,
+      1,
+      2,
+      3,
+      4
+    ],
+    "total_tokens": 802,
+    "raw": "{\"top5\":[5,108,115,66,40]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"does the court try to settle rent disputes outside trial?\", [[\"Karnataka Rent Act, 1999\", \"44\"], [\"Karnataka Rent Act, 1999\", \"43\"], [\"Karnataka Rent Act, 1999\", \"50\"], [\"Transfer of Property Act, 1882\", \"114\"], [\"Karnataka Rent Act, 1999\", \"45\"], [\"Karnataka Rent Act, 1999\", \"27\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"197\"], [\"Karnataka Rent Act, 1999\", \"38\"], [\"Karnataka Rent Act, 1999\", \"60\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"205\"], [\"Karnataka Rent Act, 1999\", \"61\"], [\"Karnataka Rent Act, 1999\", \"46\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"206\"], [\"Karnataka Rent Act, 1999\", \"11\"], [\"Karnataka Rent Act, 1999\", \"69\"], [\"Karnataka Rent Act, 1999\", \"42\"], [\"Karnataka Rent Act, 1999\", \"41\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"198\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"214\"], [\"Karnataka Rent Act, 1999\", \"40\"]]]": {
+    "top5_indices": [
+      1,
+      16,
+      2,
+      5,
+      12
+    ],
+    "total_tokens": 776,
+    "raw": "{\"top5\":[1,16,2,5,12]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can i get my mortgaged property back after paying off the loan?\", [[\"Transfer of Property Act, 1882\", \"67\"], [\"Transfer of Property Act, 1882\", \"64\"], [\"Transfer of Property Act, 1882\", \"83\"], [\"Transfer of Property Act, 1882\", \"63\"], [\"Transfer of Property Act, 1882\", \"134\"], [\"Transfer of Property Act, 1882\", \"91\"], [\"Transfer of Property Act, 1882\", \"95\"], [\"Transfer of Property Act, 1882\", \"76\"], [\"Transfer of Property Act, 1882\", \"73\"], [\"Transfer of Property Act, 1882\", \"62\"], [\"Transfer of Property Act, 1882\", \"63A\"], [\"Transfer of Property Act, 1882\", \"68\"], [\"Transfer of Property Act, 1882\", \"60\"], [\"Transfer of Property Act, 1882\", \"71\"], [\"Transfer of Property Act, 1882\", \"72\"], [\"Transfer of Property Act, 1882\", \"92\"], [\"Transfer of Property Act, 1882\", \"58\"], [\"Transfer of Property Act, 1882\", \"93\"], [\"Transfer of Property Act, 1882\", \"77\"], [\"Transfer of Property Act, 1882\", \"70\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "total_tokens": 814,
+    "raw": "{\"top5\":[60,91,92,67,76]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"when will a court refuse to grant an injunction?\", [[\"Specific Relief Act, 1963\", \"41\"], [\"Specific Relief Act, 1963\", \"39\"], [\"Specific Relief Act, 1963\", \"38\"], [\"Motor Vehicles Act, 1988\", \"94\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"161\"], [\"Specific Relief Act, 1963\", \"42\"], [\"Specific Relief Act, 1963\", \"40\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"388\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"96\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"89\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"84\"], [\"Karnataka Rent Act, 1999\", \"42\"], [\"Specific Relief Act, 1963\", \"36\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"160\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"380\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"414\"], [\"Specific Relief Act, 1963\", \"37\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"500\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"85\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"155\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "total_tokens": 871,
+    "raw": "{\"top5\":[1,40,37,36,39]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can i force someone to complete a personal service contract?\", [[\"Specific Relief Act, 1963\", \"16\"], [\"Specific Relief Act, 1963\", \"14\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"10\"], [\"Specific Relief Act, 1963\", \"19\"], [\"Specific Relief Act, 1963\", \"15\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"357\"], [\"Information Technology Act, 2000\", \"72A\"], [\"Indian Contract Act, 1872\", \"37\"], [\"Indian Contract Act, 1872\", \"11\"], [\"Indian Contract Act, 1872\", \"68\"], [\"Specific Relief Act, 1963\", \"11\"], [\"Information Technology Act, 2000\", \"6A\"], [\"Indian Contract Act, 1872\", \"38\"], [\"Indian Contract Act, 1872\", \"41\"], [\"Consumer Protection Act, 2019\", \"85\"], [\"Indian Contract Act, 1872\", \"185\"], [\"Indian Contract Act, 1872\", \"53\"], [\"Indian Contract Act, 1872\", \"46\"], [\"Transfer of Property Act, 1882\", \"102\"], [\"Indian Contract Act, 1872\", \"188\"]]]": {
+    "top5_indices": [
+      5,
+      2,
+      1,
+      8,
+      3
+    ],
+    "total_tokens": 883,
+    "raw": "{\"top5\":[5,2,1,8,53]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"how do i legally recover my property from someone occupying it?\", [[\"Specific Relief Act, 1963\", \"5\"], [\"Specific Relief Act, 1963\", \"7\"], [\"Karnataka Rent Act, 1999\", \"35\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"252\"], [\"Karnataka Rent Act, 1999\", \"28\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"502\"], [\"Specific Relief Act, 1963\", \"6\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"317\"], [\"Specific Relief Act, 1963\", \"22\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"115\"], [\"Transfer of Property Act, 1882\", \"62\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"107\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"243\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"504\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"505\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"315\"], [\"Transfer of Property Act, 1882\", \"38\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"244\"], [\"Transfer of Property Act, 1882\", \"108\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"119\"]]]": {
+    "top5_indices": [
+      5,
+      6,
+      3,
+      1,
+      2
+    ],
+    "total_tokens": 863,
+    "raw": "{\"top5\":[5,6,3,5,6]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can i get my pawned item back even after missing the deadline?\", [[\"Indian Contract Act, 1872\", \"177\"], [\"Transfer of Property Act, 1882\", \"126\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"471\"], [\"Specific Relief Act, 1963\", \"33\"], [\"Specific Relief Act, 1963\", \"5\"], [\"Indian Contract Act, 1872\", \"175\"], [\"Specific Relief Act, 1963\", \"7\"], [\"Information Technology Act, 2000\", \"64\"], [\"Indian Contract Act, 1872\", \"158\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"88\"], [\"Indian Contract Act, 1872\", \"65\"], [\"Specific Relief Act, 1963\", \"22\"], [\"Indian Contract Act, 1872\", \"30\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"251\"], [\"Specific Relief Act, 1963\", \"20\"], [\"Transfer of Property Act, 1882\", \"23\"], [\"Transfer of Property Act, 1882\", \"34\"], [\"Indian Contract Act, 1872\", \"176\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"252\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"122\"]]]": {
+    "top5_indices": [
+      1,
+      18,
+      6,
+      7,
+      12
+    ],
+    "total_tokens": 879,
+    "raw": "{\"top5\":[1,18,6,7,12]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can my agent hire someone else to do my work without asking me?\", [[\"Indian Contract Act, 1872\", \"190\"], [\"Indian Contract Act, 1872\", \"183\"], [\"Indian Contract Act, 1872\", \"193\"], [\"Indian Contract Act, 1872\", \"195\"], [\"Indian Contract Act, 1872\", \"188\"], [\"Indian Contract Act, 1872\", \"184\"], [\"Indian Contract Act, 1872\", \"212\"], [\"Indian Contract Act, 1872\", \"186\"], [\"Indian Contract Act, 1872\", \"192\"], [\"Indian Contract Act, 1872\", \"234\"], [\"Indian Contract Act, 1872\", \"235\"], [\"Indian Contract Act, 1872\", \"226\"], [\"Indian Contract Act, 1872\", \"232\"], [\"Indian Contract Act, 1872\", \"216\"], [\"Indian Contract Act, 1872\", \"191\"], [\"Indian Contract Act, 1872\", \"218\"], [\"Transfer of Property Act, 1882\", \"102\"], [\"Indian Contract Act, 1872\", \"210\"], [\"Indian Contract Act, 1872\", \"227\"], [\"Indian Contract Act, 1872\", \"178\"]]]": {
+    "top5_indices": [
+      1,
+      5,
+      8,
+      3,
+      4
+    ],
+    "total_tokens": 714,
+    "raw": "{\"top5\":[1,5,8,3,4]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"what happens if both parties agree to change a contract?\", [[\"Indian Contract Act, 1872\", \"62\"], [\"Right to Information Act, 2005\", \"29\"], [\"Indian Contract Act, 1872\", \"36\"], [\"Indian Contract Act, 1872\", \"53\"], [\"Indian Contract Act, 1872\", \"10\"], [\"Specific Relief Act, 1963\", \"20\"], [\"Indian Contract Act, 1872\", \"37\"], [\"Specific Relief Act, 1963\", \"19\"], [\"Indian Contract Act, 1872\", \"132\"], [\"Specific Relief Act, 1963\", \"20A\"], [\"Specific Relief Act, 1963\", \"18\"], [\"Indian Contract Act, 1872\", \"55\"], [\"Indian Contract Act, 1872\", \"19A\"], [\"Indian Contract Act, 1872\", \"32\"], [\"Indian Contract Act, 1872\", \"527\"], [\"Indian Contract Act, 1872\", \"13\"], [\"Transfer of Property Act, 1882\", \"4\"], [\"Specific Relief Act, 1963\", \"16\"], [\"Right to Information Act, 2005\", \"22\"], [\"Specific Relief Act, 1963\", \"14\"]]]": {
+    "top5_indices": [
+      1,
+      11,
+      6,
+      7,
+      5
+    ],
+    "total_tokens": 863,
+    "raw": "{\"top5\":[1,11,6,7,5]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"is it illegal to create a fake digital certificate to scam someone?\", [[\"Information Technology Act, 2000\", \"74\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"235\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"234\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"336\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"335\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"340\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"337\"], [\"Information Technology Act, 2000\", \"36\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"339\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"338\"], [\"Information Technology Act, 2000\", \"41\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"341\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"342\"], [\"Information Technology Act, 2000\", \"40\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"180\"], [\"Information Technology Act, 2000\", \"73\"], [\"Information Technology Act, 2000\", \"37\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"202\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"179\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"233\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      3,
+      4,
+      6
+    ],
+    "total_tokens": 1251,
+    "raw": "{\"top5\":[1,2,3,4,6]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can i appeal a cyber tribunal decision to the high court?\", [[\"Information Technology Act, 2000\", \"62\"], [\"Motor Vehicles Act, 1988\", \"173\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"429\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"420\"], [\"Information Technology Act, 2000\", \"57\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"380\"], [\"Information Technology Act, 2000\", \"60\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"390\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"442\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"445\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"495\"], [\"Information Technology Act, 2000\", \"48\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"432\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"500\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"447\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"415\"], [\"Karnataka Rent Act, 1999\", \"46\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"454\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"443\"], [\"Information Technology Act, 2000\", \"55\"]]]": {
+    "top5_indices": [
+      1,
+      5,
+      7,
+      12,
+      2
+    ],
+    "total_tokens": 1052,
+    "raw": "{\"top5\":[1,5,7,12,55]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can the government tap my internet communications?\", [[\"Information Technology Act, 2000\", \"69B\"], [\"Information Technology Act, 2000\", \"6A\"], [\"Information Technology Act, 2000\", \"69A\"], [\"Information Technology Act, 2000\", \"69\"], [\"Right to Information Act, 2005\", \"4\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"202\"], [\"Information Technology Act, 2000\", \"84A\"], [\"Information Technology Act, 2000\", \"90\"], [\"Information Technology Act, 2000\", \"6\"], [\"Information Technology Act, 2000\", \"70\"], [\"Information Technology Act, 2000\", \"66F\"], [\"Information Technology Act, 2000\", \"83\"], [\"Right to Information Act, 2005\", \"6\"], [\"Right to Information Act, 2005\", \"26\"], [\"Information Technology Act, 2000\", \"87\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"2\"], [\"Information Technology Act, 2000\", \"16\"], [\"Information Technology Act, 2000\", \"67C\"], [\"Right to Information Act, 2005\", \"9\"], [\"Information Technology Act, 2000\", \"29\"]]]": {
+    "top5_indices": [
+      4,
+      1,
+      20,
+      18,
+      10
+    ],
+    "total_tokens": 2014,
+    "raw": "{\"top5\":[4,1,20,18,10]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"what's the punishment for sabotaging a train?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"327\"], [\"Motor Vehicles Act, 1988\", \"131\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"328\"], [\"Motor Vehicles Act, 1988\", \"188\"], [\"Motor Vehicles Act, 1988\", \"35\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"289\"], [\"Motor Vehicles Act, 1988\", \"193\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"255\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"292\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"4\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"285\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"62\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"49\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"284\"], [\"Consumer Protection Act, 2019\", \"91\"], [\"Motor Vehicles Act, 1988\", \"32\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"129\"], [\"Motor Vehicles Act, 1988\", \"182A\"], [\"Information Technology Act, 2000\", \"84B\"], [\"Motor Vehicles Act, 1988\", \"177\"]]]": {
+    "top5_indices": [
+      1,
+      11,
+      6,
+      12,
+      4
+    ],
+    "total_tokens": 954,
+    "raw": "{\"top5\":[1,11,6,12,4]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"is it a crime to knowingly spread a dangerous disease?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"271\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"272\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"286\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"111\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"123\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"106\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"125\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"33\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"32\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"118\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"19\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"114\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"25\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"26\"], [\"Motor Vehicles Act, 1988\", \"186\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"326\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"281\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"112\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"280\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"2\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      7,
+      3,
+      19
+    ],
+    "total_tokens": 833,
+    "raw": "{\"top5\":[1,2,7,3,19]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"what's the punishment for recklessly endangering someone's life?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"125\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"104\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"66\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"62\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"55\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"71\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"105\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"109\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"4\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"52\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"32\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"106\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"288\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"110\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"286\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"26\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"249\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"86\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"49\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"39\"]]]": {
+    "top5_indices": [
+      1,
+      12,
+      13,
+      15,
+      2
+    ],
+    "total_tokens": 903,
+    "raw": "{\"top5\":[1,12,13,15,39]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"is it illegal to stop someone from receiving a court summons?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"207\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"281\"], [\"Specific Relief Act, 1963\", \"41\"], [\"Specific Relief Act, 1963\", \"39\"], [\"Specific Relief Act, 1963\", \"38\"], [\"Specific Relief Act, 1963\", \"36\"], [\"Specific Relief Act, 1963\", \"37\"], [\"Specific Relief Act, 1963\", \"40\"], [\"Specific Relief Act, 1963\", \"42\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"161\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"206\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"90\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"528\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"84\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"151\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"93\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"126\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"223\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"133\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"69\"]]]": {
+    "top5_indices": [
+      1,
+      11,
+      2,
+      3,
+      4
+    ],
+    "total_tokens": 852,
+    "raw": "{\"top5\":[1,11,206,223,93]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"how does the court officially deliver a summons?\", [[\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"69\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"68\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"71\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"133\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"64\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"63\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"90\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"70\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"227\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"93\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"110\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"96\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"65\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"67\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"282\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"123\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"207\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"309\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"66\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"132\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "total_tokens": 907,
+    "raw": "{\"top5\":[64,63,65,66,70]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"what does it mean for a court to take cognizance of a crime?\", [[\"Consumer Protection Act, 2019\", \"92\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"213\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"210\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"224\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"221\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"514\"], [\"Motor Vehicles Act, 1988\", \"208\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"260\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"107\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"379\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"169\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"291\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"393\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"32\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"513\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"217\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"223\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"351\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"131\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"212\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      3,
+      5,
+      6
+    ],
+    "total_tokens": 860,
+    "raw": "{\"top5\":[1,2,3,5,6]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"does a magistrate investigate suspicious deaths?\", [[\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"196\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"175\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"158\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"178\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"176\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"506\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"212\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"361\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"210\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"327\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"362\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"163\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"382\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"322\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"159\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"190\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"167\"], [\"Information Technology Act, 2000\", \"78\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"194\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"260\"]]]": {
+    "top5_indices": [
+      1,
+      3,
+      4,
+      17,
+      15
+    ],
+    "total_tokens": 918,
+    "raw": "{\"top5\":[1,3,4,17,15]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"am i required to help someone who's executing an arrest warrant?\", [[\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"77\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"78\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"82\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"55\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"75\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"49\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"47\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"93\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"79\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"482\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"35\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"57\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"61\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"32\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"74\"], [\"Motor Vehicles Act, 1988\", \"202\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"62\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"43\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"40\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"48\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "total_tokens": 949,
+    "raw": "{\"top5\":[32,75,79,40,55]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"does the magistrate check if a complaint is true before acting?\", [[\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"224\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"223\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"382\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"210\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"233\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"362\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"379\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"261\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"178\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"260\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"327\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"135\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"267\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"226\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"212\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"361\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"196\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"273\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"371\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"227\"]]]": {
+    "top5_indices": [
+      2,
+      13,
+      14,
+      1,
+      4
+    ],
+    "total_tokens": 923,
+    "raw": "{\"top5\":[2,13,14,1,4]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can my insurance company settle a claim directly with me?\", [[\"Motor Vehicles Act, 1988\", \"149\"], [\"Motor Vehicles Act, 1988\", \"153\"], [\"Motor Vehicles Act, 1988\", \"152\"], [\"Motor Vehicles Act, 1988\", \"151\"], [\"Motor Vehicles Act, 1988\", \"154\"], [\"Motor Vehicles Act, 1988\", \"170\"], [\"Motor Vehicles Act, 1988\", \"156\"], [\"Motor Vehicles Act, 1988\", \"148\"], [\"Transfer of Property Act, 1882\", \"135\"], [\"Motor Vehicles Act, 1988\", \"150\"], [\"Motor Vehicles Act, 1988\", \"145\"], [\"Specific Relief Act, 1963\", \"19\"], [\"Motor Vehicles Act, 1988\", \"147\"], [\"Motor Vehicles Act, 1988\", \"172\"], [\"Motor Vehicles Act, 1988\", \"157\"], [\"Transfer of Property Act, 1882\", \"130\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"87\"], [\"Motor Vehicles Act, 1988\", \"146\"], [\"Motor Vehicles Act, 1988\", \"168\"], [\"Specific Relief Act, 1963\", \"26\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      3,
+      4,
+      10
+    ],
+    "total_tokens": 717,
+    "raw": "{\"top5\":[1,2,3,4,10]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"if i cancel a contract, do i have to give back what i received?\", [[\"Specific Relief Act, 1963\", \"30\"], [\"Indian Contract Act, 1872\", \"64\"], [\"Indian Contract Act, 1872\", \"65\"], [\"Specific Relief Act, 1963\", \"33\"], [\"Transfer of Property Act, 1882\", \"126\"], [\"Indian Contract Act, 1872\", \"66\"], [\"Indian Contract Act, 1872\", \"53\"], [\"Specific Relief Act, 1963\", \"29\"], [\"Indian Contract Act, 1872\", \"5\"], [\"Specific Relief Act, 1963\", \"19\"], [\"Indian Contract Act, 1872\", \"6\"], [\"Specific Relief Act, 1963\", \"20\"], [\"Indian Contract Act, 1872\", \"206\"], [\"Indian Contract Act, 1872\", \"39\"], [\"Specific Relief Act, 1963\", \"16\"], [\"Indian Contract Act, 1872\", \"56\"], [\"Indian Contract Act, 1872\", \"33\"], [\"Indian Contract Act, 1872\", \"37\"], [\"Specific Relief Act, 1963\", \"23\"], [\"Indian Contract Act, 1872\", \"38\"]]]": {
+    "top5_indices": [
+      3,
+      2,
+      4,
+      1,
+      8
+    ],
+    "total_tokens": 755,
+    "raw": "{\"top5\":[3,2,4,1,8]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"is it a crime to bring a child into india for exploitation?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"144\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"137\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"141\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"99\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"98\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"96\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"143\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"95\"], [\"Information Technology Act, 2000\", \"75\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"295\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"139\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"208\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"111\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"20\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"97\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"47\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"48\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"111\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"93\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"154\"]]]": {
+    "top5_indices": [
+      3,
+      7,
+      16,
+      4,
+      5
+    ],
+    "total_tokens": 903,
+    "raw": "{\"top5\":[3,7,16,4,5]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"is it illegal to secretly alter someone's computer code?\", [[\"Information Technology Act, 2000\", \"65\"], [\"Information Technology Act, 2000\", \"66\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"60\"], [\"Information Technology Act, 2000\", \"72\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"339\"], [\"Information Technology Act, 2000\", \"66D\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"335\"], [\"Information Technology Act, 2000\", \"5\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"340\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"336\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"59\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"343\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"58\"], [\"Right to Information Act, 2005\", \"22\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"45\"], [\"Information Technology Act, 2000\", \"66F\"], [\"Information Technology Act, 2000\", \"2\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"358\"], [\"Information Technology Act, 2000\", \"72A\"], [\"Information Technology Act, 2000\", \"71\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "total_tokens": 1591,
+    "raw": ""
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"do shelter homes have specific duties toward domestic violence victims?\", [[\"Protection of Women from Domestic Violence Act, 2005\", \"6\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"7\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"5\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"9\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"17\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"19\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"3\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"18\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"4\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"2\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"15\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"27\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"10\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"1\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"37\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"35\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"36\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"8\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"16\"], [\"Karnataka Rent Act, 1999\", \"3\"]]]": {
+    "top5_indices": [
+      1,
+      5,
+      9,
+      10,
+      15
+    ],
+    "total_tokens": 771,
+    "raw": "{\"top5\":[1,5,9,10,15]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can i take back a gift i already gave someone?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"252\"], [\"Transfer of Property Act, 1882\", \"127\"], [\"Transfer of Property Act, 1882\", \"122\"], [\"Transfer of Property Act, 1882\", \"126\"], [\"Transfer of Property Act, 1882\", \"125\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"251\"], [\"Transfer of Property Act, 1882\", \"128\"], [\"Transfer of Property Act, 1882\", \"124\"], [\"Transfer of Property Act, 1882\", \"800\"], [\"Transfer of Property Act, 1882\", \"123\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"250\"], [\"Indian Contract Act, 1872\", \"177\"], [\"Transfer of Property Act, 1882\", \"91\"], [\"Transfer of Property Act, 1882\", \"13\"], [\"Transfer of Property Act, 1882\", \"27\"], [\"Transfer of Property Act, 1882\", \"134\"], [\"Transfer of Property Act, 1882\", \"6\"], [\"Transfer of Property Act, 1882\", \"121\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"499\"], [\"Indian Contract Act, 1872\", \"72\"]]]": {
+    "top5_indices": [
+      4,
+      2,
+      3,
+      8,
+      5
+    ],
+    "total_tokens": 775,
+    "raw": "{\"top5\":[4,2,3,8,5]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"does the state keep an official record of all vehicles?\", [[\"Motor Vehicles Act, 1988\", \"62B\"], [\"Motor Vehicles Act, 1988\", \"26\"], [\"Motor Vehicles Act, 1988\", \"63\"], [\"Motor Vehicles Act, 1988\", \"212\"], [\"Motor Vehicles Act, 1988\", \"62\"], [\"Motor Vehicles Act, 1988\", \"111\"], [\"Motor Vehicles Act, 1988\", \"210D\"], [\"Motor Vehicles Act, 1988\", \"60\"], [\"Motor Vehicles Act, 1988\", \"1\"], [\"Motor Vehicles Act, 1988\", \"96\"], [\"Motor Vehicles Act, 1988\", \"25A\"], [\"Motor Vehicles Act, 1988\", \"138\"], [\"Motor Vehicles Act, 1988\", \"118\"], [\"Motor Vehicles Act, 1988\", \"110A\"], [\"Motor Vehicles Act, 1988\", \"164D\"], [\"Motor Vehicles Act, 1988\", \"215\"], [\"Motor Vehicles Act, 1988\", \"47\"], [\"Motor Vehicles Act, 1988\", \"217\"], [\"Motor Vehicles Act, 1988\", \"38\"], [\"Motor Vehicles Act, 1988\", \"68\"]]]": {
+    "top5_indices": [
+      1,
+      3,
+      2,
+      4,
+      5
+    ],
+    "total_tokens": 779,
+    "raw": "{\"top5\":[1,3,60,47,62]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can i ask a court to officially declare my legal rights?\", [[\"Specific Relief Act, 1963\", \"34\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"444\"], [\"Transfer of Property Act, 1882\", \"104\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"131\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"85\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"26\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"16\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"379\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"84\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"86\"], [\"Motor Vehicles Act, 1988\", \"94\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"436\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"523\"], [\"Transfer of Property Act, 1882\", \"57\"], [\"Right to Information Act, 2005\", \"23\"], [\"Right to Information Act, 2005\", \"3\"], [\"Motor Vehicles Act, 1988\", \"215D\"], [\"Specific Relief Act, 1963\", \"26\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"340\"], [\"Karnataka Rent Act, 1999\", \"42\"]]]": {
+    "top5_indices": [
+      1,
+      7,
+      12,
+      13,
+      2
+    ],
+    "total_tokens": 899,
+    "raw": "{\"top5\": [1, 7, 12, 13, 2]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"how does a court grant an injunction to prevent something?\", [[\"Specific Relief Act, 1963\", \"39\"], [\"Specific Relief Act, 1963\", \"41\"], [\"Specific Relief Act, 1963\", \"38\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"161\"], [\"Specific Relief Act, 1963\", \"36\"], [\"Specific Relief Act, 1963\", \"40\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"28\"], [\"Karnataka Rent Act, 1999\", \"42\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"528\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"156\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"207\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"414\"], [\"Specific Relief Act, 1963\", \"37\"], [\"Karnataka Rent Act, 1999\", \"27\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"223\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"23\"], [\"Motor Vehicles Act, 1988\", \"94\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"157\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"25\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"168\"]]]": {
+    "top5_indices": [
+      5,
+      13,
+      1,
+      2,
+      3
+    ],
+    "total_tokens": 814,
+    "raw": "{\"top5\":[5,13,1,2,3]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can a public servant be punished for deliberately letting a criminal escape?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"261\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"156\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"157\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"195\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"264\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"259\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"253\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"132\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"221\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"121\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"260\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"255\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"224\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"198\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"225\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"199\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"218\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"222\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"204\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"218\"]]]": {
+    "top5_indices": [
+      2,
+      3,
+      6,
+      11,
+      5
+    ],
+    "total_tokens": 972,
+    "raw": "{\"top5\":[2,3,6,11,5]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can a court make me sign a bond to guarantee i'll show up?\", [[\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"134\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"91\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"92\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"481\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"73\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"485\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"143\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"496\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"490\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"489\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"494\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"114\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"128\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"125\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"130\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"305\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"302\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"482\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"132\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"228\"]]]": {
+    "top5_indices": [
+      2,
+      3,
+      6,
+      5,
+      18
+    ],
+    "total_tokens": 881,
+    "raw": "{\"top5\":[2,3,6,5,18]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"does a certifying authority have to publicly disclose if their certificate is revoked?\", [[\"Information Technology Act, 2000\", \"34\"], [\"Information Technology Act, 2000\", \"39\"], [\"Information Technology Act, 2000\", \"73\"], [\"Information Technology Act, 2000\", \"38\"], [\"Information Technology Act, 2000\", \"36\"], [\"Information Technology Act, 2000\", \"35\"], [\"Right to Information Act, 2005\", \"31\"], [\"Right to Information Act, 2005\", \"12\"], [\"Right to Information Act, 2005\", \"25\"], [\"Right to Information Act, 2005\", \"15\"], [\"Right to Information Act, 2005\", \"17\"], [\"Information Technology Act, 2000\", \"37\"], [\"Right to Information Act, 2005\", \"22\"], [\"Right to Information Act, 2005\", \"18\"], [\"Right to Information Act, 2005\", \"14\"], [\"Information Technology Act, 2000\", \"19\"], [\"Right to Information Act, 2005\", \"13\"], [\"Right to Information Act, 2005\", \"16\"], [\"Information Technology Act, 2000\", \"30\"], [\"Information Technology Act, 2000\", \"71\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      3,
+      4,
+      12
+    ],
+    "total_tokens": 1267,
+    "raw": "{\"top5\":[1,2,3,4,12]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"what's the punishment for hurting someone to force them to pay you?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"131\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"115\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"135\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"52\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"119\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"117\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"120\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"129\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"49\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"86\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"125\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"122\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"76\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"26\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"308\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"51\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"74\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"114\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"22\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"395\"]]]": {
+    "top5_indices": [
+      5,
+      8,
+      15,
+      2,
+      3
+    ],
+    "total_tokens": 893,
+    "raw": "{\"top5\":[5,8,15,2,3]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"is it illegal to make statements that harm national unity?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"197\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"152\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"353\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"356\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"196\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"299\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"37\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"189\"], [\"Right to Information Act, 2005\", \"8\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"237\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"175\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"181\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"150\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"236\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"352\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"33\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"299\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"227\"], [\"Consumer Protection Act, 2019\", \"103\"], [\"Indian Contract Act, 1872\", \"18\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      3,
+      5,
+      15
+    ],
+    "total_tokens": 826,
+    "raw": "{\"top5\":[1,2,3,5,15]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"are there situations where i can't legally defend myself?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"34\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"37\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"44\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"40\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"35\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"38\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"36\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"41\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"270\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"43\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"39\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"33\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"340\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"42\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"265\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"126\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"129\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"262\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"14\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"40\"]]]": {
+    "top5_indices": [
+      2,
+      6,
+      8,
+      3,
+      5
+    ],
+    "total_tokens": 991,
+    "raw": "{\"top5\":[2,6,8,3,5]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"what's the punishment for encouraging a soldier to disobey orders?\", [[\"Motor Vehicles Act, 1988\", \"179\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"166\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"159\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"163\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"161\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"167\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"162\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"164\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"160\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"14\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"198\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"521\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"353\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"223\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"414\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"160\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"255\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"132\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"42\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"155\"]]]": {
+    "top5_indices": [
+      2,
+      3,
+      9,
+      7,
+      5
+    ],
+    "total_tokens": 996,
+    "raw": "{\"top5\":[2,3,9,7,5]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"what happens if i keep causing a nuisance after a court tells me to stop?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"293\"], [\"Specific Relief Act, 1963\", \"41\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"161\"], [\"Specific Relief Act, 1963\", \"39\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"281\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"162\"], [\"Specific Relief Act, 1963\", \"38\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"152\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"126\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"163\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"270\"], [\"Motor Vehicles Act, 1988\", \"132\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"507\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"19\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"168\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"223\"], [\"Specific Relief Act, 1963\", \"36\"], [\"Specific Relief Act, 1963\", \"40\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"25\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"207\"]]]": {
+    "top5_indices": [
+      1,
+      6,
+      11,
+      2,
+      4
+    ],
+    "total_tokens": 843,
+    "raw": "{\"top5\":[1,6,11,2,4]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can state governments make their own consumer protection rules?\", [[\"Consumer Protection Act, 2019\", \"102\"], [\"Consumer Protection Act, 2019\", \"101\"], [\"Consumer Protection Act, 2019\", \"6\"], [\"Consumer Protection Act, 2019\", \"7\"], [\"Consumer Protection Act, 2019\", \"70\"], [\"Motor Vehicles Act, 1988\", \"138\"], [\"Motor Vehicles Act, 1988\", \"164D\"], [\"Consumer Protection Act, 2019\", \"18\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"37\"], [\"Consumer Protection Act, 2019\", \"100\"], [\"Motor Vehicles Act, 1988\", \"107\"], [\"Information Technology Act, 2000\", \"90\"], [\"Motor Vehicles Act, 1988\", \"215D\"], [\"Consumer Protection Act, 2019\", \"42\"], [\"Consumer Protection Act, 2019\", \"56\"], [\"Consumer Protection Act, 2019\", \"1\"], [\"Consumer Protection Act, 2019\", \"49\"], [\"Motor Vehicles Act, 1988\", \"210D\"], [\"Consumer Protection Act, 2019\", \"103\"], [\"Motor Vehicles Act, 1988\", \"28\"]]]": {
+    "top5_indices": [
+      1,
+      10,
+      6,
+      2,
+      3
+    ],
+    "total_tokens": 772,
+    "raw": "{\n  \"top5\": [1, 10, 42, 49, 6]\n}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"what happens if someone mixes my goods with theirs without my permission?\", [[\"Indian Contract Act, 1872\", \"157\"], [\"Indian Contract Act, 1872\", \"155\"], [\"Consumer Protection Act, 2019\", \"91\"], [\"Consumer Protection Act, 2019\", \"90\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"30\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"326\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"274\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"275\"], [\"Indian Contract Act, 1872\", \"154\"], [\"Indian Contract Act, 1872\", \"149\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"19\"], [\"Indian Contract Act, 1872\", \"164\"], [\"Transfer of Property Act, 1882\", \"41\"], [\"Specific Relief Act, 1963\", \"8\"], [\"Transfer of Property Act, 1882\", \"25\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"45\"], [\"Transfer of Property Act, 1882\", \"118\"], [\"Consumer Protection Act, 2019\", \"35\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"188\"], [\"Karnataka Rent Act, 1999\", \"49\"]]]": {
+    "top5_indices": [
+      1,
+      9,
+      12,
+      14,
+      2
+    ],
+    "total_tokens": 902,
+    "raw": "{\"top5\":[1,9,12,14,2]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can something still be a crime even if no one was harmed?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"19\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"33\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"42\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"25\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"39\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"9\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"18\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"54\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"244\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"115\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"101\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"26\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"311\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"245\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"199\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"49\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"102\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"117\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"359\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"56\"]]]": {
+    "top5_indices": [
+      2,
+      3,
+      4,
+      5,
+      13
+    ],
+    "total_tokens": 890,
+    "raw": "{\"top5\":[2,3,4,5,13]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can i transfer an endorsement to a new driving licence?\", [[\"Motor Vehicles Act, 1988\", \"25\"], [\"Motor Vehicles Act, 1988\", \"182\"], [\"Motor Vehicles Act, 1988\", \"15\"], [\"Motor Vehicles Act, 1988\", \"16\"], [\"Motor Vehicles Act, 1988\", \"217A\"], [\"Motor Vehicles Act, 1988\", \"17\"], [\"Motor Vehicles Act, 1988\", \"210\"], [\"Motor Vehicles Act, 1988\", \"11\"], [\"Motor Vehicles Act, 1988\", \"14\"], [\"Motor Vehicles Act, 1988\", \"19\"], [\"Motor Vehicles Act, 1988\", \"21\"], [\"Motor Vehicles Act, 1988\", \"6\"], [\"Motor Vehicles Act, 1988\", \"25A\"], [\"Motor Vehicles Act, 1988\", \"10\"], [\"Motor Vehicles Act, 1988\", \"22\"], [\"Motor Vehicles Act, 1988\", \"83\"], [\"Motor Vehicles Act, 1988\", \"26\"], [\"Motor Vehicles Act, 1988\", \"13\"], [\"Motor Vehicles Act, 1988\", \"24\"], [\"Motor Vehicles Act, 1988\", \"9\"]]]": {
+    "top5_indices": [
+      1,
+      8,
+      19,
+      2,
+      3
+    ],
+    "total_tokens": 777,
+    "raw": "{\"top5\":[1,24,8,19,21]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"is a promise legally binding if nothing was exchanged for it?\", [[\"Indian Contract Act, 1872\", \"63\"], [\"Indian Contract Act, 1872\", \"9\"], [\"Indian Contract Act, 1872\", \"25\"], [\"Indian Contract Act, 1872\", \"37\"], [\"Indian Contract Act, 1872\", \"49\"], [\"Indian Contract Act, 1872\", \"54\"], [\"Indian Contract Act, 1872\", \"127\"], [\"Indian Contract Act, 1872\", \"41\"], [\"Indian Contract Act, 1872\", \"46\"], [\"Indian Contract Act, 1872\", \"39\"], [\"Indian Contract Act, 1872\", \"7\"], [\"Indian Contract Act, 1872\", \"8\"], [\"Indian Contract Act, 1872\", \"38\"], [\"Indian Contract Act, 1872\", \"177\"], [\"Indian Contract Act, 1872\", \"64\"], [\"Indian Contract Act, 1872\", \"42\"], [\"Indian Contract Act, 1872\", \"178A\"], [\"Indian Contract Act, 1872\", \"56\"], [\"Indian Contract Act, 1872\", \"178\"], [\"Indian Contract Act, 1872\", \"000\"]]]": {
+    "top5_indices": [
+      3,
+      2,
+      8,
+      7,
+      1
+    ],
+    "total_tokens": 793,
+    "raw": "{\"top5\":[3,2,8,7,1]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can a protection officer be punished for failing to do their job?\", [[\"Protection of Women from Domestic Violence Act, 2005\", \"33\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"34\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"30\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"225\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"8\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"198\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"224\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"121\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"132\"], [\"Information Technology Act, 2000\", \"46\"], [\"Karnataka Rent Act, 1999\", \"57\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"35\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"255\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"261\"], [\"Consumer Protection Act, 2019\", \"46\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"221\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"151\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"161\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"9\"], [\"Information Technology Act, 2000\", \"63\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      9,
+      5,
+      3
+    ],
+    "total_tokens": 1218,
+    "raw": "{\"top5\":[1,2,9,5,30]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"what's the punishment for kidnapping a young child to rob them?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"97\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"139\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"140\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"137\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"96\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"93\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"309\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"138\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"95\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"20\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"254\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"304\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"303\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"98\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"87\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"99\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"101\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"313\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"144\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"142\"]]]": {
+    "top5_indices": [
+      1,
+      8,
+      4,
+      12,
+      7
+    ],
+    "total_tokens": 861,
+    "raw": "{\"top5\":[1,8,4,12,7]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can my driving licence be cancelled if i'm convicted of a crime?\", [[\"Motor Vehicles Act, 1988\", \"22\"], [\"Motor Vehicles Act, 1988\", \"210\"], [\"Motor Vehicles Act, 1988\", \"21\"], [\"Motor Vehicles Act, 1988\", \"19\"], [\"Motor Vehicles Act, 1988\", \"16\"], [\"Motor Vehicles Act, 1988\", \"15\"], [\"Motor Vehicles Act, 1988\", \"182\"], [\"Motor Vehicles Act, 1988\", \"20\"], [\"Motor Vehicles Act, 1988\", \"17\"], [\"Motor Vehicles Act, 1988\", \"23\"], [\"Motor Vehicles Act, 1988\", \"25\"], [\"Motor Vehicles Act, 1988\", \"24\"], [\"Motor Vehicles Act, 1988\", \"14\"], [\"Motor Vehicles Act, 1988\", \"35\"], [\"Motor Vehicles Act, 1988\", \"32\"], [\"Motor Vehicles Act, 1988\", \"6\"], [\"Motor Vehicles Act, 1988\", \"217A\"], [\"Motor Vehicles Act, 1988\", \"11\"], [\"Motor Vehicles Act, 1988\", \"34\"], [\"Motor Vehicles Act, 1988\", \"9\"]]]": {
+    "top5_indices": [
+      1,
+      3,
+      4,
+      19,
+      2
+    ],
+    "total_tokens": 750,
+    "raw": "{\"top5\":[1,3,4,19,34]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"how is a maintenance payment order actually enforced?\", [[\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"147\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"146\"], [\"Transfer of Property Act, 1882\", \"39\"], [\"Indian Contract Act, 1872\", \"15\"], [\"Specific Relief Act, 1963\", \"16\"], [\"Indian Contract Act, 1872\", \"72\"], [\"Indian Contract Act, 1872\", \"33\"], [\"Indian Contract Act, 1872\", \"32\"], [\"Specific Relief Act, 1963\", \"14\"], [\"Karnataka Rent Act, 1999\", \"25\"], [\"Indian Contract Act, 1872\", \"129\"], [\"Specific Relief Act, 1963\", \"23\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"223\"], [\"Specific Relief Act, 1963\", \"20\"], [\"Specific Relief Act, 1963\", \"11\"], [\"Karnataka Rent Act, 1999\", \"63\"], [\"Consumer Protection Act, 2019\", \"56\"], [\"Indian Contract Act, 1872\", \"170\"], [\"Indian Contract Act, 1872\", \"123\"], [\"Karnataka Rent Act, 1999\", \"15\"]]]": {
+    "top5_indices": [
+      1,
+      13,
+      2,
+      10,
+      16
+    ],
+    "total_tokens": 869,
+    "raw": "{\"top5\":[1,13,2,10,16]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"is it a crime to give false information to authorities?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"240\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"238\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"212\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"217\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"232\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"227\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"233\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"231\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"239\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"230\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"246\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"229\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"228\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"236\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"353\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"235\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"322\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"216\"], [\"Right to Information Act, 2005\", \"8\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"237\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      3,
+      16,
+      18
+    ],
+    "total_tokens": 849,
+    "raw": "{\"top5\":[1,2,3,16,18]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"what's the punishment for encouraging a large group to commit a crime?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"103\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"310\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"112\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"111\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"313\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"57\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"70\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"52\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"191\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"189\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"195\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"9\"], [\"Information Technology Act, 2000\", \"84C\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"351\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"190\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"49\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"62\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"33\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"194\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"148\"]]]": {
+    "top5_indices": [
+      6,
+      1,
+      2,
+      3,
+      4
+    ],
+    "total_tokens": 896,
+    "raw": "{\"top5\":[6,52,49,190,189]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can what i tell the police be used against me in court?\", [[\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"181\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"190\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"260\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"237\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"354\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"299\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"215\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"220\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"267\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"180\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"173\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"217\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"35\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"151\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"340\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"94\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"266\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"331\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"217\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"191\"]]]": {
+    "top5_indices": [
+      1,
+      6,
+      9,
+      18,
+      10
+    ],
+    "total_tokens": 976,
+    "raw": "{\"top5\":[1,6,9,18,10]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can i let someone off from fulfilling their part of a contract?\", [[\"Specific Relief Act, 1963\", \"16\"], [\"Indian Contract Act, 1872\", \"53\"], [\"Specific Relief Act, 1963\", \"19\"], [\"Specific Relief Act, 1963\", \"17\"], [\"Indian Contract Act, 1872\", \"64\"], [\"Specific Relief Act, 1963\", \"12\"], [\"Indian Contract Act, 1872\", \"39\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"357\"], [\"Indian Contract Act, 1872\", \"37\"], [\"Indian Contract Act, 1872\", \"19A\"], [\"Indian Contract Act, 1872\", \"38\"], [\"Specific Relief Act, 1963\", \"24\"], [\"Indian Contract Act, 1872\", \"389\"], [\"Indian Contract Act, 1872\", \"68\"], [\"Specific Relief Act, 1963\", \"20\"], [\"Indian Contract Act, 1872\", \"206\"], [\"Indian Contract Act, 1872\", \"56\"], [\"Specific Relief Act, 1963\", \"14\"], [\"Specific Relief Act, 1963\", \"29\"], [\"Indian Contract Act, 1872\", \"41\"]]]": {
+    "top5_indices": [
+      12,
+      6,
+      20,
+      1,
+      2
+    ],
+    "total_tokens": 754,
+    "raw": "{\"top5\":[12,6,20,53,39]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can i sue a company for compensation if they leak my personal data?\", [[\"Information Technology Act, 2000\", \"43A\"], [\"Consumer Protection Act, 2019\", \"82\"], [\"Consumer Protection Act, 2019\", \"83\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"344\"], [\"Information Technology Act, 2000\", \"85\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"322\"], [\"Consumer Protection Act, 2019\", \"39\"], [\"Motor Vehicles Act, 1988\", \"172\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"316\"], [\"Information Technology Act, 2000\", \"72A\"], [\"Consumer Protection Act, 2019\", \"85\"], [\"Transfer of Property Act, 1882\", \"130\"], [\"Consumer Protection Act, 2019\", \"17\"], [\"Specific Relief Act, 1963\", \"24\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"318\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"217\"], [\"Information Technology Act, 2000\", \"66B\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"336\"], [\"Indian Contract Act, 1872\", \"72\"], [\"Indian Contract Act, 1872\", \"235\"]]]": {
+    "top5_indices": [
+      1,
+      10,
+      5,
+      3,
+      2
+    ],
+    "total_tokens": 1025,
+    "raw": "{\"top5\":[1,10,5,3,2]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"am i still guilty of a crime if someone forced me to do it under threat?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"32\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"351\"], [\"Indian Contract Act, 1872\", \"15\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"308\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"182\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"143\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"225\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"262\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"120\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"87\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"263\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"148\"], [\"Indian Contract Act, 1872\", \"22\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"119\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"129\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"52\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"40\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"265\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"135\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"224\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      4,
+      14,
+      13
+    ],
+    "total_tokens": 920,
+    "raw": "{\"top5\":[1,2,4,14,13]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"what's the punishment for selling a child into prostitution?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"98\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"99\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"144\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"295\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"96\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"139\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"95\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"141\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"143\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"20\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"89\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"145\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"318\"], [\"Information Technology Act, 2000\", \"67B\"], [\"Consumer Protection Act, 2019\", \"91\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"97\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"111\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"65\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"27\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"69\"]]]": {
+    "top5_indices": [
+      1,
+      6,
+      5,
+      9,
+      12
+    ],
+    "total_tokens": 1197,
+    "raw": "{\"top5\":[1,6,5,9,12]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"what's the punishment for an acid attack?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"124\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"123\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"286\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"49\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"66\"], [\"Information Technology Act, 2000\", \"84B\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"131\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"52\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"288\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"125\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"38\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"292\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"118\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"359\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"113\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"109\"], [\"Information Technology Act, 2000\", \"84C\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"62\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"6\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"9\"]]]": {
+    "top5_indices": [
+      1,
+      6,
+      7,
+      13,
+      2
+    ],
+    "total_tokens": 956,
+    "raw": "{\"top5\":[1,6,7,13,2]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"what counts as 'grievous hurt' under the law?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"116\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"117\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"122\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"118\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"311\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"124\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"25\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"115\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"114\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"125\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"33\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"38\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"119\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"359\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"121\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"246\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"120\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"37\"], [\"Motor Vehicles Act, 1988\", \"164\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"52\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      4,
+      9,
+      14
+    ],
+    "total_tokens": 981,
+    "raw": "{\"top5\":[1,2,4,9,14]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can i be punished for carelessly handling explosives?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"288\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"326\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"287\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"286\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"113\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"289\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"118\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"327\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"123\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"125\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"119\"], [\"Consumer Protection Act, 2019\", \"91\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"148\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"129\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"293\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"328\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"106\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"290\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"18\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"292\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      3,
+      10,
+      17
+    ],
+    "total_tokens": 899,
+    "raw": "{\"top5\":[1,2,3,10,17]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"what's the punishment for reckless driving?\", [[\"Motor Vehicles Act, 1988\", \"183\"], [\"Motor Vehicles Act, 1988\", \"187\"], [\"Motor Vehicles Act, 1988\", \"186\"], [\"Motor Vehicles Act, 1988\", \"188\"], [\"Motor Vehicles Act, 1988\", \"177\"], [\"Motor Vehicles Act, 1988\", \"22\"], [\"Motor Vehicles Act, 1988\", \"194\"], [\"Motor Vehicles Act, 1988\", \"210B\"], [\"Motor Vehicles Act, 1988\", \"20\"], [\"Motor Vehicles Act, 1988\", \"182\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"281\"], [\"Motor Vehicles Act, 1988\", \"21\"], [\"Motor Vehicles Act, 1988\", \"194C\"], [\"Motor Vehicles Act, 1988\", \"196\"], [\"Motor Vehicles Act, 1988\", \"19\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"125\"], [\"Motor Vehicles Act, 1988\", \"184\"], [\"Motor Vehicles Act, 1988\", \"189\"], [\"Motor Vehicles Act, 1988\", \"200\"], [\"Motor Vehicles Act, 1988\", \"199A\"]]]": {
+    "top5_indices": [
+      18,
+      1,
+      2,
+      10,
+      11
+    ],
+    "total_tokens": 771,
+    "raw": "{\"top5\":[18,1,2,10,11]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can i be penalized for leaking confidential information i agreed to protect?\", [[\"Information Technology Act, 2000\", \"72\"], [\"Information Technology Act, 2000\", \"72A\"], [\"Right to Information Act, 2005\", \"8\"], [\"Information Technology Act, 2000\", \"66E\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"212\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"240\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"354\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"316\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"323\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"239\"], [\"Information Technology Act, 2000\", \"43A\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"58\"], [\"Information Technology Act, 2000\", \"5\"], [\"Right to Information Act, 2005\", \"11\"], [\"Right to Information Act, 2005\", \"10\"], [\"Information Technology Act, 2000\", \"71\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"59\"], [\"Information Technology Act, 2000\", \"66B\"], [\"Information Technology Act, 2000\", \"66\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"4\"]]]": {
+    "top5_indices": [
+      2,
+      1,
+      11,
+      8,
+      19
+    ],
+    "total_tokens": 1190,
+    "raw": "{\"top5\":[2,1,11,8,19]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"what's the punishment for pretending to be someone else online to cheat them?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"319\"], [\"Information Technology Act, 2000\", \"66D\"], [\"Information Technology Act, 2000\", \"66C\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"318\"], [\"Consumer Protection Act, 2019\", \"89\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"202\"], [\"Information Technology Act, 2000\", \"67B\"], [\"Information Technology Act, 2000\", \"66\"], [\"Information Technology Act, 2000\", \"67A\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"144\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"45\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"249\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"69\"], [\"Information Technology Act, 2000\", \"84B\"], [\"Indian Contract Act, 1872\", \"235\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"78\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"143\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"96\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"2\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"133\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      3,
+      4,
+      6
+    ],
+    "total_tokens": 1274,
+    "raw": "{\"top5\":[1,2,3,4,6]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can i appeal a rent tribunal's decision?\", [[\"Karnataka Rent Act, 1999\", \"26\"], [\"Karnataka Rent Act, 1999\", \"59\"], [\"Information Technology Act, 2000\", \"62\"], [\"Information Technology Act, 2000\", \"57\"], [\"Karnataka Rent Act, 1999\", \"45\"], [\"Karnataka Rent Act, 1999\", \"63\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"500\"], [\"Motor Vehicles Act, 1988\", \"90\"], [\"Motor Vehicles Act, 1988\", \"214\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"495\"], [\"Karnataka Rent Act, 1999\", \"46\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"423\"], [\"Karnataka Rent Act, 1999\", \"13\"], [\"Karnataka Rent Act, 1999\", \"10\"], [\"Karnataka Rent Act, 1999\", \"51\"], [\"Information Technology Act, 2000\", \"60\"], [\"Karnataka Rent Act, 1999\", \"64\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"380\"], [\"Transfer of Property Act, 1882\", \"114\"], [\"Motor Vehicles Act, 1988\", \"173\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      6,
+      11,
+      3
+    ],
+    "total_tokens": 845,
+    "raw": "{\"top5\":[1,2,6,11,46]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can a court set a temporary rent amount while a dispute is ongoing?\", [[\"Karnataka Rent Act, 1999\", \"44\"], [\"Karnataka Rent Act, 1999\", \"43\"], [\"Karnataka Rent Act, 1999\", \"37\"], [\"Specific Relief Act, 1963\", \"37\"], [\"Karnataka Rent Act, 1999\", \"45\"], [\"Karnataka Rent Act, 1999\", \"50\"], [\"Karnataka Rent Act, 1999\", \"13\"], [\"Transfer of Property Act, 1882\", \"114\"], [\"Karnataka Rent Act, 1999\", \"6\"], [\"Karnataka Rent Act, 1999\", \"46\"], [\"Karnataka Rent Act, 1999\", \"27\"], [\"Transfer of Property Act, 1882\", \"116\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"146\"], [\"Transfer of Property Act, 1882\", \"105\"], [\"Transfer of Property Act, 1882\", \"107\"], [\"Karnataka Rent Act, 1999\", \"7\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"519\"], [\"Karnataka Rent Act, 1999\", \"14\"], [\"Karnataka Rent Act, 1999\", \"69\"], [\"Karnataka Rent Act, 1999\", \"48\"]]]": {
+    "top5_indices": [
+      13,
+      14,
+      1,
+      2,
+      3
+    ],
+    "total_tokens": 749,
+    "raw": "{\"top5\":[13,45,44,43,14]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"who appoints protection officers under the domestic violence law?\", [[\"Protection of Women from Domestic Violence Act, 2005\", \"8\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"5\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"30\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"9\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"34\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"35\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"4\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"37\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"1\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"18\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"11\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"33\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"6\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"10\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"36\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"3\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"27\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"2\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"15\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"28\"]]]": {
+    "top5_indices": [
+      1,
+      3,
+      4,
+      11,
+      7
+    ],
+    "total_tokens": 783,
+    "raw": "{\"top5\":[1,3,4,11,7]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"what counts as legal consent in a contract?\", [[\"Indian Contract Act, 1872\", \"13\"], [\"Indian Contract Act, 1872\", \"22\"], [\"Indian Contract Act, 1872\", \"19\"], [\"Indian Contract Act, 1872\", \"14\"], [\"Indian Contract Act, 1872\", \"10\"], [\"Indian Contract Act, 1872\", \"19A\"], [\"Indian Contract Act, 1872\", \"23\"], [\"Specific Relief Act, 1963\", \"19\"], [\"Indian Contract Act, 1872\", \"11\"], [\"Indian Contract Act, 1872\", \"132\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"28\"], [\"Indian Contract Act, 1872\", \"178\"], [\"Indian Contract Act, 1872\", \"37\"], [\"Indian Contract Act, 1872\", \"8\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"30\"], [\"Transfer of Property Act, 1882\", \"26\"], [\"Transfer of Property Act, 1882\", \"4\"], [\"Specific Relief Act, 1963\", \"16\"], [\"Indian Contract Act, 1872\", \"31\"], [\"Transfer of Property Act, 1882\", \"53A\"]]]": {
+    "top5_indices": [
+      1,
+      4,
+      2,
+      3,
+      6
+    ],
+    "total_tokens": 759,
+    "raw": "{\"top5\":[1,4,2,3,6]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"is a guarantee void if someone hid important facts to get it?\", [[\"Indian Contract Act, 1872\", \"143\"], [\"Indian Contract Act, 1872\", \"142\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"354\"], [\"Consumer Protection Act, 2019\", \"77\"], [\"Indian Contract Act, 1872\", \"127\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"58\"], [\"Indian Contract Act, 1872\", \"200\"], [\"Indian Contract Act, 1872\", \"36\"], [\"Indian Contract Act, 1872\", \"65\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"238\"], [\"Indian Contract Act, 1872\", \"29\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"212\"], [\"Indian Contract Act, 1872\", \"126\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"338\"], [\"Information Technology Act, 2000\", \"5\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"235\"], [\"Indian Contract Act, 1872\", \"30\"], [\"Right to Information Act, 2005\", \"8\"], [\"Motor Vehicles Act, 1988\", \"172\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"233\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      5,
+      13,
+      3
+    ],
+    "total_tokens": 907,
+    "raw": "{\"top5\":[1,2,5,13,65]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can i cancel a contract i was pressured into signing?\", [[\"Indian Contract Act, 1872\", \"39\"], [\"Indian Contract Act, 1872\", \"206\"], [\"Indian Contract Act, 1872\", \"66\"], [\"Indian Contract Act, 1872\", \"5\"], [\"Indian Contract Act, 1872\", \"6\"], [\"Indian Contract Act, 1872\", \"64\"], [\"Specific Relief Act, 1963\", \"29\"], [\"Specific Relief Act, 1963\", \"32\"], [\"Indian Contract Act, 1872\", \"53\"], [\"Indian Contract Act, 1872\", \"19A\"], [\"Specific Relief Act, 1963\", \"16\"], [\"Motor Vehicles Act, 1988\", \"54\"], [\"Indian Contract Act, 1872\", \"38\"], [\"Specific Relief Act, 1963\", \"19\"], [\"Indian Contract Act, 1872\", \"37\"], [\"Indian Contract Act, 1872\", \"55\"], [\"Indian Contract Act, 1872\", \"201\"], [\"Information Technology Act, 2000\", \"38\"], [\"Indian Contract Act, 1872\", \"210\"], [\"Transfer of Property Act, 1882\", \"103\"]]]": {
+    "top5_indices": [
+      10,
+      6,
+      3,
+      1,
+      2
+    ],
+    "total_tokens": 866,
+    "raw": "{\"top5\":[10,6,3,1,2]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"who is legally allowed to enter into a contract?\", [[\"Indian Contract Act, 1872\", \"68\"], [\"Specific Relief Act, 1963\", \"17\"], [\"Indian Contract Act, 1872\", \"11\"], [\"Indian Contract Act, 1872\", \"23\"], [\"Indian Contract Act, 1872\", \"15\"], [\"Indian Contract Act, 1872\", \"17\"], [\"Specific Relief Act, 1963\", \"19\"], [\"Specific Relief Act, 1963\", \"15\"], [\"Indian Contract Act, 1872\", \"185\"], [\"Specific Relief Act, 1963\", \"16\"], [\"Specific Relief Act, 1963\", \"14\"], [\"Indian Contract Act, 1872\", \"10\"], [\"Indian Contract Act, 1872\", \"37\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"124\"], [\"Indian Contract Act, 1872\", \"178\"], [\"Indian Contract Act, 1872\", \"8\"], [\"Information Technology Act, 2000\", \"72A\"], [\"Indian Contract Act, 1872\", \"13\"], [\"Indian Contract Act, 1872\", \"188\"], [\"Indian Contract Act, 1872\", \"31\"]]]": {
+    "top5_indices": [
+      3,
+      12,
+      13,
+      1,
+      18
+    ],
+    "total_tokens": 752,
+    "raw": "{\"top5\":[3,12,13,1,18]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"how do i legally get back my stolen movable property?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"252\"], [\"Specific Relief Act, 1963\", \"7\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"303\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"304\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"317\"], [\"Specific Relief Act, 1963\", \"5\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"502\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"499\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"243\"], [\"Specific Relief Act, 1963\", \"6\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"107\"], [\"Karnataka Rent Act, 1999\", \"35\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"115\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"43\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"155\"], [\"Motor Vehicles Act, 1988\", \"62\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"305\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"498\"], [\"Specific Relief Act, 1963\", \"22\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"503\"]]]": {
+    "top5_indices": [
+      2,
+      3,
+      5,
+      11,
+      19
+    ],
+    "total_tokens": 845,
+    "raw": "{\"top5\":[2,3,5,11,19]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"what's the fine for speeding?\", [[\"Motor Vehicles Act, 1988\", \"189\"], [\"Motor Vehicles Act, 1988\", \"183\"], [\"Motor Vehicles Act, 1988\", \"187\"], [\"Motor Vehicles Act, 1988\", \"177\"], [\"Motor Vehicles Act, 1988\", \"210A\"], [\"Motor Vehicles Act, 1988\", \"188\"], [\"Motor Vehicles Act, 1988\", \"182\"], [\"Motor Vehicles Act, 1988\", \"112\"], [\"Motor Vehicles Act, 1988\", \"210B\"], [\"Motor Vehicles Act, 1988\", \"194\"], [\"Motor Vehicles Act, 1988\", \"177A\"], [\"Motor Vehicles Act, 1988\", \"199B\"], [\"Motor Vehicles Act, 1988\", \"22\"], [\"Motor Vehicles Act, 1988\", \"201\"], [\"Motor Vehicles Act, 1988\", \"192\"], [\"Motor Vehicles Act, 1988\", \"198\"], [\"Motor Vehicles Act, 1988\", \"20\"], [\"Motor Vehicles Act, 1988\", \"84\"], [\"Motor Vehicles Act, 1988\", \"209\"], [\"Motor Vehicles Act, 1988\", \"200\"]]]": {
+    "top5_indices": [
+      2,
+      8,
+      1,
+      3,
+      4
+    ],
+    "total_tokens": 778,
+    "raw": "{\"top5\":[2,8,177,\"210A\",\"199B\"]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can the licensing authority ban me from driving?\", [[\"Motor Vehicles Act, 1988\", \"19\"], [\"Motor Vehicles Act, 1988\", \"17\"], [\"Motor Vehicles Act, 1988\", \"16\"], [\"Motor Vehicles Act, 1988\", \"6\"], [\"Motor Vehicles Act, 1988\", \"9\"], [\"Motor Vehicles Act, 1988\", \"8\"], [\"Motor Vehicles Act, 1988\", \"24\"], [\"Motor Vehicles Act, 1988\", \"22\"], [\"Motor Vehicles Act, 1988\", \"182\"], [\"Motor Vehicles Act, 1988\", \"34\"], [\"Motor Vehicles Act, 1988\", \"20\"], [\"Motor Vehicles Act, 1988\", \"21\"], [\"Motor Vehicles Act, 1988\", \"11\"], [\"Motor Vehicles Act, 1988\", \"12\"], [\"Motor Vehicles Act, 1988\", \"32\"], [\"Motor Vehicles Act, 1988\", \"33\"], [\"Motor Vehicles Act, 1988\", \"115\"], [\"Motor Vehicles Act, 1988\", \"210\"], [\"Motor Vehicles Act, 1988\", \"66B\"], [\"Motor Vehicles Act, 1988\", \"23\"]]]": {
+    "top5_indices": [
+      1,
+      10,
+      8,
+      12,
+      20
+    ],
+    "total_tokens": 793,
+    "raw": "{\"top5\":[1,10,8,12,20]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can i get relief if my lease is being forfeited?\", [[\"Transfer of Property Act, 1882\", \"114A\"], [\"Transfer of Property Act, 1882\", \"114\"], [\"Transfer of Property Act, 1882\", \"112\"], [\"Transfer of Property Act, 1882\", \"115\"], [\"Specific Relief Act, 1963\", \"28\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"491\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"121\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"119\"], [\"Transfer of Property Act, 1882\", \"64\"], [\"Transfer of Property Act, 1882\", \"111\"], [\"Transfer of Property Act, 1882\", \"71\"], [\"Karnataka Rent Act, 1999\", \"28\"], [\"Transfer of Property Act, 1882\", \"105\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"243\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"120\"], [\"Transfer of Property Act, 1882\", \"12\"], [\"Transfer of Property Act, 1882\", \"65A\"], [\"Transfer of Property Act, 1882\", \"108\"], [\"Karnataka Rent Act, 1999\", \"19\"], [\"Transfer of Property Act, 1882\", \"113\"]]]": {
+    "top5_indices": [
+      3,
+      4,
+      2,
+      1,
+      5
+    ],
+    "total_tokens": 795,
+    "raw": "{\"top5\":[3,4,2,1,5]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"what are my rights in an exchange of property?\", [[\"Transfer of Property Act, 1882\", \"118\"], [\"Transfer of Property Act, 1882\", \"121\"], [\"Transfer of Property Act, 1882\", \"120\"], [\"Transfer of Property Act, 1882\", \"109\"], [\"Transfer of Property Act, 1882\", \"54\"], [\"Transfer of Property Act, 1882\", \"48\"], [\"Transfer of Property Act, 1882\", \"7\"], [\"Transfer of Property Act, 1882\", \"46\"], [\"Transfer of Property Act, 1882\", \"38\"], [\"Transfer of Property Act, 1882\", \"41\"], [\"Transfer of Property Act, 1882\", \"11\"], [\"Transfer of Property Act, 1882\", \"37\"], [\"Transfer of Property Act, 1882\", \"40\"], [\"Transfer of Property Act, 1882\", \"35\"], [\"Transfer of Property Act, 1882\", \"55\"], [\"Transfer of Property Act, 1882\", \"18\"], [\"Transfer of Property Act, 1882\", \"108\"], [\"Transfer of Property Act, 1882\", \"44\"], [\"Transfer of Property Act, 1882\", \"43\"], [\"Transfer of Property Act, 1882\", \"19\"]]]": {
+    "top5_indices": [
+      1,
+      3,
+      2,
+      15,
+      8
+    ],
+    "total_tokens": 794,
+    "raw": "{\"top5\":[1,3,2,15,8]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"do police have to ensure my health and safety after arrest?\", [[\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"56\"], [\"Motor Vehicles Act, 1988\", \"202\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"47\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"43\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"40\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"170\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"57\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"36\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"61\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"58\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"48\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"49\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"62\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"82\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"35\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"44\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"41\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"53\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"55\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"50\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "total_tokens": 885,
+    "raw": "{\"top5\":[1,53,36,57,58]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can armed forces disperse an unlawful gathering?\", [[\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"149\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"150\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"148\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"195\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"189\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"193\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"42\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"191\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"190\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"300\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"111\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"521\"], [\"Karnataka Rent Act, 1999\", \"29\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"194\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"152\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"159\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"151\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"160\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"353\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"192\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      3,
+      18,
+      7
+    ],
+    "total_tokens": 900,
+    "raw": "{\"top5\":[1,2,3,18,7]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can a court dismiss my complaint without a trial?\", [[\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"226\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"280\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"425\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"380\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"272\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"370\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"224\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"360\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"268\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"223\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"247\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"281\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"356\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"233\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"427\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"510\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"279\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"273\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"355\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"450\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      5,
+      12,
+      7
+    ],
+    "total_tokens": 888,
+    "raw": "{\"top5\":[1,2,5,12,7]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"is it a crime to hide that i know someone plans to commit a crime?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"249\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"58\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"60\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"59\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"238\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"45\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"72\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"239\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"354\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"258\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"142\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"240\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"235\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"323\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"33\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"169\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"78\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"14\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"150\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"46\"]]]": {
+    "top5_indices": [
+      2,
+      3,
+      8,
+      16,
+      15
+    ],
+    "total_tokens": 882,
+    "raw": "{\"top5\":[2,3,8,16,15]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can a child under 7 be held criminally responsible?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"20\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"21\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"97\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"96\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"93\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"3\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"300\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"95\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"27\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"139\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"99\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"98\"], [\"Motor Vehicles Act, 1988\", \"199A\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"402\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"144\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"92\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"21\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"220\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"107\"], [\"Motor Vehicles Act, 1988\", \"194B\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "total_tokens": 984,
+    "raw": ""
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can a 10-year-old be punished for a crime?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"97\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"95\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"20\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"96\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"21\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"3\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"56\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"93\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"57\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"514\"], [\"Information Technology Act, 2000\", \"84B\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"139\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"99\"], [\"Motor Vehicles Act, 1988\", \"199A\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"98\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"144\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"249\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"27\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"55\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"65\"]]]": {
+    "top5_indices": [
+      20,
+      14,
+      3,
+      6,
+      1
+    ],
+    "total_tokens": 979,
+    "raw": "{\"top5\":[20,21,14,3,6]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can i have a lawyer represent me in a cyber tribunal case?\", [[\"Information Technology Act, 2000\", \"59\"], [\"Information Technology Act, 2000\", \"58\"], [\"Information Technology Act, 2000\", \"48\"], [\"Motor Vehicles Act, 1988\", \"169\"], [\"Information Technology Act, 2000\", \"57\"], [\"Information Technology Act, 2000\", \"61\"], [\"Information Technology Act, 2000\", \"55\"], [\"Motor Vehicles Act, 1988\", \"168\"], [\"Motor Vehicles Act, 1988\", \"165\"], [\"Information Technology Act, 2000\", \"88\"], [\"Information Technology Act, 2000\", \"60\"], [\"Motor Vehicles Act, 1988\", \"171\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"342\"], [\"Information Technology Act, 2000\", \"66F\"], [\"Motor Vehicles Act, 1988\", \"175\"], [\"Motor Vehicles Act, 1988\", \"170\"], [\"Motor Vehicles Act, 1988\", \"176\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"530\"], [\"Information Technology Act, 2000\", \"70B\"], [\"Information Technology Act, 2000\", \"62\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      5,
+      20,
+      11
+    ],
+    "total_tokens": 1418,
+    "raw": "{\n  \"top5\": [1, 2, 5, 20, 11]\n}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can an official be punished for knowingly detaining someone illegally?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"255\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"259\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"260\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"261\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"253\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"258\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"204\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"268\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"303\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"264\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"40\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"263\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"156\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"249\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"68\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"157\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"48\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"166\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"199\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"198\"]]]": {
+    "top5_indices": [
+      6,
+      4,
+      2,
+      3,
+      19
+    ],
+    "total_tokens": 1047,
+    "raw": "{\"top5\":[6,4,2,3,19]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"is it a crime to alter a product's trademark to cause harm?\", [[\"Consumer Protection Act, 2019\", \"87\"], [\"Consumer Protection Act, 2019\", \"86\"], [\"Consumer Protection Act, 2019\", \"83\"], [\"Consumer Protection Act, 2019\", \"82\"], [\"Consumer Protection Act, 2019\", \"84\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"19\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"349\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"347\"], [\"Consumer Protection Act, 2019\", \"85\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"348\"], [\"Consumer Protection Act, 2019\", \"90\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"33\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"324\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"346\"], [\"Consumer Protection Act, 2019\", \"91\"], [\"Motor Vehicles Act, 1988\", \"182A\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"341\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"336\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"342\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"294\"]]]": {
+    "top5_indices": [
+      14,
+      7,
+      8,
+      10,
+      13
+    ],
+    "total_tokens": 834,
+    "raw": "{\"top5\":[14,7,8,10,13]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"does the court keep an official record of questioning the accused?\", [[\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"316\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"335\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"355\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"266\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"351\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"286\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"311\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"330\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"312\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"379\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"255\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"332\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"438\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"257\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"327\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"369\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"309\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"256\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"509\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"288\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      7,
+      12,
+      3
+    ],
+    "total_tokens": 1135,
+    "raw": "{\"top5\":[1,2,7,12,31]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can i sue someone for defamation?\", [[\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"222\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"356\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"246\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"352\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"98\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"133\"], [\"Information Technology Act, 2000\", \"67\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"86\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"336\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"344\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"127\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"353\"], [\"Indian Contract Act, 1872\", \"18\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"99\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"232\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"215\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"229\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"242\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"308\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"299\"]]]": {
+    "top5_indices": [
+      2,
+      1,
+      12,
+      4,
+      3
+    ],
+    "total_tokens": 889,
+    "raw": "{\"top5\":[2,1,12,4,3]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"what's the difference between murder and culpable homicide?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"101\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"102\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"100\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"105\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"110\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"92\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"109\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"106\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"103\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"104\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"48\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"47\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"55\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"39\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"108\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"312\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"311\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"38\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"32\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"140\"]]]": {
+    "top5_indices": [
+      1,
+      3,
+      2,
+      9,
+      10
+    ],
+    "total_tokens": 862,
+    "raw": "{\"top5\":[1,3,2,9,10]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"what legally counts as rape under indian law?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"70\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"64\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"63\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"65\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"52\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"184\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"69\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"32\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"1\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"141\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"3\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"28\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"36\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"76\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"68\"], [\"Information Technology Act, 2000\", \"1\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"4\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"48\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"47\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"220\"]]]": {
+    "top5_indices": [
+      3,
+      2,
+      4,
+      16,
+      1
+    ],
+    "total_tokens": 848,
+    "raw": "{\"top5\":[3,2,4,16,1]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"what's the penalty for overloading a truck?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"284\"], [\"Motor Vehicles Act, 1988\", \"201\"], [\"Motor Vehicles Act, 1988\", \"194\"], [\"Motor Vehicles Act, 1988\", \"194A\"], [\"Motor Vehicles Act, 1988\", \"182A\"], [\"Motor Vehicles Act, 1988\", \"114\"], [\"Motor Vehicles Act, 1988\", \"210B\"], [\"Motor Vehicles Act, 1988\", \"198\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"327\"], [\"Motor Vehicles Act, 1988\", \"110\"], [\"Motor Vehicles Act, 1988\", \"193\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"328\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"289\"], [\"Motor Vehicles Act, 1988\", \"210A\"], [\"Indian Contract Act, 1872\", \"227\"], [\"Motor Vehicles Act, 1988\", \"197\"], [\"Indian Contract Act, 1872\", \"175\"], [\"Motor Vehicles Act, 1988\", \"179\"], [\"Motor Vehicles Act, 1988\", \"127\"], [\"Motor Vehicles Act, 1988\", \"196\"]]]": {
+    "top5_indices": [
+      3,
+      5,
+      6,
+      14,
+      2
+    ],
+    "total_tokens": 848,
+    "raw": "{\"top5\":[3,5,6,14,2]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can my driving licence be revoked due to a medical condition?\", [[\"Motor Vehicles Act, 1988\", \"16\"], [\"Motor Vehicles Act, 1988\", \"32\"], [\"Motor Vehicles Act, 1988\", \"19\"], [\"Motor Vehicles Act, 1988\", \"22\"], [\"Motor Vehicles Act, 1988\", \"17\"], [\"Motor Vehicles Act, 1988\", \"21\"], [\"Motor Vehicles Act, 1988\", \"15\"], [\"Motor Vehicles Act, 1988\", \"182\"], [\"Motor Vehicles Act, 1988\", \"217A\"], [\"Motor Vehicles Act, 1988\", \"210\"], [\"Motor Vehicles Act, 1988\", \"25\"], [\"Motor Vehicles Act, 1988\", \"14\"], [\"Motor Vehicles Act, 1988\", \"11\"], [\"Motor Vehicles Act, 1988\", \"20\"], [\"Motor Vehicles Act, 1988\", \"23\"], [\"Motor Vehicles Act, 1988\", \"6\"], [\"Motor Vehicles Act, 1988\", \"34\"], [\"Motor Vehicles Act, 1988\", \"24\"], [\"Motor Vehicles Act, 1988\", \"9\"], [\"Motor Vehicles Act, 1988\", \"13\"]]]": {
+    "top5_indices": [
+      1,
+      3,
+      5,
+      6,
+      17
+    ],
+    "total_tokens": 744,
+    "raw": "{\"top5\":[1,3,5,6,17]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can i force a trust to fulfill its contractual obligations?\", [[\"Specific Relief Act, 1963\", \"11\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"316\"], [\"Transfer of Property Act, 1882\", \"100\"], [\"Specific Relief Act, 1963\", \"2\"], [\"Specific Relief Act, 1963\", \"19\"], [\"Indian Contract Act, 1872\", \"37\"], [\"Indian Contract Act, 1872\", \"235\"], [\"Indian Contract Act, 1872\", \"178\"], [\"Indian Contract Act, 1872\", \"143\"], [\"Specific Relief Act, 1963\", \"14\"], [\"Information Technology Act, 2000\", \"72A\"], [\"Indian Contract Act, 1872\", \"389\"], [\"Information Technology Act, 2000\", \"30\"], [\"Indian Contract Act, 1872\", \"17\"], [\"Indian Contract Act, 1872\", \"144\"], [\"Indian Contract Act, 1872\", \"188\"], [\"Indian Contract Act, 1872\", \"41\"], [\"Indian Contract Act, 1872\", \"54\"], [\"Indian Contract Act, 1872\", \"142\"], [\"Indian Contract Act, 1872\", \"232\"]]]": {
+    "top5_indices": [
+      1,
+      10,
+      4,
+      5,
+      6
+    ],
+    "total_tokens": 783,
+    "raw": "{\"top5\":[1,10,4,5,6]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can a contract be enforced with modified terms?\", [[\"Specific Relief Act, 1963\", \"14\"], [\"Specific Relief Act, 1963\", \"16\"], [\"Indian Contract Act, 1872\", \"32\"], [\"Indian Contract Act, 1872\", \"33\"], [\"Specific Relief Act, 1963\", \"11\"], [\"Specific Relief Act, 1963\", \"19\"], [\"Indian Contract Act, 1872\", \"15\"], [\"Indian Contract Act, 1872\", \"22\"], [\"Indian Contract Act, 1872\", \"19A\"], [\"Indian Contract Act, 1872\", \"53\"], [\"Indian Contract Act, 1872\", \"14\"], [\"Specific Relief Act, 1963\", \"29\"], [\"Indian Contract Act, 1872\", \"19\"], [\"Indian Contract Act, 1872\", \"62\"], [\"Specific Relief Act, 1963\", \"20\"], [\"Specific Relief Act, 1963\", \"10\"], [\"Indian Contract Act, 1872\", \"55\"], [\"Indian Contract Act, 1872\", \"31\"], [\"Specific Relief Act, 1963\", \"38\"], [\"Indian Contract Act, 1872\", \"123\"]]]": {
+    "top5_indices": [
+      14,
+      20,
+      10,
+      1,
+      2
+    ],
+    "total_tokens": 824,
+    "raw": "{\"top5\":[14,62,20,10,29]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"does my agent have to hand over money they collected on my behalf?\", [[\"Indian Contract Act, 1872\", \"218\"], [\"Indian Contract Act, 1872\", \"226\"], [\"Indian Contract Act, 1872\", \"188\"], [\"Indian Contract Act, 1872\", \"186\"], [\"Indian Contract Act, 1872\", \"190\"], [\"Indian Contract Act, 1872\", \"221\"], [\"Indian Contract Act, 1872\", \"193\"], [\"Indian Contract Act, 1872\", \"216\"], [\"Indian Contract Act, 1872\", \"227\"], [\"Indian Contract Act, 1872\", \"184\"], [\"Indian Contract Act, 1872\", \"195\"], [\"Indian Contract Act, 1872\", \"178\"], [\"Indian Contract Act, 1872\", \"235\"], [\"Indian Contract Act, 1872\", \"212\"], [\"Indian Contract Act, 1872\", \"183\"], [\"Indian Contract Act, 1872\", \"181\"], [\"Indian Contract Act, 1872\", \"192\"], [\"Indian Contract Act, 1872\", \"232\"], [\"Specific Relief Act, 1963\", \"8\"], [\"Transfer of Property Act, 1882\", \"102\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      6,
+      8,
+      9
+    ],
+    "total_tokens": 797,
+    "raw": "{\"top5\":[1,2,6,8,9]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"is a contract void if i made a mistake about the law?\", [[\"Indian Contract Act, 1872\", \"21\"], [\"Indian Contract Act, 1872\", \"25\"], [\"Indian Contract Act, 1872\", \"19\"], [\"Indian Contract Act, 1872\", \"10\"], [\"Indian Contract Act, 1872\", \"65\"], [\"Indian Contract Act, 1872\", \"56\"], [\"Indian Contract Act, 1872\", \"30\"], [\"Indian Contract Act, 1872\", \"32\"], [\"Indian Contract Act, 1872\", \"36\"], [\"Indian Contract Act, 1872\", \"000\"], [\"Indian Contract Act, 1872\", \"33\"], [\"Indian Contract Act, 1872\", \"64\"], [\"Specific Relief Act, 1963\", \"16\"], [\"Specific Relief Act, 1963\", \"18\"], [\"Specific Relief Act, 1963\", \"26\"], [\"Indian Contract Act, 1872\", \"66\"], [\"Indian Contract Act, 1872\", \"29\"], [\"Consumer Protection Act, 2019\", \"49\"], [\"Consumer Protection Act, 2019\", \"59\"], [\"Indian Contract Act, 1872\", \"26\"]]]": {
+    "top5_indices": [
+      1,
+      3,
+      4,
+      12,
+      13
+    ],
+    "total_tokens": 755,
+    "raw": "{\"top5\":[1,3,4,12,13]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"what's the punishment for taking away someone's wife against her will?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"84\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"87\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"67\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"85\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"221\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"82\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"219\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"80\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"144\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"89\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"81\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"86\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"66\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"83\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"90\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"2\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"145\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"76\"], [\"Transfer of Property Act, 1882\", \"29\"], [\"Karnataka Rent Act, 1999\", \"31\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      4,
+      6,
+      11
+    ],
+    "total_tokens": 887,
+    "raw": "{\"top5\":[1,2,4,6,11]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"is it illegal to fake the label on a product container?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"349\"], [\"Consumer Protection Act, 2019\", \"86\"], [\"Consumer Protection Act, 2019\", \"84\"], [\"Consumer Protection Act, 2019\", \"87\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"350\"], [\"Consumer Protection Act, 2019\", \"83\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"342\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"348\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"347\"], [\"Consumer Protection Act, 2019\", \"82\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"341\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"345\"], [\"Consumer Protection Act, 2019\", \"85\"], [\"Consumer Protection Act, 2019\", \"90\"], [\"Consumer Protection Act, 2019\", \"21\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"339\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"180\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"340\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"336\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"181\"]]]": {
+    "top5_indices": [
+      5,
+      1,
+      2,
+      3,
+      6
+    ],
+    "total_tokens": 847,
+    "raw": "{\"top5\":[5,1,2,3,6]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"what are the penalties for violating the rent act?\", [[\"Karnataka Rent Act, 1999\", \"54\"], [\"Karnataka Rent Act, 1999\", \"55\"], [\"Karnataka Rent Act, 1999\", \"11\"], [\"Transfer of Property Act, 1882\", \"114\"], [\"Karnataka Rent Act, 1999\", \"8\"], [\"Karnataka Rent Act, 1999\", \"14\"], [\"Karnataka Rent Act, 1999\", \"6\"], [\"Transfer of Property Act, 1882\", \"112\"], [\"Karnataka Rent Act, 1999\", \"16\"], [\"Karnataka Rent Act, 1999\", \"34\"], [\"Karnataka Rent Act, 1999\", \"4\"], [\"Transfer of Property Act, 1882\", \"115\"], [\"Transfer of Property Act, 1882\", \"108\"], [\"Karnataka Rent Act, 1999\", \"22\"], [\"Karnataka Rent Act, 1999\", \"32\"], [\"Karnataka Rent Act, 1999\", \"9\"], [\"Transfer of Property Act, 1882\", \"105\"], [\"Transfer of Property Act, 1882\", \"116\"], [\"Karnataka Rent Act, 1999\", \"48\"], [\"Karnataka Rent Act, 1999\", \"19\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      20,
+      19,
+      14
+    ],
+    "total_tokens": 835,
+    "raw": "{\"top5\":[1,2,20,19,14]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"do i need to notify the landlord if i sublet my rented place?\", [[\"Karnataka Rent Act, 1999\", \"32\"], [\"Karnataka Rent Act, 1999\", \"33\"], [\"Karnataka Rent Act, 1999\", \"34\"], [\"Karnataka Rent Act, 1999\", \"11\"], [\"Karnataka Rent Act, 1999\", \"6\"], [\"Karnataka Rent Act, 1999\", \"17\"], [\"Karnataka Rent Act, 1999\", \"41\"], [\"Karnataka Rent Act, 1999\", \"28\"], [\"Karnataka Rent Act, 1999\", \"4\"], [\"Karnataka Rent Act, 1999\", \"37\"], [\"Transfer of Property Act, 1882\", \"65A\"], [\"Karnataka Rent Act, 1999\", \"38\"], [\"Karnataka Rent Act, 1999\", \"12\"], [\"Karnataka Rent Act, 1999\", \"19\"], [\"Karnataka Rent Act, 1999\", \"40\"], [\"Karnataka Rent Act, 1999\", \"10\"], [\"Karnataka Rent Act, 1999\", \"48\"], [\"Karnataka Rent Act, 1999\", \"16\"], [\"Transfer of Property Act, 1882\", \"115\"], [\"Karnataka Rent Act, 1999\", \"47\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      3,
+      17,
+      4
+    ],
+    "total_tokens": 808,
+    "raw": "{\"top5\":[1,2,3,17,41]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can a sub-tenant become a full tenant in some situations?\", [[\"Karnataka Rent Act, 1999\", \"34\"], [\"Karnataka Rent Act, 1999\", \"32\"], [\"Karnataka Rent Act, 1999\", \"33\"], [\"Karnataka Rent Act, 1999\", \"11\"], [\"Karnataka Rent Act, 1999\", \"37\"], [\"Karnataka Rent Act, 1999\", \"16\"], [\"Karnataka Rent Act, 1999\", \"6\"], [\"Karnataka Rent Act, 1999\", \"22\"], [\"Karnataka Rent Act, 1999\", \"48\"], [\"Karnataka Rent Act, 1999\", \"41\"], [\"Karnataka Rent Act, 1999\", \"8\"], [\"Karnataka Rent Act, 1999\", \"3\"], [\"Karnataka Rent Act, 1999\", \"4\"], [\"Karnataka Rent Act, 1999\", \"47\"], [\"Karnataka Rent Act, 1999\", \"54\"], [\"Karnataka Rent Act, 1999\", \"38\"], [\"Karnataka Rent Act, 1999\", \"36\"], [\"Karnataka Rent Act, 1999\", \"52\"], [\"Karnataka Rent Act, 1999\", \"17\"], [\"Karnataka Rent Act, 1999\", \"5\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      3,
+      5,
+      20
+    ],
+    "total_tokens": 792,
+    "raw": "{\"top5\":[1,2,3,5,20]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can i get compensation if i was wrongly arrested?\", [[\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"399\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"56\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"49\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"47\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"48\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"40\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"482\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"43\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"499\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"54\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"36\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"50\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"61\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"82\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"38\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"297\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"57\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"83\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"468\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"58\"]]]": {
+    "top5_indices": [
+      1,
+      4,
+      5,
+      7,
+      2
+    ],
+    "total_tokens": 908,
+    "raw": "{\"top5\":[1,4,5,7,57]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can police prevent damage to public property?\", [[\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"171\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"168\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"31\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"324\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"270\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"43\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"19\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"107\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"225\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"41\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"152\"], [\"Motor Vehicles Act, 1988\", \"132\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"162\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"156\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"161\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"503\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"126\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"121\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"243\"], [\"Transfer of Property Act, 1882\", \"18\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      4,
+      5,
+      12
+    ],
+    "total_tokens": 932,
+    "raw": "{\"top5\":[1,2,4,5,12]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"is it illegal to obstruct a bus or taxi driver while they're driving?\", [[\"Motor Vehicles Act, 1988\", \"125\"], [\"Motor Vehicles Act, 1988\", \"126\"], [\"Motor Vehicles Act, 1988\", \"179\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"126\"], [\"Motor Vehicles Act, 1988\", \"183\"], [\"Motor Vehicles Act, 1988\", \"198\"], [\"Motor Vehicles Act, 1988\", \"95\"], [\"Motor Vehicles Act, 1988\", \"115\"], [\"Motor Vehicles Act, 1988\", \"184\"], [\"Motor Vehicles Act, 1988\", \"132\"], [\"Motor Vehicles Act, 1988\", \"134\"], [\"Motor Vehicles Act, 1988\", \"5\"], [\"Motor Vehicles Act, 1988\", \"180\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"289\"], [\"Motor Vehicles Act, 1988\", \"194E\"], [\"Motor Vehicles Act, 1988\", \"122\"], [\"Motor Vehicles Act, 1988\", \"3\"], [\"Motor Vehicles Act, 1988\", \"113\"], [\"Motor Vehicles Act, 1988\", \"92\"], [\"Motor Vehicles Act, 1988\", \"186\"]]]": {
+    "top5_indices": [
+      1,
+      3,
+      4,
+      6,
+      14
+    ],
+    "total_tokens": 822,
+    "raw": "{\"top5\":[1,3,4,6,14]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"are there legal safety requirements for motorcycle riders?\", [[\"Motor Vehicles Act, 1988\", \"128\"], [\"Motor Vehicles Act, 1988\", \"129\"], [\"Motor Vehicles Act, 1988\", \"194C\"], [\"Motor Vehicles Act, 1988\", \"194D\"], [\"Motor Vehicles Act, 1988\", \"146\"], [\"Motor Vehicles Act, 1988\", \"147\"], [\"Motor Vehicles Act, 1988\", \"118\"], [\"Motor Vehicles Act, 1988\", \"210C\"], [\"Motor Vehicles Act, 1988\", \"158\"], [\"Motor Vehicles Act, 1988\", \"215\"], [\"Motor Vehicles Act, 1988\", \"138\"], [\"Motor Vehicles Act, 1988\", \"215B\"], [\"Motor Vehicles Act, 1988\", \"196\"], [\"Motor Vehicles Act, 1988\", \"161\"], [\"Motor Vehicles Act, 1988\", \"92\"], [\"Motor Vehicles Act, 1988\", \"164C\"], [\"Motor Vehicles Act, 1988\", \"113\"], [\"Motor Vehicles Act, 1988\", \"136A\"], [\"Motor Vehicles Act, 1988\", \"203\"], [\"Motor Vehicles Act, 1988\", \"194B\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      3,
+      4,
+      10
+    ],
+    "total_tokens": 724,
+    "raw": "{\"top5\":[1,2,3,4,10]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can a transport permit be cancelled?\", [[\"Motor Vehicles Act, 1988\", \"86\"], [\"Motor Vehicles Act, 1988\", \"105\"], [\"Motor Vehicles Act, 1988\", \"66B\"], [\"Motor Vehicles Act, 1988\", \"82\"], [\"Motor Vehicles Act, 1988\", \"104\"], [\"Motor Vehicles Act, 1988\", \"89\"], [\"Motor Vehicles Act, 1988\", \"79\"], [\"Motor Vehicles Act, 1988\", \"72\"], [\"Motor Vehicles Act, 1988\", \"80\"], [\"Motor Vehicles Act, 1988\", \"74\"], [\"Motor Vehicles Act, 1988\", \"23\"], [\"Motor Vehicles Act, 1988\", \"87\"], [\"Motor Vehicles Act, 1988\", \"71\"], [\"Motor Vehicles Act, 1988\", \"66\"], [\"Motor Vehicles Act, 1988\", \"103\"], [\"Motor Vehicles Act, 1988\", \"76\"], [\"Motor Vehicles Act, 1988\", \"24\"], [\"Motor Vehicles Act, 1988\", \"88\"], [\"Information Technology Act, 2000\", \"33\"], [\"Motor Vehicles Act, 1988\", \"77\"]]]": {
+    "top5_indices": [
+      1,
+      6,
+      11,
+      12,
+      5
+    ],
+    "total_tokens": 827,
+    "raw": "{\"top5\":[1,6,11,12,5]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"how is compensation calculated after a motor vehicle accident?\", [[\"Motor Vehicles Act, 1988\", \"166\"], [\"Motor Vehicles Act, 1988\", \"161\"], [\"Motor Vehicles Act, 1988\", \"164\"], [\"Motor Vehicles Act, 1988\", \"160\"], [\"Motor Vehicles Act, 1988\", \"149\"], [\"Motor Vehicles Act, 1988\", \"163\"], [\"Motor Vehicles Act, 1988\", \"167\"], [\"Motor Vehicles Act, 1988\", \"164B\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"395\"], [\"Motor Vehicles Act, 1988\", \"159\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"396\"], [\"Motor Vehicles Act, 1988\", \"168\"], [\"Motor Vehicles Act, 1988\", \"134\"], [\"Motor Vehicles Act, 1988\", \"187\"], [\"Motor Vehicles Act, 1988\", \"105\"], [\"Motor Vehicles Act, 1988\", \"164A\"], [\"Motor Vehicles Act, 1988\", \"174\"], [\"Motor Vehicles Act, 1988\", \"171\"], [\"Motor Vehicles Act, 1988\", \"190\"], [\"Specific Relief Act, 1963\", \"21\"]]]": {
+    "top5_indices": [
+      15,
+      3,
+      1,
+      2,
+      7
+    ],
+    "total_tokens": 750,
+    "raw": "{\"top5\":[15,3,1,2,7]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"who has authority to make rules under the domestic violence act?\", [[\"Protection of Women from Domestic Violence Act, 2005\", \"37\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"5\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"23\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"18\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"28\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"3\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"4\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"1\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"36\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"2\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"9\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"10\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"35\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"11\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"32\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"27\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"17\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"25\"], [\"Motor Vehicles Act, 1988\", \"164D\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"19\"]]]": {
+    "top5_indices": [
+      1,
+      9,
+      11,
+      5,
+      2
+    ],
+    "total_tokens": 858,
+    "raw": "{\"top5\":[1,9,11,36,5]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can a court require additional security for the remaining bond period?\", [[\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"143\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"136\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"138\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"125\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"141\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"494\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"139\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"484\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"481\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"493\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"519\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"128\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"485\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"491\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"490\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"73\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"91\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"492\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"430\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"269\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      3,
+      8,
+      4
+    ],
+    "total_tokens": 900,
+    "raw": "{\"top5\":[1,2,3,8,73]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can i be prosecuted for disrespecting a public official's lawful order?\", [[\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"215\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"223\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"198\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"221\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"195\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"199\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"132\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"121\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"224\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"255\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"217\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"204\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"218\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"257\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"218\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"226\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"259\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"219\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"260\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"208\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      4,
+      5,
+      20
+    ],
+    "total_tokens": 999,
+    "raw": "{\"top5\":[1,2,4,5,20]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can the government seize copies of a banned publication?\", [[\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"98\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"99\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"241\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"109\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"73\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"183\"], [\"Information Technology Act, 2000\", \"8\"], [\"Information Technology Act, 2000\", \"65\"], [\"Information Technology Act, 2000\", \"74\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"210\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"501\"], [\"Information Technology Act, 2000\", \"67\"], [\"Motor Vehicles Act, 1988\", \"206\"], [\"Information Technology Act, 2000\", \"6\"], [\"Information Technology Act, 2000\", \"69A\"], [\"Right to Information Act, 2005\", \"9\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"294\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"230\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"207\"], [\"Information Technology Act, 2000\", \"67B\"]]]": {
+    "top5_indices": [
+      1,
+      4,
+      11,
+      13,
+      15
+    ],
+    "total_tokens": 1636,
+    "raw": "{\"top5\":[1,4,11,13,15]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"what does a court have to include in its judgment?\", [[\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"294\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"392\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"428\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"393\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"403\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"16\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"295\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"288\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"379\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"131\"], [\"Transfer of Property Act, 1882\", \"104\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"405\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"436\"], [\"Motor Vehicles Act, 1988\", \"169\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"292\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"287\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"452\"], [\"Information Technology Act, 2000\", \"58\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"73\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"529\"]]]": {
+    "top5_indices": [
+      4,
+      1,
+      18,
+      7,
+      3
+    ],
+    "total_tokens": 986,
+    "raw": "{\"top5\":[4,1,18,7,3]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can a witness avoid attending court and give evidence another way?\", [[\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"389\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"353\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"319\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"191\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"266\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"253\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"265\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"348\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"335\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"358\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"256\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"277\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"313\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"315\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"310\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"355\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"398\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"326\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"322\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"254\"]]]": {
+    "top5_indices": [
+      3,
+      1,
+      8,
+      20,
+      18
+    ],
+    "total_tokens": 908,
+    "raw": "{\"top5\":[3,1,8,20,18]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can a paused court case resume later?\", [[\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"370\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"346\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"517\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"324\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"519\"], [\"Specific Relief Act, 1963\", \"37\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"281\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"285\"], [\"Specific Relief Act, 1963\", \"20C\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"516\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"282\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"279\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"518\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"225\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"213\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"272\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"362\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"260\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"449\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"72\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      4,
+      3,
+      7
+    ],
+    "total_tokens": 865,
+    "raw": "{\"top5\":[1,2,4,3,7]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"what's the punishment for encouraging a soldier to attack a superior officer?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"161\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"162\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"159\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"166\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"132\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"163\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"521\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"195\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"224\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"121\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"131\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"198\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"351\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"42\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"225\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"14\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"167\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"151\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"149\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"151\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      4,
+      3,
+      6
+    ],
+    "total_tokens": 964,
+    "raw": "{\"top5\":[1,2,4,3,6]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"how is property divided when multiple people jointly buy it?\", [[\"Transfer of Property Act, 1882\", \"37\"], [\"Transfer of Property Act, 1882\", \"45\"], [\"Transfer of Property Act, 1882\", \"46\"], [\"Transfer of Property Act, 1882\", \"47\"], [\"Transfer of Property Act, 1882\", \"44\"], [\"Transfer of Property Act, 1882\", \"118\"], [\"Indian Contract Act, 1872\", \"146\"], [\"Transfer of Property Act, 1882\", \"82\"], [\"Indian Contract Act, 1872\", \"45\"], [\"Transfer of Property Act, 1882\", \"48\"], [\"Transfer of Property Act, 1882\", \"38\"], [\"Indian Contract Act, 1872\", \"42\"], [\"Transfer of Property Act, 1882\", \"61\"], [\"Transfer of Property Act, 1882\", \"120\"], [\"Transfer of Property Act, 1882\", \"127\"], [\"Transfer of Property Act, 1882\", \"56\"], [\"Transfer of Property Act, 1882\", \"54\"], [\"Transfer of Property Act, 1882\", \"128\"], [\"Transfer of Property Act, 1882\", \"24\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"433\"]]]": {
+    "top5_indices": [
+      4,
+      5,
+      2,
+      3,
+      13
+    ],
+    "total_tokens": 748,
+    "raw": "{\"top5\":[4,5,2,3,13]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can a sessions judge review a lower court's decision?\", [[\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"445\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"448\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"449\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"440\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"441\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"422\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"438\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"443\"], [\"Karnataka Rent Act, 1999\", \"46\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"442\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"429\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"214\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"8\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"403\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"495\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"433\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"29\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"22\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"439\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"428\"]]]": {
+    "top5_indices": [
+      4,
+      8,
+      2,
+      3,
+      6
+    ],
+    "total_tokens": 901,
+    "raw": "{\"top5\":[4,8,2,3,6]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"how is the standard rent for a property determined?\", [[\"Karnataka Rent Act, 1999\", \"7\"], [\"Karnataka Rent Act, 1999\", \"12\"], [\"Karnataka Rent Act, 1999\", \"6\"], [\"Transfer of Property Act, 1882\", \"114\"], [\"Transfer of Property Act, 1882\", \"105\"], [\"Transfer of Property Act, 1882\", \"65A\"], [\"Transfer of Property Act, 1882\", \"107\"], [\"Transfer of Property Act, 1882\", \"115\"], [\"Karnataka Rent Act, 1999\", \"16\"], [\"Transfer of Property Act, 1882\", \"112\"], [\"Karnataka Rent Act, 1999\", \"34\"], [\"Karnataka Rent Act, 1999\", \"13\"], [\"Transfer of Property Act, 1882\", \"111\"], [\"Transfer of Property Act, 1882\", \"116\"], [\"Transfer of Property Act, 1882\", \"50\"], [\"Karnataka Rent Act, 1999\", \"33\"], [\"Karnataka Rent Act, 1999\", \"4\"], [\"Karnataka Rent Act, 1999\", \"22\"], [\"Karnataka Rent Act, 1999\", \"47\"], [\"Karnataka Rent Act, 1999\", \"32\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      12,
+      13,
+      6
+    ],
+    "total_tokens": 706,
+    "raw": "{\"top5\":[1,2,12,13,6]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can i get compensation if someone falsely accused me of a crime?\", [[\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"273\"], [\"Indian Contract Act, 1872\", \"235\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"248\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"242\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"395\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"246\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"232\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"235\"], [\"Motor Vehicles Act, 1988\", \"172\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"229\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"231\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"233\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"318\"], [\"Specific Relief Act, 1963\", \"21\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"240\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"230\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"322\"], [\"Indian Contract Act, 1872\", \"18\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"396\"], [\"Motor Vehicles Act, 1988\", \"167\"]]]": {
+    "top5_indices": [
+      1,
+      3,
+      5,
+      14,
+      4
+    ],
+    "total_tokens": 894,
+    "raw": "{\"top5\":[1,3,5,14,4]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"where do i file a consumer complaint?\", [[\"Consumer Protection Act, 2019\", \"17\"], [\"Consumer Protection Act, 2019\", \"35\"], [\"Consumer Protection Act, 2019\", \"38\"], [\"Consumer Protection Act, 2019\", \"69\"], [\"Consumer Protection Act, 2019\", \"16\"], [\"Consumer Protection Act, 2019\", \"48\"], [\"Consumer Protection Act, 2019\", \"62\"], [\"Consumer Protection Act, 2019\", \"49\"], [\"Consumer Protection Act, 2019\", \"24\"], [\"Consumer Protection Act, 2019\", \"79\"], [\"Consumer Protection Act, 2019\", \"65\"], [\"Consumer Protection Act, 2019\", \"59\"], [\"Consumer Protection Act, 2019\", \"34\"], [\"Consumer Protection Act, 2019\", \"19\"], [\"Consumer Protection Act, 2019\", \"92\"], [\"Consumer Protection Act, 2019\", \"66\"], [\"Consumer Protection Act, 2019\", \"42\"], [\"Consumer Protection Act, 2019\", \"28\"], [\"Consumer Protection Act, 2019\", \"47\"], [\"Consumer Protection Act, 2019\", \"74\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      3,
+      13,
+      18
+    ],
+    "total_tokens": 679,
+    "raw": "{\"top5\":[1,2,3,13,18]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"how is notice served in a domestic violence case?\", [[\"Protection of Women from Domestic Violence Act, 2005\", \"13\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"29\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"5\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"9\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"18\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"23\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"3\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"1\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"4\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"10\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"2\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"28\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"36\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"26\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"27\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"22\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"19\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"16\"], [\"Consumer Protection Act, 2019\", \"65\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"12\"]]]": {
+    "top5_indices": [
+      1,
+      5,
+      12,
+      20,
+      10
+    ],
+    "total_tokens": 756,
+    "raw": "{\"top5\":[1,5,12,20,10]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"what's the punishment for using force to try to illegally trap someone?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"135\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"131\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"129\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"263\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"62\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"76\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"262\"], [\"Information Technology Act, 2000\", \"84C\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"143\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"351\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"265\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"109\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"134\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"52\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"136\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"119\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"49\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"133\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"249\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"45\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      3,
+      13,
+      16
+    ],
+    "total_tokens": 914,
+    "raw": "{\"top5\":[1,2,3,13,16]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"are hearings before the rent controller treated like a court case?\", [[\"Karnataka Rent Act, 1999\", \"60\"], [\"Karnataka Rent Act, 1999\", \"65\"], [\"Karnataka Rent Act, 1999\", \"69\"], [\"Karnataka Rent Act, 1999\", \"24\"], [\"Karnataka Rent Act, 1999\", \"50\"], [\"Karnataka Rent Act, 1999\", \"12\"], [\"Karnataka Rent Act, 1999\", \"43\"], [\"Karnataka Rent Act, 1999\", \"45\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"205\"], [\"Karnataka Rent Act, 1999\", \"56\"], [\"Karnataka Rent Act, 1999\", \"46\"], [\"Karnataka Rent Act, 1999\", \"25\"], [\"Karnataka Rent Act, 1999\", \"34\"], [\"Karnataka Rent Act, 1999\", \"61\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"260\"], [\"Transfer of Property Act, 1882\", \"114\"], [\"Karnataka Rent Act, 1999\", \"44\"], [\"Karnataka Rent Act, 1999\", \"23\"], [\"Karnataka Rent Act, 1999\", \"27\"], [\"Karnataka Rent Act, 1999\", \"42\"]]]": {
+    "top5_indices": [
+      1,
+      12,
+      4,
+      14,
+      11
+    ],
+    "total_tokens": 767,
+    "raw": "{\"top5\":[1,12,4,14,11]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can i be punished for something i did on a judge's order?\", [[\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"160\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"257\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"155\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"452\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"15\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"157\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"218\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"445\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"16\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"440\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"495\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"198\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"245\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"223\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"391\"], [\"Karnataka Rent Act, 1999\", \"46\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"255\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"387\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"266\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"438\"]]]": {
+    "top5_indices": [
+      9,
+      12,
+      3,
+      1,
+      2
+    ],
+    "total_tokens": 928,
+    "raw": "{\"top5\":[9,23,12,3,1]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can police offer me an incentive to confess?\", [[\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"182\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"213\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"354\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"120\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"216\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"33\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"240\"], [\"Indian Contract Act, 1872\", \"38\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"227\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"353\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"169\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"173\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"239\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"180\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"195\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"191\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"212\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"250\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"172\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"265\"]]]": {
+    "top5_indices": [
+      1,
+      3,
+      4,
+      2,
+      5
+    ],
+    "total_tokens": 923,
+    "raw": "{\"top5\":[1,3,4,250,216]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"what happens if i break the rules around my driving licence?\", [[\"Motor Vehicles Act, 1988\", \"15\"], [\"Motor Vehicles Act, 1988\", \"16\"], [\"Motor Vehicles Act, 1988\", \"19\"], [\"Motor Vehicles Act, 1988\", \"22\"], [\"Motor Vehicles Act, 1988\", \"17\"], [\"Motor Vehicles Act, 1988\", \"21\"], [\"Motor Vehicles Act, 1988\", \"182\"], [\"Motor Vehicles Act, 1988\", \"210\"], [\"Motor Vehicles Act, 1988\", \"217A\"], [\"Motor Vehicles Act, 1988\", \"32\"], [\"Motor Vehicles Act, 1988\", \"14\"], [\"Motor Vehicles Act, 1988\", \"20\"], [\"Motor Vehicles Act, 1988\", \"6\"], [\"Motor Vehicles Act, 1988\", \"11\"], [\"Motor Vehicles Act, 1988\", \"25\"], [\"Motor Vehicles Act, 1988\", \"25A\"], [\"Motor Vehicles Act, 1988\", \"26\"], [\"Motor Vehicles Act, 1988\", \"34\"], [\"Motor Vehicles Act, 1988\", \"35\"], [\"Motor Vehicles Act, 1988\", \"13\"]]]": {
+    "top5_indices": [
+      7,
+      4,
+      3,
+      6,
+      18
+    ],
+    "total_tokens": 810,
+    "raw": "{\"top5\":[7,4,3,6,18]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"what's the punishment for attacking a foreign country india is at peace with?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"153\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"154\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"149\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"147\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"141\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"47\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"113\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"48\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"194\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"208\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"148\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"352\"], [\"Information Technology Act, 2000\", \"66F\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"162\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"152\"], [\"Information Technology Act, 2000\", \"75\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"32\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"131\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"161\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"38\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      4,
+      11,
+      15
+    ],
+    "total_tokens": 1327,
+    "raw": "{\"top5\":[1,2,4,11,15]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"does the court keep records during a quick/summary trial?\", [[\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"286\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"311\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"285\"], [\"Information Technology Act, 2000\", \"7\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"438\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"318\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"383\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"346\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"287\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"520\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"519\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"309\"], [\"Specific Relief Act, 1963\", \"37\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"335\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"516\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"334\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"355\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"282\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"260\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"288\"]]]": {
+    "top5_indices": [
+      1,
+      3,
+      9,
+      14,
+      8
+    ],
+    "total_tokens": 1093,
+    "raw": "{\"top5\":[1,3,9,14,8]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"if i owe multiple debts and don't specify which payment is for which, how is it applied?\", [[\"Indian Contract Act, 1872\", \"60\"], [\"Indian Contract Act, 1872\", \"61\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"321\"], [\"Indian Contract Act, 1872\", \"146\"], [\"Transfer of Property Act, 1882\", \"82\"], [\"Transfer of Property Act, 1882\", \"134\"], [\"Transfer of Property Act, 1882\", \"58\"], [\"Transfer of Property Act, 1882\", \"133\"], [\"Indian Contract Act, 1872\", \"126\"], [\"Indian Contract Act, 1872\", \"127\"], [\"Transfer of Property Act, 1882\", \"61\"], [\"Transfer of Property Act, 1882\", \"128\"], [\"Indian Contract Act, 1872\", \"136\"], [\"Indian Contract Act, 1872\", \"58\"], [\"Transfer of Property Act, 1882\", \"98\"], [\"Transfer of Property Act, 1882\", \"36\"], [\"Transfer of Property Act, 1882\", \"127\"], [\"Indian Contract Act, 1872\", \"137\"], [\"Transfer of Property Act, 1882\", \"67A\"], [\"Transfer of Property Act, 1882\", \"94\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "total_tokens": 895,
+    "raw": ""
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can a government official be punished for hiding knowledge of a planned crime?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"58\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"150\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"60\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"59\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"217\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"477\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"148\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"211\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"212\"], [\"Right to Information Act, 2005\", \"8\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"259\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"255\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"204\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"238\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"199\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"303\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"221\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"260\"], [\"Information Technology Act, 2000\", \"80\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"261\"]]]": {
+    "top5_indices": [
+      4,
+      1,
+      3,
+      8,
+      11
+    ],
+    "total_tokens": 1112,
+    "raw": "{\"top5\":[4,1,3,8,11]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"what legally counts as a 'sale' of property?\", [[\"Transfer of Property Act, 1882\", \"54\"], [\"Transfer of Property Act, 1882\", \"69\"], [\"Specific Relief Act, 1963\", \"17\"], [\"Transfer of Property Act, 1882\", \"57\"], [\"Transfer of Property Act, 1882\", \"55\"], [\"Transfer of Property Act, 1882\", \"118\"], [\"Transfer of Property Act, 1882\", \"120\"], [\"Transfer of Property Act, 1882\", \"43\"], [\"Transfer of Property Act, 1882\", \"53A\"], [\"Transfer of Property Act, 1882\", \"38\"], [\"Transfer of Property Act, 1882\", \"109\"], [\"Transfer of Property Act, 1882\", \"130\"], [\"Transfer of Property Act, 1882\", \"37\"], [\"Indian Contract Act, 1872\", \"527\"], [\"Transfer of Property Act, 1882\", \"48\"], [\"Transfer of Property Act, 1882\", \"44\"], [\"Transfer of Property Act, 1882\", \"7\"], [\"Transfer of Property Act, 1882\", \"35\"], [\"Transfer of Property Act, 1882\", \"56\"], [\"Transfer of Property Act, 1882\", \"123\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      5,
+      4,
+      3
+    ],
+    "total_tokens": 791,
+    "raw": "{\"top5\":[1,2,5,4,56]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"do driving schools need a license to operate?\", [[\"Motor Vehicles Act, 1988\", \"12\"], [\"Motor Vehicles Act, 1988\", \"9\"], [\"Motor Vehicles Act, 1988\", \"8\"], [\"Motor Vehicles Act, 1988\", \"3\"], [\"Motor Vehicles Act, 1988\", \"11\"], [\"Motor Vehicles Act, 1988\", \"10\"], [\"Motor Vehicles Act, 1988\", \"6\"], [\"Motor Vehicles Act, 1988\", \"18\"], [\"Motor Vehicles Act, 1988\", \"13\"], [\"Motor Vehicles Act, 1988\", \"182\"], [\"Motor Vehicles Act, 1988\", \"17\"], [\"Motor Vehicles Act, 1988\", \"7\"], [\"Motor Vehicles Act, 1988\", \"210\"], [\"Motor Vehicles Act, 1988\", \"158\"], [\"Motor Vehicles Act, 1988\", \"118\"], [\"Motor Vehicles Act, 1988\", \"14\"], [\"Motor Vehicles Act, 1988\", \"26\"], [\"Motor Vehicles Act, 1988\", \"20\"], [\"Motor Vehicles Act, 1988\", \"27\"], [\"Motor Vehicles Act, 1988\", \"37\"]]]": {
+    "top5_indices": [
+      1,
+      10,
+      11,
+      9,
+      2
+    ],
+    "total_tokens": 841,
+    "raw": "{\"top5\":[1,27,10,11,9]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"what actions are protected under the right to self-defence?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"37\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"35\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"38\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"41\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"44\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"36\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"40\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"34\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"39\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"43\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"42\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"35\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"33\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"340\"], [\"Right to Information Act, 2005\", \"21\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"270\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"126\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"225\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"37\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"129\"]]]": {
+    "top5_indices": [
+      2,
+      6,
+      3,
+      9,
+      7
+    ],
+    "total_tokens": 913,
+    "raw": "{\"top5\":[2,6,3,9,7]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can a landlord waive their own eviction notice?\", [[\"Karnataka Rent Act, 1999\", \"27\"], [\"Karnataka Rent Act, 1999\", \"34\"], [\"Karnataka Rent Act, 1999\", \"33\"], [\"Karnataka Rent Act, 1999\", \"41\"], [\"Karnataka Rent Act, 1999\", \"28\"], [\"Karnataka Rent Act, 1999\", \"19\"], [\"Transfer of Property Act, 1882\", \"113\"], [\"Karnataka Rent Act, 1999\", \"10\"], [\"Karnataka Rent Act, 1999\", \"17\"], [\"Karnataka Rent Act, 1999\", \"38\"], [\"Karnataka Rent Act, 1999\", \"11\"], [\"Karnataka Rent Act, 1999\", \"32\"], [\"Karnataka Rent Act, 1999\", \"16\"], [\"Karnataka Rent Act, 1999\", \"45\"], [\"Karnataka Rent Act, 1999\", \"52\"], [\"Karnataka Rent Act, 1999\", \"37\"], [\"Karnataka Rent Act, 1999\", \"48\"], [\"Karnataka Rent Act, 1999\", \"54\"], [\"Karnataka Rent Act, 1999\", \"40\"], [\"Karnataka Rent Act, 1999\", \"4\"]]]": {
+    "top5_indices": [
+      7,
+      1,
+      5,
+      2,
+      3
+    ],
+    "total_tokens": 754,
+    "raw": "{\"top5\":[7,1,5,41,38]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can a certifying authority's license be suspended?\", [[\"Information Technology Act, 2000\", \"33\"], [\"Information Technology Act, 2000\", \"26\"], [\"Information Technology Act, 2000\", \"39\"], [\"Information Technology Act, 2000\", \"25\"], [\"Motor Vehicles Act, 1988\", \"86\"], [\"Motor Vehicles Act, 1988\", \"54\"], [\"Motor Vehicles Act, 1988\", \"24\"], [\"Right to Information Act, 2005\", \"31\"], [\"Motor Vehicles Act, 1988\", \"23\"], [\"Motor Vehicles Act, 1988\", \"34\"], [\"Motor Vehicles Act, 1988\", \"32\"], [\"Motor Vehicles Act, 1988\", \"35\"], [\"Right to Information Act, 2005\", \"17\"], [\"Right to Information Act, 2005\", \"19\"], [\"Right to Information Act, 2005\", \"30\"], [\"Motor Vehicles Act, 1988\", \"20\"], [\"Motor Vehicles Act, 1988\", \"16\"], [\"Information Technology Act, 2000\", \"38\"], [\"Motor Vehicles Act, 1988\", \"22\"], [\"Motor Vehicles Act, 1988\", \"33\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "total_tokens": 1105,
+    "raw": "{\"top5\": [25, 26, 33, 1, 39]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can i get relief against someone who later claims rights to my property?\", [[\"Specific Relief Act, 1963\", \"19\"], [\"Specific Relief Act, 1963\", \"13\"], [\"Specific Relief Act, 1963\", \"8\"], [\"Specific Relief Act, 1963\", \"22\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"244\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"87\"], [\"Transfer of Property Act, 1882\", \"48\"], [\"Transfer of Property Act, 1882\", \"120\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"245\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"251\"], [\"Transfer of Property Act, 1882\", \"40\"], [\"Transfer of Property Act, 1882\", \"39\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"252\"], [\"Specific Relief Act, 1963\", \"17\"], [\"Specific Relief Act, 1963\", \"9\"], [\"Transfer of Property Act, 1882\", \"38\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"316\"], [\"Specific Relief Act, 1963\", \"6\"], [\"Specific Relief Act, 1963\", \"34\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"119\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      3,
+      6,
+      7
+    ],
+    "total_tokens": 918,
+    "raw": "{\"top5\":[1,2,3,6,7]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can a court order more evidence to be gathered after a trial starts?\", [[\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"432\"], [\"Specific Relief Act, 1963\", \"37\"], [\"Specific Relief Act, 1963\", \"38\"], [\"Specific Relief Act, 1963\", \"41\"], [\"Specific Relief Act, 1963\", \"40\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"157\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"161\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"500\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"135\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"282\"], [\"Specific Relief Act, 1963\", \"36\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"370\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"434\"], [\"Consumer Protection Act, 2019\", \"71\"], [\"Motor Vehicles Act, 1988\", \"214\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"346\"], [\"Specific Relief Act, 1963\", \"39\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"408\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"160\"], [\"Right to Information Act, 2005\", \"23\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "total_tokens": 878,
+    "raw": "{\"top5\":[408,432,346,370,282]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"which tribunal handles appeals under the it act?\", [[\"Information Technology Act, 2000\", \"57\"], [\"Motor Vehicles Act, 1988\", \"90\"], [\"Information Technology Act, 2000\", \"60\"], [\"Information Technology Act, 2000\", \"62\"], [\"Information Technology Act, 2000\", \"48\"], [\"Karnataka Rent Act, 1999\", \"59\"], [\"Information Technology Act, 2000\", \"58\"], [\"Motor Vehicles Act, 1988\", \"214\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"426\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"500\"], [\"Motor Vehicles Act, 1988\", \"173\"], [\"Information Technology Act, 2000\", \"55\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"435\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"434\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"495\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"390\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"380\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"432\"], [\"Motor Vehicles Act, 1988\", \"171\"], [\"Consumer Protection Act, 2019\", \"24\"]]]": {
+    "top5_indices": [
+      1,
+      5,
+      7,
+      2,
+      3
+    ],
+    "total_tokens": 1037,
+    "raw": "{\"top5\":[1,5,7,55,60]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"what's the punishment for secretly photographing someone in a private moment?\", [[\"Information Technology Act, 2000\", \"66E\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"77\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"94\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"40\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"36\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"40\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"34\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"35\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"44\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"250\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"38\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"16\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"142\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"249\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"37\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"131\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"58\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"303\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"66\"], [\"Information Technology Act, 2000\", \"66C\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "total_tokens": 1036,
+    "raw": ""
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"are e-rickshaws covered under the motor vehicles act?\", [[\"Motor Vehicles Act, 1988\", \"2A\"], [\"Motor Vehicles Act, 1988\", \"27\"], [\"Motor Vehicles Act, 1988\", \"88A\"], [\"Motor Vehicles Act, 1988\", \"58\"], [\"Motor Vehicles Act, 1988\", \"194B\"], [\"Motor Vehicles Act, 1988\", \"75\"], [\"Motor Vehicles Act, 1988\", \"97\"], [\"Motor Vehicles Act, 1988\", \"13\"], [\"Motor Vehicles Act, 1988\", \"2\"], [\"Motor Vehicles Act, 1988\", \"111\"], [\"Motor Vehicles Act, 1988\", \"95\"], [\"Motor Vehicles Act, 1988\", \"7\"], [\"Motor Vehicles Act, 1988\", \"127\"], [\"Motor Vehicles Act, 1988\", \"109\"], [\"Motor Vehicles Act, 1988\", \"139\"], [\"Motor Vehicles Act, 1988\", \"182A\"], [\"Motor Vehicles Act, 1988\", \"135\"], [\"Motor Vehicles Act, 1988\", \"115\"], [\"Motor Vehicles Act, 1988\", \"2B\"], [\"Motor Vehicles Act, 1988\", \"110\"]]]": {
+    "top5_indices": [
+      1,
+      9,
+      4,
+      7,
+      13
+    ],
+    "total_tokens": 858,
+    "raw": "{\"top5\":[1,9,4,7,13]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"do i need to physically bring my vehicle for registration?\", [[\"Motor Vehicles Act, 1988\", \"39\"], [\"Motor Vehicles Act, 1988\", \"40\"], [\"Motor Vehicles Act, 1988\", \"41\"], [\"Motor Vehicles Act, 1988\", \"44\"], [\"Motor Vehicles Act, 1988\", \"46\"], [\"Motor Vehicles Act, 1988\", \"45\"], [\"Motor Vehicles Act, 1988\", \"53\"], [\"Motor Vehicles Act, 1988\", \"42\"], [\"Motor Vehicles Act, 1988\", \"55\"], [\"Motor Vehicles Act, 1988\", \"48\"], [\"Motor Vehicles Act, 1988\", \"62A\"], [\"Motor Vehicles Act, 1988\", \"51\"], [\"Motor Vehicles Act, 1988\", \"61\"], [\"Motor Vehicles Act, 1988\", \"50\"], [\"Motor Vehicles Act, 1988\", \"130\"], [\"Motor Vehicles Act, 1988\", \"114\"], [\"Motor Vehicles Act, 1988\", \"192B\"], [\"Motor Vehicles Act, 1988\", \"47\"], [\"Motor Vehicles Act, 1988\", \"43\"], [\"Motor Vehicles Act, 1988\", \"207\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "total_tokens": 689,
+    "raw": "{\"top5\":[1,2,3,4,5]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can my rent be revised under special circumstances?\", [[\"Karnataka Rent Act, 1999\", \"10\"], [\"Karnataka Rent Act, 1999\", \"9\"], [\"Karnataka Rent Act, 1999\", \"6\"], [\"Karnataka Rent Act, 1999\", \"13\"], [\"Transfer of Property Act, 1882\", \"115\"], [\"Karnataka Rent Act, 1999\", \"12\"], [\"Transfer of Property Act, 1882\", \"71\"], [\"Karnataka Rent Act, 1999\", \"47\"], [\"Karnataka Rent Act, 1999\", \"14\"], [\"Transfer of Property Act, 1882\", \"105\"], [\"Transfer of Property Act, 1882\", \"64\"], [\"Transfer of Property Act, 1882\", \"116\"], [\"Karnataka Rent Act, 1999\", \"48\"], [\"Transfer of Property Act, 1882\", \"65A\"], [\"Transfer of Property Act, 1882\", \"112\"], [\"Karnataka Rent Act, 1999\", \"34\"], [\"Karnataka Rent Act, 1999\", \"37\"], [\"Transfer of Property Act, 1882\", \"50\"], [\"Transfer of Property Act, 1882\", \"111\"], [\"Transfer of Property Act, 1882\", \"51\"]]]": {
+    "top5_indices": [
+      2,
+      1,
+      6,
+      13,
+      4
+    ],
+    "total_tokens": 695,
+    "raw": "{\"top5\":[2,1,6,13,4]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"am i protected if i did something believing i was legally justified?\", [[\"Bharatiya Nyaya Sanhita, 2023\", \"17\"], [\"Right to Information Act, 2005\", \"21\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"14\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"354\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"35\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"30\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"36\"], [\"Karnataka Rent Act, 1999\", \"57\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"27\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"26\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"318\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"227\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"28\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"45\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"244\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"19\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"37\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"340\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"32\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"126\"]]]": {
+    "top5_indices": [
+      1,
+      3,
+      6,
+      10,
+      2
+    ],
+    "total_tokens": 913,
+    "raw": "{\"top5\":[1,3,6,10,27]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"what are 'service providers' under the domestic violence act?\", [[\"Protection of Women from Domestic Violence Act, 2005\", \"10\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"5\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"30\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"7\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"6\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"15\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"9\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"37\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"2\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"1\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"3\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"4\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"11\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"18\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"27\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"28\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"36\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"8\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"14\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"35\"]]]": {
+    "top5_indices": [
+      9,
+      2,
+      1,
+      5,
+      3
+    ],
+    "total_tokens": 751,
+    "raw": "{\n  \"top5\": [9, 2, 1, 5, 3]\n}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can i appeal a district consumer commission's decision?\", [[\"Consumer Protection Act, 2019\", \"41\"], [\"Consumer Protection Act, 2019\", \"24\"], [\"Consumer Protection Act, 2019\", \"68\"], [\"Consumer Protection Act, 2019\", \"73\"], [\"Consumer Protection Act, 2019\", \"51\"], [\"Consumer Protection Act, 2019\", \"67\"], [\"Consumer Protection Act, 2019\", \"40\"], [\"Consumer Protection Act, 2019\", \"28\"], [\"Motor Vehicles Act, 1988\", \"214\"], [\"Karnataka Rent Act, 1999\", \"59\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"500\"], [\"Right to Information Act, 2005\", \"19\"], [\"Consumer Protection Act, 2019\", \"16\"], [\"Karnataka Rent Act, 1999\", \"26\"], [\"Consumer Protection Act, 2019\", \"9\"], [\"Consumer Protection Act, 2019\", \"50\"], [\"Consumer Protection Act, 2019\", \"48\"], [\"Consumer Protection Act, 2019\", \"34\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"423\"], [\"Consumer Protection Act, 2019\", \"17\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      3,
+      5,
+      4
+    ],
+    "total_tokens": 669,
+    "raw": "{\n  \"top5\": [1, 2, 3, 5, 40]\n}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"what happens if i can't pay a fine - do i go to jail instead?\", [[\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"461\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"8\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"56\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"464\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"463\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"385\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"55\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"395\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"24\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"400\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"469\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"471\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"23\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"173\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"62\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"209\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"49\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"200\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"4\"], [\"Bharatiya Nyaya Sanhita, 2023\", \"355\"]]]": {
+    "top5_indices": [
+      9,
+      2,
+      1,
+      5,
+      4
+    ],
+    "total_tokens": 1037,
+    "raw": "{\"top5\":[9,2,1,5,4]}"
+  },
+  "[\"v1\", \"openai/gpt-oss-120b\", \"can accident victims get interim financial relief before the case is resolved?\", [[\"Motor Vehicles Act, 1988\", \"164A\"], [\"Motor Vehicles Act, 1988\", \"166\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"396\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"20\"], [\"Motor Vehicles Act, 1988\", \"163\"], [\"Motor Vehicles Act, 1988\", \"161\"], [\"Motor Vehicles Act, 1988\", \"164\"], [\"Specific Relief Act, 1963\", \"36\"], [\"Motor Vehicles Act, 1988\", \"149\"], [\"Motor Vehicles Act, 1988\", \"162\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"397\"], [\"Motor Vehicles Act, 1988\", \"164B\"], [\"Specific Relief Act, 1963\", \"40\"], [\"Motor Vehicles Act, 1988\", \"134A\"], [\"Motor Vehicles Act, 1988\", \"159\"], [\"Specific Relief Act, 1963\", \"9\"], [\"Motor Vehicles Act, 1988\", \"160\"], [\"Protection of Women from Domestic Violence Act, 2005\", \"26\"], [\"Bharatiya Nagarik Suraksha Sanhita, 2023\", \"147\"], [\"Motor Vehicles Act, 1988\", \"187\"]]]": {
+    "top5_indices": [
+      1,
+      2,
+      7,
+      6,
+      10
+    ],
+    "total_tokens": 780,
+    "raw": "{\"top5\":[1,2,7,6,10]}"
+  }
+}
