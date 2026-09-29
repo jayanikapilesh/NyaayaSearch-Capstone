@@ -128,7 +128,7 @@ def summarize_document(document_text, language="en"):
             {"role": "system", "content": DOCUMENT_SUMMARY_SYSTEM_PROMPT},
             {"role": "user", "content": user_prompt},
         ],
-        temperature=0.2,
+        temperature=0,
         max_tokens=6000,
         reasoning_effort="low",
     )

@@ -10,6 +10,7 @@ function SimplifierTab({ setError, uiLanguage = "en", pendingCaseContext, onCons
   const content = getSimplifierContent(uiLanguage);
   const [caseText, setCaseText] = useState("");
   const [simplifiedCase, setSimplifiedCase] = useState("");
+  const [lawReferences, setLawReferences] = useState([]);
   const [simplifying, setSimplifying] = useState(false);
   const [caseContext, setCaseContext] = useState(null);
 
@@ -24,6 +25,7 @@ function SimplifierTab({ setError, uiLanguage = "en", pendingCaseContext, onCons
       setCaseContext(pendingCaseContext);
       setCaseText("");
       setSimplifiedCase("");
+      setLawReferences([]);
       if (typeof onConsumePendingCaseContext === "function") onConsumePendingCaseContext();
     }, 0);
     return function () { clearTimeout(timer); };
@@ -37,12 +39,13 @@ function SimplifierTab({ setError, uiLanguage = "en", pendingCaseContext, onCons
     setSimplifying(true);
     setError(null);
     setSimplifiedCase("");
+    setLawReferences([]);
 
     try {
       const response = await fetch(API_URL + "/simplify-case", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ case_text: caseText }),
+        body: JSON.stringify({ case_text: caseText, language: uiLanguage }),
       });
 
       if (!response.ok) {
@@ -53,6 +56,7 @@ function SimplifierTab({ setError, uiLanguage = "en", pendingCaseContext, onCons
 
       const data = await response.json();
       setSimplifiedCase(data.simplified_explanation || "");
+      setLawReferences(Array.isArray(data.law_references) ? data.law_references : []);
     } catch (err) {
       setError(content.errNetwork);
       console.error(err);
@@ -100,6 +104,20 @@ function SimplifierTab({ setError, uiLanguage = "en", pendingCaseContext, onCons
           <div className="draft-text">
             <ReactMarkdown remarkPlugins={[remarkGfm]}>{simplifiedCase}</ReactMarkdown>
           </div>
+          {lawReferences && lawReferences.length > 0 && (
+            <div className="laws-mentioned-box">
+              <h4>{content.lawsMentioned}</h4>
+              <ul className="laws-mentioned-list">
+                {lawReferences.map(function (ref, idx) {
+                  return (
+                    <li key={idx}>
+                      {ref.now ? `${ref.cited} → now ${ref.now}` : ref.cited}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          )}
           <p className="legal-disclaimer">{getLegalDisclaimer(uiLanguage)}</p>
         </div>
       )}

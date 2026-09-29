@@ -21,7 +21,7 @@ function DictionaryTab({ uiLanguage }) {
       const response = await fetch(API_URL + "/define", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ term: dictTerm }),
+        body: JSON.stringify({ term: dictTerm, language: uiLanguage }),
       });
 
       if (!response.ok) {

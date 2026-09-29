@@ -1610,6 +1610,38 @@ h1, h2, h3 {
   margin-bottom: var(--space-3);
 }
 
+.laws-mentioned-box {
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.laws-mentioned-box h4 {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+  color: var(--color-ink);
+}
+
+.laws-mentioned-list {
+  list-style-type: disc;
+  padding-left: var(--space-5);
+  margin: 0;
+  font-size: var(--fs-sm);
+  color: var(--color-ink);
+}
+
+.laws-mentioned-list li {
+  margin-bottom: var(--space-1);
+}
+
+.laws-mentioned-list li:last-child {
+  margin-bottom: 0;
+}
+
 /* Search history */
 
 .search-history {

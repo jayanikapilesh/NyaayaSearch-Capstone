@@ -7,6 +7,7 @@ const SIMPLIFIER_CONTENT = {
     submitButton: "Simplify Case",
     submittingButton: "Simplifying...",
     resultHeading: "Explanation",
+    lawsMentioned: "Laws mentioned",
     errDefault: "Could not simplify this case. Please try again.",
     errNetwork: "Could not reach the server. Make sure the backend is running.",
     caseContextHint: "Paste the judgment text for this case below to simplify it.",
@@ -20,6 +21,7 @@ const SIMPLIFIER_CONTENT = {
     submitButton: "केस सरल करें",
     submittingButton: "सरल किया जा रहा है...",
     resultHeading: "स्पष्टीकरण",
+    lawsMentioned: "उल्लिखित कानून", // needs native review
     errDefault: "इस केस को सरल करने में समस्या आई। कृपया फिर से कोशिश करें।",
     errNetwork: "सर्वर से संपर्क नहीं हो पाया। सुनिश्चित करें कि बैकएंड चल रहा है।",
     caseContextHint: "इस मामले को सरल करने के लिए नीचे फैसले का पाठ पेस्ट करें।",
@@ -33,6 +35,7 @@ const SIMPLIFIER_CONTENT = {
     submitButton: "ಪ್ರಕರಣ ಸರಳಗೊಳಿಸಿ",
     submittingButton: "ಸರಳಗೊಳಿಸಲಾಗುತ್ತಿದೆ...",
     resultHeading: "ವಿವರಣೆ",
+    lawsMentioned: "ಉಲ್ಲೇಖಿಸಲಾದ ಕಾನೂನುಗಳು", // needs native review
     errDefault: "ಈ ಪ್ರಕರಣವನ್ನು ಸರಳಗೊಳಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.",
     errNetwork: "ಸರ್ವರ್ ಸಂಪರ್ಕಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ಬ್ಯಾಕೆಂಡ್ ಚಾಲನೆಯಲ್ಲಿದೆಯೇ ಎಂದು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ.",
     caseContextHint: "ಈ ಪ್ರಕರಣವನ್ನು ಸರಳಗೊಳಿಸಲು ಕೆಳಗೆ ತೀರ್ಪಿನ ಪಠ್ಯವನ್ನು ಅಂಟಿಸಿ.",

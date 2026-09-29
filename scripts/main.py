@@ -18,7 +18,7 @@ from citations_core import find_related_cases, load_citations
 from pdf_core import extract_text_from_pdf, answer_question_about_document, summarize_document, extract_dates_and_deadlines
 from dictionary_core import define_term
 from drafter_core import draft_document, DOCUMENT_TYPES
-from case_simplifier_core import simplify_case
+from case_simplifier_core import simplify_case, extract_law_references
 from bns_decoder_core import explain_bns_section
 
 import logging
@@ -66,6 +66,7 @@ class DocumentQuestionRequest(BaseModel):
 
 class DefineRequest(BaseModel):
     term: str
+    language: str | None = "en"
 
 
 class TranslateExplanationRequest(BaseModel):
@@ -435,12 +436,15 @@ def ask_document(request: DocumentQuestionRequest, raw_request: Request):
 
 @app.post("/define")
 def define(request: DefineRequest, raw_request: Request):
-    check_rate_limit(raw_request, language="en")
+    lang = (request.language or "en").lower().strip()
+    if lang not in ("en", "hi", "kn"):
+        lang = "en"
+    check_rate_limit(raw_request, language=lang)
     if not request.term or not request.term.strip():
         raise HTTPException(status_code=400, detail="Please enter a term to look up.")
 
     try:
-        definition = define_term(request.term)
+        definition = define_term(request.term, language=lang)
     except groq.RateLimitError:
         raise HTTPException(status_code=503, detail="The dictionary service is temporarily unavailable due to a usage limit. Please try again later.")
     except Exception:
@@ -455,6 +459,7 @@ class DraftRequest(BaseModel):
 
 class CaseSimplifyRequest(BaseModel):
     case_text: str
+    language: str | None = "en"
 
 
 class BNSLookupRequest(BaseModel):
@@ -485,20 +490,31 @@ def get_document_types():
 
 @app.post("/simplify-case")
 def simplify_case_endpoint(request: CaseSimplifyRequest, raw_request: Request):
-    check_rate_limit(raw_request, language="en")
+    lang = (request.language or "en").lower().strip()
+    if lang not in ("en", "hi", "kn"):
+        lang = "en"
+    check_rate_limit(raw_request, language=lang)
     if not request.case_text or not request.case_text.strip():
         raise HTTPException(status_code=400, detail="Please paste the case text you want simplified.")
     if len(request.case_text) > 20000:
         raise HTTPException(status_code=400, detail="That text is too long. Please paste a shorter excerpt (under 20,000 characters).")
 
     try:
-        simplified = simplify_case(request.case_text)
+        res = simplify_case(request.case_text, language=lang)
     except groq.RateLimitError:
         raise HTTPException(status_code=503, detail="The case simplifier is temporarily unavailable due to a usage limit. Please try again later.")
     except Exception:
         raise HTTPException(status_code=500, detail="Something went wrong simplifying this case. Please try again.")
 
-    return {"simplified_explanation": simplified}
+    if isinstance(res, dict):
+        return {
+            "simplified_explanation": res.get("simplified_explanation", ""),
+            "law_references": res.get("law_references", []),
+        }
+    return {
+        "simplified_explanation": res,
+        "law_references": extract_law_references(request.case_text),
+    }
 
 
 @app.post("/bns-lookup")
