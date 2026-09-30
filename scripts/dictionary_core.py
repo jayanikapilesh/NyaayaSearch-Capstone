@@ -13,7 +13,13 @@ CACHE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "data"
 DICTIONARY_CACHE_PATH = os.path.join(CACHE_DIR, "dictionary_cache.json")
 _cache_lock = threading.Lock()
 
-DICTIONARY_PROMPT_VERSION = "v2"
+DICTIONARY_PROMPT_VERSION = "v3"
+
+LANGUAGE_NAMES = {
+    "en": "English",
+    "hi": "Hindi",
+    "kn": "Kannada",
+}
 
 # Small verified mapping of terms to current BNSS section and earlier CrPC section.
 # Verified against the statutory text in Legal_Knowledge_Base_combined.xlsx.
@@ -73,15 +79,20 @@ STRICT RULES:
   * For ANY other term where no verified citation is provided, you MUST NOT include ANY section numbers. Instead, name the governing law (e.g. "under the Bharatiya Nagarik Suraksha Sanhita (BNSS)") without any section number. Never guess or invent section numbers.
 - If the term is not a real legal term, say so honestly rather than making up a definition.
 - Do not give legal advice - only explain what the term means.
-- Respond in the SAME language as the term/question was asked in.
+- For unusual legal terms, keep the English term in brackets when unsure (e.g. "धोखाधड़ी (cheating)").
 """
 
 
-def define_term(term):
+def define_term(term, language="en"):
+    lang_code = (language or "en").lower().strip()
+    if lang_code not in ("en", "hi", "kn"):
+        lang_code = "en"
+    target_language = LANGUAGE_NAMES.get(lang_code, "English")
+
     norm_term = (term or "").strip().lower()
     cache_key = None
     if os.environ.get("NYAAYA_DISABLE_CACHE") != "1":
-        cache_key = json.dumps([DICTIONARY_PROMPT_VERSION, norm_term], ensure_ascii=False)
+        cache_key = json.dumps([DICTIONARY_PROMPT_VERSION, lang_code, norm_term], ensure_ascii=False)
         with _cache_lock:
             cache = _load_cache()
             if cache_key in cache and cache[cache_key] and cache[cache_key].strip():
@@ -94,7 +105,19 @@ def define_term(term):
     else:
         cit_msg = "NO VERIFIED CITATION: Do NOT include ANY section numbers. Name the governing law without any section number."
 
-    user_prompt = f"Define this legal term in plain language: {term}\n\n{cit_msg}"
+    user_prompt = (
+        f"Define the legal term '{term}' in plain language.\n\n"
+        f"{cit_msg}\n\n"
+        f"IMPORTANT: Respond entirely in {target_language}.\n"
+    )
+    if lang_code != "en":
+        user_prompt += (
+            f"Translate the term to its proper legal term in {target_language} with the English term in brackets (e.g. 'जमानत (bail)' in Hindi, 'ಜಾಮೀನು (bail)' in Kannada).\n"
+            "For unusual legal terms, keep the English term in brackets when unsure (e.g. 'धोखाधड़ी (cheating)').\n"
+            "Remember: If no verified citation is provided above, do NOT mention ANY section numbers."
+        )
+
+    max_tokens = 600 if lang_code == "en" else 2000
 
     result = None
     for attempt in range(3):
@@ -105,8 +128,9 @@ def define_term(term):
                     {"role": "system", "content": DICTIONARY_SYSTEM_PROMPT},
                     {"role": "user", "content": user_prompt},
                 ],
-                temperature=0.2,
-                max_tokens=400,
+                temperature=0,
+                max_tokens=max_tokens,
+                reasoning_effort="low",
             )
             content = response.choices[0].message.content
             if content and content.strip():

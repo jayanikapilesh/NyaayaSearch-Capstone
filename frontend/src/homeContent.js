@@ -8,6 +8,8 @@ export const HOME_CONTENT = {
     heroHeadlineLine2: "Indian law in plain language.",
     heroSubtitle: "NyaayaSearch matches your question to the exact Acts and Sections that apply, explains what they mean, and helps you act on them - in English, Hindi, or Kannada.",
     ctaLabel: "Start Searching",
+    continueHeading: "Continue where you left off",
+    continueSubtext: "Jump back into your last search.",
     statsLabels: {
       acts: "Acts Covered",
       sections: "Sections Indexed",
@@ -57,6 +59,8 @@ export const HOME_CONTENT = {
     heroHeadlineLine2: "और सरल भाषा में समझें।",
     heroSubtitle: "न्यायासर्च आपके प्रश्न से जुड़ी सटीक धाराओं और अधिनियमों को खोजता है, उनका अर्थ समझाता है, और अंग्रेज़ी, हिंदी या कन्नड़ में आपको आगे बढ़ने में मदद करता है।",
     ctaLabel: "खोजना शुरू करें",
+    continueHeading: "जहां आपने छोड़ा था वहीं से जारी रखें",
+    continueSubtext: "अपनी पिछली खोज पर वापस जाएं।",
     statsLabels: {
       acts: "शामिल अधिनियम",
       sections: "शामिल धाराएं",
@@ -106,6 +110,8 @@ export const HOME_CONTENT = {
     heroHeadlineLine2: "ಮತ್ತು ಸರಳ ಭಾಷೆಯಲ್ಲಿ ಅರ್ಥಮಾಡಿಕೊಳ್ಳಿ.",
     heroSubtitle: "ನ್ಯಾಯಸರ್ಚ್ ನಿಮ್ಮ ಪ್ರಶ್ನೆಗೆ ಸಂಬಂಧಿಸಿದ ನಿಖರವಾದ ಕಾಯ್ದೆಗಳು ಮತ್ತು ವಿಭಾಗಗಳನ್ನು ಹೊಂದಿಸುತ್ತದೆ, ಅವುಗಳ ಅರ್ಥವನ್ನು ವಿವರಿಸುತ್ತದೆ, ಮತ್ತು ಇಂಗ್ಲಿಷ್, ಹಿಂದಿ ಅಥವಾ ಕನ್ನಡದಲ್ಲಿ ಮುಂದುವರಿಯಲು ಸಹಾಯ ಮಾಡುತ್ತದೆ.",
     ctaLabel: "ಹುಡುಕಾಟ ಪ್ರಾರಂಭಿಸಿ",
+    continueHeading: "ನೀವು ನಿಲ್ಲಿಸಿದಲ್ಲಿಂದ ಮುಂದುವರಿಸಿ",
+    continueSubtext: "ನಿಮ್ಮ ಕೊನೆಯ ಹುಡುಕಾಟಕ್ಕೆ ಹಿಂತಿರುಗಿ.",
     statsLabels: {
       acts: "ಸೇರಿಸಲಾದ ಕಾಯ್ದೆಗಳು",
       sections: "ಸೂಚ್ಯಂಕಗೊಳಿಸಿದ ವಿಭಾಗಗಳು",

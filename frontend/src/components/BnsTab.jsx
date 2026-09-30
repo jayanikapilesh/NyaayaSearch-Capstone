@@ -1,19 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { API_URL } from "../constants";
 import { extractErrorMessage } from "../utils";
 import { getBnsContent } from "../bnsContent";
+import { getLegalDisclaimer } from "../legalDisclaimerContent";
 
-function BnsTab({ setError, uiLanguage = "en" }) {
+function BnsTab({ setError, uiLanguage = "en", pendingSection, onConsumePendingSection }) {
   const content = getBnsContent(uiLanguage);
   const [bnsSectionInput, setBnsSectionInput] = useState("");
   const [bnsResult, setBnsResult] = useState(null);
   const [bnsLoading, setBnsLoading] = useState(false);
 
-  const handleBnsLookup = async function (e) {
-    e.preventDefault();
-    if (!bnsSectionInput.trim()) return;
+  const runBnsLookup = async function (sectionNumber) {
+    if (!sectionNumber.trim()) return;
 
     setBnsLoading(true);
     setError(null);
@@ -24,7 +24,7 @@ function BnsTab({ setError, uiLanguage = "en" }) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          section_number: bnsSectionInput.trim(),
+          section_number: sectionNumber.trim(),
           language: uiLanguage,
         }),
       });
@@ -44,6 +44,24 @@ function BnsTab({ setError, uiLanguage = "en" }) {
       setBnsLoading(false);
     }
   };
+
+  const handleBnsLookup = function (e) {
+    e.preventDefault();
+    runBnsLookup(bnsSectionInput);
+  };
+
+  // "Look up this section" from a Search result hands us a section number to
+  // look up immediately, rather than making the user retype it here.
+  useEffect(function () {
+    if (!pendingSection) return;
+    const timer = setTimeout(function () {
+      setBnsSectionInput(pendingSection);
+      runBnsLookup(pendingSection);
+      if (typeof onConsumePendingSection === "function") onConsumePendingSection();
+    }, 0);
+    return function () { clearTimeout(timer); };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pendingSection]);
 
   return (
     <div className="drafter-section">
@@ -80,6 +98,7 @@ function BnsTab({ setError, uiLanguage = "en" }) {
             <p className="bns-original-label">{content.originalText}</p>
             <p className="bns-original-text">{bnsResult.legal_text}</p>
           </div>
+          <p className="legal-disclaimer">{getLegalDisclaimer(uiLanguage)}</p>
         </div>
       )}
     </div>
