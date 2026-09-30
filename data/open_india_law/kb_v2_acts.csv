@@ -11,7 +11,6 @@
 "Contempt of Courts Act, 1971",CC,Central,Crime/police/courts/bail/evidence,OK,Criminal Law,IND_central_1514,24,24
 "Court-Fees Act, 1870",CF70,Central,Crime/police/courts/bail/evidence,OK,Criminal Law,IND_central_2293,50,50
 "Criminal Procedure (Identification) Act, 2022",CPI,Central,Crime/police/courts/bail/evidence,OK,Criminal Law,IND_central_19029,9,10
-"Goa, Daman and Diu (Extension of the Code of Civil Procedure and the Arbitration Act) Act, 1965",GDDECC,Central,Crime/police/courts/bail/evidence,OK,Criminal Law,IND_central_1575,7,7
 "Gram Nyayalayas Act, 2008",GN,Central,Crime/police/courts/bail/evidence,OK,Criminal Law,IND_central_2060,40,40
 "Legal Services Authorities Act, 1987",LSA,Central,Crime/police/courts/bail/evidence,NEEDS CHECK,Criminal Law,IND_central_1925,39,39
 "Mediation Act, 2023",M23,Central,Crime/police/courts/bail/evidence,NEEDS CHECK,Criminal Law,IND_central_19637,68,68
@@ -19,7 +18,6 @@
 "Notaries Act, 1952",N,Central,Crime/police/courts/bail/evidence,OK,Criminal Law,IND_central_2172,16,16
 "Oaths Act, 1969",O,Central,Crime/police/courts/bail/evidence,OK,Criminal Law,IND_central_1643,9,9
 "Police Act, 1861",P61,Central,Crime/police/courts/bail/evidence,NEEDS CHECK,Criminal Law,IND_central_2264,44,45
-"Presidency Small Cause Courts Act, 1882",PSCC,Central,Crime/police/courts/bail/evidence,OK,Criminal Law,IND_central_2371,98,100
 "Prevention of Corruption Act, 1988",PC,Central,Crime/police/courts/bail/evidence,OK,Criminal Law,IND_central_1558,40,41
 "Prevention of Damage to Public Property Act, 1984",PDPP,Central,Crime/police/courts/bail/evidence,OK,Criminal Law,IND_central_1770,6,6
 "Prevention of Money-Laundering Act, 2002",PML,Central,Crime/police/courts/bail/evidence,OK,Criminal Law,IND_central_2036,80,81
@@ -27,7 +25,6 @@
 "Prisons Act, 1894",P94,Central,Crime/police/courts/bail/evidence,OK,Criminal Law,IND_central_2325,60,62
 "Probation of Offenders Act, 1958",PO,Central,Crime/police/courts/bail/evidence,OK,Criminal Law,IND_central_1507,19,19
 "Protection of Civil Rights Act, 1955",PCR,Central,Crime/police/courts/bail/evidence,OK,Criminal Law,IND_central_1544,26,26
-"Public Gambling Act, 1867",PG,Central,Crime/police/courts/bail/evidence,OK,Criminal Law,IND_central_2269,18,18
 "Unlawful Activities (Prevention) Act, 1967",UAP,Central,Crime/police/courts/bail/evidence,NEEDS CHECK,Criminal Law,IND_central_1470,65,66
 "Aadhaar (Targeted Delivery of Financial and Other Subsidies, Benefits and Services) Act, 2016",ATDFOS,Central,Cyber/IT/data,OK,Information Technology and Cyber Law,IND_central_2160,67,68
 "Digital Personal Data Protection Act, 2023",DPDP,Central,Cyber/IT/data,OK,Information Technology and Cyber Law,IND_central_22037,44,44
@@ -65,7 +62,6 @@
 "Citizenship Act, 1955",C,Central,Fundamental rights/citizenship,OK,Civil Rights,IND_central_1522,27,27
 "Passports Act, 1967",P67,Central,Fundamental rights/citizenship,NEEDS CHECK,Civil Rights,IND_central_1372,27,28
 "Cigarettes and Other Tobacco Products (Prohibition of Advertisement and Regulation of Trade and Commerce, Production, Supply and Distribution) Act, 2003",COTPPA,Central,Health,OK,Health,IND_central_2053,34,34
-"Clinical Establishments (Registration and Regulation) Act, 2010",CERR,Central,Health,NEEDS CHECK,Health,IND_central_2048,55,55
 "Drugs and Cosmetics Act, 1940",DC,Central,Health,OK,Health,IND_central_2409,81,87
 "Epidemic Diseases Act, 1897",ED,Central,Health,OK,Health,IND_central_2326,12,13
 "Mental Healthcare Act, 2017",MH,Central,Health,OK,Health,IND_central_2249,126,126
@@ -95,18 +91,11 @@
 "Recovery Of Debts And Bankruptcy Act, 1993",RDB,Central,Money/cheques/banking disputes,OK,Banking and Finance,IND_central_1775,48,45
 "Securitisation and Reconstruction of Financial Assets and Enforcement of Security Interest Act, 2002",SRFAES,Central,Money/cheques/banking disputes,NEEDS CHECK,Banking and Finance,IND_central_2006,60,61
 "Usurious Loans Act, 1918",UL,Central,Money/cheques/banking disputes,OK,Banking and Finance,IND_central_2362,3,3
-"Ajmer Tenancy and Land Records Act, 1950",ATLR,Central,Property/rent/registration/land,OK,Property,IND_central_1796,205,205
-"Cantonments (Extension of Rent Control Laws) Act, 1957",CERCL,Central,Property/rent/registration/land,OK,Property,IND_central_1379,3,3
-"Central Provinces Tenancy Act, 1898",CPT,Central,Property/rent/registration/land,OK,Property,IND_central_19250,100,100
-"Delhi Apartment Ownership Act, 1986",DAO,Central,Property/rent/registration/land,OK,Property,IND_central_1805,27,27
-"East Punjab Urban Rent Restriction Act (Extension to Chandigarh) Act, 1974",EPURRE,Central,Property/rent/registration/land,OK,Property,IND_central_1610,4,4
 "Indian Easements Act, 1882",IE,Central,Property/rent/registration/land,OK,Property,IND_central_2349,64,64
 "Public Premises (Eviction of Unauthorised Occupants) Act, 1971",PPEUO,Central,Property/rent/registration/land,OK,Property,IND_central_1609,26,26
 "Registration Act, 1908",R,Central,Property/rent/registration/land,OK,Property,IND_central_2190,94,96
 "Right to Fair Compensation and Transparency in Land Acquisition, Rehabilitation and Resettlement Act, 2013",RFCTLA,Central,Property/rent/registration/land,OK,Property,IND_central_2121,116,116
 "Scheduled Tribes and Other Traditional Forest Dwellers (Recognition of Forest Rights) Act, 2006",STOTFD,Central,Property/rent/registration/land,OK,Property,IND_central_2070,14,14
-"Slum Areas (Improvement and Clearance) Act, 1956",SAIC,Central,Property/rent/registration/land,OK,Property,IND_central_1709,44,44
-"delhi rent control act, 1958",DRC,Central,Property/rent/registration/land,OK,Property,IND_central_19223,65,67
 "Commission of Sati (Prevention ) Act, 1987",CSP,Central,Women/children/elderly/disability protection,OK,Women and Child Protection,IND_central_1814,21,22
 "Commissions for Protection of Child Rights Act, 2005",CPCR,Central,Women/children/elderly/disability protection,OK,Women and Child Protection,IND_central_2056,37,37
 "Human Immunodeficiency Virus and Acquired Immune Deficiency Syndrome (Prevention and Control) Act, 2017",HIVAID,Central,Women/children/elderly/disability protection,NEEDS CHECK,Women and Child Protection,IND_central_2254,49,49

@@ -52,6 +52,62 @@ DOMAIN = {  # candidate topic -> KB-style domain label
     "Environment/pollution": "Environment", "Local bodies (Karnataka)": "Local Government",
 }
 
+# ---------------------------------------------------------------- territorial scope
+# Rule: an Act whose territorial scope is limited to State(s) / Union Territory(ies) other than Karnataka is removed.
+# Decided ONLY from the Act's title and its extent clause (kb_v2_extent_scan.py reads it from the Act PDF), never from
+# evaluation scores. All-India central Acts and all Karnataka Acts are kept.
+ALL_INDIA = re.compile(r"(?i)whole of india|entire territor|throughout india|whole of the territor|all the states")
+MENTIONS_KARNATAKA = re.compile(r"(?i)karnataka|mysore|coorg")
+TERRITORIAL_NOUNS = re.compile(r"(?i)\bstates?\b|union territor|cantonment|territories (?:for the time being )?administered|presidency")
+TITLE_TERRITORY = re.compile(
+    r"(?i)\b(delhi|ajmer|punjab|chandigarh|goa|daman|diu|presidency|bengal|bombay|madras|oudh|central provinces|pondicherry|puducherry|"
+    r"manipur|tripura|assam|sikkim|nagaland|mizoram|meghalaya|andhra|kerala|jammu|ladakh|lakshadweep|andaman)\b")
+# Evidence read directly from the Acts where the extent clause is not in the extractable PDF text
+TERRITORY_EVIDENCE = [
+    (r"^The Public Gambling Act", "long title",
+     "An Act to provide for the punishment of public gambling and the keeping of common gaming-houses in the United Provinces, East Punjab, Delhi and the Central Provinces"),
+    (r"^The Presidency Small Cause Courts Act", "section 5",
+     "There shall be in each of the towns of Calcutta, Madras and Bombay a Court, to be called the Court of Small Causes of Calcutta, Madras or Bombay"),
+    (r"^The delhi rent control act", "extent clause (section 1(2))",
+     "It extends to the areas included within the limits of the New Delhi Municipal Committee and the Delhi Cantonment Board and to such urban areas within the limits of the Municipal Corporation of Delhi as are specified in the First Schedule"),
+]
+# The set the classifier is expected to flag (reviewed by hand against the quotes). If the classifier ever disagrees, the
+# build stops instead of silently removing or keeping an Act.
+EXPECTED_TERRITORIAL_REMOVALS = {
+    "The Ajmer Tenancy and Land Records Act, 1950", "The Central Provinces Tenancy Act, 1898", "The delhi rent control act, 1958",
+    "The Delhi Apartment Ownership Act, 1986", "The East Punjab Urban Rent Restriction Act (Extension to Chandigarh) Act, 1974",
+    "The Goa, Daman and Diu (Extension of the Code of Civil Procedure and the Arbitration Act) Act, 1965",
+    "The Presidency Small Cause Courts Act, 1882", "The Public Gambling Act, 1867",
+    "The Cantonments (Extension of Rent Control Laws) Act, 1957", "The Slum Areas (Improvement and Clearance) Act, 1956",
+    "The Clinical Establishments (Registration and Regulation) Act, 2010",
+}
+# Decided by hand, overriding the extent-clause rule: the Act applies "in the first instance" to other States/UTs but also to any
+# State that adopts it under Article 252, and the Act text does not say whether Karnataka did. Kept on the project owner's decision.
+TERRITORY_KEEP_OVERRIDES = [r"^The Transplantation of Human Organs and Tissues Act"]
+
+
+def territorial_scope(title, level, clause):
+    """(limited_to_other_territory, basis, quote). Karnataka Acts are never removed."""
+    if level == "Karnataka":
+        return False, "", ""
+    if any(re.search(p, title, flags=re.I) for p in TERRITORY_KEEP_OVERRIDES):
+        return False, "", ""
+    for pat, basis, quote in TERRITORY_EVIDENCE:
+        if re.search(pat, title, flags=re.I):
+            return True, basis, quote
+    clause = clause or ""
+    if clause:
+        if ALL_INDIA.search(clause) or MENTIONS_KARNATAKA.search(clause):
+            return False, "", ""
+        if TERRITORIAL_NOUNS.search(clause):
+            return True, "extent clause", clause
+        return False, "", ""
+    m = TITLE_TERRITORY.search(title)
+    if m:
+        return True, f"title ('{m.group(0)}'); extent clause not extractable", title
+    return False, "", ""
+
+
 # ---------------------------------------------------------------- text cleaning
 SOR = re.compile(r"(?i)statement\s+of\s+objects\s+and\s+reasons")
 TOC = re.compile(r"(?im)^[#*_\s>|-]*ARRANGEMENT OF SECTIONS")
@@ -228,7 +284,27 @@ def main():
         assert len(hit) == 1, (pat, hit.act.tolist())
         picked.append(hit.iloc[0].act_id)
     keep = pd.concat([keep, nc[nc.act_id.isin(picked)]])
-    print(f"open-india-law Acts: {(keep.status == 'OK').sum()} OK + {(keep.status != 'OK').sum()} NEEDS CHECK kept = {len(keep)}")
+    print(f"open-india-law Acts before the territorial rule: {(keep.status == 'OK').sum()} OK + {(keep.status != 'OK').sum()} NEEDS CHECK = {len(keep)}")
+
+    # ---- territorial rule: remove Acts limited to another State / Union Territory (title + extent clause only)
+    scan_file = OIL / "kb_v2_extent_scan.csv"
+    assert scan_file.exists(), "run: python scripts/kb_v2_extent_scan.py"
+    clauses = {r.act_id: (r.extent_clause if isinstance(r.extent_clause, str) else "") for r in pd.read_csv(scan_file).itertuples()}
+    src_counts = pd.read_parquet(OIL / "sections_fixed.parquet", columns=["act_id"]).act_id.value_counts()
+    removed = []
+    for a in keep.itertuples():
+        limited, basis, quote = territorial_scope(a.act, a.level, clauses.get(a.act_id, ""))
+        if limited:
+            removed.append({"act": act_title(a.act), "raw_title": a.act, "act_id": a.act_id, "level": a.level, "status": a.status,
+                            "sections_in_source": int(src_counts.get(a.act_id, 0)), "basis": basis, "quote": quote[:400]})
+    flagged = {r["raw_title"] for r in removed}
+    assert flagged == EXPECTED_TERRITORIAL_REMOVALS, (
+        f"territorial classifier disagrees with the reviewed list: unexpected {sorted(flagged - EXPECTED_TERRITORIAL_REMOVALS)}, "
+        f"missing {sorted(EXPECTED_TERRITORIAL_REMOVALS - flagged)}")
+    keep = keep[~keep.act_id.isin({r["act_id"] for r in removed})]
+    pd.DataFrame(removed).drop(columns=["raw_title"]).to_csv(OIL / "kb_v2_removed_acts.csv", index=False, encoding="utf-8-sig")
+    print(f"territorial rule removed {len(removed)} Acts ({sum(r['sections_in_source'] for r in removed)} source sections); "
+          f"open-india-law Acts kept: {(keep.status == 'OK').sum()} OK + {(keep.status != 'OK').sum()} NEEDS CHECK = {len(keep)}")
 
     urls, numbers = {}, {}
     for f in ("in_central_legislation.parquet", "in_karnataka_legislation.parquet"):
@@ -302,6 +378,7 @@ def main():
         if len(legal) > 20000:
             if (m["name"], sec) in SPLIT_OVERSIZED:
                 stats["oversized_split_into_parts"] += 1
+                stats["rows_added_by_splitting"] += len(split_parts(title, legal)) - 1
                 for i, (ptitle, ptext) in enumerate(split_parts(title, legal)):
                     new_rows[(r.act_id, sec, i)] = {"act_id": r.act_id, "section": sec, "title": ptitle, "legal": ptext, "part": i}
                 continue
@@ -359,16 +436,40 @@ def main():
                              "source_sections": int((secs.act_id == a).sum())} for a in act_meta]).sort_values(["level", "topic", "name"])
     acts_df.to_csv(OIL / "kb_v2_acts.csv", index=False, encoding="utf-8-sig")
     pd.DataFrame(dropped).to_csv(OIL / "kb_v2_dropped_sections.csv", index=False, encoding="utf-8-sig")
+    dropped_by_rule = {k[len("dropped_"):]: v for k, v in stats.items() if k.startswith("dropped_")}
+    # every number below is checked against the workbook that was just written, not against in-memory counters
+    check = openpyxl.load_workbook(NEW_KB, read_only=True).active
+    file_rows = list(check.values)
+    fh, frows = file_rows[0], file_rows[1:]
+    i_act, i_src = fh.index("act_name"), fh.index("source")
+    file_acts = {r[i_act] for r in frows}
+    file_own = [r for r in frows if r[i_src] == "own"]
+    file_new = [r for r in frows if r[i_src] != "own"]
+    assert len(file_own) == len(own) and len({r[i_act] for r in file_own}) == len(own_names)
+    assert len(file_new) == len(final) and len({r[i_act] for r in file_new}) == len(keep)
+    assert len(frows) == len(own) + len(final) and len(file_acts) == len(own_names) + len(keep)
+    assert len({r[0] for r in frows}) == len(frows), "law_id not unique in the written file"
+    # accounting identity: input sections of the kept Acts = rows kept - rows created by splitting + everything dropped
+    assert stats["input_sections"] == len(final) - stats["rows_added_by_splitting"] + sum(dropped_by_rule.values()), "row accounting does not add up"
     summary = {
-        "own_acts": len(own_names), "own_rows": len(own), "oil_acts": len(keep),
-        "oil_acts_ok": int((keep.status == "OK").sum()), "oil_acts_needs_check_kept": int((keep.status != "OK").sum()),
-        "oil_input_sections": stats["input_sections"], "oil_rows_kept": len(final),
-        "total_acts": len(own_names) + len(keep), "total_rows": len(own) + len(final),
-        "dropped": {k[len("dropped_"):]: v for k, v in stats.items() if k.startswith("dropped_")},
-        "sections_with_tail_trimmed (SOR / TOC / Schedule)": stats["tail_trimmed"],
+        "own_acts": len(own_names), "own_rows": len(own),
+        "open_india_law_acts_before_territorial_rule": len(keep) + len(removed),
+        "acts_removed_other_state_or_ut": {
+            "acts": len(removed), "source_sections": sum(r["sections_in_source"] for r in removed),
+            "list": [{"act": r["act"], "basis": r["basis"], "quote": r["quote"], "source_sections": r["sections_in_source"]} for r in removed]},
+        "oil_acts": len(keep), "oil_acts_ok": int((keep.status == "OK").sum()), "oil_acts_needs_check_kept": int((keep.status != "OK").sum()),
+        "oil_input_sections_of_kept_acts": stats["input_sections"],
+        "dropped_by_rule": dropped_by_rule, "dropped_total": sum(dropped_by_rule.values()),
+        "sections_split_into_parts": stats["oversized_split_into_parts"], "rows_added_by_splitting": stats["rows_added_by_splitting"],
+        "sections_with_tail_trimmed (SOR / TOC / Schedule / Order)": stats["tail_trimmed"],
+        "oil_rows_kept": len(final), "total_acts": len(own_names) + len(keep), "total_rows": len(own) + len(final),
+        "verified_against_written_file": {"rows": len(frows), "acts": len(file_acts), "own_rows": len(file_own), "new_rows": len(file_new),
+                                          "law_ids_unique": True, "accounting_identity_holds": True},
+        "built_on": TODAY,
     }
     (OIL / "kb_v2_build_report.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
-    print(json.dumps(summary, indent=2))
+    print(json.dumps({k: v for k, v in summary.items() if k != "acts_removed_other_state_or_ut"}, indent=2))
+    print(f"removed Acts: {len(removed)}")
 
 
 if __name__ == "__main__":

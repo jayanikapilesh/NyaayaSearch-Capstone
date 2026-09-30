@@ -1,15 +1,85 @@
 {
   "own_acts": 23,
   "own_rows": 2718,
-  "oil_acts": 155,
-  "oil_acts_ok": 128,
-  "oil_acts_needs_check_kept": 27,
-  "oil_input_sections": 8068,
-  "oil_rows_kept": 7868,
-  "total_acts": 178,
-  "total_rows": 10586,
-  "dropped": {
-    "omitted_repealed": 61,
+  "open_india_law_acts_before_territorial_rule": 155,
+  "acts_removed_other_state_or_ut": {
+    "acts": 11,
+    "source_sections": 630,
+    "list": [
+      {
+        "act": "Goa, Daman and Diu (Extension of the Code of Civil Procedure and the Arbitration Act) Act, 1965",
+        "basis": "title ('Goa'); extent clause not extractable",
+        "quote": "The Goa, Daman and Diu (Extension of the Code of Civil Procedure and the Arbitration Act) Act, 1965",
+        "source_sections": 7
+      },
+      {
+        "act": "Presidency Small Cause Courts Act, 1882",
+        "basis": "section 5",
+        "quote": "There shall be in each of the towns of Calcutta, Madras and Bombay a Court, to be called the Court of Small Causes of Calcutta, Madras or Bombay",
+        "source_sections": 100
+      },
+      {
+        "act": "Public Gambling Act, 1867",
+        "basis": "long title",
+        "quote": "An Act to provide for the punishment of public gambling and the keeping of common gaming-houses in the United Provinces, East Punjab, Delhi and the Central Provinces",
+        "source_sections": 18
+      },
+      {
+        "act": "Ajmer Tenancy and Land Records Act, 1950",
+        "basis": "title ('Ajmer'); extent clause not extractable",
+        "quote": "The Ajmer Tenancy and Land Records Act, 1950",
+        "source_sections": 205
+      },
+      {
+        "act": "Cantonments (Extension of Rent Control Laws) Act, 1957",
+        "basis": "extent clause",
+        "quote": "It extends to the Cantonment of Mhow. (",
+        "source_sections": 3
+      },
+      {
+        "act": "Central Provinces Tenancy Act, 1898",
+        "basis": "extent clause",
+        "quote": "It extends to all the territories for the time being administered by the Chief Commissioner of the Central Provinces ; and (3) It shall come into force at once. 2. D",
+        "source_sections": 100
+      },
+      {
+        "act": "Delhi Apartment Ownership Act, 1986",
+        "basis": "extent clause",
+        "quote": "It extends to the whole of the Union territory of Delhi. (",
+        "source_sections": 27
+      },
+      {
+        "act": "East Punjab Urban Rent Restriction Act (Extension to Chandigarh) Act, 1974",
+        "basis": "title ('Punjab'); extent clause not extractable",
+        "quote": "The East Punjab Urban Rent Restriction Act (Extension to Chandigarh) Act, 1974",
+        "source_sections": 4
+      },
+      {
+        "act": "Slum Areas (Improvement and Clearance) Act, 1956",
+        "basis": "extent clause",
+        "quote": "It extends to all Union territories except the Union territories of the Andaman and Nicobar Islands and the Laccadive, Minicoy and Amindivi Islands. (",
+        "source_sections": 44
+      },
+      {
+        "act": "delhi rent control act, 1958",
+        "basis": "extent clause (section 1(2))",
+        "quote": "It extends to the areas included within the limits of the New Delhi Municipal Committee and the Delhi Cantonment Board and to such urban areas within the limits of the Municipal Corporation of Delhi as are specified in the First Schedule",
+        "source_sections": 67
+      },
+      {
+        "act": "Clinical Establishments (Registration and Regulation) Act, 2010",
+        "basis": "extent clause",
+        "quote": "It applies, in the first instance, to the whole of the States of Arunachal Pradesh, Himachal Pradesh, Mizoram and Sikkim and the Union territories; and it shall apply to such other State which adopts this Act by resolution passed in that behalf under clause (1) of article 252 of the Constitution. (",
+        "source_sections": 55
+      }
+    ]
+  },
+  "oil_acts": 144,
+  "oil_acts_ok": 118,
+  "oil_acts_needs_check_kept": 26,
+  "oil_input_sections_of_kept_acts": 7438,
+  "dropped_by_rule": {
+    "omitted_repealed": 57,
     "cpc_failed_pdf_check": 78,
     "oversized_over_20000_chars": 11,
     "statement_of_objects_bill_note": 7,
@@ -17,5 +87,20 @@
     "schedule": 1,
     "duplicate_text": 14
   },
-  "sections_with_tail_trimmed (SOR / TOC / Schedule)": 162
+  "dropped_total": 199,
+  "sections_split_into_parts": 1,
+  "rows_added_by_splitting": 3,
+  "sections_with_tail_trimmed (SOR / TOC / Schedule / Order)": 152,
+  "oil_rows_kept": 7242,
+  "total_acts": 167,
+  "total_rows": 9960,
+  "verified_against_written_file": {
+    "rows": 9960,
+    "acts": 167,
+    "own_rows": 2718,
+    "new_rows": 7242,
+    "law_ids_unique": true,
+    "accounting_identity_holds": true
+  },
+  "built_on": "2026-09-30"
 }

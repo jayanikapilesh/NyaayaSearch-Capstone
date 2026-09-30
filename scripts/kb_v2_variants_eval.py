@@ -118,6 +118,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", required=True)
     ap.add_argument("--penalties", default="0.95,0.90")
+    ap.add_argument("--plain-only", action="store_true", help="only evaluate the old KB and plain v2 (skip the boilerplate / penalty variants)")
     args = ap.parse_args()
     out = Path(args.out)
     (out / "cache").mkdir(parents=True, exist_ok=True)
@@ -156,9 +157,11 @@ def main():
         by_type[types_[i]] = by_type.get(types_[i], 0) + 1
     log(f"  removed by type: {by_type}")
 
-    configs = [("old_kb", old), ("v2_plain", make_variant(sc, v2, patched, all_idx)), ("v2_a_no_boilerplate", make_variant(sc, v2, patched, keep_a))]
-    for p in [float(x) for x in args.penalties.split(",") if x]:
-        configs.append((f"v2_b_no_boilerplate_x{p:.2f}", make_variant(sc, v2, patched, keep_a, penalty=p)))
+    configs = [("old_kb", old), ("v2_plain", make_variant(sc, v2, patched, all_idx))]
+    if not args.plain_only:
+        configs.append(("v2_a_no_boilerplate", make_variant(sc, v2, patched, keep_a)))
+        for p in [float(x) for x in args.penalties.split(",") if x]:
+            configs.append((f"v2_b_no_boilerplate_x{p:.2f}", make_variant(sc, v2, patched, keep_a, penalty=p)))
 
     raw_all, agg_all = {}, {}
     for label, eng in configs:
