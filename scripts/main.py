@@ -186,6 +186,9 @@ def stats():
     }
 
 
+from llm_rerank import search_with_llm
+
+
 @app.post("/search")
 def search(request: SearchRequest):
     validate_query(request.query)
@@ -193,7 +196,7 @@ def search(request: SearchRequest):
     target_language = request.language if request.language in ("en", "hi", "kn") else detected_language
     try:
         rerank = True if request.rerank is None else request.rerank
-        results = engine.search(search_query, top_k=request.top_k, rerank=rerank)
+        results = search_with_llm(engine, search_query, top_k=request.top_k, rerank=rerank)
         results = attach_related_cases(results)
     except Exception as e:
         raise HTTPException(status_code=500, detail="Search failed unexpectedly. Please try again.")
@@ -255,7 +258,7 @@ def explain(request: SearchRequest, raw_request: Request):
     else:
         try:
             rerank = True if request.rerank is None else request.rerank
-            results = engine.search(search_query, top_k=request.top_k, rerank=rerank)
+            results = search_with_llm(engine, search_query, top_k=request.top_k, rerank=rerank)
             results = attach_related_cases(results)
         except Exception:
             raise HTTPException(status_code=500, detail="Search failed unexpectedly. Please try again.")
