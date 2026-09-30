@@ -189,6 +189,34 @@ def title_from(heading_rest, text, sec):
     return m.group(1).strip() if m else ""
 
 
+def strip_schedule_items(raw, sec):
+    """Drop Schedule / list items glued onto a section that carry the section's own number.
+
+    The source parser attaches every line numbered "N." to section N, so the Schedule-style items of rules and schemes
+    ("6. The manner in which accounts shall be kept...") land inside section 6. They are whole lines starting with the
+    section's own number and "The", never the section's heading (bold, or the first real line), never an
+    amendment footnote (blockquote lines, removed later by FOOT_LINE). Returns (text, number_of_lines_removed).
+    """
+    if not sec.isdigit():
+        return raw, 0
+    item = re.compile(r"^\s*" + sec + r"\s*\.\s+The\s")
+    prev_item = re.compile(r"^\s*" + str(int(sec) - 1) + r"\s*\.\s+\S") if int(sec) > 1 else None
+    lines = raw.split("\n")
+    # a genuine numbered list inside the section (..., 5., 6.) has its predecessor line: leave those alone
+    if prev_item and any(prev_item.match(l) for l in lines):
+        return raw, 0
+    out, removed, seen_body = [], 0, False
+    for l in lines:
+        if l.strip() and not l.lstrip().startswith(">"):
+            first = not seen_body
+            seen_body = True
+            if item.match(l) and "**" not in l and not first:
+                removed += 1
+                continue
+        out.append(l)
+    return "\n".join(out), removed
+
+
 def build_row_text(raw, sec, heading_rest, stats):
     """Return (title, legal_text, drop_reason). raw = section text from sections_fixed."""
     cut = None
@@ -202,6 +230,10 @@ def build_row_text(raw, sec, heading_rest, stats):
     trimmed = raw[:cut] if cut is not None else raw
     if cut is not None:
         stats["tail_trimmed"] += 1
+    trimmed, n_items = strip_schedule_items(trimmed, sec)
+    if n_items:
+        stats["schedule_items_stripped_rows"] += 1
+        stats["schedule_items_stripped_lines"] += n_items
     body = clean_markup(trimmed)
     title = title_from(heading_rest, body, sec)
     # remove the leading "66. Title.-" from the body
@@ -213,6 +245,8 @@ def build_row_text(raw, sec, heading_rest, stats):
         rep_ = re.search(re.escape(sec) + r"\s*\.\s*" + re.escape(title) + r"[\s.\-—:]*", body[:250])
         if rep_:
             body = body[rep_.end():]
+    if n_items and len(body) < 10:   # everything but the heading was Schedule items: nothing of the section is left
+        return title, "", "only_schedule_items"
     if START_OMITTED.search(body[:60]) and len(body) < 400:
         return title, "", "omitted_repealed"
     if cut is not None and len(body) < 40 and SOR.search(raw[:cut + 60]) and cut < 250:
@@ -462,6 +496,8 @@ def main():
         "dropped_by_rule": dropped_by_rule, "dropped_total": sum(dropped_by_rule.values()),
         "sections_split_into_parts": stats["oversized_split_into_parts"], "rows_added_by_splitting": stats["rows_added_by_splitting"],
         "sections_with_tail_trimmed (SOR / TOC / Schedule / Order)": stats["tail_trimmed"],
+        "sections_with_schedule_items_stripped": stats["schedule_items_stripped_rows"],
+        "schedule_item_lines_stripped": stats["schedule_items_stripped_lines"],
         "oil_rows_kept": len(final), "total_acts": len(own_names) + len(keep), "total_rows": len(own) + len(final),
         "verified_against_written_file": {"rows": len(frows), "acts": len(file_acts), "own_rows": len(file_own), "new_rows": len(file_new),
                                           "law_ids_unique": True, "accounting_identity_holds": True},

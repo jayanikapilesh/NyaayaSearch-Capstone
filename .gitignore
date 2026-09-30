@@ -27,3 +27,5 @@ finetuned_legal_model_v3/
 data/open_india_law/*.parquet
 data/open_india_law/README.md
 finetuned_legal_model_v4/
+kaggle_v4/
+kaggle_v4.zip

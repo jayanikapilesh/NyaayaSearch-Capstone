@@ -1,0 +1,11 @@
+{
+  "prompt_tokens": 15637863,
+  "completion_tokens": 3384489,
+  "calls": 31743,
+  "estimated_cost_usd": 4.884,
+  "model": "openai/gpt-oss-120b",
+  "price_per_million_usd": {
+    "input": 0.15,
+    "output": 0.75
+  }
+}
