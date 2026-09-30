@@ -1,0 +1,7 @@
+{
+  "prompt": 74375,
+  "completion": 16060,
+  "calls": 150,
+  "estimated_cost_usd": 0.0232,
+  "model": "openai/gpt-oss-120b"
+}

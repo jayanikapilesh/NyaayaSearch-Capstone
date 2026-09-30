@@ -1,0 +1,11 @@
+﻿reason,new_question,act_name,section_number,matched_test_question_or_source
+embedding_leak,"accident on my way to work, can I claim compensation?","Code on Social Security, 2020",34,"0.857 | I was in an accident, how do I claim compensation?"
+embedding_leak,"court told me to pay rent, how to appeal?","Code of Civil Procedure, 1908",103,0.866 | Can I appeal a rent tribunal's decision?
+embedding_leak,"my landlord won't return deposit, what do i do?","Gram Nyayalayas Act, 2008",13,0.868 | My landlord isn't returning my security deposit
+embedding_leak,"police arrested me, why didn't they tell me why?","Narcotic Drugs and Psychotropic Substances Act, 1985",52,0.853 | Do police have to tell me why I'm being arrested?
+embedding_leak,"my property taken, want it back, how to appeal?","Prevention of Corruption Act, 1988",17F,0.864 | Can I appeal if the court won't give my seized property back?
+embedding_leak,can i testify in my own case if i want?,"Prevention of Corruption Act, 1988",21,0.854 | Can the person on trial testify in their own defense?
+embedding_leak,"police said they can arrest without warrant, is that allowed?","Unlawful Activities (Prevention) Act, 1967",43D,0.921 | Can police arrest someone without a warrant?
+embedding_leak,"court ordered my property forfeited, can I appeal the decision?","Karnataka Control of Organized Crimes Acts, 2000",21,0.852 | Can I appeal if the court won't give my seized property back?
+embedding_leak,"landlord can't evict me, what prove?","Karnataka Debt Relief Act, 1976",7,"0.871 | My landlord wants to evict me, what are my protections?"
+embedding_leak,"landlord not returning my deposit, can govt help?","Karnataka Land Reforms Act, 1961",127,0.853 | My landlord isn't returning my security deposit
