@@ -1,0 +1,156 @@
+﻿name,prefix,level,topic,status,domain,act_id,sections_in_kb,source_sections
+"Food Safety and Standards Act, 2006",FSS,Central,Consumer,NEEDS CHECK,Consumer,IND_central_2027,100,100
+"Legal Metrology Act, 2009",LM,Central,Consumer,OK,Consumer,IND_central_2102,57,57
+"National Food Security Act, 2013",NFS,Central,Consumer,NEEDS CHECK,Consumer,IND_central_2113,44,44
+"Sale of Goods Act, 1930",SG,Central,Consumer,OK,Consumer,IND_central_2390,67,67
+"Indian Partnership Act, 1932",IP,Central,Contract/civil law,OK,Contract,IND_central_2394,76,76
+"Indian Trust Act, 1882",IT,Central,Contract/civil law,OK,Contract,IND_central_2327,96,97
+"Powers-of Attorney Act, 1882",PA,Central,Contract/civil law,OK,Contract,IND_central_2360,6,7
+"Arbitration and Conciliation Act, 1996",AC,Central,Crime/police/courts/bail/evidence,OK,Criminal Law,IND_central_1978,105,107
+"Code of Civil Procedure, 1908",CCP,Central,Crime/police/courts/bail/evidence,NEEDS CHECK,Criminal Law,IND_central_2191,124,212
+"Contempt of Courts Act, 1971",CC,Central,Crime/police/courts/bail/evidence,OK,Criminal Law,IND_central_1514,24,24
+"Court-Fees Act, 1870",CF70,Central,Crime/police/courts/bail/evidence,OK,Criminal Law,IND_central_2293,50,50
+"Criminal Procedure (Identification) Act, 2022",CPI,Central,Crime/police/courts/bail/evidence,OK,Criminal Law,IND_central_19029,9,10
+"Goa, Daman and Diu (Extension of the Code of Civil Procedure and the Arbitration Act) Act, 1965",GDDECC,Central,Crime/police/courts/bail/evidence,OK,Criminal Law,IND_central_1575,7,7
+"Gram Nyayalayas Act, 2008",GN,Central,Crime/police/courts/bail/evidence,OK,Criminal Law,IND_central_2060,40,40
+"Legal Services Authorities Act, 1987",LSA,Central,Crime/police/courts/bail/evidence,NEEDS CHECK,Criminal Law,IND_central_1925,39,39
+"Mediation Act, 2023",M23,Central,Crime/police/courts/bail/evidence,NEEDS CHECK,Criminal Law,IND_central_19637,68,68
+"Narcotic Drugs and Psychotropic Substances Act, 1985",NDPS,Central,Crime/police/courts/bail/evidence,OK,Criminal Law,IND_central_1791,126,127
+"Notaries Act, 1952",N,Central,Crime/police/courts/bail/evidence,OK,Criminal Law,IND_central_2172,16,16
+"Oaths Act, 1969",O,Central,Crime/police/courts/bail/evidence,OK,Criminal Law,IND_central_1643,9,9
+"Police Act, 1861",P61,Central,Crime/police/courts/bail/evidence,NEEDS CHECK,Criminal Law,IND_central_2264,44,45
+"Presidency Small Cause Courts Act, 1882",PSCC,Central,Crime/police/courts/bail/evidence,OK,Criminal Law,IND_central_2371,98,100
+"Prevention of Corruption Act, 1988",PC,Central,Crime/police/courts/bail/evidence,OK,Criminal Law,IND_central_1558,40,41
+"Prevention of Damage to Public Property Act, 1984",PDPP,Central,Crime/police/courts/bail/evidence,OK,Criminal Law,IND_central_1770,6,6
+"Prevention of Money-Laundering Act, 2002",PML,Central,Crime/police/courts/bail/evidence,OK,Criminal Law,IND_central_2036,80,81
+"Prisoners Act, 1900",P00,Central,Crime/police/courts/bail/evidence,OK,Criminal Law,IND_central_2334,37,53
+"Prisons Act, 1894",P94,Central,Crime/police/courts/bail/evidence,OK,Criminal Law,IND_central_2325,60,62
+"Probation of Offenders Act, 1958",PO,Central,Crime/police/courts/bail/evidence,OK,Criminal Law,IND_central_1507,19,19
+"Protection of Civil Rights Act, 1955",PCR,Central,Crime/police/courts/bail/evidence,OK,Criminal Law,IND_central_1544,26,26
+"Public Gambling Act, 1867",PG,Central,Crime/police/courts/bail/evidence,OK,Criminal Law,IND_central_2269,18,18
+"Unlawful Activities (Prevention) Act, 1967",UAP,Central,Crime/police/courts/bail/evidence,NEEDS CHECK,Criminal Law,IND_central_1470,65,66
+"Aadhaar (Targeted Delivery of Financial and Other Subsidies, Benefits and Services) Act, 2016",ATDFOS,Central,Cyber/IT/data,OK,Information Technology and Cyber Law,IND_central_2160,67,68
+"Digital Personal Data Protection Act, 2023",DPDP,Central,Cyber/IT/data,OK,Information Technology and Cyber Law,IND_central_22037,44,44
+"Indian Institutes of Information Technology Act, 2014",IIIT,Central,Cyber/IT/data,OK,Information Technology and Cyber Law,IND_central_2135,49,50
+"Central Educational Institutions (Reservation in Admission) Act, 2006",CEIRA,Central,Education,OK,Education,IND_central_2091,7,7
+"Public Examinations (Prevention of Unfair Means) Act, 2024",PEPUM,Central,Education,OK,Education,IND_central_20100,18,19
+"Air (Prevention and Control of Pollution) Act, 1981",APCP,Central,Environment/pollution,NEEDS CHECK,Environment,IND_central_1389,61,62
+"Biological Diversity Act, 2002",BD,Central,Environment/pollution,OK,Environment,IND_central_2046,71,72
+"Environment (Protection) Act, 1986",EP,Central,Environment/pollution,OK,Environment,IND_central_1876,26,26
+"Indian Forest Act, 1927",IF,Central,Environment/pollution,OK,Environment,IND_central_2388,87,88
+"National Green Tribunal Act, 2010",NGT,Central,Environment/pollution,OK,Environment,IND_central_2025,39,39
+"Prevention of Cruelty to Animals Act, 1960",PCA,Central,Environment/pollution,OK,Environment,IND_central_1547,44,44
+"Public Liability Insurance Act, 1991",PLI,Central,Environment/pollution,OK,Environment,IND_central_1960,27,28
+"Van (Sanrakshan Evam Samvardhan) Adhiniyam, 1980",VSESA,Central,Environment/pollution,OK,Environment,IND_central_1760,10,10
+"Water (Prevention and Control of Pollution) Act, 1974",WPCP,Central,Environment/pollution,OK,Environment,IND_central_1612,68,68
+"Wild Life (Protection) Act, 1972",WLP,Central,Environment/pollution,OK,Environment,IND_central_1726,163,170
+"Anand Marriage Act, 1909",AM,Central,Family/marriage/succession/maintenance,OK,Family,IND_central_2347,5,5
+"Assisted Reproductive Technology (Regulation) Act, 2021",ARTR,Central,Family/marriage/succession/maintenance,OK,Family,IND_central_17031,46,46
+"Births, Deaths and Marriages Registration Act, 1886",BDMR,Central,Family/marriage/succession/maintenance,NEEDS CHECK,Family,IND_central_2309,33,35
+"Dissolution of Muslim Marriages Act, 1939",DMM,Central,Family/marriage/succession/maintenance,OK,Family,IND_central_2404,4,5
+"Divorce Act, 1869",D,Central,Family/marriage/succession/maintenance,OK,Family,IND_central_2280,58,64
+"Foreign Marriage Act, 1969",FM,Central,Family/marriage/succession/maintenance,NEEDS CHECK,Family,IND_central_1720,28,29
+"Guardians and Wards Act, 1890",GW,Central,Family/marriage/succession/maintenance,OK,Family,IND_central_2318,53,55
+"Hindu Minority and Guardianship Act, 1956",HMG,Central,Family/marriage/succession/maintenance,OK,Family,IND_central_1649,12,12
+"Indian Christian Marriage Act, 1872",ICM,Central,Family/marriage/succession/maintenance,OK,Family,IND_central_2186,84,88
+"Indian Succession Act, 1925",IS,Central,Family/marriage/succession/maintenance,NEEDS CHECK,Family,IND_central_2385,391,391
+"Maintenance Orders Enforcement Act, 1921",MOE,Central,Family/marriage/succession/maintenance,OK,Family,IND_central_2373,11,12
+"Majority Act, 1875",M75,Central,Family/marriage/succession/maintenance,OK,Family,IND_central_2284,4,4
+"Muslim Women (Protection of Rights on Divorce) Act, 1986",MWPROD,Central,Family/marriage/succession/maintenance,OK,Family,IND_central_1873,4,4
+"Muslim Women (Protection of Rights on Marriage) Act, 2019",MWPROM,Central,Family/marriage/succession/maintenance,OK,Family,IND_central_11564,7,7
+"Parsi Marriage and Divorce Act, 1936",PMD,Central,Family/marriage/succession/maintenance,OK,Family,IND_central_2476,53,55
+"Prohibition of Child Marriage Act, 2006",PCM,Central,Family/marriage/succession/maintenance,OK,Family,IND_central_2055,21,21
+"Registration of Births and Deaths Act, 1969",RBD,Central,Family/marriage/succession/maintenance,OK,Family,IND_central_1682,33,33
+"Surrogacy (Regulation) Act, 2021",SR,Central,Family/marriage/succession/maintenance,OK,Family,IND_central_17046,53,54
+"Citizenship Act, 1955",C,Central,Fundamental rights/citizenship,OK,Civil Rights,IND_central_1522,27,27
+"Passports Act, 1967",P67,Central,Fundamental rights/citizenship,NEEDS CHECK,Civil Rights,IND_central_1372,27,28
+"Cigarettes and Other Tobacco Products (Prohibition of Advertisement and Regulation of Trade and Commerce, Production, Supply and Distribution) Act, 2003",COTPPA,Central,Health,OK,Health,IND_central_2053,34,34
+"Clinical Establishments (Registration and Regulation) Act, 2010",CERR,Central,Health,NEEDS CHECK,Health,IND_central_2048,55,55
+"Drugs and Cosmetics Act, 1940",DC,Central,Health,OK,Health,IND_central_2409,81,87
+"Epidemic Diseases Act, 1897",ED,Central,Health,OK,Health,IND_central_2326,12,13
+"Mental Healthcare Act, 2017",MH,Central,Health,OK,Health,IND_central_2249,126,126
+"Transplantation of Human Organs and Tissues Act, 1994",THOT,Central,Health,OK,Health,IND_central_1962,31,31
+"Real Estate (Regulation and Development) Act, 2016",RERD,Central,Housing (RERA),OK,Property,IND_central_2158,92,92
+"Apprentices Act, 1961",A,Central,Labour/wages/employment,OK,Labour,IND_central_1668,42,42
+"Bonded Labour System (Abolition) Act, 1976",BLSA,Central,Labour/wages/employment,OK,Labour,IND_central_1491,27,27
+"Employees Provident Funds and Miscellaneous Provisions Act, 1952",EPFMP,Central,Labour/wages/employment,NEEDS CHECK,Labour,IND_central_2152,66,66
+"Employment of Manual Scavengers and Construction of Dry Latrines (Prohibition) Act, 1993",EMSCDL,Central,Labour/wages/employment,OK,Labour,IND_central_1581,24,24
+"Industrial Employmnet (Standing Orders) Act, 1946",IESO,Central,Labour/wages/employment,OK,Labour,IND_central_22043,20,21
+"Industrial Relations Code, 2020",IRC,Central,Labour/wages/employment,OK,Labour,IND_central_22040,102,104
+"Mahatma Gandhi National Rural Employment Guarantee Act, 2005",MGNREG,Central,Labour/wages/employment,OK,Labour,IND_central_2014,35,35
+"Occupational Safety, Health and Working Conditions Code, 2020",OSHWCC,Central,Labour/wages/employment,OK,Labour,IND_central_22041,141,143
+"Prohibition of Employment as Manual Scavengers and their Rehabilitation Act, 2013",PEAMST,Central,Labour/wages/employment,OK,Labour,IND_central_2119,38,39
+"Street Vendors (Protection of Livelihood and Regulation of Street Vending) Act, 2014",SVPLRS,Central,Labour/wages/employment,NEEDS CHECK,Labour,IND_central_2124,38,38
+"Trade Unions Act, 1926",TU,Central,Labour/wages/employment,OK,Labour,IND_central_22044,34,34
+"Bankers Books Evidence Act, 1891",BBE,Central,Money/cheques/banking disputes,OK,Banking and Finance,IND_central_2322,8,8
+"Banking Regulation Act, 1949",BR,Central,Money/cheques/banking disputes,OK,Banking and Finance,IND_central_1885,129,130
+"Banning of Unregulated Deposit Schemes Act, 2019",BUDS,Central,Money/cheques/banking disputes,OK,Banking and Finance,IND_central_11641,44,44
+"Chit Funds Act, 1982",CF82,Central,Money/cheques/banking disputes,OK,Banking and Finance,IND_central_1797,90,90
+"Credit Information Companies (Regulation) Act, 2005",CICR,Central,Money/cheques/banking disputes,OK,Banking and Finance,IND_central_2057,38,38
+"Insolvency and Bankruptcy Code, 2016",IBC,Central,Money/cheques/banking disputes,OK,Banking and Finance,IND_central_2154,278,280
+"Interest Act, 1978",I,Central,Money/cheques/banking disputes,OK,Banking and Finance,IND_central_1724,5,5
+"Payment and Settlement Systems Act, 2007",PSS,Central,Money/cheques/banking disputes,OK,Banking and Finance,IND_central_2082,42,42
+"Prize Chits and Money Circulation Schemes (Banning) Act, 1978",PCMCSB,Central,Money/cheques/banking disputes,OK,Banking and Finance,IND_central_1628,14,14
+"Provincial Insolvency Act, 1920",PI,Central,Money/cheques/banking disputes,OK,Banking and Finance,IND_central_19723,87,87
+"Recovery Of Debts And Bankruptcy Act, 1993",RDB,Central,Money/cheques/banking disputes,OK,Banking and Finance,IND_central_1775,48,45
+"Securitisation and Reconstruction of Financial Assets and Enforcement of Security Interest Act, 2002",SRFAES,Central,Money/cheques/banking disputes,NEEDS CHECK,Banking and Finance,IND_central_2006,60,61
+"Usurious Loans Act, 1918",UL,Central,Money/cheques/banking disputes,OK,Banking and Finance,IND_central_2362,3,3
+"Ajmer Tenancy and Land Records Act, 1950",ATLR,Central,Property/rent/registration/land,OK,Property,IND_central_1796,205,205
+"Cantonments (Extension of Rent Control Laws) Act, 1957",CERCL,Central,Property/rent/registration/land,OK,Property,IND_central_1379,3,3
+"Central Provinces Tenancy Act, 1898",CPT,Central,Property/rent/registration/land,OK,Property,IND_central_19250,100,100
+"Delhi Apartment Ownership Act, 1986",DAO,Central,Property/rent/registration/land,OK,Property,IND_central_1805,27,27
+"East Punjab Urban Rent Restriction Act (Extension to Chandigarh) Act, 1974",EPURRE,Central,Property/rent/registration/land,OK,Property,IND_central_1610,4,4
+"Indian Easements Act, 1882",IE,Central,Property/rent/registration/land,OK,Property,IND_central_2349,64,64
+"Public Premises (Eviction of Unauthorised Occupants) Act, 1971",PPEUO,Central,Property/rent/registration/land,OK,Property,IND_central_1609,26,26
+"Registration Act, 1908",R,Central,Property/rent/registration/land,OK,Property,IND_central_2190,94,96
+"Right to Fair Compensation and Transparency in Land Acquisition, Rehabilitation and Resettlement Act, 2013",RFCTLA,Central,Property/rent/registration/land,OK,Property,IND_central_2121,116,116
+"Scheduled Tribes and Other Traditional Forest Dwellers (Recognition of Forest Rights) Act, 2006",STOTFD,Central,Property/rent/registration/land,OK,Property,IND_central_2070,14,14
+"Slum Areas (Improvement and Clearance) Act, 1956",SAIC,Central,Property/rent/registration/land,OK,Property,IND_central_1709,44,44
+"delhi rent control act, 1958",DRC,Central,Property/rent/registration/land,OK,Property,IND_central_19223,65,67
+"Commission of Sati (Prevention ) Act, 1987",CSP,Central,Women/children/elderly/disability protection,OK,Women and Child Protection,IND_central_1814,21,22
+"Commissions for Protection of Child Rights Act, 2005",CPCR,Central,Women/children/elderly/disability protection,OK,Women and Child Protection,IND_central_2056,37,37
+"Human Immunodeficiency Virus and Acquired Immune Deficiency Syndrome (Prevention and Control) Act, 2017",HIVAID,Central,Women/children/elderly/disability protection,NEEDS CHECK,Women and Child Protection,IND_central_2254,49,49
+"Immoral Traffic (Prevention) Act, 1956",ITP,Central,Women/children/elderly/disability protection,OK,Women and Child Protection,IND_central_19243,29,32
+"Indecent Representation of Women (Prohibition) Act, 1986",IRWP,Central,Women/children/elderly/disability protection,OK,Women and Child Protection,IND_central_1768,10,10
+"Juvenile Justice (Care and Protection of Children) Act, 2015",JJCPC,Central,Women/children/elderly/disability protection,NEEDS CHECK,Women and Child Protection,IND_central_2148,111,111
+"National Commission for Women Act, 1990",NCW,Central,Women/children/elderly/disability protection,OK,Women and Child Protection,IND_central_1944,17,17
+"Orphanages and other Charitable Homes (Supervision and Control) Act, 1960",OOCHSC,Central,Women/children/elderly/disability protection,OK,Women and Child Protection,IND_central_13052,31,31
+"Right of Children to Free and Compulsory Education Act, 2009",RCFCE,Central,Women/children/elderly/disability protection,OK,Women and Child Protection,IND_central_2086,39,39
+"Rights of Persons with Disabilities Act, 2016",RPWD,Central,Women/children/elderly/disability protection,OK,Women and Child Protection,IND_central_2155,102,102
+"Transgender Persons (Protection of Rights) Act, 2019",TPPR,Central,Women/children/elderly/disability protection,NEEDS CHECK,Women and Child Protection,IND_central_13091,22,22
+"Women’s and Children’s Institutions (Licensing) Act, 1956",WSCSIL,Central,Women/children/elderly/disability protection,OK,Women and Child Protection,IND_central_19281,12,12
+"Karnataka Civil Courts Act, 1964",KCC,Karnataka,Crime/police/courts/bail/evidence,OK,Criminal Law,IND_state_7624,31,31
+"Karnataka Control of Organized Crimes Acts, 2000",KCOCA,Karnataka,Crime/police/courts/bail/evidence,NEEDS CHECK,Criminal Law,IND_state_8190,29,29
+"Karnataka Court-fee and Suits Valuation Act, 1958",KCFSV,Karnataka,Crime/police/courts/bail/evidence,NEEDS CHECK,Criminal Law,IND_state_7625,75,79
+"Karnataka Police Act, 1963",KP63,Karnataka,Crime/police/courts/bail/evidence,NEEDS CHECK,Criminal Law,IND_state_8195,180,183
+"Karnataka Small Cause Courts Act, 1964",KSCC,Karnataka,Crime/police/courts/bail/evidence,OK,Criminal Law,IND_state_7611,29,29
+"Karnataka Education Act, 1983",KE,Karnataka,Education,NEEDS CHECK,Education,IND_state_7138,153,153
+"Karnataka Educational Institutions (Prohibition of Capitation Fee) Act, 1984",KEIPCF,Karnataka,Education,OK,Education,IND_state_7139,15,15
+"Karnataka Preservation of Trees Act, 1976",KPT,Karnataka,Environment/pollution,OK,Environment,IND_state_7008,37,37
+"Karnataka Marriages (Registration and Miscellaneous Provisions) Act, 1976",KMRMP,Karnataka,Family/marriage/succession/maintenance,OK,Family,IND_state_7898,36,36
+"Karnataka Private Medical Establishments Act, 2007",KPME,Karnataka,Health,NEEDS CHECK,Health,IND_state_7097,29,29
+"Karnataka Daily Wage Employees Welfare Act, 2012",KDWEW,Karnataka,Labour/wages/employment,OK,Labour,IND_state_7134,11,11
+"Karnataka Payment of Subsistence Allowance Act, 1988",KPSA,Karnataka,Labour/wages/employment,OK,Labour,IND_state_7607,12,12
+"Karnataka Shops and Commercial Establishments Act, 1961",KSCE,Karnataka,Labour/wages/employment,OK,Labour,IND_state_7609,45,46
+"Karnataka Debt Relief Act, 1976",KDR76,Karnataka,Money/cheques/banking disputes,OK,Banking and Finance,IND_state_7135,10,10
+"Karnataka Debt Relief Act, 1980",KDR80,Karnataka,Money/cheques/banking disputes,OK,Banking and Finance,IND_state_8127,17,17
+"Karnataka Debt Relief Act, 2018",KDR18,Karnataka,Money/cheques/banking disputes,OK,Banking and Finance,IND_state_17216,18,18
+"Karnataka Micro Loan and Small Loan (Prevention of Coercive Actions) Act, 2025",KMLSLP,Karnataka,Money/cheques/banking disputes,OK,Banking and Finance,IND_state_21666,19,19
+"Karnataka Money-lenders Act, 1961",KML,Karnataka,Money/cheques/banking disputes,OK,Banking and Finance,IND_state_7208,48,49
+"Karnataka Pawnbrokers Act, 1961",KP61,Karnataka,Money/cheques/banking disputes,OK,Banking and Finance,IND_state_7163,28,28
+"Karnataka Prohibition of Charging Exorbitant Interest Act, 2004",KPCEI,Karnataka,Money/cheques/banking disputes,OK,Banking and Finance,IND_state_7174,16,16
+"Karnataka Motor Vehicles Taxation Act, 1957",KMVT,Karnataka,Motor vehicles/transport,OK,Motor Vehicles,IND_state_7605,31,34
+"Karnataka Traffic Control Act, 1960",KTC,Karnataka,Motor vehicles/transport,OK,Motor Vehicles,IND_state_7618,24,24
+"Karnataka Acquisition of Lands for Grant of House Sites Act, 1972",KALGHS,Karnataka,Property/rent/registration/land,OK,Property,IND_state_7613,7,7
+"Karnataka Apartment Ownership Act, 1972",KAO,Karnataka,Property/rent/registration/land,OK,Property,IND_state_7623,27,27
+"Karnataka Land (Restriction on Transfer) Act, 1991",KLROT,Karnataka,Property/rent/registration/land,NEEDS CHECK,Property,IND_state_7806,11,12
+"Karnataka Land Grabbing Prohibition Act, 2011",KLGP,Karnataka,Property/rent/registration/land,OK,Property,IND_state_7805,21,21
+"Karnataka Land Reforms Act, 1961",KLR,Karnataka,Property/rent/registration/land,NEEDS CHECK,Property,IND_state_7740,143,152
+"Karnataka Public Premises (Eviction of Unauthorised Occupants) Act, 1974",KPPEUO,Karnataka,Property/rent/registration/land,OK,Property,IND_state_7742,19,19
+"Karnataka Slum Areas Development Act, 1973",KSAD,Karnataka,Property/rent/registration/land,OK,Property,IND_state_7610,80,80
+"Karnataka Stamp Act, 1957",KS,Karnataka,Property/rent/registration/land,OK,Property,IND_state_7744,85,87
+"Karnataka Town and Country Planning Act, 1961",KTCP,Karnataka,Property/rent/registration/land,NEEDS CHECK,Property,IND_state_7905,112,112
+"Karnataka Sakaala Services Act, 2011",KSS,Karnataka,RTI/transparency,OK,Right to Information,IND_state_7187,20,20
+"Karnataka Devadasis (Prohibition of Dedication) Act, 1982",KDPD,Karnataka,Women/children/elderly/disability protection,OK,Women and Child Protection,IND_state_7912,13,13
+"Karnataka Prohibition of Beggary Act, 1975",KPB,Karnataka,Women/children/elderly/disability protection,OK,Women and Child Protection,IND_state_7808,41,41
+"Karnataka State Commission for Women Act, 1995",KSCW,Karnataka,Women/children/elderly/disability protection,OK,Women and Child Protection,IND_state_7902,19,20

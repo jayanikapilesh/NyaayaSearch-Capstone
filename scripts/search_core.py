@@ -8,7 +8,23 @@ import openpyxl
 from rank_bm25 import BM25Okapi
 from sentence_transformers import SentenceTransformer, CrossEncoder
 
-DATASET = os.path.join(os.path.dirname(__file__), "..", "Legal_Knowledge_Base_combined.xlsx")
+DEFAULT_DATASET = os.path.join(os.path.dirname(__file__), "..", "Legal_Knowledge_Base_combined.xlsx")
+DATASET = DEFAULT_DATASET  # kept for backwards compatibility; SearchEngine uses resolve_dataset_path()
+
+
+def resolve_dataset_path():
+    """Knowledge-base workbook to load: NYAAYA_KB_PATH (absolute, or relative to the repo root), else the default.
+
+    Read when the engine is built rather than at import, so a value set in .env (loaded by rag_core) is honoured.
+    """
+    path = os.environ.get("NYAAYA_KB_PATH", "").strip()
+    if not path:
+        return DEFAULT_DATASET
+    if not os.path.isabs(path):
+        path = os.path.join(os.path.dirname(__file__), "..", path)
+    return path
+
+
 CACHE_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
 CACHE_FILE = os.path.join(CACHE_DIR, "section_embeddings_cache.npy")
 CACHE_META_FILE = os.path.join(CACHE_DIR, "section_embeddings_cache_meta.json")
@@ -316,8 +332,9 @@ def is_placeholder_record(record):
 
 class SearchEngine:
     def __init__(self, model_path=None, model_name=None):
-        print("Loading legal dataset...")
-        wb = openpyxl.load_workbook(DATASET, read_only=True)
+        kb_path = resolve_dataset_path()
+        print(f"Loading legal dataset from {os.path.abspath(kb_path)}...")
+        wb = openpyxl.load_workbook(kb_path, read_only=True)
         ws = wb.active
 
         headers = list(next(ws.values))

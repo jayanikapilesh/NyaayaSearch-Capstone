@@ -1,0 +1,21 @@
+{
+  "own_acts": 23,
+  "own_rows": 2718,
+  "oil_acts": 155,
+  "oil_acts_ok": 128,
+  "oil_acts_needs_check_kept": 27,
+  "oil_input_sections": 8068,
+  "oil_rows_kept": 7868,
+  "total_acts": 178,
+  "total_rows": 10586,
+  "dropped": {
+    "omitted_repealed": 61,
+    "cpc_failed_pdf_check": 78,
+    "oversized_over_20000_chars": 11,
+    "statement_of_objects_bill_note": 7,
+    "too_short_under_40_chars": 31,
+    "schedule": 1,
+    "duplicate_text": 14
+  },
+  "sections_with_tail_trimmed (SOR / TOC / Schedule)": 162
+}

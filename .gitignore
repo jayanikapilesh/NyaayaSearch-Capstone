@@ -22,3 +22,7 @@ data/section_embeddings_cache_meta.json
 data/cache/
 
 finetuned_legal_model_v3/
+
+# Open India Law dataset downloads
+data/open_india_law/*.parquet
+data/open_india_law/README.md
