@@ -1,14 +1,8 @@
 """LLM shortlist rerank for the live /search (same logic as eval_llm_rerank.py).
 Search gets the top 20; gpt-oss-120b picks the best 5. Falls back to normal
 results on any error/timeout. Disable with env NYAAYA_LLM_RERANK=0.
-
-The live picker also says whether ANY candidate actually covers the question
-("covered"). If not, results are tagged llm_covered=False so the app can show
-"not confident / topic not covered". Disable with env NYAAYA_ABSTAIN=0.
 """
-import json
 import os
-import re
 import threading
 from dotenv import load_dotenv
 load_dotenv()
@@ -22,24 +16,11 @@ except Exception as e:  # never break the app
     _READY = False
 
 ENABLED = os.getenv("NYAAYA_LLM_RERANK", "1") == "1"
-ABSTAIN = os.getenv("NYAAYA_ABSTAIN", "1") == "1"
 TIMEOUT = float(os.getenv("NYAAYA_LLM_RERANK_TIMEOUT", "6"))
 POOL = 20
 _client = None
 _cache = {}
 _lock = threading.Lock()
-
-LIVE_PROMPT = (
-    "You are given a legal question and a numbered list of candidate law sections "
-    "(act name, section number, section title only). Pick the 5 candidates most "
-    "relevant to answering the question, best first. "
-    "Also decide whether at least one candidate actually governs the person's situation "
-    "(set covered to true), or whether none of them is legally relevant to it "
-    "(set covered to false). Only use false when no candidate genuinely applies. "
-    "Return ONLY a JSON object of the form "
-    "{\"top5\": [n1, n2, n3, n4, n5], \"covered\": true} using the candidate numbers shown, "
-    "nothing else."
-)
 
 
 def _client_get():
@@ -50,10 +31,8 @@ def _client_get():
 
 
 def _ask_llm(query, cands):
-    prompt = LIVE_PROMPT if ABSTAIN else SYSTEM_PROMPT
     user = f"Question: {query}\n\nCandidates:\n{build_candidate_list(cands)}"
-    msgs = [{"role": "system", "content": prompt}, {"role": "user", "content": user}]
-    last = None
+    msgs = [{"role": "system", "content": SYSTEM_PROMPT}, {"role": "user", "content": user}]
     for json_mode in (True, False):
         kw = dict(model=MODEL, messages=msgs, temperature=0, reasoning_effort="low", max_tokens=200)
         if json_mode:
@@ -64,17 +43,6 @@ def _ask_llm(query, cands):
         except Exception as e:
             last = e
     raise last
-
-
-def _parse_covered(content):
-    """True unless the model clearly said covered=false (any doubt -> True)."""
-    try:
-        val = json.loads(content).get("covered", True)
-        if isinstance(val, str):
-            return val.strip().lower() != "false"
-        return bool(val)
-    except Exception:
-        return not re.search(r'"covered"\s*:\s*false', content or "", re.IGNORECASE)
 
 
 def search_with_llm(engine, query, top_k=5, rerank=True):
@@ -96,18 +64,14 @@ def search_with_llm(engine, query, top_k=5, rerank=True):
     base = cands[:top_k]
     if not (ENABLED and _READY) or len(cands) < 2:
         return base
-    key = (query, ABSTAIN, tuple((str(c.get("act_name")), str(c.get("section_number"))) for c in cands))
+    key = (query, tuple((str(c.get("act_name")), str(c.get("section_number"))) for c in cands))
     try:
         with _lock:
-            cached = _cache.get(key)
-        if cached is None:
-            content = _ask_llm(query, cands)
-            picks = parse_top5(content, len(cands))  # 1-indexed
-            covered = _parse_covered(content) if ABSTAIN else True
+            picks = _cache.get(key)
+        if picks is None:
+            picks = parse_top5(_ask_llm(query, cands), len(cands))  # 1-indexed
             with _lock:
-                _cache[key] = (picks, covered)
-        else:
-            picks, covered = cached
+                _cache[key] = picks
         order, seen = [], set()
         for p in picks:
             i = int(p) - 1
@@ -120,8 +84,8 @@ def search_with_llm(engine, query, top_k=5, rerank=True):
             if i not in seen:
                 order.append(i)
                 seen.add(i)
-        out = [dict(cands[i], llm_reranked=True, llm_covered=covered) for i in order[:top_k]]
-        print("[llm_rerank] used LLM order" + ("" if covered else " | NOT COVERED"))
+        out = [dict(cands[i], llm_reranked=True) for i in order[:top_k]]
+        print("[llm_rerank] used LLM order")
         return out
     except Exception as e:
         print("[llm_rerank] fallback:", type(e).__name__, str(e)[:120])

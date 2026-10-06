@@ -215,7 +215,7 @@ def search(request: SearchRequest):
 
     CONFIDENCE_THRESHOLD = 0.30
     top_score = results[0].get("hybrid_score", 0) if results else 0
-    low_confidence = bool(results and (top_score < CONFIDENCE_THRESHOLD or results[0].get('llm_covered') is False))
+    low_confidence = bool(results and top_score < CONFIDENCE_THRESHOLD)
 
     explanation = None
     if not results:
