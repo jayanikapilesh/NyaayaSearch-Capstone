@@ -20,12 +20,16 @@ RUN pip install --no-cache-dir --user torch==2.14.0 --extra-index-url https://do
 # Copy repository source code with user ownership
 COPY --chown=user:user . $HOME/app
 
-# Ensure data/ and data/cache/ directories exist and are writable by user (UID 1000)
-RUN mkdir -p $HOME/app/data/cache && \
-    chmod -R u+rwx $HOME/app/data
+# Ensure data/cache exists and the whole app folder is owned by user (UID 1000).
+# Done as root because copied folders can end up not writable by the app user.
+USER root
+RUN mkdir -p /home/user/app/data/cache && \
+    chown -R user:user /home/user/app && \
+    chmod -R u+rwx /home/user/app/data
+USER user
 
 # Configure PYTHONPATH so scripts/ imports work across sibling modules
-ENV PYTHONPATH="$HOME/app/scripts:$HOME/app:$PYTHONPATH"
+ENV PYTHONPATH="/home/user/app/scripts:/home/user/app"
 
 # Final system settings: 81-Act knowledge base, local v4 model, query rewrite on, AI picker on
 ENV NYAAYA_KB_PATH=Legal_Knowledge_Base_focused.xlsx \
