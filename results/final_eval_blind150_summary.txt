@@ -1,0 +1,11 @@
+Final test on human questions | answer key: PRELIMINARY (unreviewed draft answer key)
+
+Group      Qs  Covered   Act@1   Act@5   Sec@1   Sec@5    MRR  NotCov flagged  AI picker  Avg s
+English    74       67   61.2%   73.1%   20.4%   31.5%  0.242            0.0%     100.0%    2.0
+Hindi      38       30   63.3%   83.3%   33.3%   41.7%  0.352            0.0%     100.0%    2.4
+Kannada    38       30   56.7%   83.3%   23.8%   57.1%  0.371            0.0%     100.0%    2.4
+ALL       150      127   60.6%   78.0%   24.2%   39.4%  0.296            0.0%     100.0%    2.2
+
+Act@k / Sec@k: an acceptable Act / Act+section is in the top k results (covered questions only).
+NotCov flagged: for questions no law covers, how often the app said 'not confident' or returned nothing.
+AI picker: share of questions where the LLM rerank actually ran (others fell back to normal ranking).
