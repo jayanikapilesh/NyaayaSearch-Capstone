@@ -1,4 +1,4 @@
-# Python version matching the local virtual environment (.venv)
+﻿# Python version matching the local virtual environment (.venv)
 FROM python:3.14-slim
 
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -27,16 +27,16 @@ RUN mkdir -p $HOME/app/data/cache && \
 # Configure PYTHONPATH so scripts/ imports work across sibling modules
 ENV PYTHONPATH="$HOME/app/scripts:$HOME/app:$PYTHONPATH"
 
-# Build-time embedding model specification (Hugging Face Hub ID)
-ARG NYAAYA_EMBED_MODEL
-ENV NYAAYA_EMBED_MODEL=${NYAAYA_EMBED_MODEL}
+# Final system settings: 81-Act knowledge base, local v4 model, query rewrite on, AI picker on
+ENV NYAAYA_KB_PATH=Legal_Knowledge_Base_focused.xlsx \
+    NYAAYA_EMBED_MODEL=finetuned_legal_model_v4 \
+    NYAAYA_QUERY_REWRITE=1 \
+    NYAAYA_LLM_RERANK=1
 
-# At BUILD time: download the cross-encoder and the embedding model,
-# and build the section-embeddings cache so runtime startup does not recompute.
+# At BUILD time: download the cross-encoder and build the section-embeddings cache
+# with the final KB + model, so runtime startup does not recompute.
 RUN python -c "from sentence_transformers import CrossEncoder; CrossEncoder('cross-encoder/ms-marco-MiniLM-L-6-v2')" && \
-    if [ -n "$NYAAYA_EMBED_MODEL" ] || [ -d "finetuned_legal_model_v3" ]; then \
-        python -c "from search_core import SearchEngine; SearchEngine()"; \
-    fi
+    python -c "from search_core import SearchEngine; SearchEngine()"
 
 # Hugging Face Spaces default port
 EXPOSE 7860

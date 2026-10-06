@@ -1,4 +1,4 @@
-# Virtual environments & dependencies
+﻿# Virtual environments & dependencies
 .venv/
 venv/
 node_modules/
@@ -16,7 +16,7 @@ __pycache__/
 *.pyo
 *.pyd
 
-# Local model directories (downloaded via Hugging Face Hub in Docker)
+# Old local model directories (final model finetuned_legal_model_v4 IS included)
 finetuned_legal_model/
 finetuned_legal_model_v3/
 
@@ -35,9 +35,10 @@ data/training_pairs*
 data/uncovered_sections.csv
 results/
 
-# Alternative / temporary knowledge base workbooks (only Legal_Knowledge_Base_combined.xlsx is needed)
+# Knowledge base workbooks: only the final 81-Act KB (and the old combined file) are needed
 Legal_Knowledge_Base_*.xlsx
 !Legal_Knowledge_Base_combined.xlsx
+!Legal_Knowledge_Base_focused.xlsx
 
 # Git & tooling metadata
 .git/
