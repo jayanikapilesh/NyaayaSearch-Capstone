@@ -61,6 +61,26 @@ def search_with_llm(engine, query, top_k=5, rerank=True):
                 print("[rewrite+union]", rq[:100], "| pool", len(cands))
         except Exception as e:
             print("[rewrite] skipped:", type(e).__name__, str(e)[:100])
+    if os.getenv("NYAAYA_ACT_SUGGEST", "0") == "1":
+        try:
+            from act_suggest import suggest_acts
+            sa = suggest_acts(query)
+            if sa:
+                wide = engine.search(query, top_k=1000, rerank=False)
+                seen = {(str(c.get("act_name")), str(c.get("section_number"))) for c in cands}
+                added = 0
+                for act in sa:
+                    n = 0
+                    for c in wide:
+                        if str(c.get("act_name")).strip() == act:
+                            k = (str(c.get("act_name")), str(c.get("section_number")))
+                            if k not in seen:
+                                cands.append(c); seen.add(k); n += 1; added += 1
+                            if n >= 4:
+                                break
+            print("[act_suggest]", sa, "| added", added if sa else 0, "| pool", len(cands))
+        except Exception as e:
+            print("[act_suggest] skipped:", type(e).__name__, str(e)[:100])
     base = cands[:top_k]
     if not (ENABLED and _READY) or len(cands) < 2:
         return base
