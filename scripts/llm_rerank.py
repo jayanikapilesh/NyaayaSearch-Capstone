@@ -47,6 +47,20 @@ def _ask_llm(query, cands):
 
 def search_with_llm(engine, query, top_k=5, rerank=True):
     cands = engine.search(query, top_k=max(POOL, top_k), rerank=rerank)
+    if os.getenv("NYAAYA_QUERY_REWRITE", "0") == "1":
+        try:
+            from query_rewrite import rewrite
+            rq = rewrite(query)
+            if rq:
+                extra = engine.search(rq, top_k=POOL, rerank=rerank)
+                seen = {(str(c.get("act_name")), str(c.get("section_number"))) for c in cands}
+                for c in extra:
+                    k = (str(c.get("act_name")), str(c.get("section_number")))
+                    if k not in seen and len(cands) < 30:
+                        cands.append(c); seen.add(k)
+                print("[rewrite+union]", rq[:100], "| pool", len(cands))
+        except Exception as e:
+            print("[rewrite] skipped:", type(e).__name__, str(e)[:100])
     base = cands[:top_k]
     if not (ENABLED and _READY) or len(cands) < 2:
         return base

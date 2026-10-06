@@ -1,0 +1,1377 @@
+{
+ "summary": {
+  "en": {
+   "n": 150,
+   "R@5": 0.893,
+   "P@1": 0.7,
+   "MRR": 0.787,
+   "Act@5": 0.98
+  },
+  "hi": {
+   "n": 60,
+   "R@5": 0.867,
+   "P@1": 0.667,
+   "MRR": 0.753,
+   "Act@5": 1.0
+  },
+  "kn": {
+   "n": 60,
+   "R@5": 0.817,
+   "P@1": 0.683,
+   "MRR": 0.744,
+   "Act@5": 0.983
+  }
+ },
+ "rows": [
+  {
+   "lang": "en",
+   "q": "What's the punishment for trying to kill someone but failing?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "What's the punishment for seriously injuring someone on purpose?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can a company be punished for false advertising?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can a shop be held responsible for selling a defective product?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can a manufacturer be sued for a faulty product?",
+   "rank": 2
+  },
+  {
+   "lang": "en",
+   "q": "Do police have to tell me why I'm being arrested?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can a domestic violence victim get financial compensation?",
+   "rank": 2
+  },
+  {
+   "lang": "en",
+   "q": "Can a domestic violence case affect child custody?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Do I have to give the property back empty when I move out?",
+   "rank": null
+  },
+  {
+   "lang": "en",
+   "q": "Does the court try to settle rent disputes outside trial?",
+   "rank": null
+  },
+  {
+   "lang": "en",
+   "q": "Can I get my mortgaged property back after paying off the loan?",
+   "rank": 2
+  },
+  {
+   "lang": "en",
+   "q": "When will a court refuse to grant an injunction?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can I force someone to complete a personal service contract?",
+   "rank": 2
+  },
+  {
+   "lang": "en",
+   "q": "How do I legally recover my property from someone occupying it?",
+   "rank": null
+  },
+  {
+   "lang": "en",
+   "q": "Can I get my pawned item back even after missing the deadline?",
+   "rank": 5
+  },
+  {
+   "lang": "en",
+   "q": "Can my agent hire someone else to do my work without asking me?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "What happens if both parties agree to change a contract?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Is it illegal to create a fake digital certificate to scam someone?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can I appeal a Cyber Tribunal decision to the High Court?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can the government tap my internet communications?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "What's the punishment for sabotaging a train?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Is it a crime to knowingly spread a dangerous disease?",
+   "rank": 2
+  },
+  {
+   "lang": "en",
+   "q": "What's the punishment for recklessly endangering someone's life?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Is it illegal to stop someone from receiving a court summons?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "How does the court officially deliver a summons?",
+   "rank": null
+  },
+  {
+   "lang": "en",
+   "q": "What does it mean for a court to take cognizance of a crime?",
+   "rank": null
+  },
+  {
+   "lang": "en",
+   "q": "Does a magistrate investigate suspicious deaths?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Am I required to help someone who's executing an arrest warrant?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Does the magistrate check if a complaint is true before acting?",
+   "rank": 2
+  },
+  {
+   "lang": "en",
+   "q": "Can my insurance company settle a claim directly with me?",
+   "rank": 2
+  },
+  {
+   "lang": "en",
+   "q": "If I cancel a contract, do I have to give back what I received?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Is it a crime to bring a child into India for exploitation?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Is it illegal to secretly alter someone's computer code?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Do shelter homes have specific duties toward domestic violence victims?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can I take back a gift I already gave someone?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Does the state keep an official record of all vehicles?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can I ask a court to officially declare my legal rights?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "How does a court grant an injunction to prevent something?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can a public servant be punished for deliberately letting a criminal escape?",
+   "rank": 3
+  },
+  {
+   "lang": "en",
+   "q": "Can a court make me sign a bond to guarantee I'll show up?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Does a Certifying Authority have to publicly disclose if their certificate is revoked?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "What's the punishment for hurting someone to force them to pay you?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Is it illegal to make statements that harm national unity?",
+   "rank": 2
+  },
+  {
+   "lang": "en",
+   "q": "Are there situations where I can't legally defend myself?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "What's the punishment for encouraging a soldier to disobey orders?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "What happens if I keep causing a nuisance after a court tells me to stop?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can state governments make their own consumer protection rules?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "What happens if someone mixes my goods with theirs without my permission?",
+   "rank": 2
+  },
+  {
+   "lang": "en",
+   "q": "Can something still be a crime even if no one was harmed?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can I transfer an endorsement to a new driving licence?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Is a promise legally binding if nothing was exchanged for it?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can a Protection Officer be punished for failing to do their job?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "What's the punishment for kidnapping a young child to rob them?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can my driving licence be cancelled if I'm convicted of a crime?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "How is a maintenance payment order actually enforced?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Is it a crime to give false information to authorities?",
+   "rank": 2
+  },
+  {
+   "lang": "en",
+   "q": "What's the punishment for encouraging a large group to commit a crime?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can what I tell the police be used against me in court?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can I let someone off from fulfilling their part of a contract?",
+   "rank": null
+  },
+  {
+   "lang": "en",
+   "q": "Can I sue a company for compensation if they leak my personal data?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Am I still guilty of a crime if someone forced me to do it under threat?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "What's the punishment for selling a child into prostitution?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "What's the punishment for an acid attack?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "What counts as 'grievous hurt' under the law?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can I be punished for carelessly handling explosives?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "What's the punishment for reckless driving?",
+   "rank": 2
+  },
+  {
+   "lang": "en",
+   "q": "Can I be penalized for leaking confidential information I agreed to protect?",
+   "rank": 2
+  },
+  {
+   "lang": "en",
+   "q": "What's the punishment for pretending to be someone else online to cheat them?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can I appeal a rent tribunal's decision?",
+   "rank": null
+  },
+  {
+   "lang": "en",
+   "q": "Can a court set a temporary rent amount while a dispute is ongoing?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Who appoints Protection Officers under the domestic violence law?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "What counts as legal consent in a contract?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Is a guarantee void if someone hid important facts to get it?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can I cancel a contract I was pressured into signing?",
+   "rank": 3
+  },
+  {
+   "lang": "en",
+   "q": "Who is legally allowed to enter into a contract?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "How do I legally get back my stolen movable property?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "What's the fine for speeding?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can the licensing authority ban me from driving?",
+   "rank": 2
+  },
+  {
+   "lang": "en",
+   "q": "Can I get relief if my lease is being forfeited?",
+   "rank": null
+  },
+  {
+   "lang": "en",
+   "q": "What are my rights in an exchange of property?",
+   "rank": null
+  },
+  {
+   "lang": "en",
+   "q": "Do police have to ensure my health and safety after arrest?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can armed forces disperse an unlawful gathering?",
+   "rank": 2
+  },
+  {
+   "lang": "en",
+   "q": "Can a court dismiss my complaint without a trial?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Is it a crime to hide that I know someone plans to commit a crime?",
+   "rank": null
+  },
+  {
+   "lang": "en",
+   "q": "Can a child under 7 be held criminally responsible?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can a 10-year-old be punished for a crime?",
+   "rank": 2
+  },
+  {
+   "lang": "en",
+   "q": "Can I have a lawyer represent me in a Cyber Tribunal case?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can an official be punished for knowingly detaining someone illegally?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Is it a crime to alter a product's trademark to cause harm?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Does the court keep an official record of questioning the accused?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can I sue someone for defamation?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "What's the difference between murder and culpable homicide?",
+   "rank": null
+  },
+  {
+   "lang": "en",
+   "q": "What legally counts as rape under Indian law?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "What's the penalty for overloading a truck?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can my driving licence be revoked due to a medical condition?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can I force a trust to fulfill its contractual obligations?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can a contract be enforced with modified terms?",
+   "rank": 2
+  },
+  {
+   "lang": "en",
+   "q": "Does my agent have to hand over money they collected on my behalf?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Is a contract void if I made a mistake about the law?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "What's the punishment for taking away someone's wife against her will?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Is it illegal to fake the label on a product container?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "What are the penalties for violating the Rent Act?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Do I need to notify the landlord if I sublet my rented place?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can a sub-tenant become a full tenant in some situations?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can I get compensation if I was wrongly arrested?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can police prevent damage to public property?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Is it illegal to obstruct a bus or taxi driver while they're driving?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Are there legal safety requirements for motorcycle riders?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can a transport permit be cancelled?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "How is compensation calculated after a motor vehicle accident?",
+   "rank": null
+  },
+  {
+   "lang": "en",
+   "q": "Who has authority to make rules under the Domestic Violence Act?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can a court require additional security for the remaining bond period?",
+   "rank": null
+  },
+  {
+   "lang": "en",
+   "q": "Can I be prosecuted for disrespecting a public official's lawful order?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can the government seize copies of a banned publication?",
+   "rank": 2
+  },
+  {
+   "lang": "en",
+   "q": "What does a court have to include in its judgment?",
+   "rank": 2
+  },
+  {
+   "lang": "en",
+   "q": "Can a witness avoid attending court and give evidence another way?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can a paused court case resume later?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "What's the punishment for encouraging a soldier to attack a superior officer?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "How is property divided when multiple people jointly buy it?",
+   "rank": 5
+  },
+  {
+   "lang": "en",
+   "q": "Can a Sessions Judge review a lower court's decision?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "How is the standard rent for a property determined?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can I get compensation if someone falsely accused me of a crime?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Where do I file a consumer complaint?",
+   "rank": 4
+  },
+  {
+   "lang": "en",
+   "q": "How is notice served in a domestic violence case?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "What's the punishment for using force to try to illegally trap someone?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Are hearings before the Rent Controller treated like a court case?",
+   "rank": null
+  },
+  {
+   "lang": "en",
+   "q": "Can I be punished for something I did on a judge's order?",
+   "rank": null
+  },
+  {
+   "lang": "en",
+   "q": "Can police offer me an incentive to confess?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "What happens if I break the rules around my driving licence?",
+   "rank": 3
+  },
+  {
+   "lang": "en",
+   "q": "What's the punishment for attacking a foreign country India is at peace with?",
+   "rank": 2
+  },
+  {
+   "lang": "en",
+   "q": "Does the court keep records during a quick/summary trial?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "If I owe multiple debts and don't specify which payment is for which, how is it applied?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can a government official be punished for hiding knowledge of a planned crime?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "What legally counts as a 'sale' of property?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Do driving schools need a license to operate?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "What actions are protected under the right to self-defence?",
+   "rank": 2
+  },
+  {
+   "lang": "en",
+   "q": "Can a landlord waive their own eviction notice?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can a Certifying Authority's license be suspended?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can I get relief against someone who later claims rights to my property?",
+   "rank": null
+  },
+  {
+   "lang": "en",
+   "q": "Can a court order more evidence to be gathered after a trial starts?",
+   "rank": 2
+  },
+  {
+   "lang": "en",
+   "q": "Which tribunal handles appeals under the IT Act?",
+   "rank": 2
+  },
+  {
+   "lang": "en",
+   "q": "What's the punishment for secretly photographing someone in a private moment?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Are e-rickshaws covered under the Motor Vehicles Act?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Do I need to physically bring my vehicle for registration?",
+   "rank": 3
+  },
+  {
+   "lang": "en",
+   "q": "Can my rent be revised under special circumstances?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Am I protected if I did something believing I was legally justified?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "What are 'service providers' under the Domestic Violence Act?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can I appeal a District Consumer Commission's decision?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "What happens if I can't pay a fine - do I go to jail instead?",
+   "rank": 1
+  },
+  {
+   "lang": "en",
+   "q": "Can accident victims get interim financial relief before the case is resolved?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "What is the punishment for attempting to kill someone but failing?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "What is the punishment for intentionally causing serious injury to someone?",
+   "rank": 3
+  },
+  {
+   "lang": "hi",
+   "q": "Can a company be punished for false advertising?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "Can a shop be held liable for selling defective goods?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "Can a manufacturer be sued for a defective product?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "Do the police have to tell me why I am being arrested?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "Can a victim of domestic violence receive financial compensation?",
+   "rank": 2
+  },
+  {
+   "lang": "hi",
+   "q": "Can a domestic violence case affect child custody?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "Do I have to hand over the house vacant when I vacate it?",
+   "rank": null
+  },
+  {
+   "lang": "hi",
+   "q": "Does the court try to resolve rent disputes without litigation?",
+   "rank": null
+  },
+  {
+   "lang": "hi",
+   "q": "Can I get my mortgaged property back after repaying the loan?",
+   "rank": 2
+  },
+  {
+   "lang": "hi",
+   "q": "When will the court refuse to grant an injunction?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "Can I force someone to fulfill a personal service contract?",
+   "rank": null
+  },
+  {
+   "lang": "hi",
+   "q": "How can I legally reclaim my property from someone who is in possession of it?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "Can I retrieve my pledged item after missing the deadline?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "Can my agent hire someone else to do my work without asking me?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "What happens if both parties agree to amend the contract?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "Is creating a fake digital certificate to deceive someone illegal?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "Can I challenge the Cyber Tribunal's decision in the High Court?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "Can the government monitor my internet communications?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "What is the punishment for vandalizing a train?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "Is deliberately spreading a dangerous disease a crime?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "What is the punishment for endangering someone's life through negligence?",
+   "rank": 2
+  },
+  {
+   "lang": "hi",
+   "q": "Is it illegal to prevent someone from receiving a court summons?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "How does the court officially send a summons?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "What does it mean for a court to take cognizance of an offence?",
+   "rank": null
+  },
+  {
+   "lang": "hi",
+   "q": "Does a magistrate investigate suspicious deaths?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "Do I have to help the person executing the arrest warrant?",
+   "rank": null
+  },
+  {
+   "lang": "hi",
+   "q": "Does the magistrate verify the truth of the complaint before taking action?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "Can my insurance company settle a claim directly with me?",
+   "rank": 2
+  },
+  {
+   "lang": "hi",
+   "q": "If I cancel the contract, do I have to return what I received?",
+   "rank": 2
+  },
+  {
+   "lang": "hi",
+   "q": "Is bringing a child to India for exploitation a crime?",
+   "rank": null
+  },
+  {
+   "lang": "hi",
+   "q": "Is it illegal to secretly modify someone's computer code?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "Do shelters have specific responsibilities towards victims of domestic violence?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "Can I take back a gift I gave to someone?",
+   "rank": 2
+  },
+  {
+   "lang": "hi",
+   "q": "Does the state keep an official record of all vehicles?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "Can I ask the court to make an official declaration of my legal rights?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "How does a court issue an injunction to stop something?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "Can a government employee be punished for deliberately allowing a criminal to escape?",
+   "rank": 4
+  },
+  {
+   "lang": "hi",
+   "q": "Can the court require me to sign a bond to guarantee my appearance?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "Does the certification authority have to be notified that their certificate has been revoked?",
+   "rank": 3
+  },
+  {
+   "lang": "hi",
+   "q": "What is the punishment for causing injury to force someone to give money?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "Is making statements that harm national unity illegal?",
+   "rank": 2
+  },
+  {
+   "lang": "hi",
+   "q": "Are there situations where I cannot legally defend myself?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "What is the punishment for inciting a soldier to disobey orders?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "What happens if I continue the disturbance even after a court order?",
+   "rank": 4
+  },
+  {
+   "lang": "hi",
+   "q": "Can state governments make their own consumer protection rules?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "What happens if someone mixes my belongings with their belongings without my permission?",
+   "rank": 2
+  },
+  {
+   "lang": "hi",
+   "q": "Can an act be a crime even if it does not cause any harm to anyone?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "Can I transfer an endorsement to a new driving license?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "Is a promise made without consideration legally binding?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "Can a protection officer be punished for not doing his job?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "What is the punishment for kidnapping a small child and stealing from them?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "Can my driving license be revoked if I am convicted of a crime?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "How is a maintenance order actually enforced?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "Is providing false information to authorities a crime?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "What is the punishment for inciting a large group to commit a crime?",
+   "rank": null
+  },
+  {
+   "lang": "hi",
+   "q": "Can my statement given to the police be used against me in court?",
+   "rank": 1
+  },
+  {
+   "lang": "hi",
+   "q": "Can I exempt someone from completing their part of a contract?",
+   "rank": null
+  },
+  {
+   "lang": "hi",
+   "q": "If a company leaks my personal data, can I sue for compensation?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "What is the punishment for attempting to kill someone and failing?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "What is the punishment for intentionally causing serious injury to someone?",
+   "rank": 3
+  },
+  {
+   "lang": "kn",
+   "q": "Can a company be punished for false advertising?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "Can a store that sells a defective product be held liable?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "Can a claim be filed against the manufacturer for a defective product?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "Should the police tell me why I am being arrested?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "Can a victim of domestic violence receive financial compensation?",
+   "rank": 2
+  },
+  {
+   "lang": "kn",
+   "q": "Can a domestic violence case affect child custody?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "Should the house be returned empty when moving out?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "Is the court trying to resolve rent disputes without a hearing?",
+   "rank": null
+  },
+  {
+   "lang": "kn",
+   "q": "Can the pledged property be reclaimed after the loan is repaid?",
+   "rank": null
+  },
+  {
+   "lang": "kn",
+   "q": "When does the court refuse to grant an injunction?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "Can someone be compelled to fulfill an individual service contract?",
+   "rank": null
+  },
+  {
+   "lang": "kn",
+   "q": "How can I legally get my property back from those who have seized it?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "Can I get my pledged item back after the deadline has passed?",
+   "rank": 2
+  },
+  {
+   "lang": "kn",
+   "q": "Can my agent hire someone else for my work without asking me?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "What happens if both parties agree to amend the contract?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "Is creating a fake digital certificate to deceive someone illegal?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "Can a cyber tribunal judgment be challenged in the High Court?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "Can the government monitor my internet communications?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "What is the punishment for damaging the railway?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "Is intentionally spreading a dangerous disease a crime?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "What is the punishment for causing danger to someone's life by negligence?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "Is it illegal to prevent someone from receiving a court summons?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "How does a court officially send a summons?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "What does it mean for a court to take cognizance of an offence?",
+   "rank": null
+  },
+  {
+   "lang": "kn",
+   "q": "Does the magistrate investigate suspicious deaths?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "Should we help the person executing the arrest warrant?",
+   "rank": null
+  },
+  {
+   "lang": "kn",
+   "q": "Do magistrates verify the authenticity of the distance before taking action?",
+   "rank": null
+  },
+  {
+   "lang": "kn",
+   "q": "Can my insurance company settle a claim directly with me?",
+   "rank": 2
+  },
+  {
+   "lang": "kn",
+   "q": "If the contract is terminated, do I have to return what I received?",
+   "rank": 2
+  },
+  {
+   "lang": "kn",
+   "q": "Is bringing a child to India for exploitation a crime?",
+   "rank": null
+  },
+  {
+   "lang": "kn",
+   "q": "Is secretly modifying someone's computer code illegal?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "Do shelters have specific obligations regarding victims of domestic violence?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "Can I take back a gift I have already given?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "Does the state keep an official record of all vehicles?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "Can I ask the court to officially declare my legal rights?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "How does a court issue an injunction to stop something?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "Can a government employee who intentionally allowed a criminal to escape be punished?",
+   "rank": 3
+  },
+  {
+   "lang": "kn",
+   "q": "Can the court require me to sign a bond to guarantee my appearance?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "Should the certification authority publicly disclose that a certificate has been revoked?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "What is the punishment for injuring someone to force them to pay money?",
+   "rank": 2
+  },
+  {
+   "lang": "kn",
+   "q": "Is making statements that harm national integrity illegal?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "Are there situations where I cannot legally protect myself?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "What is the punishment for inciting a soldier to disobey orders?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "What will happen if I continue the disturbance after a court order?",
+   "rank": null
+  },
+  {
+   "lang": "kn",
+   "q": "Can state governments make their own consumer protection regulations?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "What happens if someone mixes my goods with their goods without my permission?",
+   "rank": 2
+  },
+  {
+   "lang": "kn",
+   "q": "Can an act be a crime even if it does not cause harm to anyone?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "Can an endorsement be transferred to a new driver's license?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "Is a promise made without consideration legally binding?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "Can a protection officer be punished if they do not do their work?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "What is the punishment for kidnapping a small child and extorting from them?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "Can my driver's license be revoked if I am convicted of a crime?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "How is a life sentence actually enforced?",
+   "rank": null
+  },
+  {
+   "lang": "kn",
+   "q": "Is providing false information to authorities a crime?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "What is the punishment for inciting a large group to commit a crime?",
+   "rank": null
+  },
+  {
+   "lang": "kn",
+   "q": "Can the statement I gave to the police be used against me in court?",
+   "rank": 1
+  },
+  {
+   "lang": "kn",
+   "q": "Can I release someone by fulfilling a part of the contract?",
+   "rank": null
+  },
+  {
+   "lang": "kn",
+   "q": "Can I file a claim for compensation if a company leaks my personal data?",
+   "rank": 1
+  }
+ ]
+}

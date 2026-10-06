@@ -186,6 +186,17 @@ def stats():
     }
 
 
+
+import math as _math
+def _clean_nan(obj):
+    if isinstance(obj, float) and (_math.isnan(obj) or _math.isinf(obj)):
+        return None
+    if isinstance(obj, dict):
+        return {k: _clean_nan(v) for k, v in obj.items()}
+    if isinstance(obj, list):
+        return [_clean_nan(v) for v in obj]
+    return obj
+
 from llm_rerank import search_with_llm
 
 
@@ -198,6 +209,7 @@ def search(request: SearchRequest):
         rerank = True if request.rerank is None else request.rerank
         results = search_with_llm(engine, search_query, top_k=request.top_k, rerank=rerank)
         results = attach_related_cases(results)
+        results = _clean_nan(results)
     except Exception as e:
         raise HTTPException(status_code=500, detail="Search failed unexpectedly. Please try again.")
 
@@ -260,6 +272,7 @@ def explain(request: SearchRequest, raw_request: Request):
             rerank = True if request.rerank is None else request.rerank
             results = search_with_llm(engine, search_query, top_k=request.top_k, rerank=rerank)
             results = attach_related_cases(results)
+            results = _clean_nan(results)
         except Exception:
             raise HTTPException(status_code=500, detail="Search failed unexpectedly. Please try again.")
 
