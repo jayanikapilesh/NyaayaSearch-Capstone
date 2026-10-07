@@ -49,6 +49,7 @@ function SearchTab({ setError, uiLanguage, onLanguageChange, isActive, pendingVi
   const [searchAttempted, setSearchAttempted] = useState(false);
   const [showConfidenceInfo, setShowConfidenceInfo] = useState(false);
   const [explanation, setExplanation] = useState("");
+  const [notCovered, setNotCovered] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const recognitionRef = useRef(null);
@@ -247,7 +248,7 @@ function SearchTab({ setError, uiLanguage, onLanguageChange, isActive, pendingVi
     setLoadingSearch(true);
     setLoadingExplanation(false);
     setError(null);
-    setExplanation("");
+    setExplanation(""); setNotCovered(false);
     setResults([]);
     setLowConfidence(false);
     setExplanationCache({});
@@ -338,6 +339,7 @@ function SearchTab({ setError, uiLanguage, onLanguageChange, isActive, pendingVi
       if (searchIdRef.current !== searchId) return;
 
       const returnedExplanation = expData.explanation || "";
+        setNotCovered(!!expData.not_covered);
       setExplanationCache(function (prev) {
         const copy = Object.assign({}, prev);
         copy[requestLang] = returnedExplanation;
@@ -648,6 +650,15 @@ function SearchTab({ setError, uiLanguage, onLanguageChange, isActive, pendingVi
               </button>
             </div>
           </div>
+          {notCovered && (
+            <div className="not-covered-banner" role="note">
+              {uiLanguage === "hi"
+                ? "\u092f\u0939 \u092e\u093e\u092e\u0932\u093e \u0936\u093e\u092f\u0926 \u0939\u092e\u093e\u0930\u0947 \u0936\u093e\u092e\u093f\u0932 \u0915\u093e\u0928\u0942\u0928\u094b\u0902 \u0915\u0947 \u0926\u093e\u092f\u0930\u0947 \u0938\u0947 \u092c\u093e\u0939\u0930 \u0939\u0948\u0964 \u092e\u0941\u092b\u093c\u094d\u0924 \u0915\u093e\u0928\u0942\u0928\u0940 \u0938\u0939\u093e\u092f\u0924\u093e \u0915\u0947 \u0932\u093f\u090f NALSA 15100 \u092a\u0930 \u0938\u0902\u092a\u0930\u094d\u0915 \u0915\u0930\u0947\u0902\u0964"
+                : uiLanguage === "kn"
+                ? "\u0c87\u0ca6\u0cc1 \u0ca8\u0cbe\u0cb5\u0cc1 \u0c92\u0cb3\u0c97\u0cca\u0c82\u0ca1\u0cbf\u0cb0\u0cc1\u0cb5 \u0c95\u0cbe\u0ca8\u0cc2\u0ca8\u0cc1\u0c97\u0cb3 \u0cb5\u0ccd\u0caf\u0cbe\u0caa\u0ccd\u0ca4\u0cbf\u0caf \u0cb9\u0cca\u0cb0\u0c97\u0cbf\u0cb0\u0cac\u0cb9\u0cc1\u0ca6\u0cc1. \u0c89\u0c9a\u0cbf\u0ca4 \u0c95\u0cbe\u0ca8\u0cc2\u0ca8\u0cc1 \u0ca8\u0cc6\u0cb0\u0cb5\u0cbf\u0c97\u0cbe\u0c97\u0cbf NALSA 15100 \u0c85\u0ca8\u0ccd\u0ca8\u0cc1 \u0cb8\u0c82\u0caa\u0cb0\u0ccd\u0c95\u0cbf\u0cb8\u0cbf."
+                : "This may be outside the laws we cover. For help with your situation, contact free legal aid: NALSA 15100."}
+            </div>
+          )}
           {translating ? (
             <div className="loading">{t(uiLanguage, "translating")}</div>
           ) : (

@@ -197,6 +197,13 @@ def _clean_nan(obj):
         return [_clean_nan(v) for v in obj]
     return obj
 
+
+def _split_not_covered(text):
+    if isinstance(text, str) and text.lstrip().startswith("NOT_COVERED"):
+        rest = text.lstrip()[len("NOT_COVERED"):].lstrip()
+        return rest, True
+    return text, False
+
 from llm_rerank import search_with_llm
 
 
@@ -317,7 +324,8 @@ def explain(request: SearchRequest, raw_request: Request):
             "query": request.query,
             "translated_query": search_query,
             "results": results,
-            "explanation": cached_exp,
+            "explanation": _split_not_covered(cached_exp)[0],
+            "not_covered": _split_not_covered(cached_exp)[1],
             "language": target_language,
             "model_used": cached_model,
         }
@@ -354,7 +362,8 @@ def explain(request: SearchRequest, raw_request: Request):
         "query": request.query,
         "translated_query": search_query,
         "results": results,
-        "explanation": explanation,
+        "explanation": _split_not_covered(explanation)[0],
+        "not_covered": _split_not_covered(explanation)[1],
         "language": target_language,
         "model_used": model_used,
     }

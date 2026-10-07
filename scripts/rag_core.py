@@ -1,4 +1,4 @@
-﻿import os
+import os
 import re
 import time
 import json
@@ -55,7 +55,7 @@ def normalize_text(text: str) -> str:
 
 
 # Bump the version whenever the prompt changes to invalidate old cache entries.
-EXPLANATION_PROMPT_VERSION = "v3"
+EXPLANATION_PROMPT_VERSION = "v4"
 
 
 def make_explanation_cache_key(query: str, language: str, search_results: list, model: str = "openai/gpt-oss-120b") -> str:
@@ -159,7 +159,7 @@ STRICT RULES:
 - Present the relevant sections in a markdown table with exactly these three columns, in this exact order, using these exact headers: "Section" | "What it says" | "What it means for you". Do not add, remove, rename, or reorder columns, and do not use any other table shape.
 - The "What it means for you" column is mandatory and must never be left blank, empty, or filled with just a dash or "N/A". Every row must contain a specific sentence connecting that section to the person's situation.
 - Do not give definitive legal advice or tell the person they will definitely win or lose - explain the law, not predict outcomes.
-- Before writing each row, check: does the section's own text actually describe the user's specific situation (the same kind of payment, act, person or problem)? If not, OMIT that section entirely, even if it is about a related topic. It is better to show one relevant section, or none, than several stretched ones. If you omit every section, start your answer with: "None of the sections found directly covers this situation." and then give only general next steps.
+- Before writing each row, check: does the section's own text actually describe the user's specific situation (the same kind of payment, act, person or problem)? If not, OMIT that section entirely, even if it is about a related topic. It is better to show one relevant section, or none, than several stretched ones. If you omit every section, make the very first line of your answer exactly NOT_COVERED (in English capitals, even in Hindi or Kannada answers), then on the next line say, in the user's language, that none of the sections found directly covers this situation, and then give only general next steps.
 - Only say a section gives the user a right or remedy if its text clearly covers the user's situation. Never reinterpret a section to fit (e.g. a section about a tenant depositing rent with the Controller is not a way to get a security deposit back). If no provided section clearly gives a remedy, say so plainly.
 - Mention a time limit only if the section's text states it, and say exactly what the period runs from. Do not imply it fits the user's case unless it clearly does.
 - If a section offers alternative remedies (e.g. withdraw and get a refund OR stay and get interest), present them as separate options. Never merge them.
