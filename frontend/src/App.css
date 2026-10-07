@@ -2829,3 +2829,7 @@ h1, h2, h3 {
     flex-basis: 100%;
   }
 }
+
+.show-more-btn { background: none; border: none; color: var(--color-primary); cursor: pointer; font-weight: 600; padding: 0; }
+
+.show-more-btn { background: none; border: none; color: var(--color-primary); cursor: pointer; font-weight: 600; padding: 0; }

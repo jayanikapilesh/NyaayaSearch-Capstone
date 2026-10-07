@@ -23,6 +23,23 @@ function isBnsAct(actName) {
   return typeof actName === "string" && /\bbharatiya nyaya sanhita\b/i.test(actName);
 }
 
+function LegalText(props) {
+  const [open, setOpen] = useState(false);
+  const LIMIT = 350;
+  const text = props.text || "";
+  if (text.length <= LIMIT) {
+    return <div className="legal-text">{text}</div>;
+  }
+  return (
+    <div className="legal-text">
+      {open ? text : text.slice(0, LIMIT).trimEnd() + "..."}{" "}
+      <button type="button" className="show-more-btn" onClick={function () { setOpen(!open); }}>
+        {open ? "Show less" : "Show more"}
+      </button>
+    </div>
+  );
+}
+
 function SearchTab({ setError, uiLanguage, onLanguageChange, isActive, pendingViewSavedId, onConsumePendingViewSavedId, onLookUpBnsSection, onSimplifyCase, pendingSearchQuery, onConsumePendingSearchQuery }) {
   const [query, setQuery] = useState("");
   const [loadingSearch, setLoadingSearch] = useState(false);
@@ -695,7 +712,7 @@ function SearchTab({ setError, uiLanguage, onLanguageChange, isActive, pendingVi
                 )}
 
                 <div className="section-title">{r.section_title}</div>
-                <div className="legal-text">{r.legal_text}</div>
+                <LegalText text={r.legal_text} />
 
                 {r.related_cases && r.related_cases.length > 0 && (
                   <div className="related-cases">
