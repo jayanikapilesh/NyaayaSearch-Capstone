@@ -414,7 +414,7 @@ function SearchTab({ setError, uiLanguage, onLanguageChange, isActive, pendingVi
     }
 
     const recognition = new SpeechRecognition();
-    recognition.lang = "en-IN";
+    recognition.lang = uiLanguage === "hi" ? "hi-IN" : uiLanguage === "kn" ? "kn-IN" : "en-IN";
     recognition.interimResults = false;
     recognition.maxAlternatives = 1;
 
