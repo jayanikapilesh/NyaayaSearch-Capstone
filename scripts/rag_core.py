@@ -1,4 +1,4 @@
-import os
+﻿import os
 import re
 import time
 import json
@@ -55,7 +55,7 @@ def normalize_text(text: str) -> str:
 
 
 # Bump the version whenever the prompt changes to invalidate old cache entries.
-EXPLANATION_PROMPT_VERSION = "v2"
+EXPLANATION_PROMPT_VERSION = "v3"
 
 
 def make_explanation_cache_key(query: str, language: str, search_results: list, model: str = "openai/gpt-oss-120b") -> str:
