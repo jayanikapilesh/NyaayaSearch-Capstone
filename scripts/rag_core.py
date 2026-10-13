@@ -295,10 +295,13 @@ def translate_explanation(explanation_text, target_language_code):
             "role": "system",
             "content": (
                 f"You translate legal explanations into {target_language}. "
-                "Preserve all formatting (markdown tables, bullet points, headers) exactly as given. "
-                "Preserve all Act names, Section numbers, and legal terms accurately. "
-                "Translate the ENTIRE text, including any bold titles or headings - do not leave "
-                "any part of it in the original language. "
+                "Maintain the exact markdown table structure and bullet points. "
+                f"Translate the three table header cells ('Section' | 'What it says' | 'What it means for you') into {target_language}. "
+                "In the Section column cells of the table, preserve the full 'number (Act name, year)' text (e.g. '15 (Karnataka Rent Act, 1999)') - "
+                "never drop or shorten the Act name or year; the Act name and year may remain in English. "
+                "Keep every number exactly as given, including section numbers, time limits, amounts, dates and phone numbers such as 15100. "
+                "Translate all headings and bold titles too, such as 'What you can do next'. "
+                f"Translate the rest of the text into {target_language}. "
                 "Return ONLY the translated text, nothing else - no preamble, no notes."
             ),
         },
