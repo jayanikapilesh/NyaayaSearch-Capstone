@@ -86,6 +86,8 @@ export const UI_STRINGS = {
     pinned: "Pinned:",
     pin: "Pin",
     unpin: "Unpin",
+    karnatakaNotice: "Some of these sections are Karnataka state laws. If you live in another state, your state's own law may apply instead. For free legal advice, call NALSA at 15100.",
+    coverageNotice: "Covers central laws and Karnataka state laws.",
   },
   hi: {
     search: "खोजें",
@@ -127,6 +129,8 @@ export const UI_STRINGS = {
     pinned: "पिन किए गए:",
     pin: "पिन करें",
     unpin: "अनपिन करें",
+    karnatakaNotice: "इनमें से कुछ धाराएँ कर्नाटक राज्य के कानून हैं। यदि आप किसी अन्य राज्य में रहते हैं, तो आपके राज्य का अपना कानून लागू हो सकता है। मुफ़्त कानूनी सलाह के लिए NALSA को 15100 पर कॉल करें।",
+    coverageNotice: "केंद्रीय कानून और कर्नाटक राज्य के कानून शामिल हैं।",
   },
   kn: {
     search: "ಹುಡುಕಿ",
@@ -168,6 +172,8 @@ export const UI_STRINGS = {
     pinned: "ಪಿನ್ ಮಾಡಿದವು:",
     pin: "ಪಿನ್ ಮಾಡಿ",
     unpin: "ಅನ್‌ಪಿನ್ ಮಾಡಿ",
+    karnatakaNotice: "ಇವುಗಳಲ್ಲಿ ಕೆಲವು ವಿಭಾಗಗಳು ಕರ್ನಾಟಕ ರಾಜ್ಯದ ಕಾನೂನುಗಳಾಗಿವೆ. ನೀವು ಬೇರೆ ರಾಜ್ಯದಲ್ಲಿ ವಾಸಿಸುತ್ತಿದ್ದರೆ, ನಿಮ್ಮ ರಾಜ್ಯದ ಸ್ವಂತ ಕಾನೂನು ಅನ್ವಯವಾಗಬಹುದು. ಉಚಿತ ಕಾನೂನು ಸಲಹೆಗಾಗಿ NALSA ಗೆ 15100 ಕ್ಕೆ ಕರೆ ಮಾಡಿ.",
+    coverageNotice: "ಕೇಂದ್ರ ಕಾನೂನುಗಳು ಮತ್ತು ಕರ್ನಾಟಕ ರಾಜ್ಯದ ಕಾನೂನುಗಳನ್ನು ಒಳಗೊಂಡಿದೆ.",
   },
 };
 

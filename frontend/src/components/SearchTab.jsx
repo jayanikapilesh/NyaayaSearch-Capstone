@@ -470,6 +470,9 @@ function SearchTab({ setError, uiLanguage, onLanguageChange, isActive, pendingVi
   const topScore = results.length > 0 ? results[0].hybrid_score : 0;
   const showLowConfidenceWarning = results.length > 0 && lowConfidence;
   const otherLanguages = ALL_LANGUAGES.filter(function (lang) { return lang !== uiLanguage; });
+  const hasKarnatakaAct = results.some(function (r) {
+    return typeof r.act_name === "string" && r.act_name.includes("Karnataka");
+  });
 
   // Purely derived from the query text - no dictionary lookup - so this is
   // cheap enough to compute on every render and needs no effect/state of
@@ -502,6 +505,7 @@ function SearchTab({ setError, uiLanguage, onLanguageChange, isActive, pendingVi
           {loadingSearch ? t(uiLanguage, "searching") : t(uiLanguage, "search")}
         </button>
       </form>
+      <div className="search-coverage-note">{t(uiLanguage, "coverageNotice")}</div>
 
       {searchHistory.length === 0 && !explanation && !loadingSearch && !loadingExplanation && (
         <div className="example-queries">
@@ -657,6 +661,11 @@ function SearchTab({ setError, uiLanguage, onLanguageChange, isActive, pendingVi
                 : uiLanguage === "kn"
                 ? "\u0c87\u0ca6\u0cc1 \u0ca8\u0cbe\u0cb5\u0cc1 \u0c92\u0cb3\u0c97\u0cca\u0c82\u0ca1\u0cbf\u0cb0\u0cc1\u0cb5 \u0c95\u0cbe\u0ca8\u0cc2\u0ca8\u0cc1\u0c97\u0cb3 \u0cb5\u0ccd\u0caf\u0cbe\u0caa\u0ccd\u0ca4\u0cbf\u0caf \u0cb9\u0cca\u0cb0\u0c97\u0cbf\u0cb0\u0cac\u0cb9\u0cc1\u0ca6\u0cc1. \u0c89\u0c9a\u0cbf\u0ca4 \u0c95\u0cbe\u0ca8\u0cc2\u0ca8\u0cc1 \u0ca8\u0cc6\u0cb0\u0cb5\u0cbf\u0c97\u0cbe\u0c97\u0cbf NALSA 15100 \u0c85\u0ca8\u0ccd\u0ca8\u0cc1 \u0cb8\u0c82\u0caa\u0cb0\u0ccd\u0c95\u0cbf\u0cb8\u0cbf."
                 : "This may be outside the laws we cover. For help with your situation, contact free legal aid: NALSA 15100."}
+            </div>
+          )}
+          {hasKarnatakaAct && (
+            <div className="state-law-notice" role="note">
+              {t(uiLanguage, "karnatakaNotice")}
             </div>
           )}
           {translating ? (
